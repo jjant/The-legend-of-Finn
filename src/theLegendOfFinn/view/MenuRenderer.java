@@ -18,7 +18,7 @@ public class MenuRenderer implements Renderer {
 
 	public void render(Graphics g) {
 		try {
-			backGroundImage = ImageIO.read(new File("The legend of Finn/Assets/zelda-menu.jpg"));
+			backGroundImage = ImageIO.read(new File("./Assets/zelda-menu.jpg"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

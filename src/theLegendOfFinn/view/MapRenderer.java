@@ -22,7 +22,7 @@ public class MapRenderer implements Renderer {
 
 	public void render(Graphics g) {
 		try {
-			backGroundImage = ImageIO.read(new File("The legend of Finn/Assets/grass.png"));
+			backGroundImage = ImageIO.read(new File("./Assets/grass.png"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
