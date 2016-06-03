@@ -12,10 +12,12 @@ public class PauseRenderer implements Renderer {
 
     public void render(Graphics g) {
         try {
-            backGroundImage = ImageIO.read(new File("The legend of Finn/Assets/pause.png"));
+            backGroundImage = ImageIO.read(new File("./Assets/pause.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+
         g.drawImage(backGroundImage, 0, 0, MasterRenderer.WIDTH, MasterRenderer.HEIGHT, null);
         g.setColor(Color.RED);
     }

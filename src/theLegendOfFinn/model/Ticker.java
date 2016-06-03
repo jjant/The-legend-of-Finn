@@ -32,6 +32,7 @@ public class Ticker {
 		return map;
 	}
 
+	//Hace que todos se muevan
 	private void moveCharacter(PlayerCharacter player, List<EnemyCharacter> enemies) {
 		player.move();
 		/*

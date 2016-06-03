@@ -1,6 +1,6 @@
 package theLegendOfFinn.controller;
 
-import theLegendOfFinn.controller.RenderManager;
+import theLegendOfFinn.controller.RenderManager.Stage;;
 
 public class Delegate {
 	private Manager manager;
@@ -9,11 +9,11 @@ public class Delegate {
 		this.manager = manager;
 	}
 
-	public void setStage(RenderManager.Stage stage) {
+	public void setStage(Stage stage) {
 		manager.setStage(stage);
 	}
 
-	public RenderManager.Stage getStage() {
+	public Stage getStage() {
 		return manager.getStage();
 	}
 

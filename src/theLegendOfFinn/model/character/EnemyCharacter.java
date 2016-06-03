@@ -1,11 +1,15 @@
 package theLegendOfFinn.model.character;
 
 public abstract class EnemyCharacter extends Character {
-	enum EnemyType{
+	//Esto esta todo ok!
+	public enum EnemyType{
 		Warrior,
 		Horse;
 	}
+	
+	
 	// Decidir como se van a guardar las propiedades de cada enemigo y donde. (aca o en la factory)
+	//Probablemente sacar velocity.
 	public static final int WARRIOR_MAX_HP = 1;
 	public static final int WARRIOR_ATTACK = 1;
 	public static final int WARRIOR_VELOCITY = 1;

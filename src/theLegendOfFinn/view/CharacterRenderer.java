@@ -7,6 +7,11 @@ import java.awt.Color;
  * de algun clase como esta, se me ocurrio hacerlo asi pero despues se
  * vera si hay alguna manera mejor
  */
+
+
+
+/////Poner el mapa: clase -> sprite.
+
 public class CharacterRenderer implements Renderer {
 	private Character character;
 	private Color color;
@@ -17,7 +22,7 @@ public class CharacterRenderer implements Renderer {
 		this.character = character;
 		this.color = color;
 	}
-	
+
 	@Override
 	public void render(Graphics g) {
 		//g.setColor(new Color(0.5f, 0f, 0f));

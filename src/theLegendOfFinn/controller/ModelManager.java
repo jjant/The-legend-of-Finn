@@ -12,12 +12,15 @@ public class ModelManager implements Runnable{
 		thread.start();
 	}
 	
+	//Buscar timer clase (para sacar el sleep)
 	public void run() {
 		while(true){ 
 			ticker.tick();
 			try{
 				Thread.sleep(5);
-			}catch (Exception e){}
+			}catch (InterruptedException e){
+
+			}
 		}
 		
 	}
