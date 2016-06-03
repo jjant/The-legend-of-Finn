@@ -2,6 +2,7 @@ package theLegendOfFinn.model;
 
 import java.util.List;
 
+import theLegendOfFinn.controller.RenderManager;
 import theLegendOfFinn.model.character.EnemyCharacter;
 import theLegendOfFinn.model.character.PlayerCharacter;
 
@@ -40,8 +41,10 @@ public class Ticker {
 	private void moveCharacter(PlayerCharacter player, List<EnemyCharacter> enemies) {
 		player.move();
 		for (EnemyCharacter enemy: enemies) {
-			enemy.chasePlayer(player.getX(), player.getY());
-			enemy.move();
+			if (RenderManager.secondPassed()) {
+				enemy.chasePlayer(player.getX(), player.getY());
+				enemy.move();
+			}
 		}
 		/*
 		 * for(EnemyCharacter enemy: enemies){ //enemy.move(); }

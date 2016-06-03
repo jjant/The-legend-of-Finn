@@ -19,7 +19,7 @@ public class RenderManager implements Runnable {
 	
 	private final double ns = 1000000000.0 / 600.0;
 	private long lastTime;
-	private long lastSecond;
+	private static long lastSecond;
 	private double delta;
 	
 
@@ -51,9 +51,16 @@ public class RenderManager implements Runnable {
 			
 	}
 
-	public boolean secondPassed() {
+	// WARNING!
+	// SECOND PASSED CHANGED TO STATIC
+	// LASTSECOND CHANGED TO STATIC
+	// 1000ms CHANGED to 15ms
+	// ONLY FOR DEBUGGING GOALS
+	// SOMETHING LIKE THIS SHOULD BE IMPLEMENTED
+	// TAKING INTO ACCOUNT CHARACTER'S VELOCITY
+	public static boolean secondPassed() {
 		long now = System.currentTimeMillis();
-		if ((now - lastSecond) >= 1000) {
+		if ((now - lastSecond) >= 15) {
 			lastSecond = now;
 			return true;
 		}
