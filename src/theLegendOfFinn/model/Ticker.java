@@ -23,6 +23,10 @@ public class Ticker {
 	public void tick() {
 		moveCharacter(map.getPlayer(), map.getEnemies());
 	}
+	
+	public List<EnemyCharacter> getEnemies() {
+		return map.getEnemies();
+	}
 
 	public PlayerCharacter getPlayer() {
 		return map.getPlayer();
@@ -35,6 +39,10 @@ public class Ticker {
 	//Hace que todos se muevan
 	private void moveCharacter(PlayerCharacter player, List<EnemyCharacter> enemies) {
 		player.move();
+		for (EnemyCharacter enemy: enemies) {
+			enemy.chasePlayer(player.getX(), player.getY());
+			enemy.move();
+		}
 		/*
 		 * for(EnemyCharacter enemy: enemies){ //enemy.move(); }
 		 */

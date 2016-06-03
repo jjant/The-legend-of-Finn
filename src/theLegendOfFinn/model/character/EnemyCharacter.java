@@ -25,13 +25,23 @@ public abstract class EnemyCharacter extends Character {
 	}
 
 	public void chasePlayer(int playerX, int playerY) {
-		if (playerY > getY())
-			tryToMove(Direction.UP);
-		else if (playerY < getY())
+		if (playerY > getY() && playerX > getX())
 			tryToMove(Direction.DOWN);
-		if (playerX < getX())
-			tryToMove(Direction.LEFT);
-		else if (playerX > getX())
+		else if (playerY == getY() && playerX > getX())
 			tryToMove(Direction.RIGHT);
+		else if (playerY == getY() && playerX < getX())
+			tryToMove(Direction.LEFT);
+		else if (playerY < getY() && playerX < getX())
+			tryToMove(Direction.UP);
+		else if (playerX == getX() && playerY > getY())
+			tryToMove(Direction.DOWN);
+		else if (playerX == getX() && playerY < getY()) {
+			System.out.println("ok");
+			tryToMove(Direction.UP);
+		}
+		else if (playerX > getX() && playerY < getY())
+			tryToMove(Direction.UP);
+		else if (playerX < getX() && playerY > getY())
+			tryToMove(Direction.DOWN);
 	}
 }

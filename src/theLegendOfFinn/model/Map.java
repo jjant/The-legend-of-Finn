@@ -41,7 +41,7 @@ public class Map {
 		this.player = player;
 		this.enemyList = enemyList;
 	}
-
+	
 	// Lo hice villerisimo...
 	public void add(Character character) throws PositionOccupiedException {
 		if (grid[character.getX()/CELL_SIZE][character.getY()/CELL_SIZE] != null) {

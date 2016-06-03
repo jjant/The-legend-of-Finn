@@ -7,7 +7,7 @@ import theLegendOfFinn.model.Map;
 import theLegendOfFinn.view.Renderer;
 
 public class Character {
-	public enum Direction {
+	public static enum Direction {
 		UP, RIGHT, DOWN, LEFT;
 	}
 
@@ -33,7 +33,11 @@ public class Character {
 		this.currentHP = maxHP;
 		this.attack = attack;
 	}
-
+	
+	public static void test(){
+		return;
+	}
+	
 	public int getX() {
 		return x;
 	}
