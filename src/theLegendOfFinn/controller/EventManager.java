@@ -3,7 +3,7 @@ package theLegendOfFinn.controller;
 
 import java.awt.event.KeyEvent;
 
-import theLegendOfFinn.controller.Manager.Stage;
+import theLegendOfFinn.controller.RenderManager.Stage;
 import theLegendOfFinn.model.Ticker;
 import theLegendOfFinn.model.character.Character;
 import theLegendOfFinn.view.MasterRenderer;
@@ -92,17 +92,4 @@ public class EventManager {
 		}
 		return stage;
 	}
-
 }
-
-/*
- * else if (stage.equals(Stage.MAP)) player.tryToMove(Character.Direction.LEFT);
- * break; case KeyEvent.VK_RIGHT: if (stage.equals(Manager.Stage.MENU))
- * window.getMenuR().changeOption(); else if (stage.equals(Stage.MAP))
- * player.tryToMove(Character.Direction.RIGHT); break; case KeyEvent.VK_UP: if
- * (stage.equals(Manager.Stage.MAP)) player.tryToMove(Character.Direction.UP);
- * break; case KeyEvent.VK_DOWN: if (stage.equals(Manager.Stage.MAP))
- * player.tryToMove(Character.Direction.DOWN); break; case KeyEvent.VK_ESCAPE:
- * if (stage.equals(Stage.MAP)) setStage(Stage.PAUSE); else if
- * (stage.equals(Stage.PAUSE)) setStage(Stage.MAP); default: break;
- */

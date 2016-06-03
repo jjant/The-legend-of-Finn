@@ -18,14 +18,18 @@ public class MapRenderer implements Renderer {
 	 */
 	public MapRenderer(Map map) {
 		this.map = map;
-	}
 
-	public void render(Graphics g) {
+		// cambiar!
 		try {
 			backGroundImage = ImageIO.read(new File("./Assets/grass.png"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+	}
+
+	public void render(Graphics g) {
+
 		g.drawImage(backGroundImage, 0, 0, MasterRenderer.WIDTH, MasterRenderer.HEIGHT, null);
 		g.setColor(new Color(0, 0f, 0.5f));
 		// Renderiza las lineas del tablero. Borrar despues.

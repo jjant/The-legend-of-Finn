@@ -7,15 +7,13 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.JFrame;
 
-import java.util.Iterator;
-import java.util.ArrayList;
-
 import theLegendOfFinn.controller.Delegate;
-import theLegendOfFinn.controller.Manager;
-//import theLegendOfFinn.model.character.Character.CharacterType;
+import theLegendOfFinn.controller.RenderManager;
 
 public class MasterRenderer extends Canvas implements KeyListener {
 	private static final long serialVersionUID = 1L;
@@ -29,7 +27,7 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	private JFrame frame;
 	private BufferStrategy bs;
 	private Graphics g;
-	private ArrayList<CharacterRenderer> charactersR;
+	private ArrayList<CharacterRenderer> charactersRenderer;
 	// private CharacterRenderer playerR;
 	private MapRenderer mapRenderer;
 	private MenuRenderer menuRenderer;
@@ -37,10 +35,12 @@ public class MasterRenderer extends Canvas implements KeyListener {
 
 	public MasterRenderer(Delegate delegate) {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
-
 		// probando
 		this.delegate = delegate;
 
+		menuRenderer = new MenuRenderer();
+		pauseRenderer = new PauseRenderer();
+		
 		frame = new JFrame();
 		addKeyListener(this);
 		frame.setTitle(TITLE);
@@ -53,10 +53,10 @@ public class MasterRenderer extends Canvas implements KeyListener {
 
 		requestFocus();
 
-		charactersR = new ArrayList<CharacterRenderer>();
+		charactersRenderer = new ArrayList<CharacterRenderer>();
 	}
 
-	public void render(Manager.Stage stage) {
+	public void render(RenderManager.Stage stage) {
 
 		bs = getBufferStrategy();
 		if (bs == null) {
@@ -73,7 +73,7 @@ public class MasterRenderer extends Canvas implements KeyListener {
 			break;
 		case MAP:
 			mapRenderer.render(g);
-			Iterator<CharacterRenderer> iter = charactersR.iterator();
+			Iterator<CharacterRenderer> iter = charactersRenderer.iterator();
 			while (iter.hasNext())
 				iter.next().render(g);
 			break;
@@ -93,17 +93,12 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	public void setMapRenderer(MapRenderer mapR) {
 		this.mapRenderer = mapR;
 	}
-
 	
-	/*
-	 * se deberian renderizar todos los characters con un iterador.
-	 * MasterRenderer no deberia hacer distincion entre player y enemy.
-	 */
 	public void addCharacterRenderer(CharacterRenderer characterR) {
-		charactersR.add(characterR);
+		charactersRenderer.add(characterR);
 		// this.playerR = playerR;
 	}
-
+	
 	public void setMenuRenderer(MenuRenderer menuR) {
 		this.menuRenderer = menuR;
 	}

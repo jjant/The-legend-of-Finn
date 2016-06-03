@@ -22,7 +22,6 @@ public class Ticker {
 
 	public void tick() {
 		moveCharacter(map.getPlayer(), map.getEnemies());
-
 	}
 
 	public PlayerCharacter getPlayer() {

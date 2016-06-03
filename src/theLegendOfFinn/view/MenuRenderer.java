@@ -10,6 +10,15 @@ import javax.imageio.ImageIO;
 public class MenuRenderer implements Renderer {
 	private BufferedImage backGroundImage;
 
+	public MenuRenderer() {
+		try {
+			backGroundImage = ImageIO.read(new File("./Assets/zelda-menu.jpg"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	public enum Option {
 		NUEVO, CARGAR;
 	}
@@ -17,11 +26,6 @@ public class MenuRenderer implements Renderer {
 	private Option option = Option.NUEVO;
 
 	public void render(Graphics g) {
-		try {
-			backGroundImage = ImageIO.read(new File("./Assets/zelda-menu.jpg"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		g.drawImage(backGroundImage, 0, 0, MasterRenderer.WIDTH, MasterRenderer.HEIGHT, null);
 		g.setColor(Color.RED);
 		if (option.equals(Option.NUEVO)) {
