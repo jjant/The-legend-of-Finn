@@ -49,9 +49,7 @@ public class EventManager {
 		case KeyEvent.VK_ENTER:
 		case KeyEvent.VK_A:
 			if (menu.getOption().equals(MenuRenderer.Option.NUEVO))
-				System.out.println("hola");
-			;
-			stage = Stage.MAP;
+				stage = Stage.MAP;
 			break;
 		default:
 			break;
@@ -75,6 +73,8 @@ public class EventManager {
 		case KeyEvent.VK_RIGHT:
 			player.tryToMove(Character.Direction.RIGHT);
 			break;
+		case KeyEvent.VK_ESCAPE:
+			stage = Stage.PAUSE;
 		// Con esto atacaria.
 		case KeyEvent.VK_A:
 			break;
@@ -86,6 +86,10 @@ public class EventManager {
 
 	public Stage handlePause(int key) {
 		Stage stage = Stage.PAUSE;
+		switch(key){
+		case KeyEvent.VK_ESCAPE:
+			stage = Stage.MAP;
+		}
 		return stage;
 	}
 

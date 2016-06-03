@@ -43,17 +43,10 @@ public class Manager implements Runnable {
 
 	public Manager() {
 		ticker = new Ticker(new Map(new PlayerCharacter(1)));
-
 		masterRenderer = new MasterRenderer(new Delegate(this));
-
 		timeManager = new TimeManager();
 		eventManager = new EventManager(masterRenderer, ticker);
 
-		/*
-		 * Lo hago asi nomas para probar tema enemigos, creo que convendria
-		 * tener un CharacterManager que maneje todo lo relacionado con el
-		 * spawning, removal etc.
-		 */
 		//Cambiar luego, estoy de acuerdo con el comment de arriba.
 		enemyFactory = new EnemyFactory();
 		
@@ -81,15 +74,16 @@ public class Manager implements Runnable {
 		running = true;
 		
 		setStage(Stage.MENU);
-		
+		System.out.println("LLEGUE ACA");
 		thread = new Thread(this);
 		thread.start();
+		System.out.println("LLEGUE ACA2");
 	}
 
 	public void run() {
+
 		while (running) {
 			if (timeManager.update()) {
-				// Cambiar dsp
 				tick(timeManager.getDelta(), 9);
 				render();
 			}
@@ -98,7 +92,7 @@ public class Manager implements Runnable {
 
 	// Probando...
 	public void tick(double delta, int key) {
-		// Aca deberia hacer los cambios en el modelo.
+		ticker.tick();
 	}
 
 	public void render() {

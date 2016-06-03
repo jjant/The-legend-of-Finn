@@ -1,5 +1,6 @@
 package theLegendOfFinn.model.character;
 
+import java.nio.channels.NonWritableChannelException;
 import java.util.concurrent.TimeUnit;
 
 import theLegendOfFinn.model.Map;
@@ -10,9 +11,6 @@ public class Character {
 		UP, RIGHT, DOWN, LEFT;
 	}
 
-	private static final int MOVE_COOLDOWN = 1;
-
-
 	private int maxHP;
 	private int x, y;
 	private int velocity;
@@ -22,7 +20,9 @@ public class Character {
 
 	private long lastMoveTime;
 	private long nowMoveTime;
+	private Direction moveDirection;
 	private boolean moving = false;
+	private int moveRemaining;
 
 	public Character(int x, int y, Direction direction, int maxHP, int attack, int velocity) {
 		this.x = x;
@@ -76,9 +76,10 @@ public class Character {
 
 	public void tryToMove(Direction direction) {
 		if (canMove(direction)) {
-			moveCharacter(direction);
-			lastMoveTime = System.currentTimeMillis();
+			moveDirection = direction;
 			moving = true;
+			moveRemaining = 32;
+			lastMoveTime = System.currentTimeMillis();
 		}
 	}
 
@@ -92,18 +93,15 @@ public class Character {
 
 	// DEJEN DE USAR LAS VARIABLES, MIERDA!! USEN LOS GETTERS/SETTERS.
 	// Hay que ver lo de que no se superpongan tipitos/enemigos.
-	
-	//Revisar el movimiento, se mueve trabado.
+
+	// Revisar el movimiento, se mueve trabado.
 	private boolean canMove(Direction direction) {
 		boolean canMove = true;
 
 		nowMoveTime = System.currentTimeMillis();
-		if (moving == true) {
-			if (nowMoveTime - lastMoveTime > MOVE_COOLDOWN) {
-				moving = false;
-			} else
-				return false;
-		}
+		if (moving == true)
+			return false;
+		
 		switch (direction) {
 		case LEFT:
 			if ((getX() - Renderer.CELL_SIZE) < 0)
@@ -127,13 +125,19 @@ public class Character {
 	}
 
 	// Falta usar la velocity
-	
-	// Hay que tener cuidado con el sleep(10), quizas habria que hacer 
-	// otro thread que maneje ticker, pero no estoy seguro de coomo se hace todo eso.
-	
-	private void moveCharacter(Direction direction) {
+
+	// Hay que tener cuidado con el sleep(10), quizas habria que hacer
+	// otro thread que maneje ticker, pero no estoy seguro de coomo se hace todo
+	// eso.
+
+	public void move() {
 		int yIncrement = 0, xIncrement = 0;
-		switch (direction) {
+		if(moveRemaining == 0){ 
+			moving = false;
+			return;
+		}
+		moveRemaining--;
+		switch (moveDirection) {
 		case UP:
 			yIncrement = -1;
 			xIncrement = 0;
@@ -151,15 +155,8 @@ public class Character {
 			xIncrement = 1;
 			break;
 		}
-
-		for (int i = 0; i < Renderer.CELL_SIZE; i++) {
-			setY(getY() + yIncrement);
-			setX(getX() + xIncrement);
-			try {
-				TimeUnit.MILLISECONDS.sleep(10);
-			} catch (Exception e){
-			}
-		}
+		setY(getY() + yIncrement);
+		setX(getX() + xIncrement);
 
 	}
 

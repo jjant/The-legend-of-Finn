@@ -46,7 +46,7 @@ public class Map {
 	public void add(Character character) throws PositionOccupiedException {
 		if (grid[character.getX()/CELL_SIZE][character.getY()/CELL_SIZE] != null) {
 			throw new PositionOccupiedException(
-					"La posicion [" + character.getX() + "]" + "[" + character.getY() + "]" + " esta ocupada, imposible añadir " + character + ".");
+					"La posicion [" + character.getX() + "]" + "[" + character.getY() + "]" + " esta ocupada, imposible aï¿½adir " + character + ".");
 		}
 		grid[character.getX()/CELL_SIZE][character.getY()/CELL_SIZE] = character;
 	}
@@ -58,6 +58,10 @@ public class Map {
 
 	public PlayerCharacter getPlayer(){
 		return player;
+	}
+	
+	public List<EnemyCharacter> getEnemies(){
+		return enemyList;
 	}
 	/*
 	 * Como implementar esto? Que devuelve? Es necesaria? public void
