@@ -40,8 +40,8 @@ public class Ticker {
 	//Hace que todos se muevan
 	private void moveCharacter(PlayerCharacter player, List<EnemyCharacter> enemies) {
 		player.move();
-		for (EnemyCharacter enemy: enemies) {
-			if (RenderManager.secondPassed()) {
+		if (RenderManager.secondPassed()) {
+			for (EnemyCharacter enemy: enemies) {
 				enemy.chasePlayer(player.getX(), player.getY());
 				enemy.move();
 			}

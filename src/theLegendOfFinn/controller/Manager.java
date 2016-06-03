@@ -33,6 +33,7 @@ public class Manager {
 		List<EnemyCharacter> enemyList = new ArrayList<EnemyCharacter>();
 		//Aca meti un enemigo de prueba
 		enemyList.add(new EnemyWarrior(0, 0, Direction.LEFT));
+		enemyList.add(new EnemyWarrior(32 * 14, 32 * 14, Direction.LEFT));
 		
 		ticker = new Ticker(new Map(new PlayerCharacter(1), enemyList));
 
