@@ -65,6 +65,11 @@ public class Manager {
 
 	public void setStage(Stage stage) {
 		renderManager.setStage(stage);
+		if(getStage().equals(RenderManager.Stage.MAP))
+			ticker.changeModifier(true);
+		else
+			ticker.changeModifier(false);
+
 	}
 
 	public Stage getStage() {

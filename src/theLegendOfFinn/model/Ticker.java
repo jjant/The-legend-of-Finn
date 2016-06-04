@@ -8,6 +8,7 @@ import theLegendOfFinn.model.character.PlayerCharacter;
 
 public class Ticker {
 	Map map;
+	Boolean canModify=false;
 
 	public Ticker() {
 		map = new Map();
@@ -37,13 +38,16 @@ public class Ticker {
 		return map;
 	}
 
+	public void changeModifier(Boolean b){	canModify=b;	}
 	//Hace que todos se muevan
 	private void moveCharacter(PlayerCharacter player, List<EnemyCharacter> enemies) {
-		player.move();
-		if (RenderManager.secondPassed()) {
-			for (EnemyCharacter enemy: enemies) {
-				enemy.chasePlayer(player.getX(), player.getY());
-				enemy.move();
+		if(canModify) {
+			player.move();
+			if (RenderManager.secondPassed()) {
+				for (EnemyCharacter enemy : enemies) {
+					enemy.chasePlayer(player.getX(), player.getY());
+					enemy.move();
+				}
 			}
 		}
 		/*
