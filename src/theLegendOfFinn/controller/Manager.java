@@ -5,6 +5,7 @@ import java.util.List;
 
 import theLegendOfFinn.controller.RenderManager.Stage;
 import theLegendOfFinn.model.Map;
+import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.Ticker;
 import theLegendOfFinn.model.character.EnemyCharacter;
 import theLegendOfFinn.model.character.EnemyFactory;
@@ -32,8 +33,8 @@ public class Manager {
 	public Manager() {
 		List<EnemyCharacter> enemyList = new ArrayList<EnemyCharacter>();
 		//Aca meti un enemigo de prueba
-		enemyList.add(new EnemyWarrior(0, 0, Direction.LEFT));
-		enemyList.add(new EnemyWarrior(32 * 14, 32 * 14, Direction.LEFT));
+		enemyList.add(new EnemyWarrior(new Position(0, 0), Direction.LEFT));			
+		enemyList.add(new EnemyWarrior(new Position(32 * 14, 32 * 14), Direction.LEFT));
 		
 		ticker = new Ticker(new Map(new PlayerCharacter(1), enemyList));
 

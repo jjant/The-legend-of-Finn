@@ -4,6 +4,7 @@ import java.nio.channels.NonWritableChannelException;
 import java.util.concurrent.TimeUnit;
 
 import theLegendOfFinn.model.Map;
+import theLegendOfFinn.model.Position;
 import theLegendOfFinn.view.Renderer;
 
 public class Character {
@@ -12,7 +13,8 @@ public class Character {
 	}
 
 	private int maxHP;
-	private int x, y;
+	private Position pos;
+	//private int x, y;
 	private int velocity;
 	private int currentHP;
 	private int attack;
@@ -24,9 +26,11 @@ public class Character {
 	private boolean moving = false;
 	private int moveRemaining;
 
-	public Character(int x, int y, Direction direction, int maxHP, int attack, int velocity) {
-		this.x = x;
-		this.y = y;
+	public Character(Position pos, Direction direction, int maxHP, int attack, int velocity) {
+	//public Character(int x, int y, Direction direction, int maxHP, int attack, int velocity) {
+		//this.x = x;
+		//this.y = y;
+		this.pos = pos;
 		this.direction = direction;
 		this.velocity = velocity;
 		this.maxHP = maxHP;
@@ -38,12 +42,18 @@ public class Character {
 		return;
 	}
 	
+	public Position getPosition() {
+		return pos;
+	}
+	
 	public int getX() {
-		return x;
+		return pos.getX();
+		//return x;
 	}
 
 	public int getY() {
-		return y;
+		return pos.getY();
+		//return y;
 	}
 
 	public Direction getDirection() {
@@ -71,11 +81,17 @@ public class Character {
 	}
 
 	protected void setX(int x) {
-		this.x = x;
+		pos.setX(x);
+		//this.x = x;
 	}
 
 	protected void setY(int y) {
-		this.y = y;
+		pos.setY(y);
+		//this.y = y;
+	}
+	
+	protected void setPosition(Position pos) {
+		this.pos = pos;
 	}
 
 	public void tryToMove(Direction direction) {
@@ -108,7 +124,7 @@ public class Character {
 		
 		switch (direction) {
 		case LEFT:
-			if ((getX() - Renderer.CELL_SIZE) < 0)
+			if ((getX() - Renderer.CELL_SIZE) < 0 )
 				canMove = false;
 			break;
 		case RIGHT:
@@ -159,8 +175,9 @@ public class Character {
 			xIncrement = 1;
 			break;
 		}
-		setY(getY() + yIncrement);
-		setX(getX() + xIncrement);
+		pos.incPos(xIncrement, yIncrement);
+		//setY(getY() + yIncrement);
+		//setX(getX() + xIncrement);
 
 	}
 

@@ -1,6 +1,7 @@
 package theLegendOfFinn.model.character;
 
 import theLegendOfFinn.model.character.Character.Direction;
+import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.character.EnemyCharacter.EnemyType;
 
 public class EnemyFactory {
@@ -8,6 +9,7 @@ public class EnemyFactory {
 	public static final int WARRIOR = 1;
 	public static final int HORSE = 2;
 
+	/*
 	public EnemyCharacter getEnemy(EnemyType type, int x, int y, Direction direction) {
 		switch (type) {
 		case Warrior:
@@ -18,5 +20,16 @@ public class EnemyFactory {
 			throw new IllegalArgumentException();
 		}
 	}
+	*/
 	
+	public EnemyCharacter getEnemy(EnemyType type, Position pos, Direction direction) {
+		switch (type) {
+		case Warrior:
+			return new EnemyWarrior(pos, direction);
+		case Horse:
+			return new EnemyHorse(pos, direction);
+		default:
+			throw new IllegalArgumentException();
+		}
+	}
 }

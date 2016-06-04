@@ -52,8 +52,8 @@ public class Map {
 	}
 	
 	// cambiar luego;
-	public void remove(int x, int y) {
-		grid[x][y] = null;
+	public void remove(Position pos) {
+		grid[pos.getX()/CELL_SIZE][pos.getY()/CELL_SIZE] = null;
 	}
 
 	public PlayerCharacter getPlayer(){
@@ -63,6 +63,13 @@ public class Map {
 	public List<EnemyCharacter> getEnemies(){
 		return enemyList;
 	}
+	
+	public boolean isFreePosition(Position pos) {
+		if (grid[pos.getX()/CELL_SIZE][pos.getY()/CELL_SIZE] != null)
+			return false;
+		return true;
+	}
+	
 	/*
 	 * Como implementar esto? Que devuelve? Es necesaria? public void
 	 *

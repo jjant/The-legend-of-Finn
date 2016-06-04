@@ -1,6 +1,7 @@
 package theLegendOfFinn.model.character;
 
 import theLegendOfFinn.model.Map;
+import theLegendOfFinn.model.Position;
 import theLegendOfFinn.view.Renderer;
 
 public class PlayerCharacter extends Character {
@@ -22,7 +23,9 @@ public class PlayerCharacter extends Character {
 	 */
 
 	public PlayerCharacter(int level) {
-		super(Map.WIDTH * Renderer.CELL_SIZE / 2 - Renderer.CELL_SIZE,
-				Map.HEIGHT * Renderer.CELL_SIZE / 2 - Renderer.CELL_SIZE / 2, Direction.DOWN, PLAYER_MAX_HP[level], PLAYER_ATTACK[level], PLAYER_VELOCITY[level]);
+		super(new Position(Map.WIDTH * Renderer.CELL_SIZE / 2 - Renderer.CELL_SIZE,
+				Map.HEIGHT * Renderer.CELL_SIZE / 2 - Renderer.CELL_SIZE / 2), Direction.DOWN, PLAYER_MAX_HP[level], PLAYER_ATTACK[level], PLAYER_VELOCITY[level]);
+		//super(Map.WIDTH * Renderer.CELL_SIZE / 2 - Renderer.CELL_SIZE,
+		//		Map.HEIGHT * Renderer.CELL_SIZE / 2 - Renderer.CELL_SIZE / 2, Direction.DOWN, PLAYER_MAX_HP[level], PLAYER_ATTACK[level], PLAYER_VELOCITY[level]);
 	}
 }

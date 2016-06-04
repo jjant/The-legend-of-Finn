@@ -1,5 +1,6 @@
 package theLegendOfFinn.model.character;
 
+import theLegendOfFinn.model.Position;
 import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class EnemyCharacter extends Character {
@@ -21,10 +22,15 @@ public abstract class EnemyCharacter extends Character {
 	public static final int HORSE_VELOCITY = 2;
 		
 	 
+	public EnemyCharacter(Position pos, Direction direction, int velocity, int maxHP, int attack) {
+		super(pos, direction, velocity, maxHP, attack);
+	}
 	
+	/*
 	public EnemyCharacter(int x, int y, Direction direction, int velocity, int maxHP, int attack) {
 		super(x, y, direction, velocity, maxHP, attack);
 	}
+	*/
 
 	/**
 	 * author: Ramiro Olivera Fedi
@@ -33,8 +39,12 @@ public abstract class EnemyCharacter extends Character {
 	 * @param playerY Position Y for the player
 	 */
 	// Maybe we should be passing a Position object instead of two ints.
+	
 	public void chasePlayer(int playerX, int playerY) {
+
 		boolean flipDirection = ThreadLocalRandom.current().nextInt(0, 11) <= 5;
+		
+		// map Parameter added
 		
 		if (playerY > getY() && playerX > getX())
 			tryToMove(flipDirection ? Direction.DOWN : Direction.RIGHT);
@@ -54,4 +64,5 @@ public abstract class EnemyCharacter extends Character {
 			tryToMove(flipDirection ? Direction.DOWN : Direction.LEFT);
 		else {} // THIS HAPPENS ONLY IF ARE IN SAME POSITION. (NEVER SHOULD HAPPEN)
 	}
+
 }
