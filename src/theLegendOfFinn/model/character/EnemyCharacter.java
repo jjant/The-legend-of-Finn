@@ -40,7 +40,11 @@ public abstract class EnemyCharacter extends Character {
 	 */
 	// Maybe we should be passing a Position object instead of two ints.
 	
-	public void chasePlayer(int playerX, int playerY) {
+	public void chasePlayer(Position pos) {
+	//public void chasePlayer(int playerX, int playerY) {
+		
+		int playerX = pos.getX();
+		int playerY = pos.getY();
 
 		boolean flipDirection = ThreadLocalRandom.current().nextInt(0, 11) <= 5;
 		

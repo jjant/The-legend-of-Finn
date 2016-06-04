@@ -13,7 +13,7 @@ public class RenderFactory {
 	 */
 	//Rompi este metodo por separar los enemigos en clases...
 	/*
-	public CharacterRenderer getCharacterRenderer(Character character, CharacterType type) {
+	public CharacterRenderer getCharacterRenderer(Character character) {
 		switch (type) {
 		case WARRIOR:
 			return new CharacterRenderer(character, Color.RED);
@@ -26,6 +26,7 @@ public class RenderFactory {
 		}
 	}
 	*/
+	
 	public CharacterRenderer getPlayerRenderer(PlayerCharacter player){
 		return new CharacterRenderer(player, Color.BLUE);
 	}
