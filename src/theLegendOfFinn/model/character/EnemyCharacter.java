@@ -26,6 +26,13 @@ public abstract class EnemyCharacter extends Character {
 		super(x, y, direction, velocity, maxHP, attack);
 	}
 
+	/**
+	 * author: Ramiro Olivera Fedi
+	 * 
+	 * @param playerX Position X for player
+	 * @param playerY Position Y for the player
+	 */
+	// Maybe we should be passing a Position object instead of two ints.
 	public void chasePlayer(int playerX, int playerY) {
 		boolean flipDirection = ThreadLocalRandom.current().nextInt(0, 11) <= 5;
 		
