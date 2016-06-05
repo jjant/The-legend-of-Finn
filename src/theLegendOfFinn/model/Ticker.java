@@ -48,9 +48,19 @@ public class Ticker {
 			player.move();
 			if (RenderManager.secondPassed()) {
 				for (EnemyCharacter enemy : enemies) {
+					// This raises ConcurrentModificationException
+					// Should be looped differently or done in another way.
+					/*if (!enemy.isAlive()) {
+						map.getGrid().freePosition(enemy.getPosition());
+						enemies.remove(enemy);
+					} else {
+						enemy.chasePlayer(player.getPosition(), map.getGrid());
+						//enemy.chasePlayer(player.getX(), player.getY());
+						enemy.move();	
+					}*/
 					enemy.chasePlayer(player.getPosition(), map.getGrid());
 					//enemy.chasePlayer(player.getX(), player.getY());
-					enemy.move();
+					enemy.move();	
 				}
 			}
 		}

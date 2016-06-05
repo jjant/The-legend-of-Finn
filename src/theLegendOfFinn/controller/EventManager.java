@@ -4,6 +4,7 @@ package theLegendOfFinn.controller;
 import java.awt.event.KeyEvent;
 
 import theLegendOfFinn.controller.RenderManager.Stage;
+import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.Ticker;
 import theLegendOfFinn.model.character.Character;
 import theLegendOfFinn.view.MasterRenderer;
@@ -77,6 +78,14 @@ public class EventManager {
 			stage = Stage.PAUSE;
 		// Con esto atacaria.
 		case KeyEvent.VK_A:
+			Position posToAttack = player.getPosition().toGridIndexes(player.getDirection());
+			System.out.println(posToAttack);
+			System.out.println(player.getDirection());
+			if (posToAttack != null) {
+				int x = posToAttack.getX();
+				int y = posToAttack.getY();
+				player.attack(ticker.getMap().getGrid().getCharMatrix()[x][y]);
+			}
 			break;
 		default:
 			break;

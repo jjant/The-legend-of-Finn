@@ -99,6 +99,10 @@ public class MasterRenderer extends Canvas implements KeyListener {
 		// this.playerR = playerR;
 	}
 	
+	public void removeCharacterRenderer(CharacterRenderer characterR) {
+		charactersRenderer.remove(characterR);
+	}
+	
 	public void setMenuRenderer(MenuRenderer menuR) {
 		this.menuRenderer = menuR;
 	}

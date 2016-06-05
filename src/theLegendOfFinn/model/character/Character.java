@@ -39,6 +39,10 @@ public class Character {
 		this.attack = attack;
 	}
 	
+	public boolean isAlive() {
+		return currentHP > 0;
+	}
+	
 	public static void test(){
 		return;
 	}
@@ -58,7 +62,7 @@ public class Character {
 	}
 	*/
 	public Direction getDirection() {
-		return direction;
+		return moveDirection;
 	}
 
 	public int getVelocity() {
@@ -103,6 +107,7 @@ public class Character {
 		if (moving == true)
 			return;
 					
+		moveDirection = direction;
 		switch (direction) {
 		case LEFT:
 			destination = new Position(getPosition().getX() - Map.CELL_SIZE, getPosition().getY());
@@ -128,12 +133,11 @@ public class Character {
 		
 		if (canMove) {
 		//if (canMove(direction)) {
-			moveDirection = direction;
 			moving = true;
 			moveRemaining = 32;
 			lastMoveTime = System.currentTimeMillis();
-			grid.occupyPosition(this, destination);
-			grid.freePosition(this.getPosition());
+			grid.occupyPosition(this, destination); // This should be done in move. To not attack the enemy
+			grid.freePosition(this.getPosition());  // in an empty space. Maybe when MoveRemaining == 10 i.e.
 		}
 	}
 
@@ -201,6 +205,7 @@ public class Character {
 			moving = false;
 			return;
 		}
+		
 		moveRemaining--;
 		switch (moveDirection) {
 		case UP:
@@ -227,9 +232,10 @@ public class Character {
 	}
 
 	// private?
-	private void attack(Character character) {
+	public void attack(Character character) {
 		if (character == null)
 			return;
+		System.out.println(character);
 		character.receiveAttack(this);
 	}
 
