@@ -16,8 +16,8 @@ public class EnemyWarrior extends EnemyCharacter {
 	*/
 	
 	public EnemyWarrior(Position pos, Direction direction) {
-		super(pos, direction, EnemyCharacter.WARRIOR_VELOCITY, EnemyCharacter.HORSE_MAX_HP,
-				EnemyCharacter.HORSE_ATTACK);
+		super(pos, direction, EnemyCharacter.WARRIOR_MAX_HP, EnemyCharacter.WARRIOR_ATTACK,
+				EnemyCharacter.WARRIOR_VELOCITY);
 	}
 	
 	public EnemyWarrior(Position pos) {

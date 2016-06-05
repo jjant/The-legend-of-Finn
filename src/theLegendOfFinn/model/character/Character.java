@@ -19,6 +19,10 @@ public class Character {
 	private int velocity;
 	private int currentHP;
 	private int attack;
+	
+	/* Si esto no se usa, habria que usar esta en vez de moveDirection..
+	 * y sino, ver en para que serviria tenerlas diferenciadas e implementarlo.
+	 */
 	private Direction direction;
 
 	private long lastMoveTime;
@@ -37,6 +41,7 @@ public class Character {
 		this.maxHP = maxHP;
 		this.currentHP = maxHP;
 		this.attack = attack;
+		lastMoveTime = 0;
 	}
 	
 	public boolean isAlive() {
@@ -206,29 +211,35 @@ public class Character {
 			return;
 		}
 		
-		moveRemaining--;
-		switch (moveDirection) {
-		case UP:
-			yIncrement = -1;
-			xIncrement = 0;
-			break;
-		case LEFT:
-			yIncrement = 0;
-			xIncrement = -1;
-			break;
-		case DOWN:
-			yIncrement = 1;
-			xIncrement = 0;
-			break;
-		case RIGHT:
-			yIncrement = 0;
-			xIncrement = 1;
-			break;
+		nowMoveTime = System.currentTimeMillis();
+		if (nowMoveTime - lastMoveTime >= 15 / getVelocity()) {
+			
+			lastMoveTime = nowMoveTime;
+		
+			moveRemaining--;
+			switch (moveDirection) {
+			case UP:
+				yIncrement = -1;
+				xIncrement = 0;
+				break;
+			case LEFT:
+				yIncrement = 0;
+				xIncrement = -1;
+				break;
+			case DOWN:
+				yIncrement = 1;
+				xIncrement = 0;
+				break;
+			case RIGHT:
+				yIncrement = 0;
+				xIncrement = 1;
+				break;
+			}
+			pos.incPos(xIncrement, yIncrement);
+			//setY(getY() + yIncrement);
+			//setX(getX() + xIncrement);
+		
 		}
-		pos.incPos(xIncrement, yIncrement);
-		//setY(getY() + yIncrement);
-		//setX(getX() + xIncrement);
-
 	}
 
 	// private?

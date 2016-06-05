@@ -46,7 +46,7 @@ public class Ticker {
 	private void moveCharacter(PlayerCharacter player, List<EnemyCharacter> enemies) {
 		if(canModify) {
 			player.move();
-			if (RenderManager.secondPassed()) {
+			//if (RenderManager.secondPassed()) {
 				for (EnemyCharacter enemy : enemies) {
 					// This raises ConcurrentModificationException
 					// Should be looped differently or done in another way.
@@ -62,7 +62,7 @@ public class Ticker {
 					//enemy.chasePlayer(player.getX(), player.getY());
 					enemy.move();	
 				}
-			}
+			//}
 		}
 		/*
 		 * for(EnemyCharacter enemy: enemies){ //enemy.move(); }
