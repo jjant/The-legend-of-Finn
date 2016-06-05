@@ -71,6 +71,10 @@ public class CharacterRenderer implements Renderer {
 		if (character.getDirection()==null)
 			img = characterSprites.get(Character.Direction.DOWN);
 		else
+			img = characterSprites.get(character.getDirection());
+		g.drawImage(img , character.getPosition().getX(), character.getPosition().getY(), CELL_SIZE, CELL_SIZE, null);
+		/*
+		else
 			switch (character.getDirection()) {
 				case DOWN: {
 					img = characterSprites.get(Character.Direction.DOWN);
@@ -90,7 +94,8 @@ public class CharacterRenderer implements Renderer {
 				}
 				default: img = characterSprites.get(Character.Direction.DOWN);
 			}
-		g.drawImage(img, character.getPosition().getX(), character.getPosition().getY(), CELL_SIZE, CELL_SIZE, null);
+		*/
+		//g.drawImage(img, character.getPosition().getX(), character.getPosition().getY(), CELL_SIZE, CELL_SIZE, null);
 	}
 	
 	//No sé si en render mismo se hacen los chequeos, pero así funca bien para arrancar..
