@@ -21,7 +21,10 @@ public class CharacterRenderer implements Renderer {
 	private Character character;
 	private Character.CharacterType type;
 	private Color color;
-	private BufferedImage zeldaDown;
+	private BufferedImage finnDown;
+	private BufferedImage finnUp;
+	private BufferedImage finnRight;
+	private BufferedImage finnLeft;
 	private BufferedImage warriorDown;
 	/* La idea es que en lugar de recibir el color reciba tipo WARRIOR o PLAYER 
 	 * y entonces se renderiza utilizando los sprites correspondientes
@@ -32,7 +35,10 @@ public class CharacterRenderer implements Renderer {
 		switch(type) {
 			case PLAYER: {
 				try {
-					zeldaDown = ImageIO.read(new File("./Assets/zelda-down.png"));
+					finnDown = ImageIO.read(new File("./Assets/finnDown.png"));
+					finnUp = ImageIO.read(new File("./Assets/finnUp.png"));
+					finnRight = ImageIO.read(new File("./Assets/finnRight.png"));
+					finnLeft = ImageIO.read(new File("./Assets/finnLeft.png"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -49,19 +55,46 @@ public class CharacterRenderer implements Renderer {
 		}
 	}
 
+	//No sé si en render mismo se hacen los chequeos, pero así funca bien para arrancar..
 	@Override
 	public void render(Graphics g) {
 		//g.setColor(color);
+		BufferedImage img;
 		switch (type) {
 			case PLAYER: {
-				g.drawImage(zeldaDown, character.getPosition().getX(), character.getPosition().getY(), CELL_SIZE, CELL_SIZE, null);
+				//getDirection devuelve el movDirection, que inicialmente apunta a null. Ver cómo mejorar.
+				//Chequear también los defaults...
+				if (character.getDirection()==null)
+					img = finnDown;
+				else
+					switch (character.getDirection()) {
+						case DOWN: {
+							img = finnDown;
+							break;
+						}
+						case UP: {
+							img = finnUp;
+							break;
+						}
+						case RIGHT: {
+							img = finnRight;
+							break;
+						}
+						case LEFT: {
+							img = finnLeft;
+							break;
+						}
+						default: img = finnDown;
+					}
 				break;
 			}
 			case WARRIOR: {
-				g.drawImage(warriorDown, character.getPosition().getX(), character.getPosition().getY(), CELL_SIZE, CELL_SIZE, null);
+				img = warriorDown;
 				break;
 			}
+			default: img = finnDown;
 		}
+		g.drawImage(img, character.getPosition().getX(), character.getPosition().getY(), CELL_SIZE, CELL_SIZE, null);
 		/*else{
 			g.drawOval(character.getPosition().getX(), character.getPosition().getY(), CELL_SIZE, CELL_SIZE);
 			g.fillOval(character.getPosition().getX(), character.getPosition().getY(), CELL_SIZE, CELL_SIZE);
