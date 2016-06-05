@@ -8,10 +8,6 @@ import theLegendOfFinn.model.character.PlayerCharacter;
 import theLegendOfFinn.model.exceptions.PositionOccupiedException;
 
 public class Map {
-	/*
-	 * Decidir si estas constantes van aca, en la clase aue hace de
-	 * intermediario o en alguna del view. CELL_SIZE repetida :/
-	 */
 
 	public static final int CELL_SIZE = 32;
 
@@ -23,26 +19,39 @@ public class Map {
 	// Ver si quedarnos con player aca.
 	private PlayerCharacter player;
 	private List<EnemyCharacter> enemyList;
-	private Character[][] grid = new Character[WIDTH][HEIGHT];
+	
+	private CharacterGrid grid;
+	//private Character[][] grid = new Character[WIDTH][HEIGHT];
 
+	/*
 	public Map(){
 		player = new PlayerCharacter(1);
+		grid = new CharacterGrid();
 		try {
-			add(player);
+			grid.add(player);
+			//add(player);
 		} catch (PositionOccupiedException e) {
 			e.printStackTrace();
 		}
 	}
+	*/
 	public Map(PlayerCharacter player) {
 		this(player, new ArrayList<EnemyCharacter>());
 	}
 
 	public Map(PlayerCharacter player, List<EnemyCharacter> enemyList) {
+		grid = new CharacterGrid();
 		this.player = player;
+		try {
+			grid.add(player);
+		} catch (PositionOccupiedException e) {
+			e.printStackTrace();
+		}
 		this.enemyList = enemyList;
 	}
 	
 	// Lo hice villerisimo...
+	/*
 	public void add(Character character) throws PositionOccupiedException {
 		if (grid[character.getPosition().getX()/CELL_SIZE][character.getPosition().getY()/CELL_SIZE] != null) {
 			throw new PositionOccupiedException(
@@ -50,24 +59,25 @@ public class Map {
 		}
 		grid[character.getPosition().getX()/CELL_SIZE][character.getPosition().getY()/CELL_SIZE] = character;
 	}
+	*/
 	
 	// cambiar luego;
+	/*
 	public void remove(Position pos) {
 		grid[pos.getX()/CELL_SIZE][pos.getY()/CELL_SIZE] = null;
 	}
+	*/
 
-	public PlayerCharacter getPlayer(){
+	public PlayerCharacter getPlayer() {
 		return player;
 	}
 	
-	public List<EnemyCharacter> getEnemies(){
+	public List<EnemyCharacter> getEnemies() {
 		return enemyList;
 	}
 	
-	public boolean isFreePosition(Position pos) {
-		if (grid[pos.getX()/CELL_SIZE][pos.getY()/CELL_SIZE] != null)
-			return false;
-		return true;
+	public CharacterGrid getGrid() {
+		return grid;
 	}
 	
 	/*

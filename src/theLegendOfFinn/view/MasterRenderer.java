@@ -119,7 +119,7 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	
 	public void keyPressed(KeyEvent e) {
 		int keyCode = e.getKeyCode();
-		System.out.println("key pressed");
+		//System.out.println("key pressed");
 		delegate.passKeyPressed(keyCode);
 	}
 

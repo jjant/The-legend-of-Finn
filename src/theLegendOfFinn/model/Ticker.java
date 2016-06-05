@@ -9,11 +9,13 @@ import theLegendOfFinn.model.character.PlayerCharacter;
 public class Ticker {
 	Map map;
 	Boolean canModify=false;
-
+	
+	/*
 	public Ticker() {
 		map = new Map();
 	}
-
+	*/
+	
 	public Ticker(Map map) {
 		this.map = map;
 	}
@@ -46,7 +48,7 @@ public class Ticker {
 			player.move();
 			if (RenderManager.secondPassed()) {
 				for (EnemyCharacter enemy : enemies) {
-					enemy.chasePlayer(player.getPosition());
+					enemy.chasePlayer(player.getPosition(), map.getGrid());
 					//enemy.chasePlayer(player.getX(), player.getY());
 					enemy.move();
 				}

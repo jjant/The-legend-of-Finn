@@ -62,16 +62,16 @@ public class EventManager {
 		Character player = ticker.getPlayer();
 		switch (key) {
 		case KeyEvent.VK_UP:
-			player.tryToMove(Character.Direction.UP);
+			player.tryToMove(Character.Direction.UP, ticker.getMap().getGrid());
 			break;
 		case KeyEvent.VK_LEFT:
-			player.tryToMove(Character.Direction.LEFT);
+			player.tryToMove(Character.Direction.LEFT, ticker.getMap().getGrid());
 			break;
 		case KeyEvent.VK_DOWN:
-			player.tryToMove(Character.Direction.DOWN);
+			player.tryToMove(Character.Direction.DOWN, ticker.getMap().getGrid());
 			break;
 		case KeyEvent.VK_RIGHT:
-			player.tryToMove(Character.Direction.RIGHT);
+			player.tryToMove(Character.Direction.RIGHT, ticker.getMap().getGrid());
 			break;
 		case KeyEvent.VK_ESCAPE:
 			stage = Stage.PAUSE;

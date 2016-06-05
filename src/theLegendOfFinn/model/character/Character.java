@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 import theLegendOfFinn.model.Map;
 import theLegendOfFinn.model.Position;
+import theLegendOfFinn.model.CharacterGrid;
 import theLegendOfFinn.view.Renderer;
 
 public class Character {
@@ -94,12 +95,45 @@ public class Character {
 		this.pos = pos;
 	}
 
-	public void tryToMove(Direction direction) {
-		if (canMove(direction)) {
+	//public boolean canMove(Direction direction) {
+	public void tryToMove(Direction direction, CharacterGrid grid) {
+		Position destination;
+		boolean canMove = true;
+		
+		if (moving == true)
+			return;
+					
+		switch (direction) {
+		case LEFT:
+			destination = new Position(getPosition().getX() - Map.CELL_SIZE, getPosition().getY());
+			break;
+		case RIGHT:
+			destination = new Position(getPosition().getX() + Map.CELL_SIZE, getPosition().getY());
+			break;
+		case UP:
+			destination = new Position(getPosition().getX(), getPosition().getY() - Map.CELL_SIZE);
+			break;
+		case DOWN:
+			destination = new Position(getPosition().getX(), getPosition().getY() + Map.CELL_SIZE);
+			break;
+		default:
+			// should throw an exception, this is madness.
+			destination = new Position(0, 0);
+		}
+		
+		if (destination.getX() < 0 || destination.getX() >= Map.WIDTH * Map.CELL_SIZE
+				|| destination.getY() < 0 || destination.getY() >= Map.HEIGHT * Map.CELL_SIZE
+				|| !grid.isFreePosition(destination))
+			canMove = false;
+		
+		if (canMove) {
+		//if (canMove(direction)) {
 			moveDirection = direction;
 			moving = true;
 			moveRemaining = 32;
 			lastMoveTime = System.currentTimeMillis();
+			grid.occupyPosition(this, destination);
+			grid.freePosition(this.getPosition());
 		}
 	}
 
@@ -111,16 +145,21 @@ public class Character {
 	 * limites y mueva.
 	 */
 
-	// DEJEN DE USAR LAS VARIABLES, MIERDA!! USEN LOS GETTERS/SETTERS.
-	// Hay que ver lo de que no se superpongan tipitos/enemigos.
-
 	// Revisar el movimiento, se mueve trabado.
-	private boolean canMove(Direction direction) {
+	
+	/*
+	private boolean canMove(Position finalPos) {
+	//private boolean canMove(Direction direction) {
 		boolean canMove = true;
 
 		nowMoveTime = System.currentTimeMillis();
 		if (moving == true)
 			return false;
+		
+		if (finalPos.getX() < 0 || finalPos.getX() >= Map.WIDTH * Map.CELL_SIZE
+				|| finalPos.getY() < 0 || finalPos.getY() >= Map.HEIGHT * Map.CELL_SIZE)
+			canMove = false;
+		return canMove;
 		
 		switch (direction) {
 		case LEFT:
@@ -146,7 +185,9 @@ public class Character {
 		}
 
 		return canMove;
+		
 	}
+	*/
 
 	// Falta usar la velocity
 

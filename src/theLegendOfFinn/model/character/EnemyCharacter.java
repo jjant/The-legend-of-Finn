@@ -1,6 +1,7 @@
 package theLegendOfFinn.model.character;
 
 import theLegendOfFinn.model.Position;
+import theLegendOfFinn.model.CharacterGrid;
 import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class EnemyCharacter extends Character {
@@ -39,8 +40,9 @@ public abstract class EnemyCharacter extends Character {
 	 * @param playerY Position Y for the player
 	 */
 	// Maybe we should be passing a Position object instead of two ints.
+	// Ready, Something else boss?
 	
-	public void chasePlayer(Position pos) {
+	public void chasePlayer(Position pos, CharacterGrid grid) {
 	//public void chasePlayer(int playerX, int playerY) {
 		
 		int playerX = pos.getX();
@@ -48,8 +50,25 @@ public abstract class EnemyCharacter extends Character {
 
 		boolean flipDirection = ThreadLocalRandom.current().nextInt(0, 11) <= 5;
 		
-		// map Parameter added
+		if (playerY > getPosition().getY() && playerX > getPosition().getX())
+			tryToMove(flipDirection ? Direction.DOWN : Direction.RIGHT, grid);
+		else if (playerY == getPosition().getY() && playerX > getPosition().getX())
+			tryToMove(Direction.RIGHT, grid);
+		else if (playerY == getPosition().getY() && playerX < getPosition().getX())
+			tryToMove(Direction.LEFT, grid);
+		else if (playerY > getPosition().getY() && playerX == getPosition().getX())
+			tryToMove(Direction.DOWN, grid);
+		else if (playerY < getPosition().getY() && playerX == getPosition().getX())
+			tryToMove(Direction.UP, grid);
+		else if (playerY < getPosition().getY() && playerX < getPosition().getX())
+			tryToMove(flipDirection ? Direction.UP : Direction.LEFT, grid);
+		else if (playerY < getPosition().getY() && playerX > getPosition().getX())
+			tryToMove(flipDirection ? Direction.UP : Direction.RIGHT, grid);
+		else if (playerY > getPosition().getY() && playerX < getPosition().getX())
+			tryToMove(flipDirection ? Direction.DOWN : Direction.LEFT, grid);
+		else {} // THIS HAPPENS ONLY IF ARE IN SAME POSITION. (NEVER SHOULD HAPPEN)
 		
+		/*
 		if (playerY > getPosition().getY() && playerX > getPosition().getX())
 			tryToMove(flipDirection ? Direction.DOWN : Direction.RIGHT);
 		else if (playerY == getPosition().getY() && playerX > getPosition().getX())
@@ -67,6 +86,7 @@ public abstract class EnemyCharacter extends Character {
 		else if (playerY > getPosition().getY() && playerX < getPosition().getX())
 			tryToMove(flipDirection ? Direction.DOWN : Direction.LEFT);
 		else {} // THIS HAPPENS ONLY IF ARE IN SAME POSITION. (NEVER SHOULD HAPPEN)
+		*/
 	}
 
 }
