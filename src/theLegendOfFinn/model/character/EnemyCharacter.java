@@ -41,7 +41,8 @@ public abstract class EnemyCharacter extends Character {
 	 */
 	// Maybe we should be passing a Position object instead of two ints.
 	// Ready, Something else boss?
-	
+	// When we finish, we might take into account multiple players
+	// capabilities.
 	public void chasePlayer(Position pos, CharacterGrid grid) {
 	//public void chasePlayer(int playerX, int playerY) {
 		

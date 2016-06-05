@@ -1,5 +1,6 @@
 package theLegendOfFinn.model;
 
+import java.util.Iterator;
 import java.util.List;
 
 import theLegendOfFinn.controller.RenderManager;
@@ -39,15 +40,29 @@ public class Ticker {
 	public Map getMap() {
 		return map;
 	}
-
-	public void changeModifier(Boolean b){	canModify=b;	}
+	
+	// Maybe rename to: toggleMovement
+	public void changeModifier(Boolean b){	canModify = b;	}
 	//Hace que todos se muevan
 	
 	private void moveCharacter(PlayerCharacter player, List<EnemyCharacter> enemies) {
 		if(canModify) {
 			player.move();
+			Iterator<EnemyCharacter> enemyIter = enemies.iterator();
 			//if (RenderManager.secondPassed()) {
-				for (EnemyCharacter enemy : enemies) {
+			
+			while (enemyIter.hasNext()) {
+			   EnemyCharacter enemy = enemyIter.next();
+			   if (enemy.isAlive()) {
+				   enemy.chasePlayer(player.getPosition(), map.getGrid());
+				   //enemy.chasePlayer(player.getX(), player.getY());
+				   enemy.move();
+			   } else {
+				   map.getGrid().freePosition(enemy.getPosition());
+				   enemyIter.remove();
+			   }
+			}
+				/*for (EnemyCharacter enemy : enemies) {
 					// This raises ConcurrentModificationException
 					// Should be looped differently or done in another way.
 					/*if (!enemy.isAlive()) {
@@ -57,11 +72,11 @@ public class Ticker {
 						enemy.chasePlayer(player.getPosition(), map.getGrid());
 						//enemy.chasePlayer(player.getX(), player.getY());
 						enemy.move();	
-					}*/
+					}
 					enemy.chasePlayer(player.getPosition(), map.getGrid());
 					//enemy.chasePlayer(player.getX(), player.getY());
 					enemy.move();	
-				}
+				}*/
 			//}
 		}
 		/*
