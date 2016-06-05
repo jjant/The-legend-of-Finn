@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 
 import theLegendOfFinn.controller.Delegate;
 import theLegendOfFinn.controller.RenderManager;
+import theLegendOfFinn.model.character.Character;
 
 public class MasterRenderer extends Canvas implements KeyListener {
 	private static final long serialVersionUID = 1L;
@@ -74,8 +75,11 @@ public class MasterRenderer extends Canvas implements KeyListener {
 		case MAP:
 			mapRenderer.render(g);
 			Iterator<CharacterRenderer> iter = charactersRenderer.iterator();
-			while (iter.hasNext())
-				iter.next().render(g);
+			while (iter.hasNext()) {
+				CharacterRenderer characterR = iter.next();
+				Character character = characterR.getCharacter();
+				if (character.isAlive()) characterR.render(g);
+			}
 			break;
 		case PAUSE:
 			pauseRenderer.render(g);

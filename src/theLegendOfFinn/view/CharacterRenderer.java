@@ -55,6 +55,10 @@ public class CharacterRenderer implements Renderer {
 		}
 	}
 
+	public Character getCharacter(){
+		return character;
+	}
+	
 	//No sé si en render mismo se hacen los chequeos, pero así funca bien para arrancar..
 	@Override
 	public void render(Graphics g) {
