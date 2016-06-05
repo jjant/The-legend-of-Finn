@@ -25,6 +25,7 @@ public class PlayerCharacter extends Character {
 	public PlayerCharacter(int level) {
 		super(new Position(Map.WIDTH * Renderer.CELL_SIZE / 2 - Renderer.CELL_SIZE,
 				Map.HEIGHT * Renderer.CELL_SIZE / 2 - Renderer.CELL_SIZE / 2), Direction.DOWN, PLAYER_MAX_HP[level], PLAYER_ATTACK[level], PLAYER_VELOCITY[level]);
+
 		//super(Map.WIDTH * Renderer.CELL_SIZE / 2 - Renderer.CELL_SIZE,
 		//		Map.HEIGHT * Renderer.CELL_SIZE / 2 - Renderer.CELL_SIZE / 2, Direction.DOWN, PLAYER_MAX_HP[level], PLAYER_ATTACK[level], PLAYER_VELOCITY[level]);
 	}

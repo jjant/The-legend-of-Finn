@@ -2,7 +2,9 @@ package theLegendOfFinn.view;
 
 import java.awt.Color;
 
+import theLegendOfFinn.model.character.Character;
 import theLegendOfFinn.model.character.EnemyCharacter;
+import theLegendOfFinn.model.character.EnemyWarrior;
 import theLegendOfFinn.model.character.PlayerCharacter;
 
 public class RenderFactory {
@@ -28,10 +30,10 @@ public class RenderFactory {
 	*/
 	
 	public CharacterRenderer getPlayerRenderer(PlayerCharacter player){
-		return new CharacterRenderer(player, Color.BLUE);
+		return new CharacterRenderer(player, Character.CharacterType.PLAYER);
 	}
 	//borrar luego
 	public CharacterRenderer getHorseRenderer(EnemyCharacter enemy){
-		return new CharacterRenderer(enemy, Color.RED);
+		return new CharacterRenderer(enemy, Character.CharacterType.WARRIOR);
 	}
 }

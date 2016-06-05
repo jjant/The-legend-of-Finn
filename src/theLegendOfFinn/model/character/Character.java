@@ -12,7 +12,11 @@ public class Character {
 	public static enum Direction {
 		UP, RIGHT, DOWN, LEFT;
 	}
-
+	//está esto acá para diferenciar al renderizar, ver dónde va
+	public static enum CharacterType {
+		PLAYER, WARRIOR, HORSE;
+	}
+	private CharacterType type;
 	private int maxHP;
 	private Position pos;
 	//private int x, y;
