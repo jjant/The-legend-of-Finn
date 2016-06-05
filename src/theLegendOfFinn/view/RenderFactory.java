@@ -47,9 +47,9 @@ public class RenderFactory {
 		characterSprites = new HashMap<Character.Direction, BufferedImage>(4);
 		try {
 			characterSprites.put(Character.Direction.DOWN, ImageIO.read(new File("./Assets/warrior-down.png")));
-			characterSprites.put(Character.Direction.UP, ImageIO.read(new File("./Assets/warrior-down.png")));
-			characterSprites.put(Character.Direction.LEFT, ImageIO.read(new File("./Assets/warrior-down.png")));
-			characterSprites.put(Character.Direction.RIGHT, ImageIO.read(new File("./Assets/warrior-down.png")));
+			characterSprites.put(Character.Direction.UP, ImageIO.read(new File("./Assets/warrior-up.png")));
+			characterSprites.put(Character.Direction.LEFT, ImageIO.read(new File("./Assets/warrior-left.png")));
+			characterSprites.put(Character.Direction.RIGHT, ImageIO.read(new File("./Assets/warrior-right.png")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -62,7 +62,7 @@ public class RenderFactory {
 		//return new CharacterRenderer(player, Character.CharacterType.PLAYER);
 	}
 	//borrar luego
-	public CharacterRenderer getHorseRenderer(EnemyCharacter enemy){
+	public CharacterRenderer getWarriorRenderer(EnemyCharacter enemy){
 		return new CharacterRenderer(enemy, spriteMap.get(Character.CharacterType.WARRIOR));
 		//return new CharacterRenderer(enemy, Character.CharacterType.WARRIOR);
 	}

@@ -1,4 +1,4 @@
-package theLegendOfFinn.model;
+  package theLegendOfFinn.model;
 
 import java.util.ArrayList;
 import java.util.List;

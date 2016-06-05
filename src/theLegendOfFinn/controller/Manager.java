@@ -47,7 +47,7 @@ public class Manager {
 		masterRenderer.addCharacterRenderer(renderFactory.getPlayerRenderer(ticker.getPlayer()));
 		// Aca renderizo los enemigos creo
 		for(EnemyCharacter enemy: ticker.getEnemies()) {
-			masterRenderer.addCharacterRenderer(renderFactory.getHorseRenderer(enemy));
+			masterRenderer.addCharacterRenderer(renderFactory.getWarriorRenderer(enemy));
 		}
 		renderManager = new RenderManager(masterRenderer);
 		eventManager = new EventManager(masterRenderer, ticker);
