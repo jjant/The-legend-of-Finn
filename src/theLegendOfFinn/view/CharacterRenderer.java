@@ -27,7 +27,7 @@ public class CharacterRenderer implements Renderer {
 	public void render(Graphics g) {
 		//g.setColor(new Color(0.5f, 0f, 0f));
 		g.setColor(color);
-		g.drawOval(character.getX(), character.getY(), CELL_SIZE, CELL_SIZE);
-		g.fillOval(character.getX(), character.getY(), CELL_SIZE, CELL_SIZE);
+		g.drawOval(character.getPosition().getX(), character.getPosition().getY(), CELL_SIZE, CELL_SIZE);
+		g.fillOval(character.getPosition().getX(), character.getPosition().getY(), CELL_SIZE, CELL_SIZE);
 	}
 }

@@ -50,21 +50,21 @@ public abstract class EnemyCharacter extends Character {
 		
 		// map Parameter added
 		
-		if (playerY > getY() && playerX > getX())
+		if (playerY > getPosition().getY() && playerX > getPosition().getX())
 			tryToMove(flipDirection ? Direction.DOWN : Direction.RIGHT);
-		else if (playerY == getY() && playerX > getX())
+		else if (playerY == getPosition().getY() && playerX > getPosition().getX())
 			tryToMove(Direction.RIGHT);
-		else if (playerY == getY() && playerX < getX())
+		else if (playerY == getPosition().getY() && playerX < getPosition().getX())
 			tryToMove(Direction.LEFT);
-		else if (playerY > getY() && playerX == getX())
+		else if (playerY > getPosition().getY() && playerX == getPosition().getX())
 			tryToMove(Direction.DOWN);
-		else if (playerY < getY() && playerX == getX())
+		else if (playerY < getPosition().getY() && playerX == getPosition().getX())
 			tryToMove(Direction.UP);
-		else if (playerY < getY() && playerX < getX())
+		else if (playerY < getPosition().getY() && playerX < getPosition().getX())
 			tryToMove(flipDirection ? Direction.UP : Direction.LEFT);
-		else if (playerY < getY() && playerX > getX())
+		else if (playerY < getPosition().getY() && playerX > getPosition().getX())
 			tryToMove(flipDirection ? Direction.UP : Direction.RIGHT);
-		else if (playerY > getY() && playerX < getX())
+		else if (playerY > getPosition().getY() && playerX < getPosition().getX())
 			tryToMove(flipDirection ? Direction.DOWN : Direction.LEFT);
 		else {} // THIS HAPPENS ONLY IF ARE IN SAME POSITION. (NEVER SHOULD HAPPEN)
 	}

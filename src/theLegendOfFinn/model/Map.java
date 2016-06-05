@@ -44,11 +44,11 @@ public class Map {
 	
 	// Lo hice villerisimo...
 	public void add(Character character) throws PositionOccupiedException {
-		if (grid[character.getX()/CELL_SIZE][character.getY()/CELL_SIZE] != null) {
+		if (grid[character.getPosition().getX()/CELL_SIZE][character.getPosition().getY()/CELL_SIZE] != null) {
 			throw new PositionOccupiedException(
-					"La posicion [" + character.getX() + "]" + "[" + character.getY() + "]" + " esta ocupada, imposible a�adir " + character + ".");
+					"La posicion [" + character.getPosition().getX() + "]" + "[" + character.getPosition().getY() + "]" + " esta ocupada, imposible a�adir " + character + ".");
 		}
-		grid[character.getX()/CELL_SIZE][character.getY()/CELL_SIZE] = character;
+		grid[character.getPosition().getX()/CELL_SIZE][character.getPosition().getY()/CELL_SIZE] = character;
 	}
 	
 	// cambiar luego;

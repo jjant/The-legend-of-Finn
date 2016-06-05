@@ -45,7 +45,7 @@ public class Character {
 	public Position getPosition() {
 		return pos;
 	}
-	
+	/*
 	public int getX() {
 		return pos.getX();
 		//return x;
@@ -55,7 +55,7 @@ public class Character {
 		return pos.getY();
 		//return y;
 	}
-
+	*/
 	public Direction getDirection() {
 		return direction;
 	}
@@ -124,19 +124,23 @@ public class Character {
 		
 		switch (direction) {
 		case LEFT:
-			if ((getX() - Renderer.CELL_SIZE) < 0 )
+			//if ((getX() - Renderer.CELL_SIZE) < 0 )
+			if (getPosition().getX() - Map.CELL_SIZE < 0)
 				canMove = false;
 			break;
 		case RIGHT:
-			if ((getX() + Renderer.CELL_SIZE) >= Map.WIDTH * Renderer.CELL_SIZE)
+			//if ((getX() + Renderer.CELL_SIZE) >= Map.WIDTH * Renderer.CELL_SIZE)
+			if ((getPosition().getX() + Map.CELL_SIZE) >= Map.WIDTH * Map.CELL_SIZE)
 				canMove = false;
 			break;
 		case UP:
-			if ((getY() - Renderer.CELL_SIZE) < 0)
+			//if ((getY() - Renderer.CELL_SIZE) < 0)
+			if (getPosition().getY() - Map.CELL_SIZE < 0)
 				canMove = false;
 			break;
 		case DOWN:
-			if ((getY() + Renderer.CELL_SIZE) >= Map.HEIGHT * Renderer.CELL_SIZE)
+			//if ((getY() + Renderer.CELL_SIZE) >= Map.HEIGHT * Renderer.CELL_SIZE)
+			if ((getPosition().getY() + Map.CELL_SIZE) >= Map.HEIGHT * Map.CELL_SIZE)
 				canMove = false;
 			break;
 		}
