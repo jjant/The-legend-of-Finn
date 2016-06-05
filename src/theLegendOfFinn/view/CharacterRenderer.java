@@ -4,31 +4,36 @@ import theLegendOfFinn.model.character.Character;
 
 import javax.imageio.ImageIO;
 import java.awt.Graphics;
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-/* cree esta clase porque el RenderFactory tiene que devolver un objeto
- * de algun clase como esta, se me ocurrio hacerlo asi pero despues se
- * vera si hay alguna manera mejor
- */
 
+import java.util.HashMap;
 
 
 /////Poner el mapa: clase -> sprite.
 
 public class CharacterRenderer implements Renderer {
 	private Character character;
+	
+	/*
 	private Character.CharacterType type;
-	private Color color;
+	
 	private BufferedImage finnDown;
 	private BufferedImage finnUp;
 	private BufferedImage finnRight;
 	private BufferedImage finnLeft;
 	private BufferedImage warriorDown;
-	/* La idea es que en lugar de recibir el color reciba tipo WARRIOR o PLAYER 
-	 * y entonces se renderiza utilizando los sprites correspondientes
-	 */
+	*/
+	
+	private HashMap<Character.Direction, BufferedImage> characterSprites;
+	
+	public CharacterRenderer(Character character, HashMap<Character.Direction, BufferedImage> characterSprites) {
+		this.character = character;
+		this.characterSprites = characterSprites;
+	}
+
+	/*
 	public CharacterRenderer(Character character, Character.CharacterType type) {
 		this.character = character;
 		this.type = type;
@@ -54,15 +59,45 @@ public class CharacterRenderer implements Renderer {
 			}
 		}
 	}
+	*/
 
 	public Character getCharacter(){
 		return character;
 	}
 	
-	//No sé si en render mismo se hacen los chequeos, pero así funca bien para arrancar..
 	@Override
 	public void render(Graphics g) {
-		//g.setColor(color);
+		BufferedImage img;
+		if (character.getDirection()==null)
+			img = characterSprites.get(Character.Direction.DOWN);
+		else
+			switch (character.getDirection()) {
+				case DOWN: {
+					img = characterSprites.get(Character.Direction.DOWN);
+					break;
+				}
+				case UP: {
+					img = characterSprites.get(Character.Direction.UP);
+					break;
+				}
+				case RIGHT: {
+					img = characterSprites.get(Character.Direction.RIGHT);
+					break;
+				}
+				case LEFT: {
+					img = characterSprites.get(Character.Direction.LEFT);
+					break;
+				}
+				default: img = characterSprites.get(Character.Direction.DOWN);
+			}
+		g.drawImage(img, character.getPosition().getX(), character.getPosition().getY(), CELL_SIZE, CELL_SIZE, null);
+	}
+	
+	//No sé si en render mismo se hacen los chequeos, pero así funca bien para arrancar..
+	//@Override
+	/*
+	public void render(Graphics g) {
+
 		BufferedImage img;
 		switch (type) {
 			case PLAYER: {
@@ -99,9 +134,7 @@ public class CharacterRenderer implements Renderer {
 			default: img = finnDown;
 		}
 		g.drawImage(img, character.getPosition().getX(), character.getPosition().getY(), CELL_SIZE, CELL_SIZE, null);
-		/*else{
-			g.drawOval(character.getPosition().getX(), character.getPosition().getY(), CELL_SIZE, CELL_SIZE);
-			g.fillOval(character.getPosition().getX(), character.getPosition().getY(), CELL_SIZE, CELL_SIZE);
-		}*/
+
 	}
+	*/
 }

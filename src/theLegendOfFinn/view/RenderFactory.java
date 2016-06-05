@@ -1,18 +1,18 @@
 package theLegendOfFinn.view;
 
-import java.awt.Color;
-
 import theLegendOfFinn.model.character.Character;
 import theLegendOfFinn.model.character.EnemyCharacter;
 import theLegendOfFinn.model.character.EnemyWarrior;
 import theLegendOfFinn.model.character.PlayerCharacter;
 
+import java.awt.image.BufferedImage;
+import java.util.HashMap;
+
+import javax.imageio.ImageIO;
+import java.io.IOException;
+import java.io.File;
+
 public class RenderFactory {
-	/* REVISAR!!
-	 * en vez de pasarle el color, se le podrian pasar los sprites en un vector, nose.
-	 * porque asi como esta, no tiene mucho sentido usar una factory
-	 * porai faltan cosas o puse algo mal yo
-	 */
 	//Rompi este metodo por separar los enemigos en clases...
 	/*
 	public CharacterRenderer getCharacterRenderer(Character character) {
@@ -28,12 +28,42 @@ public class RenderFactory {
 		}
 	}
 	*/
+	//private HashMap<Character.Direction, BufferedImage> characterSprites;
+	private HashMap<Character.CharacterType, HashMap<Character.Direction, BufferedImage>> spriteMap;
+	
+	
+	public RenderFactory() {
+		spriteMap = new HashMap<Character.CharacterType, HashMap<Character.Direction, BufferedImage>>(4);
+		HashMap<Character.Direction, BufferedImage> characterSprites = new HashMap<Character.Direction, BufferedImage>(4);
+		try {
+			characterSprites.put(Character.Direction.DOWN, ImageIO.read(new File("./Assets/finnDown.png")));
+			characterSprites.put(Character.Direction.UP, ImageIO.read(new File("./Assets/finnUp.png")));
+			characterSprites.put(Character.Direction.LEFT, ImageIO.read(new File("./Assets/finnLeft.png")));
+			characterSprites.put(Character.Direction.RIGHT, ImageIO.read(new File("./Assets/finnRight.png")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		spriteMap.put(Character.CharacterType.PLAYER, characterSprites);
+		characterSprites = new HashMap<Character.Direction, BufferedImage>(4);
+		try {
+			characterSprites.put(Character.Direction.DOWN, ImageIO.read(new File("./Assets/warrior-down.png")));
+			characterSprites.put(Character.Direction.UP, ImageIO.read(new File("./Assets/warrior-down.png")));
+			characterSprites.put(Character.Direction.LEFT, ImageIO.read(new File("./Assets/warrior-down.png")));
+			characterSprites.put(Character.Direction.RIGHT, ImageIO.read(new File("./Assets/warrior-down.png")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		spriteMap.put(Character.CharacterType.WARRIOR, characterSprites);
+	}
+	
 	
 	public CharacterRenderer getPlayerRenderer(PlayerCharacter player){
-		return new CharacterRenderer(player, Character.CharacterType.PLAYER);
+		return new CharacterRenderer(player, spriteMap.get(Character.CharacterType.PLAYER));
+		//return new CharacterRenderer(player, Character.CharacterType.PLAYER);
 	}
 	//borrar luego
 	public CharacterRenderer getHorseRenderer(EnemyCharacter enemy){
-		return new CharacterRenderer(enemy, Character.CharacterType.WARRIOR);
+		return new CharacterRenderer(enemy, spriteMap.get(Character.CharacterType.WARRIOR));
+		//return new CharacterRenderer(enemy, Character.CharacterType.WARRIOR);
 	}
 }
