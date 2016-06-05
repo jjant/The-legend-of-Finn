@@ -5,7 +5,12 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import theLegendOfFinn.model.character.EnemyCharacter;
-
+/**
+ * Manages rounds in the game
+ *
+ * @author rama
+ *
+ */
 public class Round {
 
 	private List<EnemyCharacter> enemies;
@@ -16,10 +21,21 @@ public class Round {
 		}
 	}
 	
+	/**
+	 * Returns true if there are enemies left in the round.
+	 * 
+	 * @return Boolean
+	 */
 	public boolean enemiesLeft() {
 		return enemies.size() > 0;
 	}
 	
+	/**
+	 * Generates a random sized batch of enemies of the round.
+	 * This way, is easier to manage batches inside a unique round.
+	 * 
+	 * @return Array of enemies
+	 */
 	public List<EnemyCharacter> getEnemiesBatch() {
 		if (enemies.size() == 0) return null;
 		
