@@ -8,13 +8,11 @@ import theLegendOfFinn.model.Map;
 import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.Ticker;
 import theLegendOfFinn.model.character.EnemyCharacter;
-import theLegendOfFinn.model.character.EnemyFactory;
 import theLegendOfFinn.model.character.EnemyWarrior;
 import theLegendOfFinn.model.character.PlayerCharacter;
 import theLegendOfFinn.model.character.Character.Direction;
 import theLegendOfFinn.view.MapRenderer;
 import theLegendOfFinn.view.MasterRenderer;
-import theLegendOfFinn.view.RenderFactory;
 
 public class Manager {
 	private MasterRenderer masterRenderer;
@@ -25,33 +23,20 @@ public class Manager {
 	
 	private Ticker ticker;
 
-	//cambiar dsp
-	private EnemyFactory enemyFactory;
-	private RenderFactory renderFactory;
 
 
 	public Manager() {
 		List<EnemyCharacter> enemyList = new ArrayList<EnemyCharacter>();
-		
-		//Aca meti un enemigo de prueba
 		enemyList.add(new EnemyWarrior(new Position(0, 0), Direction.LEFT));			
 		enemyList.add(new EnemyWarrior(new Position(32 * 14, 32 * 14), Direction.LEFT));
 		
 		ticker = new Ticker(new Map(new PlayerCharacter(1), enemyList));
-
+		//BORRAR DSP
+		ticker.getPlayer().tryToMove(Direction.DOWN, ticker.getMap().getGrid());
+		//
 		masterRenderer = new MasterRenderer(new Delegate(this));
 		masterRenderer.setMapRenderer(new MapRenderer(ticker.getMap()));
 
-		enemyFactory = new EnemyFactory();
-		renderFactory = new RenderFactory();
-		
-		//ver como sacar esto de aca y meterlo en render manager
-		// Aca renderizo los enemigos creo
-		/*
-		for(EnemyCharacter enemy: ticker.getEnemies()) {
-			masterRenderer.addCharacterRenderer(renderFactory.getWarriorRenderer(enemy));
-		}
-		*/
 		
 		renderManager = new RenderManager(masterRenderer);
 		eventManager = new EventManager(masterRenderer, ticker);
@@ -60,13 +45,6 @@ public class Manager {
 		renderManager.initialize();
 	}
 
-		/*
-		Iterator<EnemyCharacter> iter = enemies.iterator();
-		while (iter.hasNext()) {
-			Character character = iter.next();
-			masterRenderer.addCharacterRenderer(rFactory.getCharacterRenderer(character, character.getType()));
-		}
-		*/
 
 	public void setStage(Stage stage) {
 		renderManager.setStage(stage);

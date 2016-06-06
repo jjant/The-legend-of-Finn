@@ -19,7 +19,6 @@ public class Character {
 	private CharacterType type;
 	private int maxHP;
 	private Position pos;
-	//private int x, y;
 	private int velocity;
 	private int currentHP;
 	private int attack;

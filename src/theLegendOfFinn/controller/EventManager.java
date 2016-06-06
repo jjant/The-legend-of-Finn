@@ -76,7 +76,7 @@ public class EventManager {
 			break;
 		case KeyEvent.VK_ESCAPE:
 			stage = Stage.PAUSE;
-		// Con esto atacaria.
+			break;
 		case KeyEvent.VK_A:
 			Position posToAttack = player.getPosition().toGridIndexes(player.getDirection());
 			System.out.println(posToAttack);

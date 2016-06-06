@@ -11,15 +11,18 @@ import javax.imageio.ImageIO;
 
 public class MapRenderer implements Renderer {
 	private BufferedImage backGroundImage;
-	private Map map;
+	/*
+	 * private Map map;
+	 */
 
 	/*
 	 * REVISAR se crea una instancia de map y no se utiliza.
 	 */
 	public MapRenderer(Map map) {
-		this.map = map;
+		//this.map = map;
 
 		// cambiar!
+		// Por?
 		try {
 			backGroundImage = ImageIO.read(new File("./Assets/grass.png"));
 		} catch (Exception e) {

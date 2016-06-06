@@ -1,8 +1,6 @@
 package theLegendOfFinn.controller;
 
-import theLegendOfFinn.model.character.EnemyFactory;
 import theLegendOfFinn.view.MasterRenderer;
-import theLegendOfFinn.view.RenderFactory;
 
 public class RenderManager implements Runnable {
 	public enum Stage {
@@ -12,12 +10,11 @@ public class RenderManager implements Runnable {
 	private Thread thread;
 	
 	private MasterRenderer masterRenderer;
-
-	
 	
 	private Stage stage;
-	
-	private final double ns = 1000000000.0 / 600.0;
+
+	private final double fps = 60.0;
+	private final double ns = 100000000.0 / fps;
 	private long lastTime;
 	private static long lastSecond;
 	private double delta;
@@ -28,7 +25,6 @@ public class RenderManager implements Runnable {
 	}
 
 	public void initialize() {
-
 		lastTime = System.nanoTime();
 		lastSecond = System.currentTimeMillis();
 		delta = 0;
@@ -58,6 +54,7 @@ public class RenderManager implements Runnable {
 	// ONLY FOR DEBUGGING GOALS
 	// SOMETHING LIKE THIS SHOULD BE IMPLEMENTED
 	// TAKING INTO ACCOUNT CHARACTER'S VELOCITY
+	// porq tan emocionado el comment
 	public static boolean secondPassed() {
 		long now = System.currentTimeMillis();
 		if ((now - lastSecond) >= 15) {

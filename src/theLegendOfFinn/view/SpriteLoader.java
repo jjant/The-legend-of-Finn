@@ -40,15 +40,13 @@ public class SpriteLoader {
 			e.printStackTrace();
 		}
 		
-		
 		map = new HashMap<>();
-		
 		map.put(PlayerCharacter.class, playerSprites);
 		map.put(EnemyHorse.class, horseSprites);
 		map.put(EnemyWarrior.class, warriorSprites);
 	}
+
 	public Map<Direction, BufferedImage> getSprites(Character character){
 		return map.get(character.getClass());
-		
 	}
 }

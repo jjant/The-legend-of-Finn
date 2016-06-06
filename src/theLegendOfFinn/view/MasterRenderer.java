@@ -7,14 +7,11 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.swing.JFrame;
 
 import theLegendOfFinn.controller.Delegate;
 import theLegendOfFinn.controller.RenderManager;
-import theLegendOfFinn.model.character.Character;
 import theLegendOfFinn.model.character.EnemyCharacter;
 
 public class MasterRenderer extends Canvas implements KeyListener {
@@ -28,24 +25,21 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	private JFrame frame;
 	private BufferStrategy bs;
 	private Graphics g;
-	private ArrayList<CharacterRenderer> charactersRenderer;
-	//probando
+
 	private CharacterRenderer characterRenderer;
-	// private CharacterRenderer playerR;
 	private MapRenderer mapRenderer;
 	private MenuRenderer menuRenderer;
 	private PauseRenderer pauseRenderer;
 
 	public MasterRenderer(Delegate delegate) {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
-		// probando
-		characterRenderer = new CharacterRenderer();
-		
+
 		this.delegate = delegate;
 
+		characterRenderer = new CharacterRenderer();
 		menuRenderer = new MenuRenderer();
 		pauseRenderer = new PauseRenderer();
-		
+
 		frame = new JFrame();
 		addKeyListener(this);
 		frame.setTitle(TITLE);
@@ -57,8 +51,6 @@ public class MasterRenderer extends Canvas implements KeyListener {
 		frame.setVisible(true);
 
 		requestFocus();
-
-		charactersRenderer = new ArrayList<CharacterRenderer>();
 	}
 
 	public void render(RenderManager.Stage stage) {
@@ -77,22 +69,13 @@ public class MasterRenderer extends Canvas implements KeyListener {
 			break;
 		case MAP:
 			mapRenderer.render(g);
-			// probando
 			characterRenderer.draw(delegate.getPlayer());
-			for (EnemyCharacter enemy : delegate.getEnemies()) {
+			
+			for (EnemyCharacter enemy : delegate.getEnemies())
 				characterRenderer.draw(enemy);
-			}
+
 			characterRenderer.render(g);
 			characterRenderer.dispose();
-			/*
-			Iterator<CharacterRenderer> iter = charactersRenderer.iterator();
-			while (iter.hasNext()) {
-				CharacterRenderer characterRenderer = iter.next();
-				Character character = characterRenderer.getCharacter();
-				if (character.isAlive())
-					characterRenderer.render(g);
-			}
-			*/
 			break;
 		case PAUSE:
 			pauseRenderer.render(g);
@@ -105,15 +88,6 @@ public class MasterRenderer extends Canvas implements KeyListener {
 
 	public void setMapRenderer(MapRenderer mapR) {
 		this.mapRenderer = mapR;
-	}
-
-	public void addCharacterRenderer(CharacterRenderer characterR) {
-		charactersRenderer.add(characterR);
-		// this.playerR = playerR;
-	}
-
-	public void removeCharacterRenderer(CharacterRenderer characterR) {
-		charactersRenderer.remove(characterR);
 	}
 
 	public void setMenuRenderer(MenuRenderer menuR) {
