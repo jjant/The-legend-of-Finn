@@ -31,7 +31,7 @@ public class RenderFactory {
 	//private HashMap<Character.Direction, BufferedImage> characterSprites;
 	private HashMap<Character.CharacterType, HashMap<Character.Direction, BufferedImage>> spriteMap;
 	
-	
+	/*
 	public RenderFactory() {
 		spriteMap = new HashMap<Character.CharacterType, HashMap<Character.Direction, BufferedImage>>(4);
 		HashMap<Character.Direction, BufferedImage> characterSprites = new HashMap<Character.Direction, BufferedImage>(4);
@@ -66,4 +66,5 @@ public class RenderFactory {
 		return new CharacterRenderer(enemy, spriteMap.get(Character.CharacterType.WARRIOR));
 		//return new CharacterRenderer(enemy, Character.CharacterType.WARRIOR);
 	}
+	*/
 }

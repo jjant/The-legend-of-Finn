@@ -32,6 +32,7 @@ public class Manager {
 
 	public Manager() {
 		List<EnemyCharacter> enemyList = new ArrayList<EnemyCharacter>();
+		
 		//Aca meti un enemigo de prueba
 		enemyList.add(new EnemyWarrior(new Position(0, 0), Direction.LEFT));			
 		enemyList.add(new EnemyWarrior(new Position(32 * 14, 32 * 14), Direction.LEFT));
@@ -43,12 +44,15 @@ public class Manager {
 
 		enemyFactory = new EnemyFactory();
 		renderFactory = new RenderFactory();
+		
 		//ver como sacar esto de aca y meterlo en render manager
-		masterRenderer.addCharacterRenderer(renderFactory.getPlayerRenderer(ticker.getPlayer()));
 		// Aca renderizo los enemigos creo
+		/*
 		for(EnemyCharacter enemy: ticker.getEnemies()) {
 			masterRenderer.addCharacterRenderer(renderFactory.getWarriorRenderer(enemy));
 		}
+		*/
+		
 		renderManager = new RenderManager(masterRenderer);
 		eventManager = new EventManager(masterRenderer, ticker);
 		modelManager = new ModelManager(ticker);
@@ -68,6 +72,8 @@ public class Manager {
 		renderManager.setStage(stage);
 		changeModTick();
 	}
+	
+	//que hace esto??
 	public void changeModTick(){
 		if(getStage().equals(RenderManager.Stage.MAP))
 			ticker.changeModifier(true);
@@ -78,7 +84,11 @@ public class Manager {
 	public Stage getStage() {
 		return renderManager.getStage();
 	}
-
+	//probando.
+	public Ticker getTicker(){
+		return ticker;
+	}
+	
 	public void keyChange(int key) {
 		setStage(eventManager.handleEvent(key, getStage()));
 	}

@@ -1,21 +1,19 @@
 package theLegendOfFinn.view;
 
-import theLegendOfFinn.model.character.Character;
-
-import javax.imageio.ImageIO;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import theLegendOfFinn.model.character.Character;
+import theLegendOfFinn.model.Position;
 
 /////Poner el mapa: clase -> sprite.
 
 public class CharacterRenderer implements Renderer {
-	private Character character;
-	
+	//probando 
+	private ImageData imageData;
 	/*
 	private Character.CharacterType type;
 	
@@ -28,8 +26,8 @@ public class CharacterRenderer implements Renderer {
 	
 	private HashMap<Character.Direction, BufferedImage> characterSprites;
 	
-	public CharacterRenderer(Character character, HashMap<Character.Direction, BufferedImage> characterSprites) {
-		this.character = character;
+	public CharacterRenderer() {
+		this.imageData = new ImageData();
 		this.characterSprites = characterSprites;
 	}
 
@@ -61,18 +59,11 @@ public class CharacterRenderer implements Renderer {
 	}
 	*/
 
-	public Character getCharacter(){
-		return character;
-	}
 	
 	@Override
 	public void render(Graphics g) {
-		BufferedImage img;
-		if (character.getDirection()==null)
-			img = characterSprites.get(Character.Direction.DOWN);
-		else
-			img = characterSprites.get(character.getDirection());
-		g.drawImage(img , character.getPosition().getX(), character.getPosition().getY(), CELL_SIZE, CELL_SIZE, null);
+		for(int i = 0; i < imageData.size(); i++)
+			g.drawImage(imageData.getImage(i), imageData.getPosition(i).getX(), imageData.getPosition(i).getY(), imageData.getWidth(i), imageData.getHeight(i), null);
 		/*
 		else
 			switch (character.getDirection()) {
@@ -142,4 +133,13 @@ public class CharacterRenderer implements Renderer {
 
 	}
 	*/
+	
+	
+	public void draw(Character character){
+			imageData.add(character);
+	}
+	
+	public void dispose(){
+		imageData = new ImageData();
+	}
 }

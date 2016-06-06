@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import theLegendOfFinn.controller.Delegate;
 import theLegendOfFinn.controller.RenderManager;
 import theLegendOfFinn.model.character.Character;
+import theLegendOfFinn.model.character.EnemyCharacter;
 
 public class MasterRenderer extends Canvas implements KeyListener {
 	private static final long serialVersionUID = 1L;
@@ -22,13 +23,14 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	public static final int HEIGHT = WIDTH * 3 / 4;
 	public static final String TITLE = "The legend of Finn";
 
-	// probando
 	private Delegate delegate;
 
 	private JFrame frame;
 	private BufferStrategy bs;
 	private Graphics g;
 	private ArrayList<CharacterRenderer> charactersRenderer;
+	//probando
+	private CharacterRenderer characterRenderer;
 	// private CharacterRenderer playerR;
 	private MapRenderer mapRenderer;
 	private MenuRenderer menuRenderer;
@@ -37,6 +39,8 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	public MasterRenderer(Delegate delegate) {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		// probando
+		characterRenderer = new CharacterRenderer();
+		
 		this.delegate = delegate;
 
 		menuRenderer = new MenuRenderer();
@@ -58,7 +62,6 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	}
 
 	public void render(RenderManager.Stage stage) {
-
 		bs = getBufferStrategy();
 		if (bs == null) {
 			createBufferStrategy(3);
@@ -74,22 +77,28 @@ public class MasterRenderer extends Canvas implements KeyListener {
 			break;
 		case MAP:
 			mapRenderer.render(g);
+			// probando
+			characterRenderer.draw(delegate.getPlayer());
+			for (EnemyCharacter enemy : delegate.getEnemies()) {
+				characterRenderer.draw(enemy);
+			}
+			characterRenderer.render(g);
+			characterRenderer.dispose();
+			/*
 			Iterator<CharacterRenderer> iter = charactersRenderer.iterator();
 			while (iter.hasNext()) {
-				CharacterRenderer characterR = iter.next();
-				Character character = characterR.getCharacter();
-				if (character.isAlive()) characterR.render(g);
+				CharacterRenderer characterRenderer = iter.next();
+				Character character = characterRenderer.getCharacter();
+				if (character.isAlive())
+					characterRenderer.render(g);
 			}
+			*/
 			break;
 		case PAUSE:
 			pauseRenderer.render(g);
 			break;
 		}
-		/*
-		 * if (stage.equals(Manager.Stage.MENU)) { menuR.render(g); } else if
-		 * (stage.equals(Manager.Stage.MAP)){ mapR.render(g); playerR.render(g);
-		 * } else if (stage.equals(Manager.Stage.PAUSE)){ pauseR.render(g); }
-		 */
+
 		bs.show();
 		g.dispose();
 	}
@@ -97,16 +106,16 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	public void setMapRenderer(MapRenderer mapR) {
 		this.mapRenderer = mapR;
 	}
-	
+
 	public void addCharacterRenderer(CharacterRenderer characterR) {
 		charactersRenderer.add(characterR);
 		// this.playerR = playerR;
 	}
-	
+
 	public void removeCharacterRenderer(CharacterRenderer characterR) {
 		charactersRenderer.remove(characterR);
 	}
-	
+
 	public void setMenuRenderer(MenuRenderer menuR) {
 		this.menuRenderer = menuR;
 	}
@@ -124,10 +133,9 @@ public class MasterRenderer extends Canvas implements KeyListener {
 		return menuRenderer;
 	}
 
-	
 	public void keyPressed(KeyEvent e) {
 		int keyCode = e.getKeyCode();
-		//System.out.println("key pressed");
+		// System.out.println("key pressed");
 		delegate.passKeyPressed(keyCode);
 	}
 
