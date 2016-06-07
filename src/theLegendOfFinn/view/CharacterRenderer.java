@@ -14,8 +14,9 @@ public class CharacterRenderer implements Renderer {
 	
 	@Override
 	public void render(Graphics g) {
-		for(int i = 0; i < imageData.size(); i++)
+		for(int i = 0; i < imageData.size(); i++){
 			g.drawImage(imageData.getImage(i), imageData.getPosition(i).getX(), imageData.getPosition(i).getY(), imageData.getWidth(i), imageData.getHeight(i), null);
+		}
 	}
 	
 	public void draw(Character character){

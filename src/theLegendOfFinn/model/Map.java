@@ -14,14 +14,10 @@ public class Map {
 	public static final int WIDTH = 640 / CELL_SIZE;
 	public static final int HEIGHT = ((WIDTH * 3) / 4);
 
-	// No se que podria ir aca, tenia pensado una lista de terrenos, pero no se.
-
-	// Ver si quedarnos con player aca.
 	private PlayerCharacter player;
 	private List<EnemyCharacter> enemyList;
 	
 	private CharacterGrid grid;
-	//private Character[][] grid = new Character[WIDTH][HEIGHT];
 
 	/*
 	public Map(){
@@ -80,9 +76,8 @@ public class Map {
 		return grid;
 	}
 	
-	/*
-	 * Como implementar esto? Que devuelve? Es necesaria? public void
-	 *
-	 * public POSICION getLocation(Character character) { }
-	 */
+	public void setRound(Round round){
+		enemyList = round.getEnemies();
+	}
+	
 }

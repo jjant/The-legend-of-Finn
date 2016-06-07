@@ -73,9 +73,9 @@ public class MasterRenderer extends Canvas implements KeyListener {
 			
 			for (EnemyCharacter enemy : delegate.getEnemies())
 				characterRenderer.draw(enemy);
-
 			characterRenderer.render(g);
 			characterRenderer.dispose();
+			
 			break;
 		case PAUSE:
 			pauseRenderer.render(g);

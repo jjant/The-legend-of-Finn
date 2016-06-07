@@ -19,6 +19,7 @@ public class Manager {
 	
 	private RenderManager renderManager;
 	private EventManager eventManager;
+	@SuppressWarnings("unused")
 	private ModelManager modelManager;
 	
 	private Ticker ticker;
@@ -30,18 +31,17 @@ public class Manager {
 		enemyList.add(new EnemyWarrior(new Position(0, 0), Direction.LEFT));			
 		enemyList.add(new EnemyWarrior(new Position(32 * 14, 32 * 14), Direction.LEFT));
 		
-		ticker = new Ticker(new Map(new PlayerCharacter(1), enemyList));
-		//BORRAR DSP
-		//ticker.getPlayer().tryToMove(Direction.DOWN, ticker.getMap().getGrid());
-		//
+		ticker = new Ticker(new PlayerCharacter(1));
+
 		masterRenderer = new MasterRenderer(new Delegate(this));
 		masterRenderer.setMapRenderer(new MapRenderer(ticker.getMap()));
 
-		
+
 		renderManager = new RenderManager(masterRenderer);
 		eventManager = new EventManager(masterRenderer, ticker);
 		modelManager = new ModelManager(ticker);
-
+		
+		
 		renderManager.initialize();
 	}
 
@@ -72,6 +72,6 @@ public class Manager {
 	}
 	
 	public static void main(String[] args) {
-		Manager manager = new Manager();
+		new Manager();
 	}
 }
