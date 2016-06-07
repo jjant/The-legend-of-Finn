@@ -30,7 +30,7 @@ public class Character {
 
 	private long lastMoveTime;
 	private long nowMoveTime;
-	private Direction moveDirection;
+	//private Direction moveDirection;
 	private boolean moving = false;
 	private int moveRemaining;
 
@@ -40,6 +40,7 @@ public class Character {
 		//this.y = y;
 		this.pos = pos;
 		this.direction = direction;
+		//this.moveDirection = direction;
 		this.velocity = velocity;
 		this.maxHP = maxHP;
 		this.currentHP = maxHP;
@@ -70,7 +71,7 @@ public class Character {
 	}
 	*/
 	public Direction getDirection() {
-		return moveDirection;
+		return direction;
 	}
 
 	public int getVelocity() {
@@ -115,7 +116,8 @@ public class Character {
 		if (moving == true)
 			return;
 					
-		moveDirection = direction;
+		//moveDirection = direction;
+		this.direction = direction;
 		switch (direction) {
 		case LEFT:
 			destination = new Position(getPosition().getX() - Map.CELL_SIZE, getPosition().getY());
@@ -220,7 +222,8 @@ public class Character {
 			lastMoveTime = nowMoveTime;
 		
 			moveRemaining--;
-			switch (moveDirection) {
+			switch (direction) {
+			//switch (moveDirection) {
 			case UP:
 				yIncrement = -1;
 				xIncrement = 0;

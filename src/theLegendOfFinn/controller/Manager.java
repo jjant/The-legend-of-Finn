@@ -32,7 +32,7 @@ public class Manager {
 		
 		ticker = new Ticker(new Map(new PlayerCharacter(1), enemyList));
 		//BORRAR DSP
-		ticker.getPlayer().tryToMove(Direction.DOWN, ticker.getMap().getGrid());
+		//ticker.getPlayer().tryToMove(Direction.DOWN, ticker.getMap().getGrid());
 		//
 		masterRenderer = new MasterRenderer(new Delegate(this));
 		masterRenderer.setMapRenderer(new MapRenderer(ticker.getMap()));
