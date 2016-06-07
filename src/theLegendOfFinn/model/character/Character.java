@@ -250,7 +250,8 @@ public class Character {
 
 	// private?
 	public void attack(Character character) {
-		if (character == null)
+		if (character == null || character.getPosition().getX() % Map.CELL_SIZE != 0 
+				|| character.getPosition().getY() % Map.CELL_SIZE != 0)
 			return;
 		System.out.println(character);
 		character.receiveAttack(this);
