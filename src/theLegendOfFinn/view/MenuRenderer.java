@@ -12,7 +12,7 @@ public class MenuRenderer implements Renderer {
 
 	public MenuRenderer() {
 		try {
-			backGroundImage = ImageIO.read(new File("./Assets/zelda-menu.jpg"));
+			backGroundImage = ImageIO.read(new File("./Assets/pixelmenu.png"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -29,9 +29,9 @@ public class MenuRenderer implements Renderer {
 		g.drawImage(backGroundImage, 0, 0, MasterRenderer.WIDTH, MasterRenderer.HEIGHT, null);
 		g.setColor(Color.RED);
 		if (option.equals(Option.NUEVO)) {
-			g.drawRect(110, 380, 150, 50);
+			g.drawRect(34, 314, 164, 60);
 		} else {
-			g.drawRect(380, 380, 150, 50);
+			g.drawRect(456, 314, 164, 60);
 		}
 	}
 
