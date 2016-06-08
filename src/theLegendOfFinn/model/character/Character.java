@@ -6,7 +6,7 @@ import theLegendOfFinn.model.CharacterGrid;
 
 public class Character {
 	public static enum Direction {
-		UP, RIGHT, DOWN, LEFT;
+		UP, RIGHT, DOWN, LEFT, UP_MOV, DOWN_MOV, RIGHT_MOV, LEFT_MOV;
 	}
 
 	// está esto acá para diferenciar al renderizar, ver dónde va
@@ -44,6 +44,8 @@ public class Character {
 	public boolean isAlive() {
 		return currentHP > 0;
 	}
+
+	public boolean isMoving() { return moving; }
 
 	public static void test() {
 		return;

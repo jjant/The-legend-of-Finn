@@ -40,6 +40,7 @@ public class Manager {
 	}
 	
 	//que hace esto??
+	//RTA: para el thread del modelo si stage no es MAP
 	public void changeModTick(){
 		if(getStage().equals(RenderManager.Stage.MAP))
 			ticker.changeModifier(true);
