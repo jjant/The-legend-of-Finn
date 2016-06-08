@@ -51,9 +51,11 @@ public class Ticker {
 			while (enemyIter.hasNext()) {
 				EnemyCharacter enemy = enemyIter.next();
 				if (enemy.isAlive()) {
+					enemy.attackNearbyPlayer(player);
 					enemy.chasePlayer(player.getPosition(), map.getGrid());
 					// enemy.chasePlayer(player.getX(), player.getY());
 					enemy.move();
+					
 				} else {
 					map.getGrid().freePosition(enemy.getPosition());
 					enemyIter.remove();

@@ -5,13 +5,6 @@ import theLegendOfFinn.model.CharacterGrid;
 import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class EnemyCharacter extends Character {
-	//Esto esta todo ok!
-	public enum EnemyType{
-		Warrior,
-		Horse;
-	}
-	
-	
 	// Decidir como se van a guardar las propiedades de cada enemigo y donde. (aca o en la factory)
 	//Probablemente sacar velocity.
 	public static final int WARRIOR_MAX_HP = 1;
@@ -89,5 +82,12 @@ public abstract class EnemyCharacter extends Character {
 		else {} // THIS HAPPENS ONLY IF ARE IN SAME POSITION. (NEVER SHOULD HAPPEN)
 		*/
 	}
-
+	//probando
+	public void attackNearbyPlayer(PlayerCharacter player){
+		if(getPosition().isNearby(player.getPosition()) && attacking == false ){
+			attacking = true;
+			attack(player);
+			System.out.println("attacking player");
+		}
+	}
 }

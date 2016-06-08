@@ -74,6 +74,11 @@ public class Position {
 		y += incrementY;
 	}
 	
+	public boolean isNearby(Position position){
+		if(Math.abs(getX()- position.getX())+Math.abs(getY()-position.getY()) <= Map.CELL_SIZE)
+			return true;
+		return false;
+	}
 	public String toString(){
 		return "(" + this.getX() + ", " + this.getY() + ")";
 	}

@@ -30,6 +30,8 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	private MapRenderer mapRenderer;
 	private MenuRenderer menuRenderer;
 	private PauseRenderer pauseRenderer;
+	private GUIRenderer guiRenderer;
+	
 
 	public MasterRenderer(Delegate delegate) {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -39,7 +41,8 @@ public class MasterRenderer extends Canvas implements KeyListener {
 		characterRenderer = new CharacterRenderer();
 		menuRenderer = new MenuRenderer();
 		pauseRenderer = new PauseRenderer();
-
+		guiRenderer = new GUIRenderer();
+		
 		frame = new JFrame();
 		addKeyListener(this);
 		frame.setTitle(TITLE);
@@ -69,8 +72,8 @@ public class MasterRenderer extends Canvas implements KeyListener {
 			break;
 		case MAP:
 			mapRenderer.render(g);
+			guiRenderer.render(g);
 			characterRenderer.draw(delegate.getPlayer());
-			
 			for (EnemyCharacter enemy : delegate.getEnemies())
 				characterRenderer.draw(enemy);
 			characterRenderer.render(g);
@@ -86,12 +89,12 @@ public class MasterRenderer extends Canvas implements KeyListener {
 		g.dispose();
 	}
 
-	public void setMapRenderer(MapRenderer mapR) {
-		this.mapRenderer = mapR;
+	public void setMapRenderer(MapRenderer mapRenderer) {
+		this.mapRenderer = mapRenderer;
 	}
 
-	public void setMenuRenderer(MenuRenderer menuR) {
-		this.menuRenderer = menuR;
+	public void setMenuRenderer(MenuRenderer menuRenderer) {
+		this.menuRenderer = menuRenderer;
 	}
 
 	public void setPauseRenderer(PauseRenderer pauseRenderer) {
@@ -108,9 +111,7 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	}
 
 	public void keyPressed(KeyEvent e) {
-		int keyCode = e.getKeyCode();
-		// System.out.println("key pressed");
-		delegate.passKeyPressed(keyCode);
+		delegate.passKeyPressed(e.getKeyCode());
 	}
 
 	public void keyReleased(KeyEvent e) {

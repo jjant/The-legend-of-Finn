@@ -1,16 +1,9 @@
 package theLegendOfFinn.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import theLegendOfFinn.controller.RenderManager.Stage;
-import theLegendOfFinn.model.Map;
-import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.Ticker;
-import theLegendOfFinn.model.character.EnemyCharacter;
-import theLegendOfFinn.model.character.EnemyWarrior;
 import theLegendOfFinn.model.character.PlayerCharacter;
-import theLegendOfFinn.model.character.Character.Direction;
 import theLegendOfFinn.view.MapRenderer;
 import theLegendOfFinn.view.MasterRenderer;
 
@@ -27,15 +20,10 @@ public class Manager {
 
 
 	public Manager() {
-		List<EnemyCharacter> enemyList = new ArrayList<EnemyCharacter>();
-		enemyList.add(new EnemyWarrior(new Position(0, 0), Direction.LEFT));			
-		enemyList.add(new EnemyWarrior(new Position(32 * 14, 32 * 14), Direction.LEFT));
-		
 		ticker = new Ticker(new PlayerCharacter(1));
 
 		masterRenderer = new MasterRenderer(new Delegate(this));
 		masterRenderer.setMapRenderer(new MapRenderer(ticker.getMap()));
-
 
 		renderManager = new RenderManager(masterRenderer);
 		eventManager = new EventManager(masterRenderer, ticker);
@@ -62,7 +50,7 @@ public class Manager {
 	public Stage getStage() {
 		return renderManager.getStage();
 	}
-	//probando.
+
 	public Ticker getTicker(){
 		return ticker;
 	}

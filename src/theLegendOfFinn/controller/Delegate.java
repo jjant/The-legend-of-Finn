@@ -24,11 +24,12 @@ public class Delegate {
 	public void passKeyPressed(int key) {
 		manager.keyChange(key);
 	}
-	
-	public PlayerCharacter getPlayer(){
+
+	public PlayerCharacter getPlayer() {
 		return manager.getTicker().getPlayer();
 	}
-	public List<EnemyCharacter> getEnemies(){
+
+	public List<EnemyCharacter> getEnemies() {
 		return manager.getTicker().getEnemies();
 	}
 }

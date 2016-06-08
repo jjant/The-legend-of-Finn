@@ -1,8 +1,5 @@
 package theLegendOfFinn.model.character;
 
-import theLegendOfFinn.model.character.Character.Direction;
-import theLegendOfFinn.model.Position;
-import theLegendOfFinn.model.character.EnemyCharacter.EnemyType;
 
 public class EnemyFactory {
 	
@@ -21,7 +18,7 @@ public class EnemyFactory {
 		}
 	}
 	*/
-	
+	/*
 	public EnemyCharacter getEnemy(EnemyType type, Position pos, Direction direction) {
 		switch (type) {
 		case Warrior:
@@ -32,4 +29,5 @@ public class EnemyFactory {
 			throw new IllegalArgumentException();
 		}
 	}
+	*/
 }

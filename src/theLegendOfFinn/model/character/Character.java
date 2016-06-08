@@ -1,75 +1,58 @@
 package theLegendOfFinn.model.character;
 
-import java.nio.channels.NonWritableChannelException;
-import java.util.concurrent.TimeUnit;
-
 import theLegendOfFinn.model.Map;
 import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.CharacterGrid;
-import theLegendOfFinn.view.Renderer;
 
 public class Character {
 	public static enum Direction {
 		UP, RIGHT, DOWN, LEFT;
 	}
-	//está esto acá para diferenciar al renderizar, ver dónde va
-	public static enum CharacterType {
-		PLAYER, WARRIOR, HORSE;
-	}
-	private CharacterType type;
+
+	// está esto acá para diferenciar al renderizar, ver dónde va
 	private int maxHP;
 	private Position pos;
 	private int velocity;
 	private int currentHP;
 	private int attack;
-	
-	/* Si esto no se usa, habria que usar esta en vez de moveDirection..
-	 * y sino, ver en para que serviria tenerlas diferenciadas e implementarlo.
-	 */
+
+	//revisar
+	protected boolean attacking = false;
+
 	private Direction direction;
 
 	private long lastMoveTime;
 	private long nowMoveTime;
-	//private Direction moveDirection;
 	private boolean moving = false;
 	private int moveRemaining;
 
 	public Character(Position pos, Direction direction, int maxHP, int attack, int velocity) {
-	//public Character(int x, int y, Direction direction, int maxHP, int attack, int velocity) {
-		//this.x = x;
-		//this.y = y;
+		// public Character(int x, int y, Direction direction, int maxHP, int
+		// attack, int velocity) {
+		// this.x = x;
+		// this.y = y;
 		this.pos = pos;
 		this.direction = direction;
-		//this.moveDirection = direction;
+		// this.moveDirection = direction;
 		this.velocity = velocity;
 		this.maxHP = maxHP;
 		this.currentHP = maxHP;
 		this.attack = attack;
 		lastMoveTime = 0;
 	}
-	
+
 	public boolean isAlive() {
 		return currentHP > 0;
 	}
-	
-	public static void test(){
+
+	public static void test() {
 		return;
 	}
-	
+
 	public Position getPosition() {
 		return pos;
 	}
-	/*
-	public int getX() {
-		return pos.getX();
-		//return x;
-	}
 
-	public int getY() {
-		return pos.getY();
-		//return y;
-	}
-	*/
 	public Direction getDirection() {
 		return direction;
 	}
@@ -96,27 +79,27 @@ public class Character {
 
 	protected void setX(int x) {
 		pos.setX(x);
-		//this.x = x;
+		// this.x = x;
 	}
 
 	protected void setY(int y) {
 		pos.setY(y);
-		//this.y = y;
+		// this.y = y;
 	}
-	
+
 	protected void setPosition(Position pos) {
 		this.pos = pos;
 	}
 
-	//public boolean canMove(Direction direction) {
+	// public boolean canMove(Direction direction) {
 	public void tryToMove(Direction direction, CharacterGrid grid) {
 		Position destination;
 		boolean canMove = true;
-		
+
 		if (moving == true)
 			return;
-					
-		//moveDirection = direction;
+
+		// moveDirection = direction;
 		this.direction = direction;
 		switch (direction) {
 		case LEFT:
@@ -135,19 +118,22 @@ public class Character {
 			// should throw an exception, this is madness.
 			destination = new Position(0, 0);
 		}
-		
-		if (destination.getX() < 0 || destination.getX() >= Map.WIDTH * Map.CELL_SIZE
-				|| destination.getY() < 0 || destination.getY() >= Map.HEIGHT * Map.CELL_SIZE
-				|| !grid.isFreePosition(destination))
+
+		if (destination.getX() < 0 || destination.getX() >= Map.WIDTH * Map.CELL_SIZE || destination.getY() < 0
+				|| destination.getY() >= Map.HEIGHT * Map.CELL_SIZE || !grid.isFreePosition(destination))
 			canMove = false;
-		
+
 		if (canMove) {
-		//if (canMove(direction)) {
+			// if (canMove(direction)) {
 			moving = true;
 			moveRemaining = 32;
 			lastMoveTime = System.currentTimeMillis();
-			grid.occupyPosition(this, destination); // This should be done in move. To not attack the enemy
-			grid.freePosition(this.getPosition());  // in an empty space. Maybe when MoveRemaining == 10 i.e.
+			grid.occupyPosition(this, destination); // This should be done in
+													// move. To not attack the
+													// enemy
+			grid.freePosition(this.getPosition()); // in an empty space. Maybe
+													// when MoveRemaining == 10
+													// i.e.
 		}
 	}
 
@@ -160,48 +146,32 @@ public class Character {
 	 */
 
 	// Revisar el movimiento, se mueve trabado.
-	
+
 	/*
-	private boolean canMove(Position finalPos) {
-	//private boolean canMove(Direction direction) {
-		boolean canMove = true;
-
-		nowMoveTime = System.currentTimeMillis();
-		if (moving == true)
-			return false;
-		
-		if (finalPos.getX() < 0 || finalPos.getX() >= Map.WIDTH * Map.CELL_SIZE
-				|| finalPos.getY() < 0 || finalPos.getY() >= Map.HEIGHT * Map.CELL_SIZE)
-			canMove = false;
-		return canMove;
-		
-		switch (direction) {
-		case LEFT:
-			//if ((getX() - Renderer.CELL_SIZE) < 0 )
-			if (getPosition().getX() - Map.CELL_SIZE < 0)
-				canMove = false;
-			break;
-		case RIGHT:
-			//if ((getX() + Renderer.CELL_SIZE) >= Map.WIDTH * Renderer.CELL_SIZE)
-			if ((getPosition().getX() + Map.CELL_SIZE) >= Map.WIDTH * Map.CELL_SIZE)
-				canMove = false;
-			break;
-		case UP:
-			//if ((getY() - Renderer.CELL_SIZE) < 0)
-			if (getPosition().getY() - Map.CELL_SIZE < 0)
-				canMove = false;
-			break;
-		case DOWN:
-			//if ((getY() + Renderer.CELL_SIZE) >= Map.HEIGHT * Renderer.CELL_SIZE)
-			if ((getPosition().getY() + Map.CELL_SIZE) >= Map.HEIGHT * Map.CELL_SIZE)
-				canMove = false;
-			break;
-		}
-
-		return canMove;
-		
-	}
-	*/
+	 * private boolean canMove(Position finalPos) { //private boolean
+	 * canMove(Direction direction) { boolean canMove = true;
+	 * 
+	 * nowMoveTime = System.currentTimeMillis(); if (moving == true) return
+	 * false;
+	 * 
+	 * if (finalPos.getX() < 0 || finalPos.getX() >= Map.WIDTH * Map.CELL_SIZE
+	 * || finalPos.getY() < 0 || finalPos.getY() >= Map.HEIGHT * Map.CELL_SIZE)
+	 * canMove = false; return canMove;
+	 * 
+	 * switch (direction) { case LEFT: //if ((getX() - Renderer.CELL_SIZE) < 0 )
+	 * if (getPosition().getX() - Map.CELL_SIZE < 0) canMove = false; break;
+	 * case RIGHT: //if ((getX() + Renderer.CELL_SIZE) >= Map.WIDTH *
+	 * Renderer.CELL_SIZE) if ((getPosition().getX() + Map.CELL_SIZE) >=
+	 * Map.WIDTH * Map.CELL_SIZE) canMove = false; break; case UP: //if ((getY()
+	 * - Renderer.CELL_SIZE) < 0) if (getPosition().getY() - Map.CELL_SIZE < 0)
+	 * canMove = false; break; case DOWN: //if ((getY() + Renderer.CELL_SIZE) >=
+	 * Map.HEIGHT * Renderer.CELL_SIZE) if ((getPosition().getY() +
+	 * Map.CELL_SIZE) >= Map.HEIGHT * Map.CELL_SIZE) canMove = false; break; }
+	 * 
+	 * return canMove;
+	 * 
+	 * }
+	 */
 
 	// Falta usar la velocity
 
@@ -211,19 +181,17 @@ public class Character {
 
 	public void move() {
 		int yIncrement = 0, xIncrement = 0;
-		if(moveRemaining == 0){ 
+		if (moveRemaining == 0) {
 			moving = false;
 			return;
 		}
-		
+
 		nowMoveTime = System.currentTimeMillis();
 		if (nowMoveTime - lastMoveTime >= 15 / getVelocity()) {
-			
 			lastMoveTime = nowMoveTime;
-		
 			moveRemaining--;
+
 			switch (direction) {
-			//switch (moveDirection) {
 			case UP:
 				yIncrement = -1;
 				xIncrement = 0;
@@ -242,15 +210,12 @@ public class Character {
 				break;
 			}
 			pos.incPos(xIncrement, yIncrement);
-			//setY(getY() + yIncrement);
-			//setX(getX() + xIncrement);
-		
 		}
 	}
 
 	// private?
 	public void attack(Character character) {
-		if (character == null || character.getPosition().getX() % Map.CELL_SIZE != 0 
+		if (character == null || character.getPosition().getX() % Map.CELL_SIZE != 0
 				|| character.getPosition().getY() % Map.CELL_SIZE != 0)
 			return;
 		System.out.println(character);
