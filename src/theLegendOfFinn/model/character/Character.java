@@ -8,8 +8,9 @@ public class Character {
 	public static enum Direction {
 		UP, RIGHT, DOWN, LEFT;
 	}
-	public enum State{
-		IDLE, MOVING, ATTACKING; 
+
+	public enum State {
+		IDLE, MOVING, ATTACKING;
 	}
 
 	// está esto acá para diferenciar al renderizar, ver dónde va
@@ -17,9 +18,13 @@ public class Character {
 	private Position position;
 	private int velocity;
 	private int currentHP;
-	private int attack;
 
 	protected State state = State.IDLE;
+
+	private int attack;
+	private long lastAttackTime;
+	private long attackCooldown = 500; // 1/2 segundo
+
 	private Direction direction;
 	private long lastMoveTime;
 	private long nowMoveTime;
@@ -70,8 +75,8 @@ public class Character {
 	public int getAttack() {
 		return attack;
 	}
-	
-	public State getState(){
+
+	public State getState() {
 		return state;
 	}
 
@@ -143,35 +148,6 @@ public class Character {
 													// i.e.
 		}
 	}
-
-	/*
-	 * private boolean canMove(Position finalPos) { //private boolean
-	 * canMove(Direction direction) { boolean canMove = true;
-	 * 
-	 * nowMoveTime = System.currentTimeMillis(); if (moving == true) return
-	 * false;
-	 * 
-	 * if (finalPos.getX() < 0 || finalPos.getX() >= Map.WIDTH * Map.CELL_SIZE
-	 * || finalPos.getY() < 0 || finalPos.getY() >= Map.HEIGHT * Map.CELL_SIZE)
-	 * canMove = false; return canMove;
-	 * 
-	 * switch (direction) { case LEFT: //if ((getX() - Renderer.CELL_SIZE) < 0 )
-	 * if (getPosition().getX() - Map.CELL_SIZE < 0) canMove = false; break;
-	 * case RIGHT: //if ((getX() + Renderer.CELL_SIZE) >= Map.WIDTH *
-	 * Renderer.CELL_SIZE) if ((getPosition().getX() + Map.CELL_SIZE) >=
-	 * Map.WIDTH * Map.CELL_SIZE) canMove = false; break; case UP: //if ((getY()
-	 * - Renderer.CELL_SIZE) < 0) if (getPosition().getY() - Map.CELL_SIZE < 0)
-	 * canMove = false; break; case DOWN: //if ((getY() + Renderer.CELL_SIZE) >=
-	 * Map.HEIGHT * Renderer.CELL_SIZE) if ((getPosition().getY() +
-	 * Map.CELL_SIZE) >= Map.HEIGHT * Map.CELL_SIZE) canMove = false; break; }
-	 * 
-	 * return canMove;
-	 * 
-	 * }
-	 */
-
-	// Falta usar la velocity
-
 	// Hay que tener cuidado con el sleep(10), quizas habria que hacer
 	// otro thread que maneje ticker, pero no estoy seguro de coomo se hace todo
 	// eso.
@@ -179,7 +155,8 @@ public class Character {
 	public void move() {
 		int yIncrement = 0, xIncrement = 0;
 		if (moveRemaining == 0) {
-			state = State.IDLE;
+			if(state == State.MOVING)
+				state = State.IDLE;
 			return;
 		}
 
@@ -212,8 +189,14 @@ public class Character {
 		}
 	}
 
-	// private?
+
 	public void attack(Character character) {
+		long now = System.currentTimeMillis();
+		if (now - lastAttackTime <= attackCooldown && state != State.IDLE) {
+			return;
+		}
+		state = State.ATTACKING;
+		lastAttackTime = System.currentTimeMillis();
 		if (character == null || character.getPosition().getX() % Map.CELL_SIZE != 0
 				|| character.getPosition().getY() % Map.CELL_SIZE != 0)
 			return;
@@ -223,5 +206,12 @@ public class Character {
 
 	private void receiveAttack(Character character) {
 		setCurrentHP(getCurrentHP() - character.getAttack());
+	}
+
+	//probando, sacar dsp.
+	public void updateStatus() {
+		long now = System.currentTimeMillis();
+		if (state == State.ATTACKING && now - lastAttackTime >= attackCooldown)
+			state = State.IDLE;
 	}
 }

@@ -85,9 +85,7 @@ public abstract class EnemyCharacter extends Character {
 	//probando
 	public void attackNearbyPlayer(PlayerCharacter player){
 		if(getPosition().isNearby(player.getPosition()) && getState() == State.IDLE ){
-			state = State.ATTACKING;
 			attack(player);
-			System.out.println("attacking player");
 		}
 	}
 }

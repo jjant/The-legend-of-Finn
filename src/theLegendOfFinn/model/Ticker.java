@@ -21,6 +21,7 @@ public class Ticker {
 		if (canModify) {
 			PlayerCharacter player = map.getPlayer();
 			player.move();
+			player.updateStatus();
 			behaviourEnemies(map.getEnemies());
 		}
 	}
@@ -52,6 +53,8 @@ public class Ticker {
 			while (enemyIter.hasNext()) {
 				EnemyCharacter enemy = enemyIter.next();
 				if (enemy.isAlive()) {
+					//probando
+					enemy.updateStatus();
 					enemy.attackNearbyPlayer(map.getPlayer());
 					enemy.chasePlayer(map.getPlayer().getPosition(), map.getGrid());
 					enemy.move();

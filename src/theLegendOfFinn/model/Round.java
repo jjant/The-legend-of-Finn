@@ -68,8 +68,8 @@ public class Round {
 	
 	public static Round round2(){
 		List<EnemyCharacter> enemies = new ArrayList<>();
-		enemies.add(new EnemyWarrior(new Position(0, 0)));
-		enemies.add(new EnemyWarrior(new Position(32 * 7, 32 * 8)));
+		for(int i = 0; i < 8; i++)
+			enemies.add(new EnemyWarrior(new Position(32* i, 32 * i)));
 		Round round2 = new Round(enemies);
 	
 		return round2;
