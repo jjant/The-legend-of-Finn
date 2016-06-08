@@ -27,13 +27,8 @@ public class Character {
 	private int moveRemaining;
 
 	public Character(Position pos, Direction direction, int maxHP, int attack, int velocity) {
-		// public Character(int x, int y, Direction direction, int maxHP, int
-		// attack, int velocity) {
-		// this.x = x;
-		// this.y = y;
 		this.pos = pos;
 		this.direction = direction;
-		// this.moveDirection = direction;
 		this.velocity = velocity;
 		this.maxHP = maxHP;
 		this.currentHP = maxHP;
@@ -209,6 +204,8 @@ public class Character {
 			case RIGHT:
 				yIncrement = 0;
 				xIncrement = 1;
+				break;
+			default:
 				break;
 			}
 			pos.incPos(xIncrement, yIncrement);

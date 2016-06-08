@@ -41,7 +41,7 @@ public class MasterRenderer extends Canvas implements KeyListener {
 		characterRenderer = new CharacterRenderer();
 		menuRenderer = new MenuRenderer();
 		pauseRenderer = new PauseRenderer();
-		guiRenderer = new GUIRenderer();
+		guiRenderer = new GUIRenderer(delegate.getPlayer());
 		
 		frame = new JFrame();
 		addKeyListener(this);
@@ -72,13 +72,13 @@ public class MasterRenderer extends Canvas implements KeyListener {
 			break;
 		case MAP:
 			mapRenderer.render(g);
-			guiRenderer.render(g);
+
 			characterRenderer.draw(delegate.getPlayer());
 			for (EnemyCharacter enemy : delegate.getEnemies())
 				characterRenderer.draw(enemy);
 			characterRenderer.render(g);
 			characterRenderer.dispose();
-			
+			guiRenderer.render(g);			
 			break;
 		case PAUSE:
 			pauseRenderer.render(g);

@@ -2,7 +2,6 @@ package theLegendOfFinn.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import theLegendOfFinn.model.character.Character;
 import theLegendOfFinn.model.character.EnemyCharacter;
 import theLegendOfFinn.model.character.PlayerCharacter;
 import theLegendOfFinn.model.exceptions.PositionOccupiedException;

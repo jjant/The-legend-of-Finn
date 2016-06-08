@@ -20,7 +20,7 @@ public class Manager {
 
 
 	public Manager() {
-		ticker = new Ticker(new PlayerCharacter(1));
+		ticker = new Ticker(new PlayerCharacter(0));
 
 		masterRenderer = new MasterRenderer(new Delegate(this));
 		masterRenderer.setMapRenderer(new MapRenderer(ticker.getMap()));
