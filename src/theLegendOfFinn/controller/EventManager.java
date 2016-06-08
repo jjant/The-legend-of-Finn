@@ -1,6 +1,5 @@
 package theLegendOfFinn.controller;
 
-
 import java.awt.event.KeyEvent;
 
 import theLegendOfFinn.controller.RenderManager.Stage;
@@ -106,6 +105,11 @@ public class EventManager {
 		case KeyEvent.VK_A:
 			if (menuPause.getOption().equals(PauseRenderer.Option.RESUME))
 				stage = Stage.MAP;
+			break;
+		case KeyEvent.VK_ESCAPE:
+			stage = Stage.MAP;
+			break;
+		default:
 			break;
 		}
 		return stage;
