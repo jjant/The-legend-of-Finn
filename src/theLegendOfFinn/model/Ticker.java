@@ -21,7 +21,11 @@ public class Ticker {
 	}
 
 	public void tick() {
-		moveCharacter(map.getPlayer(), map.getEnemies());
+		if (canModify) {
+			PlayerCharacter player = map.getPlayer();
+			player.move();
+			behaviourEnemies(map.getEnemies());
+		}
 	}
 
 	public List<EnemyCharacter> getEnemies() {
@@ -40,60 +44,43 @@ public class Ticker {
 	public void changeModifier(Boolean b) {
 		canModify = b;
 	}
-	
-	// Hace que todos se muevan
-	private void moveCharacter(PlayerCharacter player, List<EnemyCharacter> enemies) {
-		if (canModify) {
-			player.move();
-			Iterator<EnemyCharacter> enemyIter = enemies.iterator();
-			// if (RenderManager.secondPassed()) {
 
+	/** Sets the enemies' behavior: They'll seek to chase and attack the player.
+	 * 
+	 * @param enemies List of enemies who's behavior is to be set. 
+	 */
+	private void behaviourEnemies(List<EnemyCharacter> enemies) {
+		if (canModify) {
+			Iterator<EnemyCharacter> enemyIter = enemies.iterator();
 			while (enemyIter.hasNext()) {
 				EnemyCharacter enemy = enemyIter.next();
 				if (enemy.isAlive()) {
-					enemy.attackNearbyPlayer(player);
-					enemy.chasePlayer(player.getPosition(), map.getGrid());
-					// enemy.chasePlayer(player.getX(), player.getY());
+					enemy.attackNearbyPlayer(map.getPlayer());
+					enemy.chasePlayer(map.getPlayer().getPosition(), map.getGrid());
 					enemy.move();
-					
 				} else {
 					map.getGrid().freePosition(enemy.getPosition());
 					enemyIter.remove();
 				}
 			}
-			/*
-			 * for (EnemyCharacter enemy : enemies) { // This raises
-			 * ConcurrentModificationException // Should be looped differently
-			 * or done in another way. /*if (!enemy.isAlive()) {
-			 * map.getGrid().freePosition(enemy.getPosition());
-			 * enemies.remove(enemy); } else {
-			 * enemy.chasePlayer(player.getPosition(), map.getGrid());
-			 * //enemy.chasePlayer(player.getX(), player.getY()); enemy.move();
-			 * } enemy.chasePlayer(player.getPosition(), map.getGrid());
-			 * //enemy.chasePlayer(player.getX(), player.getY()); enemy.move();
-			 * }
-			 */
-			// }
 		}
-		/*
-		 * for(EnemyCharacter enemy: enemies){ //enemy.move(); }
-		 */
 	}
-	
-	
-	public boolean roundFinished(){
+
+	public boolean roundFinished() {
 		return !round.enemiesLeft();
 	}
-	public void setRound(Round round){
+
+	public void setRound(Round round) {
 		this.round = round;
 	}
-	public void nextRound(){
+
+	public void nextRound() {
 		round = Round.round2();
 		updateMap();
 	}
-	public void updateMap(){
+
+	public void updateMap() {
 		map.setRound(round);
 	}
-	
-	
+
 }

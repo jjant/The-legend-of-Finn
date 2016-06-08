@@ -16,6 +16,7 @@ import theLegendOfFinn.model.character.EnemyCharacter;
 
 public class MasterRenderer extends Canvas implements KeyListener {
 	private static final long serialVersionUID = 1L;
+	
 	public static final int WIDTH = 640;
 	public static final int HEIGHT = WIDTH * 3 / 4;
 	public static final String TITLE = "The legend of Finn";
@@ -118,5 +119,9 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	}
 
 	public void keyTyped(KeyEvent e) {
+	}
+	
+	public void setTitleSuffix(String suffix ){
+		frame.setTitle(MasterRenderer.TITLE + suffix);
 	}
 }
