@@ -30,7 +30,7 @@ public class RenderManager implements Runnable {
 		delta = 0;
 		
 		stage = Stage.MENU;
-		thread = new Thread(this);
+		thread = new Thread(this, "Render manager thread");
 		thread.start();
 	}
 	

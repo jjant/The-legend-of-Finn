@@ -11,9 +11,6 @@ public class Ticker {
 	Round round;
 	Boolean canModify = false;
 
-	/*
-	 * public Ticker() { map = new Map(); }
-	 */
 
 	public Ticker(PlayerCharacter player) {
 		round = Round.round1();
@@ -69,11 +66,11 @@ public class Ticker {
 	public boolean roundFinished() {
 		return !round.enemiesLeft();
 	}
+	//
 
 	public void setRound(Round round) {
 		this.round = round;
 	}
-
 	public void nextRound() {
 		round = Round.round2();
 		updateMap();

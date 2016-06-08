@@ -1,6 +1,5 @@
 package theLegendOfFinn.view;
 
-
 import java.awt.Graphics;
 import theLegendOfFinn.model.character.Character;
 
@@ -8,11 +7,9 @@ public class CharacterRenderer implements Renderer {
 	private ImageData imageData;
 
 	public CharacterRenderer() {
-
 		this.imageData = new ImageData();
 	}
 
-	@Override
 	public void render(Graphics g) {
 		for (int i = 0; i < imageData.size(); i++) {
 			g.drawImage(imageData.getImage(i), imageData.getPosition(i).getX(), imageData.getPosition(i).getY(),

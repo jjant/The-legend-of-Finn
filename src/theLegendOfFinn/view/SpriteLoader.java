@@ -11,66 +11,84 @@ import javax.swing.*;
 
 import theLegendOfFinn.model.character.Character;
 import theLegendOfFinn.model.character.Character.Direction;
+import theLegendOfFinn.model.character.Character.State;
 import theLegendOfFinn.model.character.EnemyHorse;
 import theLegendOfFinn.model.character.EnemyWarrior;
 import theLegendOfFinn.model.character.PlayerCharacter;
 
 
 public class SpriteLoader {
-	private Map<Class<?>, Map<Direction, Image>> map;
+	private Map<Class<?>, Map<State, Map<Direction, Image>>> classMap;
 	
-	private Map<Direction, Image> playerSprites;
-	private Map<Direction, Image> playerMovSprites;
+	private Map<State, Map<Direction, Image>> playerMap;
+	private Map<State, Map<Direction, Image>> warriorMap;
+	private Map<State, Map<Direction, Image>> horseMap;
+	
+	private Map<Direction, Image> playerIdleSprites;
+	private Map<Direction, Image> playerMovingSprites;
+	private Map<Direction, Image> playerAttackingSprites;
 	private Map<Direction, Image> horseSprites;
-	private Map<Direction, Image> warriorSprites;
-	private Map<Direction, Image> warriorMovSprites;
+	private Map<Direction, Image> warriorIdleSprites;
+	private Map<Direction, Image> warriorMovingSprites;
 	
 	public SpriteLoader(){	
-		playerSprites = new HashMap<>();
-		//playerMovSprites = new HashMap<>();
+		playerIdleSprites = new HashMap<>();
+		playerMovingSprites = new HashMap<>();
+		playerAttackingSprites = new HashMap<>();
+		
 		horseSprites = new HashMap<>();
-		warriorSprites = new HashMap<>();
+		warriorIdleSprites = new HashMap<>();
 		//warriorMovSprites = new HashMap<>();
 		
 		try {
-			playerSprites.put(Direction.UP, ImageIO.read(new File("./Assets/finnUp.png")));
-			playerSprites.put(Direction.DOWN, ImageIO.read(new File("./Assets/finnDown.png")));
-			playerSprites.put(Direction.RIGHT, ImageIO.read(new File("./Assets/finnRight.png")));
-			playerSprites.put(Direction.LEFT, ImageIO.read(new File("./Assets/finnLeft.png")));
-			playerSprites.put(Direction.DOWN_MOV, new ImageIcon("./Assets/finnDown.gif").getImage());
-			playerSprites.put(Direction.UP_MOV, new ImageIcon("./Assets/finnUp.gif").getImage());
-			playerSprites.put(Direction.RIGHT_MOV, new ImageIcon("./Assets/finnRight.gif").getImage());
-			playerSprites.put(Direction.LEFT_MOV, new ImageIcon("./Assets/finnLeft.gif").getImage());
-			/*playerMovSprites.put(Direction.DOWN, new ImageIcon("./Assets/finnDown.gif").getImage());
-			playerMovSprites.put(Direction.UP, new ImageIcon("./Assets/finnDown.gif").getImage());
-			playerMovSprites.put(Direction.RIGHT, new ImageIcon("./Assets/finnDown.gif").getImage());
-			playerMovSprites.put(Direction.LEFT, new ImageIcon("./Assets/finnDown.gif").getImage());*/
+			playerIdleSprites.put(Direction.UP, ImageIO.read(new File("./Assets/finnIdleUp.png")));
+			playerIdleSprites.put(Direction.DOWN, ImageIO.read(new File("./Assets/finnIdleDown.png")));
+			playerIdleSprites.put(Direction.RIGHT, ImageIO.read(new File("./Assets/finnIdleRight.png")));
+			playerIdleSprites.put(Direction.LEFT, ImageIO.read(new File("./Assets/finnIdleLeft.png")));
 			
-			warriorSprites.put(Direction.DOWN, ImageIO.read(new File("./Assets/warrior-down.png")));
-			warriorSprites.put(Direction.UP, ImageIO.read(new File("./Assets/warrior-up.png")));
-			warriorSprites.put(Direction.LEFT, ImageIO.read(new File("./Assets/warrior-left.png")));
-			warriorSprites.put(Direction.RIGHT, ImageIO.read(new File("./Assets/warrior-right.png")));
-			warriorSprites.put(Direction.DOWN_MOV, ImageIO.read(new File("./Assets/warrior-down.png")));
-			warriorSprites.put(Direction.UP_MOV, ImageIO.read(new File("./Assets/warrior-up.png")));
-			warriorSprites.put(Direction.LEFT_MOV, ImageIO.read(new File("./Assets/warrior-left.png")));
-			warriorSprites.put(Direction.RIGHT_MOV, ImageIO.read(new File("./Assets/warrior-right.png")));
-			/*warriorMovSprites.put(Direction.DOWN, new ImageIcon("./Assets/finnDown.gif").getImage());
-			warriorMovSprites.put(Direction.UP, new ImageIcon("./Assets/finnDown.gif").getImage());
-			warriorMovSprites.put(Direction.RIGHT, new ImageIcon("./Assets/finnDown.gif").getImage());
-			warriorMovSprites.put(Direction.LEFT, new ImageIcon("./Assets/finnDown.gif").getImage());*/
+			playerMovingSprites.put(Direction.DOWN, new ImageIcon("./Assets/finnMovingDown.gif").getImage());
+			playerMovingSprites.put(Direction.UP, new ImageIcon("./Assets/finnMovingUp.gif").getImage());
+			playerMovingSprites.put(Direction.RIGHT, new ImageIcon("./Assets/finnMovingRight.gif").getImage());
+			playerMovingSprites.put(Direction.LEFT, new ImageIcon("./Assets/finnMovingLeft.gif").getImage());
+			//CAMBIAR, FALTAN LOS SPRITES
+			playerAttackingSprites.put(Direction.DOWN, new ImageIcon("./Assets/finnMovingDown.gif").getImage());
+			playerAttackingSprites.put(Direction.UP, new ImageIcon("./Assets/finnMovingUp.gif").getImage());
+			playerAttackingSprites.put(Direction.RIGHT, new ImageIcon("./Assets/finnAttackingRight.gif").getImage());
+			playerAttackingSprites.put(Direction.UP, new ImageIcon("./Assets/finnMovingUp.gif").getImage());
+			
+			warriorIdleSprites.put(Direction.DOWN, ImageIO.read(new File("./Assets/warriorIdleDown.png")));
+			warriorIdleSprites.put(Direction.UP, ImageIO.read(new File("./Assets/warriorIdleUp.png")));
+			warriorIdleSprites.put(Direction.LEFT, ImageIO.read(new File("./Assets/warriorIdleLeft.png")));
+			warriorIdleSprites.put(Direction.RIGHT, ImageIO.read(new File("./Assets/warriorIdleRight.png")));
+			/*
+			warriorMovingSprites.put(Direction.DOWN, ImageIO.read(new File("./Assets/warrior-down.png")));
+			warriorMovingSprites.put(Direction.UP, ImageIO.read(new File("./Assets/warrior-up.png")));
+			warriorMovingSprites.put(Direction.LEFT, ImageIO.read(new File("./Assets/warrior-left.png")));
+			warriorMovingSprites.put(Direction.RIGHT, ImageIO.read(new File("./Assets/warrior-right.png")));
+		*/
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		playerMap = new HashMap<>();
+		playerMap.put(State.IDLE, playerIdleSprites);
+		playerMap.put(State.MOVING, playerMovingSprites);
+		//cambiar dsp
+		playerMap.put(State.ATTACKING, playerAttackingSprites);
 		
-		map = new HashMap<>();
-		map.put(PlayerCharacter.class, playerSprites);
-		//map.put(PlayerCharacter.class, playerMovSprites);
-		map.put(EnemyHorse.class, horseSprites);
-		map.put(EnemyWarrior.class, warriorSprites);
-		//map.put(EnemyWarrior.class, warriorMovSprites);
+		warriorMap = new HashMap<>();
+		warriorMap.put(State.IDLE, warriorIdleSprites);
+		//cambiar dsp
+		warriorMap.put(State.MOVING, warriorIdleSprites);
+		warriorMap.put(State.ATTACKING, warriorIdleSprites);
+		
+		
+		classMap = new HashMap<>();
+		classMap.put(PlayerCharacter.class, playerMap);
+		classMap.put(EnemyHorse.class, horseMap);
+		classMap.put(EnemyWarrior.class, warriorMap);
 	}
 
 	public Map<Direction, Image> getSprites(Character character){
-		return map.get(character.getClass());
+		return classMap.get(character.getClass()).get(character.getState());
 	}
 }

@@ -74,4 +74,11 @@ public class Round {
 	
 		return round2;
 	}
+	
+	//for debugging
+	public static Round emptyRound(){
+		List<EnemyCharacter> enemies = new ArrayList<>();
+		Round emptyRound = new Round(enemies);
+		return emptyRound;
+	}
 }

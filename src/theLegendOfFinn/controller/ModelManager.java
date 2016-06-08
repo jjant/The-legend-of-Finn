@@ -9,7 +9,7 @@ public class ModelManager implements Runnable {
 	public ModelManager(Ticker ticker) {
 		this.ticker = ticker;
 
-		thread = new Thread(this);
+		thread = new Thread(this, "Model manager thread");
 		thread.start();
 	}
 

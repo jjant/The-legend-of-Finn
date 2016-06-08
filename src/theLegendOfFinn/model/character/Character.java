@@ -1,12 +1,15 @@
 package theLegendOfFinn.model.character;
 
+import theLegendOfFinn.model.CharacterGrid;
 import theLegendOfFinn.model.Map;
 import theLegendOfFinn.model.Position;
-import theLegendOfFinn.model.CharacterGrid;
 
 public class Character {
 	public static enum Direction {
-		UP, RIGHT, DOWN, LEFT, UP_MOV, DOWN_MOV, RIGHT_MOV, LEFT_MOV;
+		UP, RIGHT, DOWN, LEFT;
+	}
+	public enum State{
+		IDLE, MOVING, ATTACKING; 
 	}
 
 	// está esto acá para diferenciar al renderizar, ver dónde va
@@ -16,14 +19,10 @@ public class Character {
 	private int currentHP;
 	private int attack;
 
-	// revisar
-	protected boolean attacking = false;
-
+	protected State state = State.IDLE;
 	private Direction direction;
-
 	private long lastMoveTime;
 	private long nowMoveTime;
-	private boolean moving = false;
 	private int moveRemaining;
 
 	public Character(Position pos, Direction direction, int maxHP, int attack, int velocity) {
@@ -41,7 +40,7 @@ public class Character {
 	}
 
 	public boolean isMoving() {
-		return moving;
+		return state == State.MOVING;
 	}
 
 	public static void test() {
@@ -70,6 +69,10 @@ public class Character {
 
 	public int getAttack() {
 		return attack;
+	}
+	
+	public State getState(){
+		return state;
 	}
 
 	protected void setCurrentHP(int currentHP) {
@@ -101,7 +104,7 @@ public class Character {
 		Position destination;
 		boolean canMove = true;
 
-		if (moving == true)
+		if (state == State.MOVING)
 			return;
 
 		this.direction = direction;
@@ -129,7 +132,7 @@ public class Character {
 
 		if (canMove) {
 			// if (canMove(direction)) {
-			moving = true;
+			state = State.MOVING;
 			moveRemaining = 32;
 			lastMoveTime = System.currentTimeMillis();
 			grid.occupyPosition(this, destination); // This should be done in
@@ -176,7 +179,7 @@ public class Character {
 	public void move() {
 		int yIncrement = 0, xIncrement = 0;
 		if (moveRemaining == 0) {
-			moving = false;
+			state = State.IDLE;
 			return;
 		}
 
