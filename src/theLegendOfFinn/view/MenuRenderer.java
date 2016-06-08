@@ -4,45 +4,58 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.imageio.ImageIO;
 
-//Cambiar toda la clase basicamente...
-public class MenuRenderer implements Renderer {
-	private BufferedImage backGroundImage;
+public abstract class MenuRenderer implements Renderer {
 
-	public MenuRenderer() {
+	private List<MenuOption> options;
+	private BufferedImage backGroundImage;
+	private MenuOption option;
+
+	public MenuRenderer(String backGroundImagePath) {
+		options = new ArrayList<>();
 		try {
-			backGroundImage = ImageIO.read(new File("./Assets/pixelmenu.png"));
+			this.backGroundImage = ImageIO.read(new File(backGroundImagePath));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
-
-	public enum Option {
-		NUEVO, CARGAR;
-	}
-
-	private Option option = Option.NUEVO;
 
 	public void render(Graphics g) {
 		g.drawImage(backGroundImage, 0, 0, MasterRenderer.WIDTH, MasterRenderer.HEIGHT, null);
 		g.setColor(Color.RED);
-		if (option.equals(Option.NUEVO)) {
-			g.drawRect(34, 314, 164, 60);
+		g.drawRect(option.getX(), option.getY(), option.getWidth(), option.getHeight());
+	}
+
+	// NO ANDA NO OSE PORQ
+	public void nextOption() {
+		int nextIndex = options.indexOf(option) + 1;
+		if (nextIndex >= options.size()) {
+			this.option = options.get(0);
 		} else {
-			g.drawRect(456, 314, 164, 60);
+			this.option = options.get(nextIndex);
 		}
 	}
 
-	public void changeOption() {
-		if (this.option.equals(Option.NUEVO))
-			this.option = Option.CARGAR;
+	// ESTE SI ANDA
+	public void previousOption() {
+		int prevIndex = options.indexOf(option) - 1;
+		if (prevIndex < 0)
+			option = options.get(options.size() - 1);
 		else
-			this.option = Option.NUEVO;
+			option = options.get(prevIndex);
 	}
 
-	public Option getOption() {
+	public MenuOption getOption() {
 		return option;
+	}
+
+	public void addOption(MenuOption option) {
+		options.add(option);
+		if (options.size() == 1)
+			this.option = option;
 	}
 }

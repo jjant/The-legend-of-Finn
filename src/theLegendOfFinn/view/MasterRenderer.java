@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import theLegendOfFinn.controller.Delegate;
 import theLegendOfFinn.controller.RenderManager;
 import theLegendOfFinn.model.character.EnemyCharacter;
+import theLegendOfFinn.model.character.GameOverRenderer;
 
 public class MasterRenderer extends Canvas implements KeyListener {
 	private static final long serialVersionUID = 1L;
@@ -29,10 +30,10 @@ public class MasterRenderer extends Canvas implements KeyListener {
 
 	private CharacterRenderer characterRenderer;
 	private MapRenderer mapRenderer;
-	private MenuRenderer menuRenderer;
+	private MenuRenderer startingMenuRenderer;
 	private PauseRenderer pauseRenderer;
 	private GUIRenderer guiRenderer;
-	
+	private GameOverRenderer gameOverRenderer;
 
 	public MasterRenderer(Delegate delegate) {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -40,9 +41,10 @@ public class MasterRenderer extends Canvas implements KeyListener {
 		this.delegate = delegate;
 
 		characterRenderer = new CharacterRenderer();
-		menuRenderer = new MenuRenderer();
+		startingMenuRenderer = new StartingMenuRenderer();
 		pauseRenderer = new PauseRenderer();
 		guiRenderer = new GUIRenderer(delegate.getPlayer());
+		gameOverRenderer = new GameOverRenderer();
 		
 		frame = new JFrame();
 		addKeyListener(this);
@@ -69,7 +71,7 @@ public class MasterRenderer extends Canvas implements KeyListener {
 
 		switch (stage) {
 		case MENU:
-			menuRenderer.render(g);
+			startingMenuRenderer.render(g);
 			break;
 		case MAP:
 			mapRenderer.render(g);
@@ -84,6 +86,9 @@ public class MasterRenderer extends Canvas implements KeyListener {
 		case PAUSE:
 			pauseRenderer.render(g);
 			break;
+		case GAMEOVER:
+			gameOverRenderer.render(g);
+			break;
 		}
 
 		bs.show();
@@ -95,7 +100,7 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	}
 
 	public void setMenuRenderer(MenuRenderer menuRenderer) {
-		this.menuRenderer = menuRenderer;
+		this.startingMenuRenderer = menuRenderer;
 	}
 
 	public void setPauseRenderer(PauseRenderer pauseRenderer) {
@@ -108,7 +113,7 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	 * @return menuRenderer - Current menu renderer.
 	 */
 	public MenuRenderer getMenuRenderer() {
-		return menuRenderer;
+		return startingMenuRenderer;
 	}
 	public PauseRenderer getPauseRenderer() {
 		return pauseRenderer;

@@ -11,12 +11,12 @@ public class Character {
 
 	// está esto acá para diferenciar al renderizar, ver dónde va
 	private int maxHP;
-	private Position pos;
+	private Position position;
 	private int velocity;
 	private int currentHP;
 	private int attack;
 
-	//revisar
+	// revisar
 	protected boolean attacking = false;
 
 	private Direction direction;
@@ -27,7 +27,7 @@ public class Character {
 	private int moveRemaining;
 
 	public Character(Position pos, Direction direction, int maxHP, int attack, int velocity) {
-		this.pos = pos;
+		this.position = pos;
 		this.direction = direction;
 		this.velocity = velocity;
 		this.maxHP = maxHP;
@@ -40,14 +40,16 @@ public class Character {
 		return currentHP > 0;
 	}
 
-	public boolean isMoving() { return moving; }
+	public boolean isMoving() {
+		return moving;
+	}
 
 	public static void test() {
 		return;
 	}
 
 	public Position getPosition() {
-		return pos;
+		return position;
 	}
 
 	public Direction getDirection() {
@@ -75,20 +77,26 @@ public class Character {
 	}
 
 	protected void setX(int x) {
-		pos.setX(x);
-		// this.x = x;
+		position.setX(x);
 	}
 
 	protected void setY(int y) {
-		pos.setY(y);
-		// this.y = y;
+		position.setY(y);
 	}
 
 	protected void setPosition(Position pos) {
-		this.pos = pos;
+		this.position = pos;
 	}
 
-	// public boolean canMove(Direction direction) {
+	/**
+	 * Tries to move the character to the specified direction. If movement is
+	 * impossible, it does nothing.
+	 * 
+	 * @param direction
+	 *            the direction towards the movement is desired.
+	 * @param grid
+	 *            the character grid.
+	 */
 	public void tryToMove(Direction direction, CharacterGrid grid) {
 		Position destination;
 		boolean canMove = true;
@@ -96,7 +104,6 @@ public class Character {
 		if (moving == true)
 			return;
 
-		// moveDirection = direction;
 		this.direction = direction;
 		switch (direction) {
 		case LEFT:
@@ -133,16 +140,6 @@ public class Character {
 													// i.e.
 		}
 	}
-
-	/*
-	 * se podria evitar hacer dos switchs iguales haciendo que cuando pregunta
-	 * si no se pasa de los limites automaticamente modifique la posicion, pero
-	 * quedaria raro nose. Osea que primero se verifique si hay algun enemigo en
-	 * esa posicion y si no hay mande move y ahi chequee si no se pasa de
-	 * limites y mueva.
-	 */
-
-	// Revisar el movimiento, se mueve trabado.
 
 	/*
 	 * private boolean canMove(Position finalPos) { //private boolean
@@ -208,7 +205,7 @@ public class Character {
 			default:
 				break;
 			}
-			pos.incPos(xIncrement, yIncrement);
+			position.incPos(xIncrement, yIncrement);
 		}
 	}
 

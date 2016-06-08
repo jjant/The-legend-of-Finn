@@ -9,6 +9,7 @@ import theLegendOfFinn.model.character.Character;
 import theLegendOfFinn.view.MasterRenderer;
 import theLegendOfFinn.view.MenuRenderer;
 import theLegendOfFinn.view.PauseRenderer;
+import theLegendOfFinn.view.StartingMenuRenderer;
 
 public class EventManager {
 
@@ -45,11 +46,11 @@ public class EventManager {
 		switch (key) {
 		case KeyEvent.VK_LEFT:
 		case KeyEvent.VK_RIGHT:
-			menu.changeOption();
+			menu.previousOption();
 			break;
 		case KeyEvent.VK_ENTER:
 		case KeyEvent.VK_A:
-			if (menu.getOption().equals(MenuRenderer.Option.NUEVO))
+			if (menu.getOption().equals(StartingMenuRenderer.NEW))
 				stage = Stage.MAP;
 			break;
 		default:
@@ -98,12 +99,13 @@ public class EventManager {
 		PauseRenderer menuPause = masterRenderer.getPauseRenderer();
 		switch (key) {
 		case KeyEvent.VK_DOWN:
+			menuPause.nextOption();
 		case KeyEvent.VK_UP:
-			menuPause.changeOption();
+			menuPause.previousOption();
 			break;
 		case KeyEvent.VK_ENTER:
 		case KeyEvent.VK_A:
-			if (menuPause.getOption().equals(PauseRenderer.Option.RESUME))
+			if (menuPause.getOption().equals(PauseRenderer.RESUME))
 				stage = Stage.MAP;
 			break;
 		case KeyEvent.VK_ESCAPE:
