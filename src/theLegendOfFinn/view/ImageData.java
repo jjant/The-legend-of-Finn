@@ -7,6 +7,7 @@ import java.util.Map;
 
 import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.character.Character;
+import theLegendOfFinn.model.character.PlayerCharacter;
 import theLegendOfFinn.model.character.Character.Direction;
 import theLegendOfFinn.model.character.Character.State;
 
@@ -57,18 +58,20 @@ public class ImageData {
 		return images.size();
 	}
 
-	// Ver la forma de implementar mejor, pasa que con el hashmap de hashmaps
-	// como está hecho es
-	// complicado diferenciar si está en movimiento teniendo en cuenta que es
 	// la misma dirección
 	public void add(Character character) {
 		Map<Direction, Image> sprites = spriteLoader.getSprites(character);
 		images.add(sprites.get(character.getDirection()));
 		positions.add(character.getPosition());
-
-		// CAMBIAR LUEGO
+		
+		//CAMBIAR DSP
+		if(character.getClass() == PlayerCharacter.class &&character.getState() == State.ATTACKING){
+			heights.add(50);
+			widths.add(50);
+		}
+		else{
 		heights.add(32);
-		widths.add(32);
+		widths.add(32);}
 	}
 
 	public void dispose() {
