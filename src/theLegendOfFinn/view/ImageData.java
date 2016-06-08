@@ -66,8 +66,8 @@ public class ImageData {
 		
 		//CAMBIAR DSP
 		if(character.getClass() == PlayerCharacter.class &&character.getState() == State.ATTACKING){
-			heights.add(50);
-			widths.add(50);
+			heights.add(55);
+			widths.add(64);
 		}
 		else{
 		heights.add(32);

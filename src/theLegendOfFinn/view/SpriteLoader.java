@@ -51,10 +51,10 @@ public class SpriteLoader {
 			playerMovingSprites.put(Direction.DOWN, new ImageIcon("./Assets/FinnMovingDown2.gif").getImage());
 			playerMovingSprites.put(Direction.LEFT, new ImageIcon("./Assets/FinnMovingLeft2.gif").getImage());
 			//CAMBIAR, FALTAN LOS SPRITES
-			playerAttackingSprites.put(Direction.UP, new ImageIcon("./Assets/finnAttackingRight.gif").getImage());
+			playerAttackingSprites.put(Direction.UP, new ImageIcon("./Assets/FinnAttackingRight2.gif").getImage());
 			playerAttackingSprites.put(Direction.RIGHT, new ImageIcon("./Assets/finnAttackingRight.gif").getImage());
 			playerAttackingSprites.put(Direction.DOWN, new ImageIcon("./Assets/finnAttackingRight.gif").getImage());
-			playerAttackingSprites.put(Direction.LEFT, new ImageIcon("./Assets/finnAttackingRight.gif").getImage());
+			playerAttackingSprites.put(Direction.LEFT, new ImageIcon("./Assets/finnAttackingLeft.gif").getImage());
 			
 			warriorIdleSprites.put(Direction.UP, ImageIO.read(new File("./Assets/warriorIdleUp.png")));
 			warriorIdleSprites.put(Direction.RIGHT, ImageIO.read(new File("./Assets/warriorIdleRight.png")));
