@@ -9,6 +9,7 @@ import theLegendOfFinn.model.Ticker;
 import theLegendOfFinn.model.character.Character;
 import theLegendOfFinn.view.MasterRenderer;
 import theLegendOfFinn.view.MenuRenderer;
+import theLegendOfFinn.view.PauseRenderer;
 
 public class EventManager {
 
@@ -95,9 +96,17 @@ public class EventManager {
 
 	public Stage handlePause(int key) {
 		Stage stage = Stage.PAUSE;
-		switch(key){
-		case KeyEvent.VK_ESCAPE:
-			stage = Stage.MAP;
+		PauseRenderer menuPause = masterRenderer.getPauseRenderer();
+		switch (key) {
+		case KeyEvent.VK_DOWN:
+		case KeyEvent.VK_UP:
+			menuPause.changeOption();
+			break;
+		case KeyEvent.VK_ENTER:
+		case KeyEvent.VK_A:
+			if (menuPause.getOption().equals(PauseRenderer.Option.RESUME))
+				stage = Stage.MAP;
+			break;
 		}
 		return stage;
 	}
