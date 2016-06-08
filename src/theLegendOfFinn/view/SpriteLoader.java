@@ -41,15 +41,15 @@ public class SpriteLoader {
 		//warriorMovSprites = new HashMap<>();
 		
 		try {
-			playerIdleSprites.put(Direction.UP, ImageIO.read(new File("./Assets/finnIdleUp.png")));
-			playerIdleSprites.put(Direction.RIGHT, ImageIO.read(new File("./Assets/finnIdleRight.png")));
-			playerIdleSprites.put(Direction.DOWN, ImageIO.read(new File("./Assets/finnIdleDown.png")));
-			playerIdleSprites.put(Direction.LEFT, ImageIO.read(new File("./Assets/finnIdleLeft.png")));
+			playerIdleSprites.put(Direction.UP, ImageIO.read(new File("./Assets/FinnIdleUp2.png")));
+			playerIdleSprites.put(Direction.RIGHT, ImageIO.read(new File("./Assets/FinnIdleRight2.png")));
+			playerIdleSprites.put(Direction.DOWN, ImageIO.read(new File("./Assets/FinnIdleDown2.png")));
+			playerIdleSprites.put(Direction.LEFT, ImageIO.read(new File("./Assets/FinnIdleLeft2.png")));
 			
-			playerMovingSprites.put(Direction.UP, new ImageIcon("./Assets/finnMovingUp.gif").getImage());
-			playerMovingSprites.put(Direction.RIGHT, new ImageIcon("./Assets/finnMovingRight.gif").getImage());
-			playerMovingSprites.put(Direction.DOWN, new ImageIcon("./Assets/finnMovingDown.gif").getImage());
-			playerMovingSprites.put(Direction.LEFT, new ImageIcon("./Assets/finnMovingLeft.gif").getImage());
+			playerMovingSprites.put(Direction.UP, new ImageIcon("./Assets/FinnMovingUp2.gif").getImage());
+			playerMovingSprites.put(Direction.RIGHT, new ImageIcon("./Assets/FinnMovingRight2.gif").getImage());
+			playerMovingSprites.put(Direction.DOWN, new ImageIcon("./Assets/FinnMovingDown2.gif").getImage());
+			playerMovingSprites.put(Direction.LEFT, new ImageIcon("./Assets/FinnMovingLeft2.gif").getImage());
 			//CAMBIAR, FALTAN LOS SPRITES
 			playerAttackingSprites.put(Direction.UP, new ImageIcon("./Assets/finnAttackingRight.gif").getImage());
 			playerAttackingSprites.put(Direction.RIGHT, new ImageIcon("./Assets/finnAttackingRight.gif").getImage());
