@@ -110,6 +110,9 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	public MenuRenderer getMenuRenderer() {
 		return menuRenderer;
 	}
+	public PauseRenderer getPauseRenderer() {
+		return pauseRenderer;
+	}
 
 	public void keyPressed(KeyEvent e) {
 		delegate.passKeyPressed(e.getKeyCode());
