@@ -27,9 +27,9 @@ public class GUIRenderer implements Renderer {
 		life1 = life2 = life3 = null;
 		
 		try {
-			life1 = ImageIO.read(new File("./Assets/lifebar1.png"));
-			life2 = ImageIO.read(new File("./Assets/lifebar2.png"));
-			life3 = ImageIO.read(new File("./Assets/lifebar3.png"));
+			life1 = ImageIO.read(new File("./Assets/life1bar.png"));
+			life2 = ImageIO.read(new File("./Assets/life2bar.png"));
+			life3 = ImageIO.read(new File("./Assets/life3bar.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -51,7 +51,7 @@ public class GUIRenderer implements Renderer {
 			displayImage = life3;
 			break;
 		}
-		g.drawImage(displayImage, 32, 0, null);
+		g.drawImage(displayImage, 32,5,94,26, null);
 	}
 
 }
