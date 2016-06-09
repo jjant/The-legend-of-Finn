@@ -112,6 +112,7 @@ public class EventManager {
 		switch (key) {
 		case KeyEvent.VK_DOWN:
 			menuPause.nextOption();
+			break;
 		case KeyEvent.VK_UP:
 			menuPause.previousOption();
 			break;
