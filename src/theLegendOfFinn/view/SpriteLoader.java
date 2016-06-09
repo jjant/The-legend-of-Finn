@@ -38,7 +38,7 @@ public class SpriteLoader {
 		
 		horseSprites = new HashMap<>();
 		warriorIdleSprites = new HashMap<>();
-		//warriorMovSprites = new HashMap<>();
+		warriorMovingSprites = new HashMap<>();
 		
 		try {
 			playerIdleSprites.put(Direction.UP, ImageIO.read(new File("./Assets/FinnIdleUp2.png")));
@@ -56,17 +56,17 @@ public class SpriteLoader {
 			playerAttackingSprites.put(Direction.DOWN, new ImageIcon("./Assets/finnAttackingRight.gif").getImage());
 			playerAttackingSprites.put(Direction.LEFT, new ImageIcon("./Assets/finnAttackingLeft.gif").getImage());
 			
-			warriorIdleSprites.put(Direction.UP, ImageIO.read(new File("./Assets/warriorIdleUp.png")));
-			warriorIdleSprites.put(Direction.RIGHT, ImageIO.read(new File("./Assets/warriorIdleRight.png")));
-			warriorIdleSprites.put(Direction.DOWN, ImageIO.read(new File("./Assets/warriorIdleDown.png")));
-			warriorIdleSprites.put(Direction.LEFT, ImageIO.read(new File("./Assets/warriorIdleLeft.png")));
+			warriorIdleSprites.put(Direction.UP, ImageIO.read(new File("./Assets/EnemyIdleUp.png")));
+			warriorIdleSprites.put(Direction.RIGHT, ImageIO.read(new File("./Assets/EnemyIdleRight.png")));
+			warriorIdleSprites.put(Direction.DOWN, ImageIO.read(new File("./Assets/EnemyIdleDown.png")));
+			warriorIdleSprites.put(Direction.LEFT, ImageIO.read(new File("./Assets/EnemyIdleLeft.png")));
 			
-			/*
-			warriorMovingSprites.put(Direction.DOWN, ImageIO.read(new File("./Assets/warrior-down.png")));
-			warriorMovingSprites.put(Direction.UP, ImageIO.read(new File("./Assets/warrior-up.png")));
-			warriorMovingSprites.put(Direction.LEFT, ImageIO.read(new File("./Assets/warrior-left.png")));
-			warriorMovingSprites.put(Direction.RIGHT, ImageIO.read(new File("./Assets/warrior-right.png")));
-		*/
+			
+			warriorMovingSprites.put(Direction.DOWN, ImageIO.read(new File("./Assets/EnemyMovingDown.png")));
+			warriorMovingSprites.put(Direction.UP, ImageIO.read(new File("./Assets/EnemyMovingUp.png")));
+			warriorMovingSprites.put(Direction.LEFT, ImageIO.read(new File("./Assets/EnemyMovingLeft.png")));
+			warriorMovingSprites.put(Direction.RIGHT, ImageIO.read(new File("./Assets/EnemyMovingRight.png")));
+		
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
