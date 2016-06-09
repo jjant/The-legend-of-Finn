@@ -12,6 +12,8 @@ public class Character {
 	public enum State {
 		IDLE, MOVING, ATTACKING;
 	}
+	
+	public static final int MOVE_COOLDOWN = 15;
 
 	// está esto acá para diferenciar al renderizar, ver dónde va
 	private int maxHP;
@@ -161,7 +163,8 @@ public class Character {
 		}
 
 		nowMoveTime = System.currentTimeMillis();
-		if (nowMoveTime - lastMoveTime >= 15 / getVelocity()) {
+		//if (nowMoveTime - lastMoveTime >= 15 / getVelocity()) {
+		if (nowMoveTime - lastMoveTime >= MOVE_COOLDOWN / getVelocity()) {
 			lastMoveTime = nowMoveTime;
 			moveRemaining--;
 

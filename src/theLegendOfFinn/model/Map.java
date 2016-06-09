@@ -12,6 +12,11 @@ public class Map {
 
 	public static final int WIDTH = 640 / CELL_SIZE;
 	public static final int HEIGHT = ((WIDTH * 3) / 4);
+	
+	public static final Position TOP_LEFT_CORNER = new Position(0, 0);
+	public static final Position BOTTOM_LEFT_CORNER = new Position(0, (HEIGHT - 1) * CELL_SIZE);
+	public static final Position TOP_RIGHT_CORNER = new Position((WIDTH - 1) * CELL_SIZE, 0);
+	public static final Position BOTTOM_RIGHT_CORNER = new Position((WIDTH - 1) * CELL_SIZE, (HEIGHT - 1) * CELL_SIZE);
 
 	private PlayerCharacter player;
 	private List<EnemyCharacter> enemyList;
