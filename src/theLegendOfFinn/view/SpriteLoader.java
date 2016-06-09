@@ -89,10 +89,10 @@ public class SpriteLoader {
 			dogMovingSprites.put(Direction.DOWN, new ImageIcon("./Assets/characters/enemies/DogMovingDown.gif").getImage());
 			dogMovingSprites.put(Direction.LEFT, new ImageIcon("./Assets/characters/enemies/DogMovingLeft.gif").getImage());
 			//Falta agregar
-			dogAttackingSprites.put(Direction.UP, new ImageIcon("./Assets/characters/enemies/DogMovingUp.gif").getImage());
-			dogAttackingSprites.put(Direction.RIGHT, new ImageIcon("./Assets/characters/enemies/DogMovingRight.gif").getImage());
-			dogAttackingSprites.put(Direction.DOWN, new ImageIcon("./Assets/characters/enemies/DogMovingDown.gif").getImage());
-			dogAttackingSprites.put(Direction.LEFT, new ImageIcon("./Assets/characters/enemies/DogMovingLeft.gif").getImage());
+			dogAttackingSprites.put(Direction.UP, new ImageIcon("./Assets/characters/enemies/DogAttackingUp.gif").getImage());
+			dogAttackingSprites.put(Direction.RIGHT, new ImageIcon("./Assets/characters/enemies/DogAttackingRight.gif").getImage());
+			dogAttackingSprites.put(Direction.DOWN, new ImageIcon("./Assets/characters/enemies/DogAttackingDown.gif").getImage());
+			dogAttackingSprites.put(Direction.LEFT, new ImageIcon("./Assets/characters/enemies/DogAttackingLeft.gif").getImage());
 			
 		} catch (IOException e) {
 			e.printStackTrace();
