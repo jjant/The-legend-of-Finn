@@ -11,7 +11,7 @@ import javax.swing.*;
 import theLegendOfFinn.model.character.Character;
 import theLegendOfFinn.model.character.Character.Direction;
 import theLegendOfFinn.model.character.Character.State;
-import theLegendOfFinn.model.character.EnemyHorse;
+import theLegendOfFinn.model.character.EnemyDog;
 import theLegendOfFinn.model.character.EnemyWarrior;
 import theLegendOfFinn.model.character.PlayerCharacter;
 
@@ -20,26 +20,33 @@ public class SpriteLoader {
 	private Map<Class<?>, Map<State, Map<Direction, Image>>> classMap;
 	
 	private Map<State, Map<Direction, Image>> playerMap;
-	private Map<State, Map<Direction, Image>> warriorMap;
-	private Map<State, Map<Direction, Image>> horseMap;
+	private Map<State, Map<Direction, Image>> penguinMap;
+	private Map<State, Map<Direction, Image>> dogMap;
 	
 	private Map<Direction, Image> playerIdleSprites;
 	private Map<Direction, Image> playerMovingSprites;
 	private Map<Direction, Image> playerAttackingSprites;
-	//private Map<Direction, Image> horseSprites;
-	private Map<Direction, Image> warriorIdleSprites;
-	private Map<Direction, Image> warriorMovingSprites;
-	private Map<Direction, Image> warriorAttackingSprites;
+	
+	private Map<Direction, Image> dogIdleSprites;
+	private Map<Direction, Image> dogMovingSprites;
+	private Map<Direction, Image> dogAttackingSprites;
+	
+	private Map<Direction, Image> penguinIdleSprites;
+	private Map<Direction, Image> penguinMovingSprites;
+	private Map<Direction, Image> penguinAttackingSprites;
 	
 	public SpriteLoader(){	
 		playerIdleSprites = new HashMap<>();
 		playerMovingSprites = new HashMap<>();
 		playerAttackingSprites = new HashMap<>();
 		
-		//horseSprites = new HashMap<>();
-		warriorIdleSprites = new HashMap<>();
-		warriorMovingSprites = new HashMap<>();
-		warriorAttackingSprites = new HashMap<>();
+		dogIdleSprites = new HashMap<>();
+		dogMovingSprites = new HashMap<>();
+		dogAttackingSprites = new HashMap<>();
+	
+		penguinIdleSprites = new HashMap<>();
+		penguinMovingSprites = new HashMap<>();
+		penguinAttackingSprites = new HashMap<>();
 		
 		try {
 			playerIdleSprites.put(Direction.UP, ImageIO.read(new File("./Assets/characters/player/FinnIdleUp2.png")));
@@ -57,20 +64,35 @@ public class SpriteLoader {
 			playerAttackingSprites.put(Direction.DOWN, new ImageIcon("./Assets/characters/player/finnAttackingRight.gif").getImage());
 			playerAttackingSprites.put(Direction.LEFT, new ImageIcon("./Assets/characters/player/finnAttackingLeft.gif").getImage());
 			
-			warriorIdleSprites.put(Direction.UP, ImageIO.read(new File("./Assets/characters/enemies/EnemyIdleUp.png")));
-			warriorIdleSprites.put(Direction.RIGHT, ImageIO.read(new File("./Assets/characters/enemies/EnemyIdleRight.png")));
-			warriorIdleSprites.put(Direction.DOWN, ImageIO.read(new File("./Assets/characters/enemies/EnemyIdleDown.png")));
-			warriorIdleSprites.put(Direction.LEFT, ImageIO.read(new File("./Assets/characters/enemies/EnemyIdleLeft.png")));
+			penguinIdleSprites.put(Direction.UP, ImageIO.read(new File("./Assets/characters/enemies/EnemyIdleUp.png")));
+			penguinIdleSprites.put(Direction.RIGHT, ImageIO.read(new File("./Assets/characters/enemies/EnemyIdleRight.png")));
+			penguinIdleSprites.put(Direction.DOWN, ImageIO.read(new File("./Assets/characters/enemies/EnemyIdleDown.png")));
+			penguinIdleSprites.put(Direction.LEFT, ImageIO.read(new File("./Assets/characters/enemies/EnemyIdleLeft.png")));
 			
-			warriorMovingSprites.put(Direction.UP, new ImageIcon("./Assets/characters/enemies/EnemyMovingUp.gif").getImage());
-			warriorMovingSprites.put(Direction.RIGHT, new ImageIcon("./Assets/characters/enemies/EnemyMovingRight.gif").getImage());
-			warriorMovingSprites.put(Direction.DOWN, new ImageIcon("./Assets/characters/enemies/EnemyMovingDown.gif").getImage());
-			warriorMovingSprites.put(Direction.LEFT, new ImageIcon("./Assets/characters/enemies/EnemyMovingLeft.gif").getImage());
+			penguinMovingSprites.put(Direction.UP, new ImageIcon("./Assets/characters/enemies/EnemyMovingUp.gif").getImage());
+			penguinMovingSprites.put(Direction.RIGHT, new ImageIcon("./Assets/characters/enemies/EnemyMovingRight.gif").getImage());
+			penguinMovingSprites.put(Direction.DOWN, new ImageIcon("./Assets/characters/enemies/EnemyMovingDown.gif").getImage());
+			penguinMovingSprites.put(Direction.LEFT, new ImageIcon("./Assets/characters/enemies/EnemyMovingLeft.gif").getImage());
 			
-			warriorAttackingSprites.put(Direction.UP, new ImageIcon("./Assets/characters/enemies/EnemyAttackingUp.gif").getImage());
-			warriorAttackingSprites.put(Direction.RIGHT, new ImageIcon("./Assets/characters/enemies/EnemyAttackingRight.gif").getImage());
-			warriorAttackingSprites.put(Direction.DOWN, new ImageIcon("./Assets/characters/enemies/EnemyAttackingDown.gif").getImage());
-			warriorAttackingSprites.put(Direction.LEFT, new ImageIcon("./Assets/characters/enemies/EnemyAttackingLeft.gif").getImage());
+			penguinAttackingSprites.put(Direction.UP, new ImageIcon("./Assets/characters/enemies/EnemyAttackingUp.gif").getImage());
+			penguinAttackingSprites.put(Direction.RIGHT, new ImageIcon("./Assets/characters/enemies/EnemyAttackingRight.gif").getImage());
+			penguinAttackingSprites.put(Direction.DOWN, new ImageIcon("./Assets/characters/enemies/EnemyAttackingDown.gif").getImage());
+			penguinAttackingSprites.put(Direction.LEFT, new ImageIcon("./Assets/characters/enemies/EnemyAttackingLeft.gif").getImage());
+			
+			dogIdleSprites.put(Direction.UP, ImageIO.read(new File("./Assets/characters/enemies/DogIdleUp.png")));
+			dogIdleSprites.put(Direction.RIGHT, ImageIO.read(new File("./Assets/characters/enemies/DogIdleRight.png")));
+			dogIdleSprites.put(Direction.DOWN, ImageIO.read(new File("./Assets/characters/enemies/DogIdleDown.png")));
+			dogIdleSprites.put(Direction.LEFT, ImageIO.read(new File("./Assets/characters/enemies/DogIdleLeft.png")));
+			
+			dogMovingSprites.put(Direction.UP, new ImageIcon("./Assets/characters/enemies/DogMovingUp.gif").getImage());
+			dogMovingSprites.put(Direction.RIGHT, new ImageIcon("./Assets/characters/enemies/DogMovingRight.gif").getImage());
+			dogMovingSprites.put(Direction.DOWN, new ImageIcon("./Assets/characters/enemies/DogMovingDown.gif").getImage());
+			dogMovingSprites.put(Direction.LEFT, new ImageIcon("./Assets/characters/enemies/DogMovingLeft.gif").getImage());
+			
+			dogAttackingSprites.put(Direction.UP, new ImageIcon("./Assets/characters/enemies/EnemyAttackingUp.gif").getImage());
+			dogAttackingSprites.put(Direction.RIGHT, new ImageIcon("./Assets/characters/enemies/EnemyAttackingRight.gif").getImage());
+			dogAttackingSprites.put(Direction.DOWN, new ImageIcon("./Assets/characters/enemies/EnemyAttackingDown.gif").getImage());
+			dogAttackingSprites.put(Direction.LEFT, new ImageIcon("./Assets/characters/enemies/EnemyAttackingLeft.gif").getImage());
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -80,16 +102,20 @@ public class SpriteLoader {
 		playerMap.put(State.MOVING, playerMovingSprites);
 		playerMap.put(State.ATTACKING, playerAttackingSprites);
 		
-		warriorMap = new HashMap<>();
-		warriorMap.put(State.IDLE, warriorIdleSprites);
-		warriorMap.put(State.MOVING, warriorMovingSprites);
-		//cambiar dsp
-		warriorMap.put(State.ATTACKING, warriorAttackingSprites);
+		penguinMap = new HashMap<>();
+		penguinMap.put(State.IDLE, penguinIdleSprites);
+		penguinMap.put(State.MOVING, penguinMovingSprites);
+		penguinMap.put(State.ATTACKING, penguinAttackingSprites);
+		
+		dogMap = new HashMap<>();
+		dogMap.put(State.IDLE, penguinIdleSprites);
+		dogMap.put(State.MOVING, penguinMovingSprites);
+		dogMap.put(State.ATTACKING, penguinAttackingSprites);
 		
 		classMap = new HashMap<>();
 		classMap.put(PlayerCharacter.class, playerMap);
-		classMap.put(EnemyHorse.class, horseMap);
-		classMap.put(EnemyWarrior.class, warriorMap);
+		classMap.put(EnemyDog.class, dogMap);
+		classMap.put(EnemyWarrior.class, penguinMap);
 	}
 
 	public Map<Direction, Image> getSprites(Character character){
