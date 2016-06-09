@@ -29,6 +29,7 @@ public class SpriteLoader {
 	//private Map<Direction, Image> horseSprites;
 	private Map<Direction, Image> warriorIdleSprites;
 	private Map<Direction, Image> warriorMovingSprites;
+	private Map<Direction, Image> warriorAttackingSprites;
 	
 	public SpriteLoader(){	
 		playerIdleSprites = new HashMap<>();
@@ -38,6 +39,7 @@ public class SpriteLoader {
 		//horseSprites = new HashMap<>();
 		warriorIdleSprites = new HashMap<>();
 		warriorMovingSprites = new HashMap<>();
+		warriorAttackingSprites = new HashMap<>();
 		
 		try {
 			playerIdleSprites.put(Direction.UP, ImageIO.read(new File("./Assets/characters/player/FinnIdleUp2.png")));
@@ -64,6 +66,12 @@ public class SpriteLoader {
 			warriorMovingSprites.put(Direction.RIGHT, new ImageIcon("./Assets/characters/enemies/EnemyMovingRight.gif").getImage());
 			warriorMovingSprites.put(Direction.DOWN, new ImageIcon("./Assets/characters/enemies/EnemyMovingDown.gif").getImage());
 			warriorMovingSprites.put(Direction.LEFT, new ImageIcon("./Assets/characters/enemies/EnemyMovingLeft.gif").getImage());
+			
+			warriorAttackingSprites.put(Direction.UP, new ImageIcon("./Assets/characters/enemies/EnemyAttackingUp.gif").getImage());
+			warriorAttackingSprites.put(Direction.RIGHT, new ImageIcon("./Assets/characters/enemies/EnemyAttackingRight.gif").getImage());
+			warriorAttackingSprites.put(Direction.DOWN, new ImageIcon("./Assets/characters/enemies/EnemyAttackingDown.gif").getImage());
+			warriorAttackingSprites.put(Direction.LEFT, new ImageIcon("./Assets/characters/enemies/EnemyAttackingLeft.gif").getImage());
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -76,7 +84,7 @@ public class SpriteLoader {
 		warriorMap.put(State.IDLE, warriorIdleSprites);
 		warriorMap.put(State.MOVING, warriorMovingSprites);
 		//cambiar dsp
-		warriorMap.put(State.ATTACKING, warriorIdleSprites);
+		warriorMap.put(State.ATTACKING, warriorAttackingSprites);
 		
 		classMap = new HashMap<>();
 		classMap.put(PlayerCharacter.class, playerMap);
