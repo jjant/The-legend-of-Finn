@@ -3,18 +3,20 @@ package theLegendOfFinn.model;
 import java.util.Iterator;
 import java.util.List;
 
+import theLegendOfFinn.controller.Notifier;
+import theLegendOfFinn.model.character.Character;
 import theLegendOfFinn.model.character.EnemyCharacter;
 import theLegendOfFinn.model.character.PlayerCharacter;
-import theLegendOfFinn.model.character.Character;
 
 public class Ticker {
-	Map map;
-	Round round;
-	Boolean canModify = false;
+	private Map map;
+	private Round round;
+	private Boolean canModify = false;
+	private Notifier notifier;
 
-
-	public Ticker(PlayerCharacter player) {
+	public Ticker(PlayerCharacter player, Notifier notifier) {
 		round = Round.round1();
+		this.notifier = notifier;
 		this.map = new Map(player, round.getEnemies());
 	}
 
@@ -24,6 +26,8 @@ public class Ticker {
 			player.move();
 			player.updateStatus();
 			behaviourEnemies(map.getEnemies());
+			if(!player.isAlive())
+				notifier.NotifyDeath();
 		}
 	}
 
@@ -54,7 +58,6 @@ public class Ticker {
 			while (enemyIter.hasNext()) {
 				EnemyCharacter enemy = enemyIter.next();
 				if (enemy.isAlive()) {
-					//probando
 					enemy.updateStatus();
 					enemy.attackNearbyPlayer(map.getPlayer());
 					enemy.chasePlayer(map.getPlayer().getPosition(), map.getGrid());
@@ -87,5 +90,4 @@ public class Ticker {
 	public void updateMap() {
 		map.setRound(round);
 	}
-
 }

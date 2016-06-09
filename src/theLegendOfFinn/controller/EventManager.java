@@ -2,10 +2,13 @@ package theLegendOfFinn.controller;
 
 import java.awt.event.KeyEvent;
 
+import com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key;
+
 import theLegendOfFinn.controller.RenderManager.Stage;
 import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.Ticker;
 import theLegendOfFinn.model.character.Character;
+import theLegendOfFinn.view.GameOverRenderer;
 import theLegendOfFinn.view.MasterRenderer;
 import theLegendOfFinn.view.MenuRenderer;
 import theLegendOfFinn.view.PauseRenderer;
@@ -22,7 +25,7 @@ public class EventManager {
 	}
 
 	public Stage handleEvent(int key, Stage stage) {
-		Stage newStage;
+		Stage newStage = null;
 		switch (stage) {
 		case MENU:
 			newStage = handleMenu(key);
@@ -33,8 +36,8 @@ public class EventManager {
 		case PAUSE:
 			newStage = handlePause(key);
 			break;
-		default:
-			throw new RuntimeException("Illegal value for stage.");
+		case GAMEOVER:
+			newStage = handleGameOver(key);
 		}
 
 		return newStage;
@@ -115,5 +118,30 @@ public class EventManager {
 			break;
 		}
 		return stage;
+	}
+	
+	public Stage handleGameOver(int key){
+		Stage stage = Stage.GAMEOVER;
+		GameOverRenderer menuGameOver = masterRenderer.getGameOverRenderer();
+		switch(key){
+		case KeyEvent.VK_RIGHT:
+			menuGameOver.nextOption();
+			break;
+		case KeyEvent.VK_LEFT:
+			menuGameOver.previousOption();
+			break;
+		case KeyEvent.VK_ENTER:
+		case KeyEvent.VK_A:
+			if(menuGameOver.getOption() == GameOverRenderer.MAIN_MENU)
+				stage = Stage.MENU;
+			else if(menuGameOver.getOption() == GameOverRenderer.EXIT) 	//revisar luego
+				System.exit(0);
+			break;
+		}
+		return stage;
+	}
+	//probando
+	public Stage handlePlayerDeath(){
+		return Stage.GAMEOVER;
 	}
 }

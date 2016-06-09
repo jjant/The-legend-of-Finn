@@ -32,9 +32,9 @@ public class GUIRenderer implements Renderer {
 		emptyHeart = halfHeart = fullHeart = null;
 
 		try {
-			emptyHeart = ImageIO.read(new File("./Assets/emptyHeart.png"));
-			halfHeart = ImageIO.read(new File("./Assets/halfHeart.png"));
-			fullHeart = ImageIO.read(new File("./Assets/fullHeart.png"));
+			emptyHeart = ImageIO.read(new File("./Assets/gui/emptyHeart.png"));
+			halfHeart = ImageIO.read(new File("./Assets/gui/halfHeart.png"));
+			fullHeart = ImageIO.read(new File("./Assets/gui/fullHeart.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -46,9 +46,7 @@ public class GUIRenderer implements Renderer {
 		fullHearts = player.getCurrentHP() / 2;
 		halfHearts = player.getCurrentHP() % 2;
 		emptyHearts = hearts - (fullHearts + halfHearts);
-		System.out.println("Current hp:" + player.getCurrentHP());
-		System.out.println("fullhearts: " + fullHearts + " halfhearts: " + halfHearts + " empty: " + emptyHearts);
-		
+
 		for (int i = 0; i < fullHearts; i++, x += 32)
 			g.drawImage(fullHeart, x, 5, 32, 26, null);
 		for (int i = 0; i < halfHearts; i++, x += 32)

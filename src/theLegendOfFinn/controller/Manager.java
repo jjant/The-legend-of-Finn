@@ -20,7 +20,7 @@ public class Manager {
 
 
 	public Manager() {
-		ticker = new Ticker(new PlayerCharacter(0));
+		ticker = new Ticker(new PlayerCharacter(0), new Notifier(this));
 
 		masterRenderer = new MasterRenderer(new Delegate(this));
 		masterRenderer.setMapRenderer(new MapRenderer(ticker.getMap()));
@@ -54,6 +54,10 @@ public class Manager {
 
 	public Ticker getTicker(){
 		return ticker;
+	}
+	//probando
+	public void gameOver(){
+		setStage(eventManager.handlePlayerDeath());
 	}
 	
 	public void keyChange(int key) {

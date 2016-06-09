@@ -24,7 +24,7 @@ public class MapRenderer implements Renderer {
 		// cambiar!
 		// Por?
 		try {
-			backGroundImage = ImageIO.read(new File("./Assets/grass.png"));
+			backGroundImage = ImageIO.read(new File("./Assets/maps/grass.png"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

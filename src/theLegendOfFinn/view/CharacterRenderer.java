@@ -15,9 +15,6 @@ public class CharacterRenderer implements Renderer {
 			g.drawImage(imageData.getImage(i), imageData.getPosition(i).getX(), imageData.getPosition(i).getY(),
 					imageData.getWidth(i), imageData.getHeight(i), null);
 		}
-		// Así no mas se puede agregar un gif:
-		// Image icon = new ImageIcon("./Assets/finnDown.gif").getImage();
-		// g.drawImage(icon, 20, 20, null);
 	}
 
 	public void draw(Character character) {

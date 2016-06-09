@@ -13,7 +13,6 @@ import javax.swing.JFrame;
 import theLegendOfFinn.controller.Delegate;
 import theLegendOfFinn.controller.RenderManager;
 import theLegendOfFinn.model.character.EnemyCharacter;
-import theLegendOfFinn.model.character.GameOverRenderer;
 
 public class MasterRenderer extends Canvas implements KeyListener {
 	private static final long serialVersionUID = 1L;
@@ -117,6 +116,9 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	}
 	public PauseRenderer getPauseRenderer() {
 		return pauseRenderer;
+	}
+	public GameOverRenderer getGameOverRenderer() {
+		return gameOverRenderer;
 	}
 
 	public void keyPressed(KeyEvent e) {
