@@ -13,6 +13,11 @@ public class Position implements Serializable {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public Position(Position other) {
+		this.x = other.getX();
+		this.y = other.getY();
+	}
 
 	public Position toGridIndexes(Direction direction) {
 		Position pos = null;

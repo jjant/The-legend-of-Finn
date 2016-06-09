@@ -10,13 +10,16 @@ import theLegendOfFinn.model.character.EnemyCharacter;
 import theLegendOfFinn.model.character.PlayerCharacter;
 
 public class Ticker implements Serializable {
+	private int roundDifficulty;
 	private Map map;
 	private Round round;
 	private Boolean canModify = false;
 	private transient Notifier notifier;
 
 	public Ticker(PlayerCharacter player, Notifier notifier) {
-		round = Round.round1();
+		roundDifficulty = 0;
+		round = new Round(roundDifficulty);
+		//round = Round.round1();
 		this.notifier = notifier;
 		this.map = new Map(player, round.getEnemies());
 	}
@@ -93,7 +96,13 @@ public class Ticker implements Serializable {
 		this.round = round;
 	}
 	public void nextRound() {
-		round = Round.round2();
+		if (roundDifficulty == 4) {
+			round = new Round(roundDifficulty);				//should begin the boss round
+			return;
+		}
+		roundDifficulty ++;
+		round = new Round(roundDifficulty);
+		//round = Round.round2();
 		updateMap();
 	}
 
