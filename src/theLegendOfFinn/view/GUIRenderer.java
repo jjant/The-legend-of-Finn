@@ -44,14 +44,16 @@ public class GUIRenderer implements Renderer {
 		int x = 32;
 		hearts = player.getMaxHP() / 2;
 		fullHearts = player.getCurrentHP() / 2;
-		halfHearts = player.getCurrentHP() / 4;
+		halfHearts = player.getCurrentHP() % 2;
 		emptyHearts = hearts - (fullHearts + halfHearts);
-
-		for (int i = 0; i < fullHearts; i++, x +=32)
+		System.out.println("Current hp:" + player.getCurrentHP());
+		System.out.println("fullhearts: " + fullHearts + " halfhearts: " + halfHearts + " empty: " + emptyHearts);
+		
+		for (int i = 0; i < fullHearts; i++, x += 32)
 			g.drawImage(fullHeart, x, 5, 32, 26, null);
-		for(int i = 0; i< halfHearts; i++, x +=32)
-			g.drawImage(halfHeart, 32*x, 5,32,26, null);
-		for(int i = 0; i< emptyHearts; i++, x +=32)
-			g.drawImage(emptyHeart, 32*x, 5,32,26, null);
+		for (int i = 0; i < halfHearts; i++, x += 32)
+			g.drawImage(halfHeart, x, 5, 32, 26, null);
+		for (int i = 0; i < emptyHearts; i++, x += 32)
+			g.drawImage(emptyHeart, x, 5, 32, 26, null);
 	}
 }
