@@ -6,7 +6,7 @@ import theLegendOfFinn.view.Renderer;
 
 public class PlayerCharacter extends Character {
 	//Datos segun nivel de jugador?
-	public static final int[] PLAYER_MAX_HP = {3, 6};
+	public static final int[] PLAYER_MAX_HP = {6, 10};
 	public static final int[] PLAYER_ATTACK = {1, 2};
 	public static final int[] PLAYER_VELOCITY = {5, 5};
 	

@@ -9,7 +9,8 @@ import javax.imageio.ImageIO;
 
 import theLegendOfFinn.model.character.PlayerCharacter;
 
-/** Renders the GUI.
+/**
+ * Renders the GUI.
  * 
  * @author Julian Antonielli
  *
@@ -17,41 +18,40 @@ import theLegendOfFinn.model.character.PlayerCharacter;
 public class GUIRenderer implements Renderer {
 
 	private PlayerCharacter player;
-	private BufferedImage life1;
-	private BufferedImage life2;
-	private BufferedImage life3;
-	
-	
-	public GUIRenderer(PlayerCharacter player){
+	private BufferedImage emptyHeart;
+	private BufferedImage halfHeart;
+	private BufferedImage fullHeart;
+
+	private int hearts;
+	private int fullHearts;
+	private int halfHearts;
+	private int emptyHearts;
+
+	public GUIRenderer(PlayerCharacter player) {
 		this.player = player;
-		life1 = life2 = life3 = null;
-		
+		emptyHeart = halfHeart = fullHeart = null;
+
 		try {
-			life1 = ImageIO.read(new File("./Assets/life1bar.png"));
-			life2 = ImageIO.read(new File("./Assets/life2bar.png"));
-			life3 = ImageIO.read(new File("./Assets/life3bar.png"));
+			emptyHeart = ImageIO.read(new File("./Assets/emptyHeart.png"));
+			halfHeart = ImageIO.read(new File("./Assets/halfHeart.png"));
+			fullHeart = ImageIO.read(new File("./Assets/fullHeart.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void render(Graphics g) {
-		BufferedImage displayImage;
-		switch(player.getCurrentHP()){
-		case 1:
-			displayImage = life1;
-			break;
-		case 2:
-			displayImage = life2;
-			break;
-		case 3:
-			displayImage = life3;
-			break;
-		default:
-			displayImage = life3;
-			break;
-		}
-		g.drawImage(displayImage, 32,5,94,26, null);
-	}
 
+	public void render(Graphics g) {
+		int x = 32;
+		hearts = player.getMaxHP() / 2;
+		fullHearts = player.getCurrentHP() / 2;
+		halfHearts = player.getCurrentHP() / 4;
+		emptyHearts = hearts - (fullHearts + halfHearts);
+
+		for (int i = 0; i < fullHearts; i++, x +=32)
+			g.drawImage(fullHeart, x, 5, 32, 26, null);
+		for(int i = 0; i< halfHearts; i++, x +=32)
+			g.drawImage(halfHeart, 32*x, 5,32,26, null);
+		for(int i = 0; i< emptyHearts; i++, x +=32)
+			g.drawImage(emptyHeart, 32*x, 5,32,26, null);
+	}
 }
