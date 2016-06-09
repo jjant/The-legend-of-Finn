@@ -200,8 +200,12 @@ public class Character {
 		}
 		state = State.ATTACKING;
 		lastAttackTime = System.currentTimeMillis();
+		/*
 		if (character == null || character.getPosition().getX() % Map.CELL_SIZE != 0
 				|| character.getPosition().getY() % Map.CELL_SIZE != 0)
+			return;
+		*/
+		if (character == null || !closeEnough(character))
 			return;
 		System.out.println(character);
 		character.receiveAttack(this);
@@ -216,5 +220,21 @@ public class Character {
 		long now = System.currentTimeMillis();
 		if (state == State.ATTACKING && now - lastAttackTime >= attackCooldown)
 			state = State.IDLE;
+	}
+	
+	public boolean closeEnough(Character character) {
+		if (getPosition().distanceX(character.getPosition()) == 0 
+				&& getPosition().distanceY(character.getPosition()) >= Map.CELL_SIZE * 3 / 2)
+			return false;
+		if (getPosition().distanceX(character.getPosition()) == Map.CELL_SIZE 
+				&& getPosition().distanceY(character.getPosition()) >= Map.CELL_SIZE / 2)
+			return false;
+		if (getPosition().distanceX(character.getPosition()) >= Map.CELL_SIZE * 3 / 2
+				&& getPosition().distanceY(character.getPosition()) == 0)
+			return false;
+		if (getPosition().distanceX(character.getPosition()) >= Map.CELL_SIZE / 2 
+				&& getPosition().distanceY(character.getPosition()) == Map.CELL_SIZE)
+			return false;
+		return true;
 	}
 }

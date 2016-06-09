@@ -1,5 +1,7 @@
 package theLegendOfFinn.model;
 
+import javax.print.attribute.standard.MediaSize.Other;
+
 import theLegendOfFinn.model.character.Character.Direction;
 
 public class Position {
@@ -72,6 +74,20 @@ public class Position {
 	public void incPos(int incrementX, int incrementY) {
 		x += incrementX;
 		y += incrementY;
+	}
+	
+	public int distanceX(Position other) {
+		int distanceX = (other.getX() - this.getX());
+		if (distanceX < 0)
+			distanceX *= -1;
+		return distanceX;
+	}
+	
+	public int distanceY(Position other) {
+		int distanceY = (other.getY() - this.getY());
+		if (distanceY < 0)
+			distanceY *= -1;
+		return distanceY;
 	}
 	
 	public boolean isNearby(Position position){

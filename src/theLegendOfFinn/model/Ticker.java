@@ -5,6 +5,7 @@ import java.util.List;
 
 import theLegendOfFinn.model.character.EnemyCharacter;
 import theLegendOfFinn.model.character.PlayerCharacter;
+import theLegendOfFinn.model.character.Character;
 
 public class Ticker {
 	Map map;
@@ -59,6 +60,10 @@ public class Ticker {
 					enemy.chasePlayer(map.getPlayer().getPosition(), map.getGrid());
 					enemy.move();
 				} else {
+					if (enemy.getPosition().getY() % Map.CELL_SIZE != 0 && enemy.getDirection() == Character.Direction.DOWN)
+						enemy.getPosition().incY(Map.CELL_SIZE);
+					else if (enemy.getPosition().getX() % Map.CELL_SIZE != 0 && enemy.getDirection() == Character.Direction.RIGHT)
+						enemy.getPosition().incX(Map.CELL_SIZE);
 					map.getGrid().freePosition(enemy.getPosition());
 					enemyIter.remove();
 				}
