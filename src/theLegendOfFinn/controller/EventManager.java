@@ -2,8 +2,6 @@ package theLegendOfFinn.controller;
 
 import java.awt.event.KeyEvent;
 
-import com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key;
-
 import theLegendOfFinn.controller.RenderManager.Stage;
 import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.Ticker;

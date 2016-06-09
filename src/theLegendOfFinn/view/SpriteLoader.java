@@ -26,7 +26,7 @@ public class SpriteLoader {
 	private Map<Direction, Image> playerIdleSprites;
 	private Map<Direction, Image> playerMovingSprites;
 	private Map<Direction, Image> playerAttackingSprites;
-	private Map<Direction, Image> horseSprites;
+	//private Map<Direction, Image> horseSprites;
 	private Map<Direction, Image> warriorIdleSprites;
 	private Map<Direction, Image> warriorMovingSprites;
 	
@@ -35,7 +35,7 @@ public class SpriteLoader {
 		playerMovingSprites = new HashMap<>();
 		playerAttackingSprites = new HashMap<>();
 		
-		horseSprites = new HashMap<>();
+		//horseSprites = new HashMap<>();
 		warriorIdleSprites = new HashMap<>();
 		warriorMovingSprites = new HashMap<>();
 		
