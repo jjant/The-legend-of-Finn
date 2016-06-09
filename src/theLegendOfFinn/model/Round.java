@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import theLegendOfFinn.model.character.EnemyCharacter;
+import theLegendOfFinn.model.character.EnemyDog;
 import theLegendOfFinn.model.character.EnemyWarrior;
 
 /**
@@ -61,7 +62,7 @@ public class Round implements Serializable {
 	}
 	public static Round round1(){
 		List<EnemyCharacter> enemies = new ArrayList<>();
-		enemies.add(new EnemyWarrior(new Position(0, 0)));
+		enemies.add(new EnemyDog(new Position(0, 0)));
 		enemies.add(new EnemyWarrior(new Position(32+320, 0)));
 		Round round1 = new Round(enemies);
 		return round1;
@@ -69,7 +70,7 @@ public class Round implements Serializable {
 	
 	public static Round round2(){
 		List<EnemyCharacter> enemies = new ArrayList<>();
-		for(int i = 0; i < 8; i++)
+		for(int i = 0; i < 6; i++)
 			enemies.add(new EnemyWarrior(new Position(32* i, 32 * i)));
 		Round round2 = new Round(enemies);
 	

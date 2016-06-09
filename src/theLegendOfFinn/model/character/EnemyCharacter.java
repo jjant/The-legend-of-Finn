@@ -13,7 +13,7 @@ public abstract class EnemyCharacter extends Character {
 	
 	public static final int DOG_MAX_HP = 2;
 	public static final int DOG_ATTACK = 2;
-	public static final int DOG_VELOCITY = 2;
+	public static final int DOG_VELOCITY = 1;
 		
 	 
 	public EnemyCharacter(Position pos, Direction direction, int velocity, int maxHP, int attack) {

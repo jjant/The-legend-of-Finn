@@ -88,11 +88,11 @@ public class SpriteLoader {
 			dogMovingSprites.put(Direction.RIGHT, new ImageIcon("./Assets/characters/enemies/DogMovingRight.gif").getImage());
 			dogMovingSprites.put(Direction.DOWN, new ImageIcon("./Assets/characters/enemies/DogMovingDown.gif").getImage());
 			dogMovingSprites.put(Direction.LEFT, new ImageIcon("./Assets/characters/enemies/DogMovingLeft.gif").getImage());
-			
-			dogAttackingSprites.put(Direction.UP, new ImageIcon("./Assets/characters/enemies/EnemyAttackingUp.gif").getImage());
-			dogAttackingSprites.put(Direction.RIGHT, new ImageIcon("./Assets/characters/enemies/EnemyAttackingRight.gif").getImage());
-			dogAttackingSprites.put(Direction.DOWN, new ImageIcon("./Assets/characters/enemies/EnemyAttackingDown.gif").getImage());
-			dogAttackingSprites.put(Direction.LEFT, new ImageIcon("./Assets/characters/enemies/EnemyAttackingLeft.gif").getImage());
+			//Falta agregar
+			dogAttackingSprites.put(Direction.UP, new ImageIcon("./Assets/characters/enemies/DogMovingUp.gif").getImage());
+			dogAttackingSprites.put(Direction.RIGHT, new ImageIcon("./Assets/characters/enemies/DogMovingRight.gif").getImage());
+			dogAttackingSprites.put(Direction.DOWN, new ImageIcon("./Assets/characters/enemies/DogMovingDown.gif").getImage());
+			dogAttackingSprites.put(Direction.LEFT, new ImageIcon("./Assets/characters/enemies/DogMovingLeft.gif").getImage());
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -108,9 +108,9 @@ public class SpriteLoader {
 		penguinMap.put(State.ATTACKING, penguinAttackingSprites);
 		
 		dogMap = new HashMap<>();
-		dogMap.put(State.IDLE, penguinIdleSprites);
-		dogMap.put(State.MOVING, penguinMovingSprites);
-		dogMap.put(State.ATTACKING, penguinAttackingSprites);
+		dogMap.put(State.IDLE, dogIdleSprites);
+		dogMap.put(State.MOVING, dogMovingSprites);
+		dogMap.put(State.ATTACKING, dogAttackingSprites);
 		
 		classMap = new HashMap<>();
 		classMap.put(PlayerCharacter.class, playerMap);
