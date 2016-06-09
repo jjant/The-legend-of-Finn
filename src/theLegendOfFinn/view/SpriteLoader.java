@@ -61,11 +61,11 @@ public class SpriteLoader {
 			warriorIdleSprites.put(Direction.DOWN, ImageIO.read(new File("./Assets/EnemyIdleDown.png")));
 			warriorIdleSprites.put(Direction.LEFT, ImageIO.read(new File("./Assets/EnemyIdleLeft.png")));
 			
+			warriorMovingSprites.put(Direction.UP, new ImageIcon("./Assets/EnemyMovingUp.gif").getImage());
+			warriorMovingSprites.put(Direction.RIGHT, new ImageIcon("./Assets/EnemyMovingRight.gif").getImage());
+			warriorMovingSprites.put(Direction.DOWN, new ImageIcon("./Assets/EnemyMovingDown.gif").getImage());
+			warriorMovingSprites.put(Direction.LEFT, new ImageIcon("./Assets/EnemyMovingLeft.gif").getImage());
 			
-			warriorMovingSprites.put(Direction.DOWN, ImageIO.read(new File("./Assets/EnemyMovingDown.png")));
-			warriorMovingSprites.put(Direction.UP, ImageIO.read(new File("./Assets/EnemyMovingUp.png")));
-			warriorMovingSprites.put(Direction.LEFT, ImageIO.read(new File("./Assets/EnemyMovingLeft.png")));
-			warriorMovingSprites.put(Direction.RIGHT, ImageIO.read(new File("./Assets/EnemyMovingRight.png")));
 		
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -79,7 +79,7 @@ public class SpriteLoader {
 		warriorMap = new HashMap<>();
 		warriorMap.put(State.IDLE, warriorIdleSprites);
 		//cambiar dsp
-		warriorMap.put(State.MOVING, warriorIdleSprites);
+		warriorMap.put(State.MOVING, warriorMovingSprites);
 		warriorMap.put(State.ATTACKING, warriorIdleSprites);
 		
 		
