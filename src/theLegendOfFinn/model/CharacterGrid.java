@@ -8,7 +8,8 @@ import theLegendOfFinn.model.character.Character;
 import theLegendOfFinn.model.exceptions.PositionOccupiedException;
 
 public class CharacterGrid implements Serializable {
-
+	private static final long serialVersionUID = 1L;
+	
 	private Character[][] matrix;
 	private int enemiesAlive;
 	

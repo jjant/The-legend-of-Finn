@@ -7,6 +7,8 @@ import theLegendOfFinn.model.Map;
 import theLegendOfFinn.model.Position;
 
 public class Character implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	public static enum Direction {
 		UP, RIGHT, DOWN, LEFT;
 	}

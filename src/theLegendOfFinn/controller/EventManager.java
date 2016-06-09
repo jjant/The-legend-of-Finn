@@ -3,6 +3,7 @@ package theLegendOfFinn.controller;
 import java.awt.event.KeyEvent;
 
 import theLegendOfFinn.controller.RenderManager.Stage;
+import theLegendOfFinn.controller.communicators.Communicator;
 import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.Ticker;
 import theLegendOfFinn.model.character.Character;
@@ -14,12 +15,16 @@ import theLegendOfFinn.view.StartingMenuRenderer;
 
 public class EventManager {
 
-	MasterRenderer masterRenderer;
-	Ticker ticker;
+	private MasterRenderer masterRenderer;
+	private Ticker ticker;
+	private Communicator communicator;
 
-	public EventManager(MasterRenderer masterRenderer, Ticker ticker) {
+	private boolean gameInitialized = false;
+	
+	public EventManager(MasterRenderer masterRenderer, Ticker ticker, Communicator communicator) {
 		this.masterRenderer = masterRenderer;
 		this.ticker = ticker;
+		this.communicator = communicator;
 	}
 
 	public Stage handleEvent(int key, Stage stage) {
@@ -40,12 +45,13 @@ public class EventManager {
 
 		return newStage;
 	}
+
 	public Stage handleMenu(int key) {
 		Stage stage = Stage.MENU;
 		MenuRenderer menu = masterRenderer.getMenuRenderer();
 		FileManager fileManager = FileManager.getFileManager();
 		Ticker tickerLoaded;
-		
+
 		switch (key) {
 		case KeyEvent.VK_LEFT:
 		case KeyEvent.VK_RIGHT:
@@ -55,13 +61,20 @@ public class EventManager {
 		case KeyEvent.VK_A:
 			if (menu.getOption().equals(StartingMenuRenderer.LOAD)) {
 				try {
-				ticker.loadTicker(fileManager.loadGame());
-				stage = Stage.MAP;
+					ticker.loadTicker(fileManager.loadGame());
+					stage = Stage.MAP;
 				} catch (ClassNotFoundException e) {
 					// DO NOTHING
 				}
-			} else if (menu.getOption().equals(StartingMenuRenderer.NEW))
+			} else if (menu.getOption().equals(StartingMenuRenderer.NEW)) {
+				if(gameInitialized)
+					communicator.newGameRequest();
+				else{
+					communicator.firstGameRequest();
+					gameInitialized = true;
+				}
 				stage = Stage.MAP;
+			}
 			break;
 		default:
 			break;
@@ -108,7 +121,7 @@ public class EventManager {
 		Stage stage = Stage.PAUSE;
 		PauseRenderer menuPause = masterRenderer.getPauseRenderer();
 		FileManager fileManager = FileManager.getFileManager();
-		
+
 		switch (key) {
 		case KeyEvent.VK_DOWN:
 			menuPause.nextOption();
@@ -121,7 +134,9 @@ public class EventManager {
 			if (menuPause.getOption().equals(PauseRenderer.RESUME))
 				stage = Stage.MAP;
 			else if (menuPause.getOption().equals(PauseRenderer.SAVE))
-				fileManager.saveGame(ticker);				
+				fileManager.saveGame(ticker);
+			else if (menuPause.getOption().equals(PauseRenderer.EXIT))
+				System.exit(0);
 			break;
 		case KeyEvent.VK_ESCAPE:
 			stage = Stage.MAP;
@@ -131,11 +146,11 @@ public class EventManager {
 		}
 		return stage;
 	}
-	
-	public Stage handleGameOver(int key){
+
+	public Stage handleGameOver(int key) {
 		Stage stage = Stage.GAMEOVER;
 		GameOverRenderer menuGameOver = masterRenderer.getGameOverRenderer();
-		switch(key){
+		switch (key) {
 		case KeyEvent.VK_DOWN:
 			menuGameOver.nextOption();
 			break;
@@ -144,16 +159,18 @@ public class EventManager {
 			break;
 		case KeyEvent.VK_ENTER:
 		case KeyEvent.VK_A:
-			if(menuGameOver.getOption() == GameOverRenderer.MAIN_MENU)
+			if (menuGameOver.getOption() == GameOverRenderer.MAIN_MENU)
 				stage = Stage.MENU;
-			else if(menuGameOver.getOption() == GameOverRenderer.EXIT) 	//revisar luego
+			else if (menuGameOver.getOption() == GameOverRenderer.EXIT) // revisar
+																		// luego
 				System.exit(0);
 			break;
 		}
 		return stage;
 	}
-	//probando
-	public Stage handlePlayerDeath(){
+
+	// probando
+	public Stage handlePlayerDeath() {
 		return Stage.GAMEOVER;
 	}
 }

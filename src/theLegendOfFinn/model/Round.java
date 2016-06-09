@@ -16,7 +16,9 @@ import theLegendOfFinn.model.character.EnemyWarrior;
  *
  */
 public class Round implements Serializable {
-
+	private static final long serialVersionUID = 1L;
+	
+	
 	private List<EnemyCharacter> enemies;
 	private final Position[] positions = {Map.TOP_LEFT_CORNER, Map.TOP_RIGHT_CORNER, Map.BOTTOM_LEFT_CORNER, Map.BOTTOM_RIGHT_CORNER};
 	private static final int TOTAL_ENEMIES = 4;
@@ -29,13 +31,12 @@ public class Round implements Serializable {
 	}
 
 	public Round(int difficulty) {
-		/*Should throw an exception if difficulty is 0 or negative
-		 */
+		//Should throw an exception if difficulty is 0 or negative
 		this.enemies = new ArrayList<>();
 		int index = 0;
 		
 		while (difficulty >= 0) {
-			this.enemies.add(new EnemyDog(new Position(positions[index])));
+			this.enemies.add(new EnemyDog(new Position(positions[index%4])));
 			index ++;
 			difficulty --;
 		}

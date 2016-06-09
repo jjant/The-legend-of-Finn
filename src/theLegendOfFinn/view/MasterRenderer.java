@@ -10,8 +10,8 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
-import theLegendOfFinn.controller.Delegate;
 import theLegendOfFinn.controller.RenderManager;
+import theLegendOfFinn.controller.communicators.Delegate;
 import theLegendOfFinn.model.character.EnemyCharacter;
 
 public class MasterRenderer extends Canvas implements KeyListener {
@@ -38,11 +38,10 @@ public class MasterRenderer extends Canvas implements KeyListener {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
 		this.delegate = delegate;
-
+		
 		characterRenderer = new CharacterRenderer();
 		startingMenuRenderer = new StartingMenuRenderer();
 		pauseRenderer = new PauseRenderer();
-		guiRenderer = new GUIRenderer(delegate.getPlayer());
 		gameOverRenderer = new GameOverRenderer();
 		
 		frame = new JFrame();
@@ -57,7 +56,11 @@ public class MasterRenderer extends Canvas implements KeyListener {
 
 		requestFocus();
 	}
-
+	
+	public void initialize(){
+		setMapRenderer(new MapRenderer(delegate.getMap()));
+		guiRenderer = new GUIRenderer(delegate.getPlayer());
+	}
 	public void render(RenderManager.Stage stage) {
 		bs = getBufferStrategy();
 		if (bs == null) {

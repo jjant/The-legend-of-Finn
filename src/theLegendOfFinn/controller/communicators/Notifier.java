@@ -1,8 +1,13 @@
-package theLegendOfFinn.controller;
+package theLegendOfFinn.controller.communicators;
 
 import java.io.Serializable;
 
-//probando...
+import theLegendOfFinn.controller.Manager;
+
+/** Provides a way for the model to communicate changes to the controller.
+ * @author LCDPCJL
+ *
+ */
 public class Notifier implements Serializable {
 	
 	private Manager manager;

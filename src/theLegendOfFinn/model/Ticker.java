@@ -4,24 +4,30 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 
-import theLegendOfFinn.controller.Notifier;
+import theLegendOfFinn.controller.communicators.Notifier;
 import theLegendOfFinn.model.character.Character;
 import theLegendOfFinn.model.character.EnemyCharacter;
 import theLegendOfFinn.model.character.PlayerCharacter;
 
 public class Ticker implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	
 	private int roundDifficulty;
 	private Map map;
 	private Round round;
 	private Boolean canModify = false;
 	private transient Notifier notifier;
 
-	public Ticker(PlayerCharacter player, Notifier notifier) {
+	public Ticker(Notifier notifier) {
+		this.notifier = notifier;
+		this.renew();
+	}
+
+	public void renew() {
 		roundDifficulty = 0;
 		round = new Round(roundDifficulty);
-		//round = Round.round1();
-		this.notifier = notifier;
-		this.map = new Map(player, round.getEnemies());
+		this.map = new Map(new PlayerCharacter(0), round.getEnemies());
 	}
 
 	public void tick() {
@@ -30,7 +36,7 @@ public class Ticker implements Serializable {
 			player.move();
 			player.updateStatus();
 			behaviourEnemies(map.getEnemies());
-			if(!player.isAlive())
+			if (!player.isAlive())
 				notifier.NotifyDeath();
 		}
 	}
@@ -39,7 +45,7 @@ public class Ticker implements Serializable {
 		map = ticker.map;
 		round = ticker.round;
 	}
-	
+
 	public List<EnemyCharacter> getEnemies() {
 		return map.getEnemies();
 	}
@@ -47,7 +53,7 @@ public class Ticker implements Serializable {
 	public PlayerCharacter getPlayer() {
 		return map.getPlayer();
 	}
-	
+
 	public void loadMap(Map map) {
 		this.map = map;
 	}
@@ -61,9 +67,11 @@ public class Ticker implements Serializable {
 		canModify = b;
 	}
 
-	/** Sets the enemies' behavior: They'll seek to chase and attack the player.
+	/**
+	 * Sets the enemies' behavior: They'll seek to chase and attack the player.
 	 * 
-	 * @param enemies List of enemies who's behavior is to be set. 
+	 * @param enemies
+	 *            List of enemies who's behavior is to be set.
 	 */
 	private void behaviourEnemies(List<EnemyCharacter> enemies) {
 		if (canModify) {
@@ -76,9 +84,11 @@ public class Ticker implements Serializable {
 					enemy.chasePlayer(map.getPlayer().getPosition(), map.getGrid());
 					enemy.move();
 				} else {
-					if (enemy.getPosition().getY() % Map.CELL_SIZE != 0 && enemy.getDirection() == Character.Direction.DOWN)
+					if (enemy.getPosition().getY() % Map.CELL_SIZE != 0
+							&& enemy.getDirection() == Character.Direction.DOWN)
 						enemy.getPosition().incY(Map.CELL_SIZE);
-					else if (enemy.getPosition().getX() % Map.CELL_SIZE != 0 && enemy.getDirection() == Character.Direction.RIGHT)
+					else if (enemy.getPosition().getX() % Map.CELL_SIZE != 0
+							&& enemy.getDirection() == Character.Direction.RIGHT)
 						enemy.getPosition().incX(Map.CELL_SIZE);
 					map.getGrid().freePosition(enemy.getPosition());
 					enemyIter.remove();
@@ -95,14 +105,15 @@ public class Ticker implements Serializable {
 	public void setRound(Round round) {
 		this.round = round;
 	}
+
 	public void nextRound() {
 		if (roundDifficulty == 4) {
-			round = new Round(roundDifficulty);				//should begin the boss round
+			round = new Round(roundDifficulty); // should begin the boss round
 			return;
 		}
-		roundDifficulty ++;
+		roundDifficulty++;
 		round = new Round(roundDifficulty);
-		//round = Round.round2();
+		// round = Round.round2();
 		updateMap();
 	}
 
