@@ -122,10 +122,10 @@ public class EventManager {
 		Stage stage = Stage.GAMEOVER;
 		GameOverRenderer menuGameOver = masterRenderer.getGameOverRenderer();
 		switch(key){
-		case KeyEvent.VK_RIGHT:
+		case KeyEvent.VK_DOWN:
 			menuGameOver.nextOption();
 			break;
-		case KeyEvent.VK_LEFT:
+		case KeyEvent.VK_UP:
 			menuGameOver.previousOption();
 			break;
 		case KeyEvent.VK_ENTER:
