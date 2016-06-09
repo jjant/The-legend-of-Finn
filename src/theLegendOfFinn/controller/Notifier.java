@@ -1,6 +1,9 @@
 package theLegendOfFinn.controller;
+
+import java.io.Serializable;
+
 //probando...
-public class Notifier {
+public class Notifier implements Serializable {
 	
 	private Manager manager;
 	

@@ -1,5 +1,6 @@
 package theLegendOfFinn.model;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 
@@ -8,11 +9,11 @@ import theLegendOfFinn.model.character.Character;
 import theLegendOfFinn.model.character.EnemyCharacter;
 import theLegendOfFinn.model.character.PlayerCharacter;
 
-public class Ticker {
+public class Ticker implements Serializable {
 	private Map map;
 	private Round round;
 	private Boolean canModify = false;
-	private Notifier notifier;
+	private transient Notifier notifier;
 
 	public Ticker(PlayerCharacter player, Notifier notifier) {
 		round = Round.round1();
@@ -31,12 +32,21 @@ public class Ticker {
 		}
 	}
 
+	public void loadTicker(Ticker ticker) {
+		map = ticker.map;
+		round = ticker.round;
+	}
+	
 	public List<EnemyCharacter> getEnemies() {
 		return map.getEnemies();
 	}
 
 	public PlayerCharacter getPlayer() {
 		return map.getPlayer();
+	}
+	
+	public void loadMap(Map map) {
+		this.map = map;
 	}
 
 	public Map getMap() {

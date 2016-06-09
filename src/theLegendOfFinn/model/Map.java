@@ -1,12 +1,13 @@
 package theLegendOfFinn.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import theLegendOfFinn.model.character.EnemyCharacter;
 import theLegendOfFinn.model.character.PlayerCharacter;
 import theLegendOfFinn.model.exceptions.PositionOccupiedException;
 
-public class Map {
+public class Map implements Serializable {
 
 	public static final int CELL_SIZE = 32;
 

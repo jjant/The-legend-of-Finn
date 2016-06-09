@@ -1,11 +1,13 @@
 package theLegendOfFinn.model;
 
+import java.io.Serializable;
+
 import theLegendOfFinn.model.Map;
 import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.character.Character;
 import theLegendOfFinn.model.exceptions.PositionOccupiedException;
 
-public class CharacterGrid {
+public class CharacterGrid implements Serializable {
 
 	private Character[][] matrix;
 	private int enemiesAlive;

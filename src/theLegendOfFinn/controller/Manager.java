@@ -39,6 +39,10 @@ public class Manager {
 		changeModTick();
 	}
 	
+	public void loadTicker(Ticker ticker) {
+		this.ticker = ticker;
+	}
+	
 	//que hace esto??
 	//RTA: para el thread del modelo si stage no es MAP
 	public void changeModTick(){

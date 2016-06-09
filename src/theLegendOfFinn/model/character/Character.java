@@ -1,10 +1,12 @@
 package theLegendOfFinn.model.character;
 
+import java.io.Serializable;
+
 import theLegendOfFinn.model.CharacterGrid;
 import theLegendOfFinn.model.Map;
 import theLegendOfFinn.model.Position;
 
-public class Character {
+public class Character implements Serializable {
 	public static enum Direction {
 		UP, RIGHT, DOWN, LEFT;
 	}

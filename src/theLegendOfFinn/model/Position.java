@@ -1,8 +1,10 @@
 package theLegendOfFinn.model;
 
+import java.io.Serializable;
+
 import theLegendOfFinn.model.character.Character.Direction;
 
-public class Position {
+public class Position implements Serializable {
 
 	private int x;
 	private int y;

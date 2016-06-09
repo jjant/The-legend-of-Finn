@@ -40,10 +40,12 @@ public class EventManager {
 
 		return newStage;
 	}
-
 	public Stage handleMenu(int key) {
 		Stage stage = Stage.MENU;
 		MenuRenderer menu = masterRenderer.getMenuRenderer();
+		FileManager fileManager = FileManager.getFileManager();
+		Ticker tickerLoaded;
+		
 		switch (key) {
 		case KeyEvent.VK_LEFT:
 		case KeyEvent.VK_RIGHT:
@@ -51,7 +53,14 @@ public class EventManager {
 			break;
 		case KeyEvent.VK_ENTER:
 		case KeyEvent.VK_A:
-			if (menu.getOption().equals(StartingMenuRenderer.NEW))
+			if (menu.getOption().equals(StartingMenuRenderer.LOAD)) {
+				try {
+				ticker.loadTicker(fileManager.loadGame());
+				stage = Stage.MAP;
+				} catch (ClassNotFoundException e) {
+					// DO NOTHING
+				}
+			} else if (menu.getOption().equals(StartingMenuRenderer.NEW))
 				stage = Stage.MAP;
 			break;
 		default:
@@ -98,6 +107,8 @@ public class EventManager {
 	public Stage handlePause(int key) {
 		Stage stage = Stage.PAUSE;
 		PauseRenderer menuPause = masterRenderer.getPauseRenderer();
+		FileManager fileManager = FileManager.getFileManager();
+		
 		switch (key) {
 		case KeyEvent.VK_DOWN:
 			menuPause.nextOption();
@@ -108,6 +119,8 @@ public class EventManager {
 		case KeyEvent.VK_A:
 			if (menuPause.getOption().equals(PauseRenderer.RESUME))
 				stage = Stage.MAP;
+			else if (menuPause.getOption().equals(PauseRenderer.SAVE))
+				fileManager.saveGame(ticker);				
 			break;
 		case KeyEvent.VK_ESCAPE:
 			stage = Stage.MAP;

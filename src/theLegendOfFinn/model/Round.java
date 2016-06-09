@@ -1,5 +1,6 @@
 package theLegendOfFinn.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -13,7 +14,7 @@ import theLegendOfFinn.model.character.EnemyWarrior;
  * @author rama
  *
  */
-public class Round {
+public class Round implements Serializable {
 
 	private List<EnemyCharacter> enemies;
 	
