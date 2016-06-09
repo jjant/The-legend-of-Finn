@@ -194,11 +194,16 @@ public class Character implements Serializable {
 		}
 	}
 
-
-	public void attack(Character character) {
+	/**
+	 * Attacks a character.
+	 * 
+	 * @param character Charcter to attack
+	 * @return true if could attack it, false otherwise
+	 */
+	public boolean attack(Character character) {
 		long now = System.currentTimeMillis();
 		if (now - lastAttackTime <= attackCooldown && state != State.IDLE) {
-			return;
+			return false;
 		}
 		state = State.ATTACKING;
 		lastAttackTime = System.currentTimeMillis();
@@ -208,9 +213,10 @@ public class Character implements Serializable {
 			return;
 		*/
 		if (character == null || !closeEnough(character))
-			return;
+			return false;
 		System.out.println(character);
 		character.receiveAttack(this);
+		return true;
 	}
 
 	private void receiveAttack(Character character) {

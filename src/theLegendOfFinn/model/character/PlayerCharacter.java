@@ -14,4 +14,11 @@ public class PlayerCharacter extends Character {
 		super(new Position(Map.WIDTH * Renderer.CELL_SIZE / 2 - Renderer.CELL_SIZE,
 				Map.HEIGHT * Renderer.CELL_SIZE / 2 - Renderer.CELL_SIZE / 2), Direction.DOWN, PLAYER_MAX_HP[level], PLAYER_ATTACK[level], PLAYER_VELOCITY[level]);
 	}
+	
+	public boolean attack(Character character) {
+		if (super.attack(character) && character.getCurrentHP() <= 0) {
+			this.setCurrentHP(this.getCurrentHP() + character.getMaxHP());
+			return true;
+		} else return false;
+	}
 }
