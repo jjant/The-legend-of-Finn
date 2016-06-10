@@ -49,3 +49,6 @@ local.properties
 
 # Code Recommenders
 .recommenders/
+
+# Savegame
+*.finn
