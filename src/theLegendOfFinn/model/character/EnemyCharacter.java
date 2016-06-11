@@ -16,6 +16,11 @@ public abstract class EnemyCharacter extends Character {
 	public static final int DOG_ATTACK = 2;
 	public static final int DOG_VELOCITY = 1;
 	public static final int DOG_HP_BOUNTY = 2;
+	
+	public static final int DONUT_MAX_HP = 3;
+	public static final int DONUT_ATTACK = 2;
+	public static final int DONUT_VELOCITY = 1;
+	public static final int DONUT_HP_BOUNTY = 2;
 
 	public int hpBounty = 1;
 

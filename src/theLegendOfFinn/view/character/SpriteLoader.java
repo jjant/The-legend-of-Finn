@@ -10,6 +10,7 @@ import theLegendOfFinn.model.character.Character;
 import theLegendOfFinn.model.character.Character.Direction;
 import theLegendOfFinn.model.character.Character.State;
 import theLegendOfFinn.model.character.EnemyDog;
+import theLegendOfFinn.model.character.EnemyDonut;
 import theLegendOfFinn.model.character.EnemyPenguin;
 import theLegendOfFinn.model.character.PlayerCharacter;
 
@@ -23,11 +24,14 @@ public class SpriteLoader {
 		Map<State, Map<Direction, Image>> playerMap = loadPlayerSprites();
 		Map<State, Map<Direction, Image>> dogMap = loadDogSprites();
 		Map<State, Map<Direction, Image>> penguinMap = loadPenguinSprites();
+		Map<State, Map<Direction, Image>> donutMap = loadDonutSprites();
+		
 
 		classMap = new HashMap<>();
 		classMap.put(PlayerCharacter.class, playerMap);
 		classMap.put(EnemyDog.class, dogMap);
 		classMap.put(EnemyPenguin.class, penguinMap);
+		classMap.put(EnemyDonut.class, donutMap);
 	}
 
 	public Map<Direction, Image> getSprites(Character character) {
@@ -58,5 +62,9 @@ public class SpriteLoader {
 
 	private Map<State, Map<Direction, Image>> loadPlayerSprites() {
 		return loadSprites(playerSpritesPath, "Finn");
+	}
+	
+	private Map<State, Map<Direction, Image>> loadDonutSprites() {
+		return loadSprites(enemySpritesPath, "Donut");
 	}
 }
