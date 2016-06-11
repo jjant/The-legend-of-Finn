@@ -1,4 +1,6 @@
-package theLegendOfFinn.view;
+package theLegendOfFinn.view.menu;
+
+import theLegendOfFinn.view.Renderer;
 
 public class StartingMenuRenderer extends MenuRenderer implements Renderer {
 	public static final MenuOption NEW = new MenuOption(34, 314, 164, 60);

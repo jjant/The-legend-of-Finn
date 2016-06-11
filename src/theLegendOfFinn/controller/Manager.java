@@ -3,10 +3,7 @@ package theLegendOfFinn.controller;
 import theLegendOfFinn.controller.RenderManager.Stage;
 import theLegendOfFinn.controller.communicators.Delegate;
 import theLegendOfFinn.controller.communicators.Notifier;
-import theLegendOfFinn.model.Map;
 import theLegendOfFinn.model.Ticker;
-import theLegendOfFinn.model.character.PlayerCharacter;
-import theLegendOfFinn.view.MapRenderer;
 import theLegendOfFinn.view.MasterRenderer;
 
 public class Manager {
@@ -22,14 +19,12 @@ public class Manager {
 
 	public Manager() {
 		notifier = new Notifier(this);
-		// mostrar menu
 		masterRenderer = new MasterRenderer(new Delegate(this));
 		renderManager = new RenderManager(this);
 		eventManager = new EventManager(this);
 		renderManager.initialize();
 	}
 
-	// cambiar nombre al metodo, esto hace q se vea el juego.
 	/**
 	 * Initializes the game. Must be called when a new game is requested.
 	 * 

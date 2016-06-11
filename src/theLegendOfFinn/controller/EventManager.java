@@ -6,11 +6,11 @@ import theLegendOfFinn.controller.RenderManager.Stage;
 import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.Ticker;
 import theLegendOfFinn.model.character.Character;
-import theLegendOfFinn.view.GameOverRenderer;
 import theLegendOfFinn.view.MasterRenderer;
-import theLegendOfFinn.view.MenuRenderer;
-import theLegendOfFinn.view.PauseRenderer;
-import theLegendOfFinn.view.StartingMenuRenderer;
+import theLegendOfFinn.view.menu.GameOverRenderer;
+import theLegendOfFinn.view.menu.MenuRenderer;
+import theLegendOfFinn.view.menu.PauseRenderer;
+import theLegendOfFinn.view.menu.StartingMenuRenderer;
 
 public class EventManager {
 	private Manager manager;

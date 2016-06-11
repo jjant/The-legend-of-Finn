@@ -13,6 +13,11 @@ import javax.swing.JFrame;
 import theLegendOfFinn.controller.RenderManager;
 import theLegendOfFinn.controller.communicators.Delegate;
 import theLegendOfFinn.model.character.EnemyCharacter;
+import theLegendOfFinn.view.character.CharacterRenderer;
+import theLegendOfFinn.view.menu.GameOverRenderer;
+import theLegendOfFinn.view.menu.MenuRenderer;
+import theLegendOfFinn.view.menu.PauseRenderer;
+import theLegendOfFinn.view.menu.StartingMenuRenderer;
 
 public class MasterRenderer extends Canvas implements KeyListener {
 	private static final long serialVersionUID = 1L;
