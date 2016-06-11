@@ -17,28 +17,30 @@ public abstract class Character implements Serializable {
 	public enum State {
 		IDLE, MOVING, ATTACKING;
 	}
+
 	protected State state = State.IDLE;
-	
+
 	// Health fields
 	private int maxHP;
-	private Position position;
-	private int velocity;
 	private int currentHP;
 
 	// Attack fields
 	private int attack;
 	private long lastAttackTime;
 	private final long ATTACK_COOLDOWN = 500; // in ms
-	
+
 	// Move fields
 	public static enum Direction {
 		UP, RIGHT, DOWN, LEFT;
 	}
+
 	public final long MOVE_COOLDOWN = 15; // in ms
 	private Direction direction;
 	private long lastMoveTime;
 	private int moveRemaining;
-	
+	private Position position;
+	private int velocity;
+
 	public Character(Position pos, Direction direction, int maxHP, int attack, int velocity) {
 		this.position = pos;
 		this.direction = direction;
@@ -111,7 +113,7 @@ public abstract class Character implements Serializable {
 	public int getAttack() {
 		return attack;
 	}
-	
+
 	/**
 	 * Gets character current state
 	 * 
@@ -124,7 +126,8 @@ public abstract class Character implements Serializable {
 	/**
 	 * Set health points (HP) to a new value
 	 * 
-	 * @param newHP new value to set the health points.
+	 * @param newHP
+	 *            new value to set the health points.
 	 */
 	protected void setCurrentHP(int newHP) {
 		this.currentHP = newHP;
@@ -134,13 +137,16 @@ public abstract class Character implements Serializable {
 	 * Tries to move the character to the specified direction. If movement is
 	 * impossible, it does nothing.
 	 * 
-	 * @param direction the direction towards the movement is desired.
-	 * @param grid the character grid.
+	 * @param direction
+	 *            the direction towards the movement is desired.
+	 * @param grid
+	 *            the character grid.
 	 */
 	public void tryToMove(Direction direction, CharacterGrid grid) {
 		Position destination = null;
 
-		if (state == State.MOVING || direction == null) return;
+		if (state == State.MOVING || direction == null)
+			return;
 
 		this.direction = direction;
 		switch (direction) {
@@ -157,11 +163,12 @@ public abstract class Character implements Serializable {
 			destination = new Position(getPosition().getX(), getPosition().getY() + Map.CELL_SIZE);
 			break;
 		}
-		
-		// Check destination is within the borders of the map, and its a valid destination.
+
+		// Check destination is within the borders of the map, and its a valid
+		// destination.
 		if (destination.getX() < 0 || destination.getX() >= Map.WIDTH * Map.CELL_SIZE || destination.getY() < 0
-		 || destination.getY() >= Map.HEIGHT * Map.CELL_SIZE || !grid.isFreePosition(destination)
-		 || destination == null)
+				|| destination.getY() >= Map.HEIGHT * Map.CELL_SIZE || !grid.isFreePosition(destination)
+				|| destination == null)
 			return;
 
 		state = State.MOVING;
@@ -213,27 +220,31 @@ public abstract class Character implements Serializable {
 	/**
 	 * Attacks a character.
 	 * 
-	 * @param character Character to attack
+	 * @param character
+	 *            Character to attack
 	 * @return true if could attack it, false otherwise
 	 */
 	public boolean attack(Character character) {
 		long now = System.currentTimeMillis();
-		if (now - lastAttackTime <= ATTACK_COOLDOWN && state != State.IDLE) return false;
+		if (now - lastAttackTime <= ATTACK_COOLDOWN && state != State.IDLE)
+			return false;
 
 		state = State.ATTACKING;
 		lastAttackTime = System.currentTimeMillis();
 
 		// We check this after setting the state, to allow the character to
 		// "attack" empty spaces.
-		if (character == null || !closeEnough(character)) return false;
+		if (character == null || !closeEnough(character))
+			return false;
 		character.receiveAttack(this);
 		return true;
 	}
-	
+
 	/**
 	 * Takes an amount of damage from a given character
 	 * 
-	 * @param character Character who attacks.
+	 * @param character
+	 *            Character who attacks.
 	 */
 	private void receiveAttack(Character character) {
 		setCurrentHP(getCurrentHP() - character.getAttack());
@@ -244,26 +255,30 @@ public abstract class Character implements Serializable {
 	 */
 	public void updateStatus() {
 		long now = System.currentTimeMillis();
-		if (state == State.ATTACKING && now - lastAttackTime >= ATTACK_COOLDOWN) state = State.IDLE;
-		else if(state == State.MOVING && moveRemaining <= 0) state = State.IDLE;
+		if (state == State.ATTACKING && now - lastAttackTime >= ATTACK_COOLDOWN)
+			state = State.IDLE;
+		else if (state == State.MOVING && moveRemaining <= 0)
+			state = State.IDLE;
 	}
-	
+
 	/**
-	 * Checks if calling character is close enough to another character given a DELTA (function of CELL_SIZE).
+	 * Checks if calling character is close enough to another character given a
+	 * DELTA (function of CELL_SIZE).
 	 * 
-	 * @param character Character 
+	 * @param character
+	 *            Character
 	 * @return true if is close enough, false otherwise.
 	 */
 	public boolean closeEnough(Character character) {
 		int distanceX = getPosition().distanceX(character.getPosition());
 		int distanceY = getPosition().distanceY(character.getPosition());
-		
+
 		if (distanceX == 0 && distanceY >= Map.CELL_SIZE * 3 / 2
-		 || distanceX == Map.CELL_SIZE && distanceY >= Map.CELL_SIZE / 2
-		 || distanceX >= Map.CELL_SIZE * 3 / 2 && distanceY == 0
-		 || distanceX >= Map.CELL_SIZE / 2 && distanceY == Map.CELL_SIZE)
+				|| distanceX == Map.CELL_SIZE && distanceY >= Map.CELL_SIZE / 2
+				|| distanceX >= Map.CELL_SIZE * 3 / 2 && distanceY == 0
+				|| distanceX >= Map.CELL_SIZE / 2 && distanceY == Map.CELL_SIZE)
 			return false;
-		
+
 		return true;
 	}
 }

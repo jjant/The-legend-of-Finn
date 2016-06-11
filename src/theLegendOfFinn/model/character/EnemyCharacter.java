@@ -7,8 +7,6 @@ import java.util.concurrent.ThreadLocalRandom;
 public abstract class EnemyCharacter extends Character {
 	private static final long serialVersionUID = 1L;
 
-	// Decidir como se van a guardar las propiedades de cada enemigo y donde. (aca o en la factory)
-	//Probablemente sacar velocity.
 	public static final int WARRIOR_MAX_HP = 1;
 	public static final int WARRIOR_ATTACK = 1;
 	public static final int WARRIOR_VELOCITY = 1;

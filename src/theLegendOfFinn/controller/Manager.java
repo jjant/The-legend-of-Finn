@@ -3,6 +3,7 @@ package theLegendOfFinn.controller;
 import theLegendOfFinn.controller.RenderManager.Stage;
 import theLegendOfFinn.controller.communicators.Delegate;
 import theLegendOfFinn.controller.communicators.Notifier;
+import theLegendOfFinn.controller.exceptions.TickerMissingException;
 import theLegendOfFinn.model.Ticker;
 import theLegendOfFinn.view.MasterRenderer;
 
@@ -26,10 +27,13 @@ public class Manager {
 	}
 
 	/**
-	 * Initializes the game. Must be called when a new game is requested.
-	 * 
+	 * Initializes the game. Must be called when a new game
+	 *  is requested or a game is to be loaded. 
+	 *  Calling this method before having a ticker set is unsafe and will throw an exception.
 	 */
-	public void initialize() {
+	public void initialize() throws TickerMissingException{
+		if(ticker == null)
+			throw new TickerMissingException("Ticker has not been set.");
 		modelManager = new ModelManager(this);
 		modelManager.initialize();
 		masterRenderer.initialize();
@@ -37,7 +41,7 @@ public class Manager {
 
 	public void setStage(Stage stage) {
 		renderManager.setStage(stage);
-		if (!stage.equals(Stage.MENU))
+		if (!(stage.equals(Stage.MENU) || stage.equals(Stage.MAPSELECTION)))
 			toggleMovement();
 	}
 
