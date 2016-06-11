@@ -6,6 +6,7 @@ import theLegendOfFinn.controller.Manager;
 import theLegendOfFinn.controller.RenderManager.Stage;
 import theLegendOfFinn.controller.exceptions.TickerMissingException;
 import theLegendOfFinn.model.Ticker;
+import theLegendOfFinn.model.Ticker.Arena;
 import theLegendOfFinn.view.menu.MapSelectionRenderer;
 
 public class StageMapSelectionManager extends StageManager{
@@ -28,14 +29,15 @@ public class StageMapSelectionManager extends StageManager{
 		case KeyEvent.VK_ENTER:
 		case KeyEvent.VK_A:
 			manager.loadTicker(new Ticker(manager.getNotifier()));
-			//implementar dsp
-			/*if (menuMapSelection.getOption().equals(MapSelectionRenderer.GRASS))
-				
+			Ticker ticker = manager.getTicker();
+			if (menuMapSelection.getOption().equals(MapSelectionRenderer.GRASS))
+				ticker.setArena(Arena.GRASS);
 			else if(menuMapSelection.getOption().equals(MapSelectionRenderer.ICE))
-				
+				ticker.setArena(Arena.ICE);
 			else if(menuMapSelection.getOption().equals(MapSelectionRenderer.MOUNTAIN))
-				
-			else if(menuMapSelection.getOption().equals(MapSelectionRenderer.LAVA))*/
+				ticker.setArena(Arena.MOUNTAIN);
+			else if(menuMapSelection.getOption().equals(MapSelectionRenderer.LAVA))
+				ticker.setArena(Arena.LAVA);
 			try {
 				manager.initialize();
 			} catch (TickerMissingException e) {

@@ -66,7 +66,7 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	}
 	
 	public void initialize(){
-		setMapRenderer(new MapRenderer(delegate.getMap()));
+		mapRenderer = new MapRenderer(delegate.getMap(), delegate.getArena());
 		guiRenderer = new GUIRenderer(delegate.getPlayer());
 	}
 	public void render(RenderManager.Stage stage) {

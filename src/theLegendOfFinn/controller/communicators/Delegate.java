@@ -5,6 +5,7 @@ import java.util.List;
 import theLegendOfFinn.controller.Manager;
 import theLegendOfFinn.controller.RenderManager.Stage;
 import theLegendOfFinn.model.Map;
+import theLegendOfFinn.model.Ticker.Arena;
 import theLegendOfFinn.model.character.EnemyCharacter;
 import theLegendOfFinn.model.character.PlayerCharacter;;
 
@@ -40,5 +41,9 @@ public class Delegate {
 
 	public Map getMap() {
 		return manager.getTicker().getMap();
+	}
+	
+	public Arena getArena(){
+		return manager.getTicker().getArena();
 	}
 }

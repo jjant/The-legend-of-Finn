@@ -13,12 +13,18 @@ import theLegendOfFinn.model.Round;
 public class Ticker implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	public enum Arena{
+		GRASS, ICE, LAVA, MOUNTAIN;
+	}
+	
 	private int roundNumber;
 	private Round.RoundTypes roundType;
 	private Map map;
 	private Round round;
 	private Boolean canModify = false;
 	private transient Notifier notifier;
+	//probando
+	private Arena arena;
 
 	public Ticker(Notifier notifier) {
 		this.notifier = notifier;
@@ -134,5 +140,13 @@ public class Ticker implements Serializable {
 	// shoud only be called when game is looadded, change this mehtod's aname
 	public void setNotifier(Notifier notifier){
 		this.notifier = notifier;
+	}
+	
+	public Arena getArena(){
+		return arena;
+	}
+	
+	public void setArena(Arena arena){
+		this.arena = arena;
 	}
 }
