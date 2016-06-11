@@ -271,7 +271,7 @@ public abstract class Character implements Serializable {
 
 		// We check this after setting the state, to allow the character to
 		// "attack" empty spaces.
-		if (character == null || !closeEnough(character))
+		if (character == null || character == this || !closeEnough(character))
 			return false;
 		character.receiveAttack(this);
 		return true;
