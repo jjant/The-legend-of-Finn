@@ -15,6 +15,7 @@ import theLegendOfFinn.controller.communicators.Delegate;
 import theLegendOfFinn.model.character.EnemyCharacter;
 import theLegendOfFinn.view.character.CharacterRenderer;
 import theLegendOfFinn.view.menu.GameOverRenderer;
+import theLegendOfFinn.view.menu.MapSelectionRenderer;
 import theLegendOfFinn.view.menu.MenuRenderer;
 import theLegendOfFinn.view.menu.PauseRenderer;
 import theLegendOfFinn.view.menu.StartingMenuRenderer;
@@ -38,6 +39,7 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	private PauseRenderer pauseRenderer;
 	private GUIRenderer guiRenderer;
 	private GameOverRenderer gameOverRenderer;
+	private MapSelectionRenderer mapSelectionRenderer;
 
 	public MasterRenderer(Delegate delegate) {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -48,6 +50,7 @@ public class MasterRenderer extends Canvas implements KeyListener {
 		startingMenuRenderer = new StartingMenuRenderer();
 		pauseRenderer = new PauseRenderer();
 		gameOverRenderer = new GameOverRenderer();
+		mapSelectionRenderer = new MapSelectionRenderer();
 		
 		frame = new JFrame();
 		addKeyListener(this);
@@ -95,6 +98,9 @@ public class MasterRenderer extends Canvas implements KeyListener {
 		case GAMEOVER:
 			gameOverRenderer.render(g);
 			break;
+		case MAPSELECTION:
+			mapSelectionRenderer.render(g);
+			break;
 		}
 
 		bs.show();
@@ -112,6 +118,10 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	public void setPauseRenderer(PauseRenderer pauseRenderer) {
 		this.pauseRenderer = pauseRenderer;
 	}
+	
+	public void setMapSelectionRenderer(MapSelectionRenderer mapSelectionRenderer) {
+		this.mapSelectionRenderer = mapSelectionRenderer;
+	}
 
 	/**
 	 * Returns the current MenuRenderer
@@ -126,6 +136,9 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	}
 	public GameOverRenderer getGameOverRenderer() {
 		return gameOverRenderer;
+	}
+	public MapSelectionRenderer getMapSelectionRenderer() {
+		return mapSelectionRenderer;
 	}
 
 	public void keyPressed(KeyEvent e) {
