@@ -7,6 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import theLegendOfFinn.model.character.EnemyCharacter;
 import theLegendOfFinn.model.character.EnemyDog;
+import theLegendOfFinn.model.character.EnemyDonut;
 import theLegendOfFinn.model.character.EnemyPenguin;
 
 /**
@@ -45,11 +46,9 @@ public class Round implements Serializable {
 		this.enemies.add(new EnemyDog(new Position(positions[(index + 1) % 4])));
 		return index + 2;
 	}
-	private int addTwoThirds(int index) {
-		/*
-		this.enemies.add(new EnemyThird(new Position(positions[index % 4])));
-		this.enemies.add(new EnemyThird(new Position(positions[(index + 1) % 4])));
-		*/
+	private int addTwoDonuts(int index) {
+		this.enemies.add(new EnemyDonut(new Position(positions[index % 4])));
+		this.enemies.add(new EnemyDonut(new Position(positions[(index + 1) % 4])));
 		return index + 2;
 	}
 	private void normalRound(int roundNumber) {
@@ -68,16 +67,16 @@ public class Round implements Serializable {
 			index = addTwoDogs(index);
 			break;
 		case 3:
-			index = addTwoThirds(index);
+			index = addTwoDonuts(index);
 			index = addTwoWarriors(index);
 			break;
 		case 4:
-			index = addTwoThirds(index);
+			index = addTwoDonuts(index);
 			index = addTwoDogs(index);
 			break;
 		case 5:
-			index = addTwoThirds(index);
-			index = addTwoThirds(index);
+			index = addTwoDonuts(index);
+			index = addTwoDonuts(index);
 			break;
 		default:
 			break;
