@@ -1,4 +1,4 @@
-package theLegendOfFinn.view;
+package theLegendOfFinn.view.character;
 
 import java.awt.*;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package theLegendOfFinn.view;
+package theLegendOfFinn.view.menu;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+
+import theLegendOfFinn.view.MasterRenderer;
+import theLegendOfFinn.view.Renderer;
 
 public abstract class MenuRenderer implements Renderer {
 

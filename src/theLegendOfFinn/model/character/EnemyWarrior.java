@@ -19,7 +19,7 @@ public class EnemyWarrior extends EnemyCharacter {
 
 	public EnemyWarrior(Position pos, Direction direction) {
 		super(pos, direction, EnemyCharacter.WARRIOR_MAX_HP, EnemyCharacter.WARRIOR_ATTACK,
-				EnemyCharacter.WARRIOR_VELOCITY);
+				EnemyCharacter.WARRIOR_VELOCITY, EnemyCharacter.WARRIOR_HP_BOUNTY);
 	}
 	
 	public EnemyWarrior(Position pos) {

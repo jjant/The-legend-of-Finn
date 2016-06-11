@@ -1,7 +1,8 @@
-package theLegendOfFinn.view;
+package theLegendOfFinn.view.character;
 
 import java.awt.Graphics;
 import theLegendOfFinn.model.character.Character;
+import theLegendOfFinn.view.Renderer;
 
 public class CharacterRenderer implements Renderer {
 	private ImageData imageData;

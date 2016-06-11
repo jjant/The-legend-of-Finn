@@ -4,7 +4,7 @@ import theLegendOfFinn.view.MasterRenderer;
 
 public class RenderManager implements Runnable {
 	public enum Stage {
-		MENU, MAP, PAUSE, GAMEOVER;
+		MENU, MAP, PAUSE, GAMEOVER, MAPSELECTION;
 	}
 	
 	private Thread thread;

@@ -12,14 +12,18 @@ public abstract class EnemyCharacter extends Character {
 	public static final int WARRIOR_MAX_HP = 1;
 	public static final int WARRIOR_ATTACK = 1;
 	public static final int WARRIOR_VELOCITY = 1;
+	public static final int WARRIOR_HP_BOUNTY = 1;
 	
 	public static final int DOG_MAX_HP = 2;
 	public static final int DOG_ATTACK = 2;
 	public static final int DOG_VELOCITY = 1;
-		
+	public static final int DOG_HP_BOUNTY = 2;
+	
+	public int hpBounty = 1; 
 	 
-	public EnemyCharacter(Position pos, Direction direction, int velocity, int maxHP, int attack) {
+	public EnemyCharacter(Position pos, Direction direction, int velocity, int maxHP, int attack, int hpBounty) {
 		super(pos, direction, velocity, maxHP, attack);
+		this.hpBounty = hpBounty;
 	}
 	
 	/*
@@ -90,4 +94,9 @@ public abstract class EnemyCharacter extends Character {
 			attack(player);
 		}
 	}
+	
+	public int getHPBounty(){
+		return hpBounty;
+	}
+	
 }

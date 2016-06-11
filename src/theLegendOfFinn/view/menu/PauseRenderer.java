@@ -1,4 +1,6 @@
-package theLegendOfFinn.view;
+package theLegendOfFinn.view.menu;
+
+import theLegendOfFinn.view.Renderer;
 
 public class PauseRenderer extends MenuRenderer implements Renderer {
 	public static final MenuOption RESUME = new MenuOption(224, 160, 193, 50);

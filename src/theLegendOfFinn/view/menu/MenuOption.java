@@ -1,4 +1,4 @@
-package theLegendOfFinn.view;
+package theLegendOfFinn.view.menu;
 
 public class MenuOption {
 	private final int x;

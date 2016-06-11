@@ -6,11 +6,12 @@ import theLegendOfFinn.controller.RenderManager.Stage;
 import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.Ticker;
 import theLegendOfFinn.model.character.Character;
-import theLegendOfFinn.view.GameOverRenderer;
 import theLegendOfFinn.view.MasterRenderer;
-import theLegendOfFinn.view.MenuRenderer;
-import theLegendOfFinn.view.PauseRenderer;
-import theLegendOfFinn.view.StartingMenuRenderer;
+import theLegendOfFinn.view.menu.GameOverRenderer;
+import theLegendOfFinn.view.menu.MapSelectionRenderer;
+import theLegendOfFinn.view.menu.MenuRenderer;
+import theLegendOfFinn.view.menu.PauseRenderer;
+import theLegendOfFinn.view.menu.StartingMenuRenderer;
 
 public class EventManager {
 	private Manager manager;
@@ -37,6 +38,8 @@ public class EventManager {
 			break;
 		case GAMEOVER:
 			newStage = handleGameOver(key);
+		case MAPSELECTION:
+			newStage = handleMapSelection(key);
 		}
 
 		return newStage;
@@ -57,15 +60,12 @@ public class EventManager {
 		case KeyEvent.VK_A:
 			if (menu.getOption().equals(StartingMenuRenderer.LOAD))
 				try {
-					manager.setTicker(Ticker.loadTicker(fileManager.loadGame()));
+					manager.loadTicker(fileManager.loadGame());
 				} catch (ClassNotFoundException e) {
 					// Tirar algo porq no encontro el archivo.
 				}
 			else if (menu.getOption().equals(StartingMenuRenderer.NEW))
-				manager.setTicker(new Ticker(manager.getNotifier()));
-			manager.initialize();
-			ticker = manager.getTicker();
-			stage = Stage.MAP;
+			stage = Stage.MAPSELECTION;
 			break;
 		default:
 			break;
@@ -163,5 +163,27 @@ public class EventManager {
 	// probando
 	public Stage handlePlayerDeath() {
 		return Stage.GAMEOVER;
+	}
+	
+	public Stage handleMapSelection(int key) {
+		Stage stage = Stage.MAPSELECTION;
+		MapSelectionRenderer menuMapSelection = masterRenderer.getMapSelectionRenderer();
+		switch (key) {
+		case KeyEvent.VK_RIGHT:
+			menuMapSelection.nextOption();
+			break;
+		case KeyEvent.VK_LEFT:
+			menuMapSelection.previousOption();
+			break;
+		case KeyEvent.VK_ENTER:
+		case KeyEvent.VK_A:
+			if (menuMapSelection.getOption() == MapSelectionRenderer.GRASS)
+				manager.loadTicker(new Ticker(manager.getNotifier()));
+				manager.initialize();
+				ticker = manager.getTicker();
+				stage = Stage.MAP;
+			break;
+		}
+		return stage;
 	}
 }

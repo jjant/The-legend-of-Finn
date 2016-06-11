@@ -1,4 +1,6 @@
-package theLegendOfFinn.view;
+package theLegendOfFinn.view.menu;
+
+import theLegendOfFinn.view.Renderer;
 
 public class GameOverRenderer extends MenuRenderer implements Renderer {
 	//cambiar luego.
