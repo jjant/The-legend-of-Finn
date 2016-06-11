@@ -1,9 +1,9 @@
 package theLegendOfFinn.controller;
 
 import theLegendOfFinn.controller.RenderManager.Stage;
-import theLegendOfFinn.controller.communicators.Communicator;
 import theLegendOfFinn.controller.communicators.Delegate;
 import theLegendOfFinn.controller.communicators.Notifier;
+import theLegendOfFinn.model.Map;
 import theLegendOfFinn.model.Ticker;
 import theLegendOfFinn.model.character.PlayerCharacter;
 import theLegendOfFinn.view.MapRenderer;
@@ -14,58 +14,45 @@ public class Manager {
 
 	private RenderManager renderManager;
 	private EventManager eventManager;
-	@SuppressWarnings("unused")
 	private ModelManager modelManager;
 
-	private Communicator communicator;
+	private Notifier notifier;
 
 	private Ticker ticker;
 
-	private boolean firstRun = true;
 
 	public Manager() {
-		communicator = new Communicator(this);
-		initialize(false);
+		notifier = new Notifier(this);
+		//mostrar menu
+		masterRenderer = new MasterRenderer(new Delegate(this));
+		renderManager = new RenderManager(this);
+		eventManager = new EventManager(this);
+		
+		renderManager.initialize();
 	}
 
+	//cambiar nombre al metodo, esto hace q se vea el juego.
 	/**
 	 * Initializes the game. Must be called when a new game is requested.
 	 * 
 	 */
-	public void initialize(boolean newGame) {
-		if (firstRun) {
-			firstRun = false;
-
-			ticker = new Ticker(new Notifier(this));
-
-			masterRenderer = new MasterRenderer(new Delegate(this));
-			masterRenderer.initialize();
-
-			renderManager = new RenderManager(masterRenderer);
-			eventManager = new EventManager(masterRenderer, ticker, communicator);
-			modelManager = new ModelManager(ticker);
-
-			renderManager.initialize();
-		}
-		if(newGame){
-			ticker.renew();
-			masterRenderer.initialize();
-		}
-			
+	public void initialize() {
+		modelManager = new ModelManager(this);
+		modelManager.initialize();
+		masterRenderer.initialize();
 	}
 
 	public void setStage(Stage stage) {
 		renderManager.setStage(stage);
-		changeModTick();
+		if(!stage.equals(Stage.MENU))
+			toggleMovement();
 	}
 
 	public void loadTicker(Ticker ticker) {
 		this.ticker = ticker;
 	}
 
-	// que hace esto??
-	// RTA: para el thread del modelo si stage no es MAP
-	public void changeModTick() {
+	public void toggleMovement() {
 		if (getStage().equals(RenderManager.Stage.MAP))
 			ticker.changeModifier(true);
 		else
@@ -80,7 +67,6 @@ public class Manager {
 		return ticker;
 	}
 
-	// probando
 	public void gameOver() {
 		setStage(eventManager.handlePlayerDeath());
 	}
@@ -89,7 +75,22 @@ public class Manager {
 		setStage(eventManager.handleEvent(key, getStage()));
 	}
 
+	public MasterRenderer getMasterRenderer() {
+		return masterRenderer;
+	}
+	//should ONLY be called when game is loaded
+	public void setTicker(Ticker ticker) {
+		this.ticker = ticker;
+		ticker.setNotifier(notifier);
+		
+	}
+
+	public Notifier getNotifier() {
+		return notifier;
+	}
+
 	public static void main(String[] args) {
 		new Manager();
 	}
+
 }

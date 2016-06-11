@@ -11,8 +11,7 @@ import theLegendOfFinn.model.character.PlayerCharacter;
 
 public class Ticker implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	private int roundDifficulty;
 	private Map map;
 	private Round round;
@@ -41,9 +40,8 @@ public class Ticker implements Serializable {
 		}
 	}
 
-	public void loadTicker(Ticker ticker) {
-		map = ticker.map;
-		round = ticker.round;
+	public static Ticker loadTicker(Ticker ticker) {
+		return ticker;
 	}
 
 	public List<EnemyCharacter> getEnemies() {
@@ -119,5 +117,10 @@ public class Ticker implements Serializable {
 
 	public void updateMap() {
 		map.setRound(round);
+	}
+
+	// shoud only be called when game is looadded, change this mehtod's aname
+	public void setNotifier(Notifier notifier){
+		this.notifier = notifier;
 	}
 }

@@ -20,8 +20,8 @@ public class RenderManager implements Runnable {
 	private double delta;
 	
 
-	public RenderManager(MasterRenderer masterRenderer) {
-		this.masterRenderer = masterRenderer;
+	public RenderManager(Manager manager) {
+		this.masterRenderer = manager.getMasterRenderer();
 	}
 
 	public void initialize() {

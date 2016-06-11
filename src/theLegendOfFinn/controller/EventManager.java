@@ -3,7 +3,6 @@ package theLegendOfFinn.controller;
 import java.awt.event.KeyEvent;
 
 import theLegendOfFinn.controller.RenderManager.Stage;
-import theLegendOfFinn.controller.communicators.Communicator;
 import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.Ticker;
 import theLegendOfFinn.model.character.Character;
@@ -14,17 +13,14 @@ import theLegendOfFinn.view.PauseRenderer;
 import theLegendOfFinn.view.StartingMenuRenderer;
 
 public class EventManager {
+	private Manager manager;
 
 	private MasterRenderer masterRenderer;
 	private Ticker ticker;
-	private Communicator communicator;
 
-	private boolean gameInitialized = false;
-	
-	public EventManager(MasterRenderer masterRenderer, Ticker ticker, Communicator communicator) {
-		this.masterRenderer = masterRenderer;
-		this.ticker = ticker;
-		this.communicator = communicator;
+	public EventManager(Manager manager) {
+		this.manager = manager;
+		this.masterRenderer = manager.getMasterRenderer();
 	}
 
 	public Stage handleEvent(int key, Stage stage) {
@@ -47,10 +43,10 @@ public class EventManager {
 	}
 
 	public Stage handleMenu(int key) {
+		FileManager fileManager = FileManager.getFileManager();
+
 		Stage stage = Stage.MENU;
 		MenuRenderer menu = masterRenderer.getMenuRenderer();
-		FileManager fileManager = FileManager.getFileManager();
-		Ticker tickerLoaded;
 
 		switch (key) {
 		case KeyEvent.VK_LEFT:
@@ -59,22 +55,17 @@ public class EventManager {
 			break;
 		case KeyEvent.VK_ENTER:
 		case KeyEvent.VK_A:
-			if (menu.getOption().equals(StartingMenuRenderer.LOAD)) {
+			if (menu.getOption().equals(StartingMenuRenderer.LOAD))
 				try {
-					ticker.loadTicker(fileManager.loadGame());
-					stage = Stage.MAP;
+					manager.setTicker(Ticker.loadTicker(fileManager.loadGame()));
 				} catch (ClassNotFoundException e) {
-					// DO NOTHING
+					// Tirar algo porq no encontro el archivo.
 				}
-			} else if (menu.getOption().equals(StartingMenuRenderer.NEW)) {
-				if(gameInitialized)
-					communicator.newGameRequest();
-				else{
-					communicator.firstGameRequest();
-					gameInitialized = true;
-				}
-				stage = Stage.MAP;
-			}
+			else if (menu.getOption().equals(StartingMenuRenderer.NEW))
+				manager.setTicker(new Ticker(manager.getNotifier()));
+			manager.initialize();
+			ticker = manager.getTicker();
+			stage = Stage.MAP;
 			break;
 		default:
 			break;

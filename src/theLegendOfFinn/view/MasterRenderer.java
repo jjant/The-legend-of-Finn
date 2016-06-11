@@ -77,7 +77,6 @@ public class MasterRenderer extends Canvas implements KeyListener {
 			break;
 		case MAP:
 			mapRenderer.render(g);
-
 			characterRenderer.draw(delegate.getPlayer());
 			for (EnemyCharacter enemy : delegate.getEnemies())
 				characterRenderer.draw(enemy);
