@@ -6,7 +6,13 @@ import theLegendOfFinn.controller.communicators.Notifier;
 import theLegendOfFinn.controller.exceptions.TickerMissingException;
 import theLegendOfFinn.model.Ticker;
 import theLegendOfFinn.view.MasterRenderer;
-
+/**
+ * Controls the flow of the entire game, every event is either
+ * resolved by this class or one of the sub-managers.
+ *  
+ * @author LCDPCJL
+ *
+ */
 public class Manager {
 	private MasterRenderer masterRenderer;
 
@@ -29,7 +35,6 @@ public class Manager {
 	/** Initializes the game. Must be called when a new game
 	 *  is requested or a game is to be loaded. 
 	 *  Calling this method before having a ticker set is unsafe and will throw an exception.
-	 *  
 	 */
 	public void initialize() throws TickerMissingException{
 		if(ticker == null)
@@ -39,14 +44,19 @@ public class Manager {
 		masterRenderer.initialize();
 	}
 
-	public void setStage(Stage stage) {
+	/**
+	 * Updates the game's stage, if the stage 
+	 * @param stage
+	 */
+	public void updateStage(Stage stage) {
 		renderManager.setStage(stage);
 		if (!(stage.equals(Stage.MENU) || stage.equals(Stage.MAPSELECTION)))
 			toggleMovement();
 	}
 
 	public void toggleMovement() {
-		if (getStage().equals(RenderManager.Stage.MAP))
+		Stage stage = getStage(); 
+		if (stage.equals(Stage.MAP) || stage.equals(Stage.MAPSELECTION))
 			ticker.changeModifier(true);
 		else
 			ticker.changeModifier(false);
@@ -61,11 +71,11 @@ public class Manager {
 	}
 
 	public void gameOver() {
-		setStage(eventManager.handlePlayerDeath());
+		updateStage(eventManager.handlePlayerDeath());
 	}
 
 	public void keyChange(int key) {
-		setStage(eventManager.handleEvent(key, getStage()));
+		updateStage(eventManager.handleEvent(key, getStage()));
 	}
 
 	public MasterRenderer getMasterRenderer() {

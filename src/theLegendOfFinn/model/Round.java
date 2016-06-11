@@ -10,7 +10,7 @@ import theLegendOfFinn.model.character.EnemyDog;
 import theLegendOfFinn.model.character.EnemyPenguin;
 
 /**
- * Manages rounds in the game
+ * Represents and stores the round in the game.
  *
  * @author rama
  *

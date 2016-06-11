@@ -20,7 +20,7 @@ public class Delegate {
 	}
 
 	public void setStage(Stage stage) {
-		manager.setStage(stage);
+		manager.updateStage(stage);
 	}
 
 	public Stage getStage() {

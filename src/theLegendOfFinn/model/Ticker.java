@@ -121,6 +121,10 @@ public class Ticker implements Serializable {
 		}
 		*/
 		roundNumber ++;
+		//probando
+		if(roundNumber == 2)
+			getPlayer().levelUp();
+		//
 		if (roundType == Round.RoundTypes.NORMAL) {
 			if (roundNumber == 4)
 				roundType = Round.RoundTypes.BOSS;

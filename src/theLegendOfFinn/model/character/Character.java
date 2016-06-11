@@ -79,6 +79,14 @@ public abstract class Character implements Serializable {
 	}
 
 	/**
+	 * Sets the character velocity.
+	 * 
+	 * @param velocity the velocity to be set.
+	 */
+	protected void setVelocity(int velocity){
+		this.velocity = velocity;
+	}
+	/**
 	 * Gets the character velocity.
 	 * 
 	 * @return character velocity
@@ -88,6 +96,13 @@ public abstract class Character implements Serializable {
 	}
 
 	/**
+	 * Sets the maximum health points of this character. 
+	 * @param maxHP the new amount of maximum health points.
+	 */
+	protected void setMaxHP(int maxHP){
+		this.maxHP = maxHP; 
+	}
+	/**
 	 * Gets the maximum health points the character can have.
 	 * 
 	 * @return the maximum health points for the character.
@@ -95,7 +110,21 @@ public abstract class Character implements Serializable {
 	public int getMaxHP() {
 		return maxHP;
 	}
-
+	
+	/**
+	 * Sets the maximum health points of this character. 
+	 * If a value greater than this character's maxHP is passed,
+	 * the current HP is set to maxHP.
+	 *   
+	 * @param maxHP the new amount of maximum health points.
+	 */
+	protected void setCurrent(int currentHP){
+		if(currentHP > maxHP)
+			this.currentHP = maxHP;
+		else
+			this.currentHP = currentHP; 
+	}
+	
 	/**
 	 * Gets character current health points (HP)
 	 * 
@@ -103,6 +132,14 @@ public abstract class Character implements Serializable {
 	 */
 	public int getCurrentHP() {
 		return currentHP;
+	}
+	
+	/**
+	 * Sets the character's attack. 
+	 * @param attack the new attack value to be set.
+	 */
+	protected void setAttack(int attack){
+		this.attack = attack; 
 	}
 
 	/**
@@ -172,7 +209,7 @@ public abstract class Character implements Serializable {
 			return;
 
 		state = State.MOVING;
-		moveRemaining = 32;
+		moveRemaining = Map.CELL_SIZE;
 		lastMoveTime = System.currentTimeMillis();
 		grid.occupyPosition(this, destination);
 		grid.freePosition(this.getPosition());
@@ -218,10 +255,10 @@ public abstract class Character implements Serializable {
 	}
 
 	/**
-	 * Attacks a character.
+	 * Attacks a character. If there's no character to be attacked, <code>null</code> is received.
 	 * 
 	 * @param character
-	 *            Character to attack
+	 *            Character to be attacked (or null).
 	 * @return true if could attack it, false otherwise
 	 */
 	public boolean attack(Character character) {
