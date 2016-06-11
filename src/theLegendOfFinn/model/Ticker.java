@@ -8,11 +8,13 @@ import theLegendOfFinn.controller.communicators.Notifier;
 import theLegendOfFinn.model.character.Character;
 import theLegendOfFinn.model.character.EnemyCharacter;
 import theLegendOfFinn.model.character.PlayerCharacter;
+import theLegendOfFinn.model.Round;
 
 public class Ticker implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private int roundDifficulty;
+	private int roundNumber;
+	private Round.RoundTypes roundType;
 	private Map map;
 	private Round round;
 	private Boolean canModify = false;
@@ -24,8 +26,9 @@ public class Ticker implements Serializable {
 	}
 
 	public void renew() {
-		roundDifficulty = 0;
-		round = new Round(roundDifficulty);
+		roundType = Round.RoundTypes.NORMAL;
+		roundNumber = 0;
+		round = new Round(roundType, roundNumber);
 		this.map = new Map(new PlayerCharacter(0), round.getEnemies());
 	}
 
@@ -105,12 +108,21 @@ public class Ticker implements Serializable {
 	}
 
 	public void nextRound() {
+		/*
 		if (roundDifficulty == 4) {
 			round = new Round(roundDifficulty); // should begin the boss round
 			return;
 		}
-		roundDifficulty++;
-		round = new Round(roundDifficulty);
+		*/
+		roundNumber ++;
+		if (roundType == Round.RoundTypes.NORMAL) {
+			if (roundNumber == 4)
+				roundType = Round.RoundTypes.BOSS;
+		}
+		else if (roundType == Round.RoundTypes.BOSS) {
+			// should display YOU WIN or something like that and return to main menu.
+		}
+		round = new Round(roundType, roundNumber);
 		// round = Round.round2();
 		updateMap();
 	}
