@@ -20,18 +20,16 @@ public class Manager {
 
 	private Ticker ticker;
 
-
 	public Manager() {
 		notifier = new Notifier(this);
-		//mostrar menu
+		// mostrar menu
 		masterRenderer = new MasterRenderer(new Delegate(this));
 		renderManager = new RenderManager(this);
 		eventManager = new EventManager(this);
-		
 		renderManager.initialize();
 	}
 
-	//cambiar nombre al metodo, esto hace q se vea el juego.
+	// cambiar nombre al metodo, esto hace q se vea el juego.
 	/**
 	 * Initializes the game. Must be called when a new game is requested.
 	 * 
@@ -44,12 +42,8 @@ public class Manager {
 
 	public void setStage(Stage stage) {
 		renderManager.setStage(stage);
-		if(!stage.equals(Stage.MENU))
+		if (!stage.equals(Stage.MENU))
 			toggleMovement();
-	}
-
-	public void loadTicker(Ticker ticker) {
-		this.ticker = ticker;
 	}
 
 	public void toggleMovement() {
@@ -78,11 +72,16 @@ public class Manager {
 	public MasterRenderer getMasterRenderer() {
 		return masterRenderer;
 	}
-	//should ONLY be called when game is loaded
-	public void setTicker(Ticker ticker) {
-		this.ticker = ticker;
-		ticker.setNotifier(notifier);
-		
+
+	/**	Sets the current ticker to the one specified.
+	 * 	This method should be called if and only if the game is to be loaded.
+	 * 
+	 * @param ticker The loaded ticker.
+	 */
+	public void loadTicker(Ticker ticker) {
+		this.ticker = Ticker.loadTicker(ticker);
+		this.ticker.setNotifier(notifier);
+
 	}
 
 	public Notifier getNotifier() {

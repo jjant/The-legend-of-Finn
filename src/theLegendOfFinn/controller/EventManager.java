@@ -57,12 +57,12 @@ public class EventManager {
 		case KeyEvent.VK_A:
 			if (menu.getOption().equals(StartingMenuRenderer.LOAD))
 				try {
-					manager.setTicker(Ticker.loadTicker(fileManager.loadGame()));
+					manager.loadTicker(fileManager.loadGame());
 				} catch (ClassNotFoundException e) {
 					// Tirar algo porq no encontro el archivo.
 				}
 			else if (menu.getOption().equals(StartingMenuRenderer.NEW))
-				manager.setTicker(new Ticker(manager.getNotifier()));
+				manager.loadTicker(new Ticker(manager.getNotifier()));
 			manager.initialize();
 			ticker = manager.getTicker();
 			stage = Stage.MAP;

@@ -18,15 +18,18 @@ public class PlayerCharacter extends Character {
 				PLAYER_ATTACK[level], PLAYER_VELOCITY[level]);
 	}
 
-	//esta feo este metodo. Sacar de aca lo de curarse(creo, meterlo en otro lado)
+	// esta feo este metodo. Sacar de aca lo de curarse(creo, meterlo en otro
+	// lado)
 	public boolean attack(Character character) {
-		int hpRested= getCurrentHP() + getMaxHP();
 		if (super.attack(character) && character.getCurrentHP() <= 0) {
-			if(hpRested <= getMaxHP())
-				setCurrentHP(hpRested);
+			int hpRestored = getCurrentHP() + ((EnemyCharacter) character).getHPBounty();
+			if (hpRestored <= getMaxHP())
+				setCurrentHP(hpRestored);
 			else
 				setCurrentHP(getMaxHP());
 			return true;
-		} else return false;
+		} else
+			return false;
 	}
+
 }
