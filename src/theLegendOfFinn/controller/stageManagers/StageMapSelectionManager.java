@@ -20,11 +20,20 @@ public class StageMapSelectionManager extends StageManager{
 		MapSelectionRenderer menuMapSelection = masterRenderer.getMapSelectionRenderer();
 		
 		switch (key) {
+		case KeyEvent.VK_UP:
+			menuMapSelection.selectOption(-2);
+			break;
 		case KeyEvent.VK_RIGHT:
 			menuMapSelection.nextOption();
 			break;
+		case KeyEvent.VK_DOWN:
+			menuMapSelection.selectOption(2);
+			break;
 		case KeyEvent.VK_LEFT:
 			menuMapSelection.previousOption();
+			break;
+		case KeyEvent.VK_ESCAPE:
+			stage = Stage.MENU;
 			break;
 		case KeyEvent.VK_ENTER:
 		case KeyEvent.VK_A:
