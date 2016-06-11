@@ -18,34 +18,100 @@ import theLegendOfFinn.model.character.EnemyWarrior;
 public class Round implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	public static enum RoundTypes {
+		NORMAL, BOSS, SURVIVAL;
+	}
 	
 	private List<EnemyCharacter> enemies;
 	private final Position[] positions = {Map.TOP_LEFT_CORNER, Map.TOP_RIGHT_CORNER, Map.BOTTOM_LEFT_CORNER, Map.BOTTOM_RIGHT_CORNER};
-	private static final int TOTAL_ENEMIES = 4;
+	//private static final int NORMAL_ROUND_ENEMIES = 4;
 	
+	/*
 	public Round(List<EnemyCharacter> enemies) {
 		this.enemies = new ArrayList<>();
 		for (EnemyCharacter enemy : enemies) {
 			this.enemies.add(enemy);
 		}
 	}
-
-	public Round(int difficulty) {
-		//Should throw an exception if difficulty is 0 or negative
-		this.enemies = new ArrayList<>();
+	*/
+	
+	private int addTwoWarriors(int index) {
+		this.enemies.add(new EnemyWarrior(new Position(positions[index % 4])));
+		this.enemies.add(new EnemyWarrior(new Position(positions[(index + 1) % 4])));
+		return index + 2;
+	}
+	private int addTwoDogs(int index) {
+		this.enemies.add(new EnemyDog(new Position(positions[index % 4])));
+		this.enemies.add(new EnemyDog(new Position(positions[(index + 1) % 4])));
+		return index + 2;
+	}
+	private int addTwoThirds(int index) {
+		/*
+		this.enemies.add(new EnemyThird(new Position(positions[index % 4])));
+		this.enemies.add(new EnemyThird(new Position(positions[(index + 1) % 4])));
+		*/
+		return index + 2;
+	}
+	private void normalRound(int roundNumber) {
 		int index = 0;
-		
-		while (difficulty >= 0) {
-			this.enemies.add(new EnemyDog(new Position(positions[index%4])));
-			index ++;
-			difficulty --;
-		}
-		
-		while (index < TOTAL_ENEMIES) {
-			this.enemies.add(new EnemyWarrior(new Position(positions[index])));
-			index ++;
+		switch (roundNumber) {
+		case 0:
+			index = addTwoWarriors(index);
+			index = addTwoWarriors(index);
+			break;
+		case 1:
+			index = addTwoWarriors(index);
+			index = addTwoDogs(index);
+			break;
+		case 2:
+			index = addTwoDogs(index);
+			index = addTwoDogs(index);
+			break;
+		case 3:
+			index = addTwoThirds(index);
+			index = addTwoWarriors(index);
+			break;
+		case 4:
+			index = addTwoThirds(index);
+			index = addTwoDogs(index);
+			break;
+		case 5:
+			index = addTwoThirds(index);
+			index = addTwoThirds(index);
+			break;
+		default:
+			break;
 		}
 	}
+	
+	private void survivalRound(int roundNumber) {
+		int index = 0;
+		while (roundNumber >= 0) {
+			boolean flipEnemy = ThreadLocalRandom.current().nextInt(0, 11) <= 5;
+			this.enemies.add(flipEnemy ? new EnemyWarrior(new Position(positions[index%4])) : new EnemyDog(new Position(positions[index%4])));
+			index ++;
+			roundNumber --;
+		}
+	}
+	
+	public Round(RoundTypes roundType, int roundNumber) {
+		this.enemies = new ArrayList<>();
+		switch (roundType) {
+		case NORMAL:
+			this.normalRound(roundNumber);
+			break;
+		case BOSS:
+			//this.enemies.add(new EnemyBoss(new Position(Map.TOP_LEFT_CORNER)));
+			break;
+		case SURVIVAL:
+			this.survivalRound(roundNumber);
+			break;
+		default:
+			// should start survival i guess.
+			break;
+		}
+	}
+	
 	/**
 	 * Returns true if there are enemies left in the round.
 	 * 
@@ -80,6 +146,8 @@ public class Round implements Serializable {
 	public List<EnemyCharacter> getEnemies(){
 		return enemies;
 	}
+	
+	/*
 	public static Round round1(){
 		List<EnemyCharacter> enemies = new ArrayList<>();
 		enemies.add(new EnemyDog(new Position(0, 0)));
@@ -87,7 +155,9 @@ public class Round implements Serializable {
 		Round round1 = new Round(enemies);
 		return round1;
 	}
+	*/
 	
+	/*
 	public static Round round2(){
 		List<EnemyCharacter> enemies = new ArrayList<>();
 		for(int i = 0; i < 6; i++)
@@ -96,11 +166,14 @@ public class Round implements Serializable {
 	
 		return round2;
 	}
+	*/
 	
+	/*
 	//for debugging
 	public static Round emptyRound(){
 		List<EnemyCharacter> enemies = new ArrayList<>();
 		Round emptyRound = new Round(enemies);
 		return emptyRound;
 	}
+	*/
 }
