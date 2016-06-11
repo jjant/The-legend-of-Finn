@@ -3,7 +3,6 @@ package theLegendOfFinn.controller.communicators;
 import theLegendOfFinn.controller.Manager;
 
 /** Provides a way for the model to communicate changes to the controller.
- * @author LCDPCJL
  *
  */
 public class Notifier {

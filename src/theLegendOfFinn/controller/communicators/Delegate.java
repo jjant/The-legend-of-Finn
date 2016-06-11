@@ -8,11 +8,8 @@ import theLegendOfFinn.model.Map;
 import theLegendOfFinn.model.character.EnemyCharacter;
 import theLegendOfFinn.model.character.PlayerCharacter;;
 
-/**
- * Provides an interface for the view to communicate changes to the controller.
+/** Provides an interface for the view to communicate changes to the controller.
  * 
- * @author LCDPCJL
- *
  */
 public class Delegate {
 	private Manager manager;

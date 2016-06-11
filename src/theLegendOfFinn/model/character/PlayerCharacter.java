@@ -31,5 +31,4 @@ public class PlayerCharacter extends Character {
 		} else
 			return false;
 	}
-
 }

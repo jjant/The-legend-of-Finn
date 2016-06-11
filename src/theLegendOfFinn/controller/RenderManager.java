@@ -24,6 +24,9 @@ public class RenderManager implements Runnable {
 		this.masterRenderer = manager.getMasterRenderer();
 	}
 
+	/**Initializes the rendering of the game.
+	 * 
+	 */
 	public void initialize() {
 		lastTime = System.nanoTime();
 		lastSecond = System.currentTimeMillis();
@@ -34,6 +37,9 @@ public class RenderManager implements Runnable {
 		thread.start();
 	}
 	
+	/**Loop that renders the game.
+	 * 
+	 */
 	public void run() {
 		while (true) {
 			long now = System.nanoTime();
@@ -44,7 +50,6 @@ public class RenderManager implements Runnable {
 				masterRenderer.render(stage);
 			}			
 		}
-			
 	}
 
 	// WARNING!
@@ -64,10 +69,18 @@ public class RenderManager implements Runnable {
 		return false;
 	}
 	
+	/** Returns the current stage of the game.
+	 * 
+	 * @return the current stage.
+	 */
 	public Stage getStage(){
 		return stage;
 	}
 	
+	/** Sets the current stage of the game.
+	 * 
+	 * @param stage the stage to be set.
+	 */
 	public void setStage(Stage stage){
 		this.stage = stage;
 	}

@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import theLegendOfFinn.model.character.EnemyCharacter;
 import theLegendOfFinn.model.character.EnemyDog;
-import theLegendOfFinn.model.character.EnemyWarrior;
+import theLegendOfFinn.model.character.EnemyPenguin;
 
 /**
  * Manages rounds in the game
@@ -36,8 +36,8 @@ public class Round implements Serializable {
 	*/
 	
 	private int addTwoWarriors(int index) {
-		this.enemies.add(new EnemyWarrior(new Position(positions[index % 4])));
-		this.enemies.add(new EnemyWarrior(new Position(positions[(index + 1) % 4])));
+		this.enemies.add(new EnemyPenguin(new Position(positions[index % 4])));
+		this.enemies.add(new EnemyPenguin(new Position(positions[(index + 1) % 4])));
 		return index + 2;
 	}
 	private int addTwoDogs(int index) {
@@ -88,7 +88,7 @@ public class Round implements Serializable {
 		int index = 0;
 		while (roundNumber >= 0) {
 			boolean flipEnemy = ThreadLocalRandom.current().nextInt(0, 11) <= 5;
-			this.enemies.add(flipEnemy ? new EnemyWarrior(new Position(positions[index%4])) : new EnemyDog(new Position(positions[index%4])));
+			this.enemies.add(flipEnemy ? new EnemyPenguin(new Position(positions[index%4])) : new EnemyDog(new Position(positions[index%4])));
 			index ++;
 			roundNumber --;
 		}

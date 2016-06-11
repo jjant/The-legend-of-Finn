@@ -26,10 +26,10 @@ public class Manager {
 		renderManager.initialize();
 	}
 
-	/**
-	 * Initializes the game. Must be called when a new game
+	/** Initializes the game. Must be called when a new game
 	 *  is requested or a game is to be loaded. 
 	 *  Calling this method before having a ticker set is unsafe and will throw an exception.
+	 *  
 	 */
 	public void initialize() throws TickerMissingException{
 		if(ticker == null)
