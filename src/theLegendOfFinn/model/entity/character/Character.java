@@ -235,7 +235,7 @@ public abstract class Character extends MovingEntity implements Serializable {
 		Character character = (Character) entity;
 		
 		// We check this after setting the state, to allow the character to
-		// "attack" empty spaces.
+		// "attack" empty spaces;
 		if (character == null || character == this || !closeEnough(character))
 			return false;
 		character.receiveAttack(this);
@@ -272,13 +272,16 @@ public abstract class Character extends MovingEntity implements Serializable {
 	 * @return true if is close enough, false otherwise.
 	 */
 	public boolean closeEnough(Character character) {
+		// WE SHOULD CHANGE IT TO MAKE THE REVERSE VALIDATIONS.
+		// WE SHOULD SAY WHEN ITS TRUE, NOT WHEN IS FALSE.
 		int distanceX = getPosition().distanceX(character.getPosition());
 		int distanceY = getPosition().distanceY(character.getPosition());
 
 		if (distanceX == 0 && distanceY >= Map.CELL_SIZE * 3 / 2
 				|| distanceX == Map.CELL_SIZE && distanceY >= Map.CELL_SIZE / 2
 				|| distanceX >= Map.CELL_SIZE * 3 / 2 && distanceY == 0
-				|| distanceX >= Map.CELL_SIZE / 2 && distanceY == Map.CELL_SIZE)
+				|| distanceX >= Map.CELL_SIZE / 2 && distanceY == Map.CELL_SIZE
+				|| distanceX >= Map.CELL_SIZE && distanceY >= Map.CELL_SIZE)
 			return false;
 
 		return true;

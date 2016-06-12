@@ -27,18 +27,24 @@ public class PlayerCharacter extends Character {
 
 	}
 
-	// esta feo este metodo. Sacar de aca lo de curarse(creo, meterlo en otro
-	// lado)
+	/**
+	 * Attack method that takes into account that killing a character makes the Player
+	 * recover life.
+	 */
 	public boolean attack(Character character) {
-		if (super.attack(character) && character.getCurrentHP() <= 0) {
-			int hpRestored = getCurrentHP() + ((EnemyCharacter) character).getHPBounty();
-			if (hpRestored <= getMaxHP())
-				setCurrentHP(hpRestored);
-			else
-				setCurrentHP(getMaxHP());
-			return true;
-		} else
-			return false;
+		boolean attacked = super.attack(character);
+		if (attacked && !character.isAlive()) recoverLife(character);
+		return attacked;
+	}
+	
+	/**
+	 * Recovers life from a given character's HP Bounty.
+	 * 
+	 * @param character Character from which get HP bounty.
+	 */
+	private void recoverLife(Character character) {
+		int hpRestored = getCurrentHP() + ((EnemyCharacter) character).getHPBounty();
+		setCurrentHP(hpRestored <= getMaxHP() ? hpRestored : getMaxHP());
 	}
 	
 	/**

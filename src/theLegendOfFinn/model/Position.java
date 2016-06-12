@@ -102,6 +102,12 @@ public class Position implements Serializable {
 			return true;
 		return false;
 	}
+	
+	public boolean equals(Position position) {
+		if (position == this) return true;
+		if (position == null || !position.getClass().equals(this.getClass())) return false;
+		return x == position.getX() && y == position.getY();
+	}
 
 	public String toString() {
 		return "(" + this.getX() + ", " + this.getY() + ")";

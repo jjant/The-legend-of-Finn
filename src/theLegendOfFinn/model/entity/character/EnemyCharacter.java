@@ -22,7 +22,7 @@ public abstract class EnemyCharacter extends Character {
 	public static final int DONUT_VELOCITY = 1;
 	public static final int DONUT_HP_BOUNTY = 2;
 
-	public int hpBounty = 1;
+	private int hpBounty = 1;
 
 	public EnemyCharacter(Position pos, Direction direction, int velocity, int maxHP, int attack, int hpBounty) {
 		super(pos, direction, velocity, maxHP, attack);
@@ -55,27 +55,24 @@ public abstract class EnemyCharacter extends Character {
 	public void chasePlayer(Position pos, Grid grid) {
 		// public void chasePlayer(int playerX, int playerY) {
 
+		if (pos == null || grid == null) return;
+		
 		int playerX = pos.getX();
 		int playerY = pos.getY();
+		int enemyX = getPosition().getX();
+		int enemyY = getPosition().getY();
 		
-		Character.Direction directionX = null;
-		Character.Direction directionY = null;
+		Direction directionX = null;
+		Direction directionY = null;
 
 		boolean flipDirection = ThreadLocalRandom.current().nextInt(0, 11) <= 5;
-		if (playerY > getPosition().getY())
-			directionY = Character.Direction.DOWN;
-		else if (playerY < getPosition().getY())
-			directionY = Character.Direction.UP;
-		if (playerX > getPosition().getX())
-			directionX = Character.Direction.RIGHT;
-		else if (playerX < getPosition().getX())
-			directionX = Character.Direction.LEFT;
-		if (directionX == null)
-			tryToMove(directionY, grid);
-		else if (directionY == null)
-			tryToMove(directionX, grid);
-		else
-			tryToMove(flipDirection ? directionX : directionY, grid);
+		
+		directionY = playerY > enemyY ? Direction.DOWN : Direction.UP;
+		directionX = playerX > enemyX ? Direction.RIGHT : Direction.LEFT;
+		
+		if (playerX == enemyX) tryToMove(directionY, grid);
+		else if (playerY == enemyY) tryToMove(directionX, grid);
+		else tryToMove(flipDirection ? directionX : directionY, grid);
 		
 		/*
 		if (playerY > getPosition().getY() && playerX > getPosition().getX())
