@@ -2,6 +2,7 @@ package theLegendOfFinn.model.entity.character;
 
 import theLegendOfFinn.model.Map;
 import theLegendOfFinn.model.Position;
+import theLegendOfFinn.model.entity.Entity;
 import theLegendOfFinn.view.Renderer;
 
 /**
@@ -31,8 +32,11 @@ public class PlayerCharacter extends Character {
 	 * Attack method that takes into account that killing a character makes the Player
 	 * recover life.
 	 */
-	public boolean attack(Character character) {
-		boolean attacked = super.attack(character);
+	public boolean attack(Entity entity) {
+		boolean attacked = super.attack(entity);
+		if (!(entity instanceof Character)) return false;
+		
+		Character character = (Character) entity;
 		if (attacked && !character.isAlive()) recoverLife(character);
 		return attacked;
 	}
