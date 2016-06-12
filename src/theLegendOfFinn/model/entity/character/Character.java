@@ -2,7 +2,6 @@ package theLegendOfFinn.model.entity.character;
 
 import java.io.Serializable;
 
-import theLegendOfFinn.model.Grid;
 import theLegendOfFinn.model.Map;
 import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.entity.Entity;
@@ -15,12 +14,8 @@ import theLegendOfFinn.model.entity.MovingEntity;
 public abstract class Character extends MovingEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	// State fields
-	public enum State {
-		IDLE, MOVING, ATTACKING;
-	}
-
-	protected State state = State.IDLE;
+	// Attacking state.
+	public static final int ATTACKING = 2;
 
 	// Health fields
 	private int maxHP;
@@ -109,15 +104,6 @@ public abstract class Character extends MovingEntity implements Serializable {
 	}
 
 	/**
-	 * Gets character current state
-	 * 
-	 * @return character state
-	 */
-	public State getState() {
-		return state;
-	}
-
-	/**
 	 * Set health points (HP) to a new value
 	 * 
 	 * @param newHP
@@ -125,90 +111,6 @@ public abstract class Character extends MovingEntity implements Serializable {
 	 */
 	protected void setCurrentHP(int newHP) {
 		this.currentHP = newHP;
-	}
-
-	/**
-	 * Tries to move the character to the specified direction. If movement is
-	 * impossible, it does nothing.
-	 * 
-	 * @param direction
-	 *            the direction towards the movement is desired.
-	 * @param grid
-	 *            the character grid.
-	 */
-	public void tryToMove(Direction direction, Grid grid) {
-		Position destination = null;
-
-		if (state == State.MOVING || direction == null)
-			return;
-
-		this.direction = direction;
-		switch (direction) {
-		case LEFT:
-			destination = new Position(getPosition().getX() - Map.CELL_SIZE, getPosition().getY());
-			break;
-		case RIGHT:
-			destination = new Position(getPosition().getX() + Map.CELL_SIZE, getPosition().getY());
-			break;
-		case UP:
-			destination = new Position(getPosition().getX(), getPosition().getY() - Map.CELL_SIZE);
-			break;
-		case DOWN:
-			destination = new Position(getPosition().getX(), getPosition().getY() + Map.CELL_SIZE);
-			break;
-		}
-
-		// Check destination is within the borders of the map, and its a valid
-		// destination.
-		if (destination.getX() < 0 || destination.getX() >= Map.WIDTH * Map.CELL_SIZE || destination.getY() < 0
-				|| destination.getY() >= Map.HEIGHT * Map.CELL_SIZE || !grid.isFreePosition(destination)
-				|| destination == null)
-			return;
-
-		state = State.MOVING;
-		moveRemaining = Map.CELL_SIZE;
-		lastMoveTime = System.currentTimeMillis();
-		grid.occupyPosition(this, destination);
-		grid.freePosition(this.getPosition());
-	}
-
-	/**
-	 * Moves the character step by step.
-	 */
-	public void move() {
-		int yIncrement = 0, xIncrement = 0;
-		if (moveRemaining == 0) {
-			updateStatus();
-			return;
-		}
-
-		long nowMoveTime = System.currentTimeMillis();
-		if (nowMoveTime - lastMoveTime >= MOVE_COOLDOWN / getVelocity()) {
-			lastMoveTime = nowMoveTime;
-			moveRemaining--;
-
-			switch (direction) {
-			case UP:
-				yIncrement = -1;
-				xIncrement = 0;
-				break;
-			case LEFT:
-				yIncrement = 0;
-				xIncrement = -1;
-				break;
-			case DOWN:
-				yIncrement = 1;
-				xIncrement = 0;
-				break;
-			case RIGHT:
-				yIncrement = 0;
-				xIncrement = 1;
-				break;
-			default:
-				break;
-			}
-			getPosition().incPos(xIncrement, yIncrement);
-		}
 	}
 
 	/**
@@ -221,19 +123,19 @@ public abstract class Character extends MovingEntity implements Serializable {
 	 */
 	public boolean attack(Entity entity) {
 		long now = System.currentTimeMillis();
-		if (now - lastAttackTime <= ATTACK_COOLDOWN && state != State.IDLE)
+		if (now - lastAttackTime <= ATTACK_COOLDOWN && state != IDLE)
 			return false;
 
-		state = State.ATTACKING;
+		state = ATTACKING;
 		lastAttackTime = System.currentTimeMillis();
 
 		// If what's in the position to be attacked is not a character,
 		// do nothing.
 		if (!(entity instanceof Character))
 			return false;
-		
+
 		Character character = (Character) entity;
-		
+
 		// We check this after setting the state, to allow the character to
 		// "attack" empty spaces;
 		if (character == null || character == this || !closeEnough(character))
@@ -257,10 +159,10 @@ public abstract class Character extends MovingEntity implements Serializable {
 	 */
 	public void updateStatus() {
 		long now = System.currentTimeMillis();
-		if (state == State.ATTACKING && now - lastAttackTime >= ATTACK_COOLDOWN)
-			state = State.IDLE;
-		else if (state == State.MOVING && moveRemaining <= 0)
-			state = State.IDLE;
+		if (state == ATTACKING && now - lastAttackTime >= ATTACK_COOLDOWN)
+			state = IDLE;
+		else if ((state == MOVING) && moveRemaining <= 0) 
+			state = IDLE;
 	}
 
 	/**

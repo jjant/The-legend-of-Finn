@@ -10,11 +10,11 @@ import org.junit.Test;
 import theLegendOfFinn.model.Map;
 import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.entity.Entity.Direction;
-import theLegendOfFinn.model.entity.character.Character.State;
 import theLegendOfFinn.view.Renderer;
 import theLegendOfFinn.model.entity.character.EnemyCharacter;
 import theLegendOfFinn.model.entity.character.EnemyDog;
 import theLegendOfFinn.model.entity.character.PlayerCharacter;
+import theLegendOfFinn.model.entity.character.Character;
 import theLegendOfFinn.model.exceptions.PositionOccupiedException;
 
 public class CharacterTest {
@@ -136,7 +136,7 @@ public class CharacterTest {
 			e.printStackTrace();
 		}
 		player.tryToMove(Direction.RIGHT, map.getGrid());
-		assertFalse("Player shouldn't move to occupied position", player.getState() == State.MOVING);
+		assertFalse("Player shouldn't move to occupied position", player.getState() == Character.MOVING);
 	}
 	
 	@Test
@@ -149,6 +149,6 @@ public class CharacterTest {
 			e.printStackTrace();
 		}
 		enemy.tryToMove(Direction.LEFT, map.getGrid());
-		assertFalse("Player shouldn't move to occupied position", enemy.getState() == State.MOVING);
+		assertFalse("Player shouldn't move to occupied position", enemy.getState() == Character.MOVING);
 	}
 }

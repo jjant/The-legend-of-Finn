@@ -41,7 +41,6 @@ public abstract class EnemyCharacter extends Character {
 	 */
 
 	/**
-	 * author: Ramiro Olivera Fedi
 	 * 
 	 * @param playerX
 	 *            Position X for player
@@ -116,7 +115,7 @@ public abstract class EnemyCharacter extends Character {
 
 	// probando
 	public void attackNearbyPlayer(PlayerCharacter player) {
-		if (getPosition().isNearby(player.getPosition()) && getState() == State.IDLE) {
+		if (getPosition().isNearby(player.getPosition()) && getState() == IDLE) {
 			attack(player);
 		}
 	}

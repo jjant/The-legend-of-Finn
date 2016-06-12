@@ -3,18 +3,14 @@ package theLegendOfFinn.model.entity;
 import theLegendOfFinn.model.Grid;
 import theLegendOfFinn.model.Map;
 import theLegendOfFinn.model.Position;
-import theLegendOfFinn.model.entity.Entity.Direction;
-import theLegendOfFinn.model.entity.character.Character.State;
 
 public class MovingEntity extends Entity {
 	private static final long serialVersionUID = 1L;
-
 	
-	public enum State{
-		IDLE, MOVING;
-	}
+	public static final int IDLE = 0;
+	public static final int MOVING = 1;
 	
-	protected State state = State.IDLE;
+	protected int state = IDLE;
 	
 	// Movement fields
 	public final long MOVE_COOLDOWN = 15; // in ms
@@ -29,10 +25,19 @@ public class MovingEntity extends Entity {
 	}
 	
 	
+	/**
+	 * Tries to move the character to the specified direction. If movement is
+	 * impossible, it does nothing.
+	 * 
+	 * @param direction
+	 *            the direction towards the movement is desired.
+	 * @param grid
+	 *            the character grid.
+	 */
 	public void tryToMove(Direction direction, Grid grid) {
 		Position destination = null;
 
-		if (state == State.MOVING || direction == null)
+		if (state == MOVING || direction == null)
 			return;
 
 		this.direction = direction;
@@ -53,18 +58,63 @@ public class MovingEntity extends Entity {
 
 		// Check destination is within the borders of the map, and its a valid
 		// destination.
-		if (destination.getX() < 0 || destination.getX() >= Map.WIDTH * Map.CELL_SIZE || destination.getY() < 0
-				|| destination.getY() >= Map.HEIGHT * Map.CELL_SIZE || !grid.isFreePosition(destination)
-				|| destination == null)
+		if (destination == null || !destination.withinBoundaries() || !grid.isFreePosition(destination))
 			return;
-
-		state = State.MOVING;
+		state = MOVING;
 		moveRemaining = Map.CELL_SIZE;
 		lastMoveTime = System.currentTimeMillis();
 		grid.occupyPosition(this, destination);
 		grid.freePosition(this.getPosition());
 	}
+	
 
+	/**
+	 * Moves the character step by step.
+	 */
+	public void move() {
+		int yIncrement = 0, xIncrement = 0;
+		if (moveRemaining == 0) {
+			updateStatus();
+			return;
+		}
+
+		long nowMoveTime = System.currentTimeMillis();
+		if (nowMoveTime - lastMoveTime >= MOVE_COOLDOWN / getVelocity()) {
+			lastMoveTime = nowMoveTime;
+			moveRemaining--;
+
+			switch (direction) {
+			case UP:
+				yIncrement = -1;
+				xIncrement = 0;
+				break;
+			case LEFT:
+				yIncrement = 0;
+				xIncrement = -1;
+				break;
+			case DOWN:
+				yIncrement = 1;
+				xIncrement = 0;
+				break;
+			case RIGHT:
+				yIncrement = 0;
+				xIncrement = 1;
+				break;
+			default:
+				break;
+			}
+			getPosition().incPos(xIncrement, yIncrement);
+		}
+	}
+
+	/**
+	 * Updates status to corresponding one.
+	 */
+	public void updateStatus() {
+		if (state == MOVING && moveRemaining <= 0)
+			state = IDLE;
+	}
+	
 	/**
 	 * Sets the character velocity.
 	 * 
@@ -83,5 +133,13 @@ public class MovingEntity extends Entity {
 		return velocity;
 	}
 	
+	/**
+	 * Gets character current state
+	 * 
+	 * @return character state
+	 */
+	public int getState() {
+		return state;
+	}
 	
 }

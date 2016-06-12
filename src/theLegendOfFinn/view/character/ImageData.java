@@ -9,7 +9,6 @@ import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.entity.character.Character;
 import theLegendOfFinn.model.entity.character.PlayerCharacter;
 import theLegendOfFinn.model.entity.Entity.Direction;
-import theLegendOfFinn.model.entity.character.Character.State;
 
 /**
  * Class holding the information of a sprite to be rendered.
@@ -65,7 +64,7 @@ public class ImageData {
 		positions.add(character.getPosition());
 		
 		//CAMBIAR DSP
-		if(character.getClass() == PlayerCharacter.class &&character.getState() == State.ATTACKING){
+		if(character.getClass() == PlayerCharacter.class &&character.getState() == Character.ATTACKING){
 			heights.add(55);
 			widths.add(64);
 		}

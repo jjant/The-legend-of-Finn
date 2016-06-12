@@ -10,11 +10,9 @@ import theLegendOfFinn.model.entity.Projectile;
 
 public class Boss extends EnemyCharacter {
 	private static final long serialVersionUID = 1L;
-
-	// re villero, pero dsp lo miran.
-	public enum State {
-		IDLE, MOVING, ATTACKING, TELEPORTING;
-	};
+	
+	// Teleporting state.
+	public static final int TELEPORTING = 3;
 
 	private static final int PROJECTILES_SPAWNED = 4;
 	// probando
@@ -26,8 +24,6 @@ public class Boss extends EnemyCharacter {
 	private static final int BOSS_ATTACK = 5;
 	private static final int BOSS_HP_BOUNTY = 0;
 	private static final long TELEPORT_DELAY = 500;
-
-	private State state = State.IDLE;
 
 	public Boss() {
 		super(BOSS_POSITION, BOSS_VELOCITY, BOSS_MAX_HP, BOSS_ATTACK, BOSS_HP_BOUNTY);
@@ -41,7 +37,7 @@ public class Boss extends EnemyCharacter {
 	}
 
 	public void tryToAttack() {
-		if (state == State.IDLE) {
+		if (state == IDLE) {
 			attack();
 		}
 	}
@@ -57,13 +53,13 @@ public class Boss extends EnemyCharacter {
 
 
 	public void tryToTeleport(Position newPosition) {
-		if (state == State.IDLE) {
-			state = State.TELEPORTING;
+		if (state == IDLE) {
+			state = TELEPORTING;
 			Timer teleportTimer = new Timer();
 			TimerTask task = new TimerTask() {
 				public void run() {
 					teleport(newPosition);
-					state = State.IDLE;
+					state = IDLE;
 				}
 			};
 			teleportTimer.schedule(task, TELEPORT_DELAY);

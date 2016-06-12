@@ -14,7 +14,7 @@ public class Position implements Serializable {
 		this.x = x;
 		this.y = y;
 	}
-	
+
 	public Position(Position other) {
 		this.x = other.getX();
 		this.y = other.getY();
@@ -103,9 +103,19 @@ public class Position implements Serializable {
 		return false;
 	}
 	
+	/**
+	 * Returns whether or not this position is within the map boundaries.
+	 * @return true if this position is within the map boundaries.
+	 */
+	public boolean withinBoundaries() {
+		return !(getX() < 0 || getX() >= Map.WIDTH * Map.CELL_SIZE || getY() < 0 || getY() >= Map.HEIGHT * Map.CELL_SIZE);
+	}
+
 	public boolean equals(Position position) {
-		if (position == this) return true;
-		if (position == null || !position.getClass().equals(this.getClass())) return false;
+		if (position == this)
+			return true;
+		if (position == null || !position.getClass().equals(this.getClass()))
+			return false;
 		return x == position.getX() && y == position.getY();
 	}
 
