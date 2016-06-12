@@ -17,6 +17,7 @@ import theLegendOfFinn.view.character.CharacterRenderer;
 import theLegendOfFinn.view.menu.GameOverRenderer;
 import theLegendOfFinn.view.menu.MapSelectionRenderer;
 import theLegendOfFinn.view.menu.MenuRenderer;
+import theLegendOfFinn.view.menu.ModeRenderer;
 import theLegendOfFinn.view.menu.PauseRenderer;
 import theLegendOfFinn.view.menu.StartingMenuRenderer;
 
@@ -40,6 +41,7 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	private GUIRenderer guiRenderer;
 	private GameOverRenderer gameOverRenderer;
 	private MapSelectionRenderer mapSelectionRenderer;
+	private ModeRenderer modeRenderer;
 
 	public MasterRenderer(Delegate delegate) {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -51,6 +53,7 @@ public class MasterRenderer extends Canvas implements KeyListener {
 		pauseRenderer = new PauseRenderer();
 		gameOverRenderer = new GameOverRenderer();
 		mapSelectionRenderer = new MapSelectionRenderer();
+		modeRenderer = new ModeRenderer();
 		
 		frame = new JFrame();
 		addKeyListener(this);
@@ -101,6 +104,9 @@ public class MasterRenderer extends Canvas implements KeyListener {
 		case MAPSELECTION:
 			mapSelectionRenderer.render(g);
 			break;
+		case MODE:
+			modeRenderer.render(g);
+			break;
 		}
 
 		bs.show();
@@ -122,6 +128,10 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	public void setMapSelectionRenderer(MapSelectionRenderer mapSelectionRenderer) {
 		this.mapSelectionRenderer = mapSelectionRenderer;
 	}
+	
+	public void setModeRenderer(ModeRenderer modeRenderer) {
+		this.modeRenderer = modeRenderer;
+	}
 
 	/**
 	 * Returns the current MenuRenderer
@@ -139,6 +149,9 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	}
 	public MapSelectionRenderer getMapSelectionRenderer() {
 		return mapSelectionRenderer;
+	}
+	public ModeRenderer getModeRenderer() {
+		return modeRenderer;
 	}
 
 	public void keyPressed(KeyEvent e) {

@@ -38,7 +38,7 @@ public class StageMenuManager extends StageManager {
 					// Tirar algo porq no encontro el archivo.
 				}
 			else if (menu.getOption().equals(StartingMenuRenderer.NEW))
-				stage = Stage.MAPSELECTION;
+				stage = Stage.MODE;
 			break;
 		default:
 			break;
