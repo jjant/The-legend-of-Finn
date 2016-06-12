@@ -46,7 +46,8 @@ public class Projectile extends MovingEntity {
 
 		state = MOVING;
 		moveRemaining = Map.CELL_SIZE;
-		lastMoveTime = System.currentTimeMillis();
+		this.getTimer().updateLastMoveTime(System.currentTimeMillis());
+		//lastMoveTime = System.currentTimeMillis();
 		grid.occupyPosition(this, destination);
 		grid.freePosition(this.getPosition());
 	}

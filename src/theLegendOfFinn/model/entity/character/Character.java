@@ -23,8 +23,11 @@ public abstract class Character extends MovingEntity implements Serializable {
 
 	// Attack fields
 	private int attack;
+	
+	/*
 	private long lastAttackTime;
 	private final long ATTACK_COOLDOWN = 500; // in ms
+	*/
 
 	public Character(Position position, Direction direction, int maxHP, int attack, int velocity) {
 		super(position, direction, velocity);
@@ -122,12 +125,20 @@ public abstract class Character extends MovingEntity implements Serializable {
 	 * @return true if could attack it, false otherwise
 	 */
 	public boolean attack(Entity entity) {
-		long now = System.currentTimeMillis();
+		//long now = System.currentTimeMillis();
+		long nowTime = System.currentTimeMillis();
+		if (this.getTimer().attackTimePassed(nowTime) && state != IDLE)
+			return false;
+		
+		/*
 		if (now - lastAttackTime <= ATTACK_COOLDOWN && state != IDLE)
 			return false;
+		*/
 
 		state = ATTACKING;
-		lastAttackTime = System.currentTimeMillis();
+		
+		this.getTimer().updateLastAttackTime(nowTime);
+		//lastAttackTime = System.currentTimeMillis();
 
 		// If what's in the position to be attacked is not a character,
 		// do nothing.
@@ -158,9 +169,15 @@ public abstract class Character extends MovingEntity implements Serializable {
 	 * Updates status to corresponding one.
 	 */
 	public void updateStatus() {
-		long now = System.currentTimeMillis();
+		//long now = System.currentTimeMillis();
+		long nowTime = System.currentTimeMillis();
+		
+		if (state == ATTACKING && this.getTimer().attackTimePassed(nowTime))
+			state = IDLE;
+		/*
 		if (state == ATTACKING && now - lastAttackTime >= ATTACK_COOLDOWN)
 			state = IDLE;
+		*/
 		else if ((state == MOVING) && moveRemaining <= 0) 
 			state = IDLE;
 	}

@@ -3,6 +3,7 @@ package theLegendOfFinn.model.entity;
 import theLegendOfFinn.model.Grid;
 import theLegendOfFinn.model.Map;
 import theLegendOfFinn.model.Position;
+import theLegendOfFinn.model.Timer;
 
 public class MovingEntity extends Entity {
 	private static final long serialVersionUID = 1L;
@@ -13,15 +14,20 @@ public class MovingEntity extends Entity {
 	protected int state = IDLE;
 	
 	// Movement fields
+	/*
 	public final long MOVE_COOLDOWN = 15; // in ms
 	protected long lastMoveTime;
+	*/
+	
+	private Timer timer;
 	protected int moveRemaining;
 	private int velocity;
 
 	public MovingEntity(Position position, Direction direction, int velocity) {
 		super(position, direction);
 		this.velocity = velocity;
-		lastMoveTime = 0;
+		//lastMoveTime = 0;
+		this.timer = new Timer(velocity);
 	}
 	
 	
@@ -62,7 +68,8 @@ public class MovingEntity extends Entity {
 			return;
 		state = MOVING;
 		moveRemaining = Map.CELL_SIZE;
-		lastMoveTime = System.currentTimeMillis();
+		timer.updateLastMoveTime(System.currentTimeMillis());
+		//lastMoveTime = System.currentTimeMillis();
 		grid.occupyPosition(this, destination);
 		grid.freePosition(this.getPosition());
 	}
@@ -77,10 +84,17 @@ public class MovingEntity extends Entity {
 			updateStatus();
 			return;
 		}
-
+		
+		long nowTime = System.currentTimeMillis();
+		if (this.getTimer().moveTimePassed(nowTime)) {
+			this.getTimer().updateLastMoveTime(nowTime);
+		
+		/*	
 		long nowMoveTime = System.currentTimeMillis();
 		if (nowMoveTime - lastMoveTime >= MOVE_COOLDOWN / getVelocity()) {
 			lastMoveTime = nowMoveTime;
+		*/
+		
 			moveRemaining--;
 
 			switch (direction) {
@@ -140,6 +154,15 @@ public class MovingEntity extends Entity {
 	 */
 	public int getState() {
 		return state;
+	}
+	
+	/**
+	 * Gets Entity timer
+	 * 
+	 * @return timer
+	 */
+	public Timer getTimer() {
+		return timer;
 	}
 	
 }
