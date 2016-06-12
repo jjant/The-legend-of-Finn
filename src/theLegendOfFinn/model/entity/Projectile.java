@@ -9,7 +9,8 @@ public class Projectile extends MovingEntity {
 	public Projectile(Position position, Direction direction) {
 		super(position, direction, PROJECTILE_VELOCITY);
 	}
-
+	
+	//hace cosas
 	public void move() {
 
 	}

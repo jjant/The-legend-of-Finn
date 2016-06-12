@@ -1,18 +1,22 @@
 package theLegendOfFinn.model.entity.character;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import theLegendOfFinn.model.Position;
+import theLegendOfFinn.model.entity.Projectile;
 
 public class Boss extends EnemyCharacter {
 	private static final long serialVersionUID = 1L;
 
 	// re villero, pero dsp lo miran.
-	public enum State{
+	public enum State {
 		IDLE, MOVING, ATTACKING, TELEPORTING;
 	};
 
+	private static final int PROJECTILES_SPAWNED = 4;
 	// probando
 	private static final int RESTING_TIME = 1000;
 	// cambiar dsp
@@ -27,25 +31,30 @@ public class Boss extends EnemyCharacter {
 
 	public Boss() {
 		super(BOSS_POSITION, BOSS_VELOCITY, BOSS_MAX_HP, BOSS_ATTACK, BOSS_HP_BOUNTY);
+
 	}
 
-	
-	
 	// probando
-	
+
 	public void act() {
 
 	}
 
-	public void tryToAttack(){
-		if(state == State.IDLE){
+	public void tryToAttack() {
+		if (state == State.IDLE) {
 			attack();
 		}
 	}
-	
+
+	//cambiar dsp
 	public void attack() {
-		//throw projectiles
+		Map<Direction, Projectile> projectiles = new HashMap<>();
+		for (Direction direction : Direction.values()){
+			projectiles.put(direction, new Projectile(getProjectilePosition(direction), direction));
+			projectiles.get(direction).move();
+			}
 	}
+
 
 	public void tryToTeleport(Position newPosition) {
 		if (state == State.IDLE) {
@@ -64,6 +73,32 @@ public class Boss extends EnemyCharacter {
 	private void teleport(Position newPosition) {
 		getPosition().setX(newPosition.getX());
 		getPosition().setY(newPosition.getY());
+	}
+
+	private Position getProjectilePosition(Direction direction) {
+		int bossX = getPosition().getX();
+		int bossY = getPosition().getY();
+		int x = 0, y = 0;
+		switch (direction) {
+		case UP:
+			x = bossX;
+			y = bossY + 1;
+			break;
+		case RIGHT:
+			x = bossX + 1;
+			y = bossY;
+			break;
+		case DOWN:
+			x = bossX;
+			y = bossY - 1;
+			break;
+		case LEFT:
+			x = bossX - 1;
+			y = bossY;
+			break;
+		}
+
+		return new Position(x, y);
 	}
 
 }
