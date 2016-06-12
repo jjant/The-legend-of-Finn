@@ -32,7 +32,7 @@ public class Ticker implements Serializable {
 	}
 
 	public void renew() {
-		roundType = Round.RoundTypes.NORMAL;
+		roundType = Round.RoundTypes.SURVIVAL;
 		roundNumber = 0;
 		round = new Round(roundType, roundNumber);
 		this.map = new Map(new PlayerCharacter(0), round.getEnemies());
@@ -122,7 +122,7 @@ public class Ticker implements Serializable {
 		*/
 		roundNumber ++;
 		//probando
-		if(roundNumber == 2)
+		if(roundNumber == 2 && roundType == Round.RoundTypes.NORMAL)
 			getPlayer().levelUp();
 		//
 		if (roundType == Round.RoundTypes.NORMAL) {

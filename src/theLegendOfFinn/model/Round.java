@@ -86,8 +86,18 @@ public class Round implements Serializable {
 	private void survivalRound(int roundNumber) {
 		int index = 0;
 		while (roundNumber >= 0) {
-			boolean flipEnemy = ThreadLocalRandom.current().nextInt(0, 11) <= 5;
-			this.enemies.add(flipEnemy ? new EnemyPenguin(new Position(positions[index%4])) : new EnemyDog(new Position(positions[index%4])));
+			int flipEnemy = ThreadLocalRandom.current().nextInt(0, 3);
+			switch (flipEnemy) {
+			case 0:
+				this.enemies.add(new EnemyPenguin(new Position(positions[index % 4])));
+				break;
+			case 1:
+				this.enemies.add(new EnemyDog(new Position(positions[index % 4])));
+				break;
+			case 2:
+				this.enemies.add(new EnemyDonut(new Position(positions[index % 4])));
+				break;
+			}
 			index ++;
 			roundNumber --;
 		}

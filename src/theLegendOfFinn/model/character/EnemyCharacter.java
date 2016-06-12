@@ -57,9 +57,27 @@ public abstract class EnemyCharacter extends Character {
 
 		int playerX = pos.getX();
 		int playerY = pos.getY();
+		
+		Character.Direction directionX = null;
+		Character.Direction directionY = null;
 
 		boolean flipDirection = ThreadLocalRandom.current().nextInt(0, 11) <= 5;
-
+		if (playerY > getPosition().getY())
+			directionY = Character.Direction.DOWN;
+		else if (playerY < getPosition().getY())
+			directionY = Character.Direction.UP;
+		if (playerX > getPosition().getX())
+			directionX = Character.Direction.RIGHT;
+		else if (playerX < getPosition().getX())
+			directionX = Character.Direction.LEFT;
+		if (directionX == null)
+			tryToMove(directionY, grid);
+		else if (directionY == null)
+			tryToMove(directionX, grid);
+		else
+			tryToMove(flipDirection ? directionX : directionY, grid);
+		
+		/*
 		if (playerY > getPosition().getY() && playerX > getPosition().getX())
 			tryToMove(flipDirection ? Direction.DOWN : Direction.RIGHT, grid);
 		else if (playerY == getPosition().getY() && playerX > getPosition().getX())
@@ -78,7 +96,8 @@ public abstract class EnemyCharacter extends Character {
 			tryToMove(flipDirection ? Direction.DOWN : Direction.LEFT, grid);
 		else {
 		} // THIS HAPPENS ONLY IF ARE IN SAME POSITION. (NEVER SHOULD HAPPEN)
-
+		*/
+		
 		/*
 		 * if (playerY > getPosition().getY() && playerX > getPosition().getX())
 		 * tryToMove(flipDirection ? Direction.DOWN : Direction.RIGHT); else if
