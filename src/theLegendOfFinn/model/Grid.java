@@ -4,26 +4,26 @@ import java.io.Serializable;
 
 import theLegendOfFinn.model.Map;
 import theLegendOfFinn.model.Position;
-import theLegendOfFinn.model.character.Character;
+import theLegendOfFinn.model.entity.Entity;
 import theLegendOfFinn.model.exceptions.PositionOccupiedException;
 
-public class CharacterGrid implements Serializable {
+public class Grid implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private Character[][] matrix;
+	private Entity[][] matrix;
 	private int enemiesAlive;
 	
-	public CharacterGrid() {
-		matrix = new Character[Map.WIDTH][Map.HEIGHT];
+	public Grid() {
+		matrix = new Entity[Map.WIDTH][Map.HEIGHT];
 		enemiesAlive = 0;
 	}
 	
-	public void add(Character character) throws PositionOccupiedException {
-		if (matrix[character.getPosition().getX()/Map.CELL_SIZE][character.getPosition().getY()/Map.CELL_SIZE] != null) {
+	public void add(Entity entity) throws PositionOccupiedException {
+		if (matrix[entity.getPosition().getX()/Map.CELL_SIZE][entity.getPosition().getY()/Map.CELL_SIZE] != null) {
 			throw new PositionOccupiedException(
-					"La posicion [" + character.getPosition().getX() + "]" + "[" + character.getPosition().getY() + "]" + " esta ocupada, imposible a�adir " + character + ".");
+					"La posicion [" + entity.getPosition().getX() + "]" + "[" + entity.getPosition().getY() + "]" + " esta ocupada, imposible a�adir " + entity + ".");
 		}
-		matrix[character.getPosition().getX()/Map.CELL_SIZE][character.getPosition().getY()/Map.CELL_SIZE] = character;
+		matrix[entity.getPosition().getX()/Map.CELL_SIZE][entity.getPosition().getY()/Map.CELL_SIZE] = entity;
 		enemiesAlive += 1;
 	}
 	
@@ -37,15 +37,15 @@ public class CharacterGrid implements Serializable {
 		matrix[pos.getX()/Map.CELL_SIZE][pos.getY()/Map.CELL_SIZE] = null;
 	}
 	
-	public void occupyPosition(Character character, Position pos) {
-		matrix[pos.getX()/Map.CELL_SIZE][pos.getY()/Map.CELL_SIZE] = character;
+	public void occupyPosition(Entity entity, Position pos) {
+		matrix[pos.getX()/Map.CELL_SIZE][pos.getY()/Map.CELL_SIZE] = entity;
 	}
 	
 	public int getEnemiesAlive() {
 		return enemiesAlive;
 	}
 	
-	public Character[][] getCharMatrix() {
+	public Entity[][] getCharMatrix() {
 		return matrix;
 	}
 	

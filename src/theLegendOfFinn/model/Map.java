@@ -3,8 +3,9 @@ package theLegendOfFinn.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import theLegendOfFinn.model.character.EnemyCharacter;
-import theLegendOfFinn.model.character.PlayerCharacter;
+
+import theLegendOfFinn.model.entity.character.EnemyCharacter;
+import theLegendOfFinn.model.entity.character.PlayerCharacter;
 import theLegendOfFinn.model.exceptions.PositionOccupiedException;
 
 public class Map implements Serializable {
@@ -23,7 +24,7 @@ public class Map implements Serializable {
 	private PlayerCharacter player;
 	private List<EnemyCharacter> enemyList;
 	
-	private CharacterGrid grid;
+	private Grid grid;
 
 	/*
 	public Map(){
@@ -42,7 +43,7 @@ public class Map implements Serializable {
 	}
 
 	public Map(PlayerCharacter player, List<EnemyCharacter> enemyList) {
-		grid = new CharacterGrid();
+		grid = new Grid();
 		this.player = player;
 		try {
 			grid.add(player);
@@ -78,7 +79,7 @@ public class Map implements Serializable {
 		return enemyList;
 	}
 	
-	public CharacterGrid getGrid() {
+	public Grid getGrid() {
 		return grid;
 	}
 	

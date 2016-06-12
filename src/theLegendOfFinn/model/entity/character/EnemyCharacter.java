@@ -1,7 +1,7 @@
-package theLegendOfFinn.model.character;
+package theLegendOfFinn.model.entity.character;
 
 import theLegendOfFinn.model.Position;
-import theLegendOfFinn.model.CharacterGrid;
+import theLegendOfFinn.model.Grid;
 import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class EnemyCharacter extends Character {
@@ -52,7 +52,7 @@ public abstract class EnemyCharacter extends Character {
 	// Ready, Something else boss?
 	// When we finish, we might take into account multiple players
 	// capabilities.
-	public void chasePlayer(Position pos, CharacterGrid grid) {
+	public void chasePlayer(Position pos, Grid grid) {
 		// public void chasePlayer(int playerX, int playerY) {
 
 		int playerX = pos.getX();

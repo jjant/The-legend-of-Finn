@@ -1,7 +1,8 @@
 package theLegendOfFinn.view.character;
 
 import java.awt.Graphics;
-import theLegendOfFinn.model.character.Character;
+
+import theLegendOfFinn.model.entity.character.Character;
 import theLegendOfFinn.view.Renderer;
 
 public class CharacterRenderer implements Renderer {

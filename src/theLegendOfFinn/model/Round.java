@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-import theLegendOfFinn.model.character.EnemyCharacter;
-import theLegendOfFinn.model.character.EnemyDog;
-import theLegendOfFinn.model.character.EnemyDonut;
-import theLegendOfFinn.model.character.EnemyPenguin;
+import theLegendOfFinn.model.entity.character.EnemyCharacter;
+import theLegendOfFinn.model.entity.character.EnemyDog;
+import theLegendOfFinn.model.entity.character.EnemyDonut;
+import theLegendOfFinn.model.entity.character.EnemyPenguin;
 
 /**
  * Represents and stores the round in the game.

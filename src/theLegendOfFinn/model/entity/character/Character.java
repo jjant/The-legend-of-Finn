@@ -1,16 +1,18 @@
-package theLegendOfFinn.model.character;
+package theLegendOfFinn.model.entity.character;
 
 import java.io.Serializable;
 
-import theLegendOfFinn.model.CharacterGrid;
+import theLegendOfFinn.model.Grid;
 import theLegendOfFinn.model.Map;
 import theLegendOfFinn.model.Position;
+import theLegendOfFinn.model.entity.Entity;
+import theLegendOfFinn.model.entity.MovingEntity;
 
 /**
  * Parent class for every character in the game.
  *
  */
-public abstract class Character implements Serializable {
+public abstract class Character extends MovingEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	// State fields
@@ -29,79 +31,32 @@ public abstract class Character implements Serializable {
 	private long lastAttackTime;
 	private final long ATTACK_COOLDOWN = 500; // in ms
 
-	// Move fields
-	public static enum Direction {
-		UP, RIGHT, DOWN, LEFT;
-	}
-
-	public final long MOVE_COOLDOWN = 15; // in ms
-	private Direction direction;
-	private long lastMoveTime;
-	private int moveRemaining;
-	private Position position;
-	private int velocity;
-
-	public Character(Position pos, Direction direction, int maxHP, int attack, int velocity) {
-		this.position = pos;
-		this.direction = direction;
-		this.velocity = velocity;
+	public Character(Position position, Direction direction, int maxHP, int attack, int velocity) {
+		super(position, direction, velocity);
 		this.maxHP = maxHP;
 		this.currentHP = maxHP;
 		this.attack = attack;
-		lastMoveTime = 0;
 	}
 
 	/**
 	 * Checks if the character is alive or not.
 	 * 
-	 * @return true if is alive, false otherwise.
+	 * @return true if it's alive, false otherwise.
 	 */
 	public boolean isAlive() {
 		return currentHP > 0;
 	}
 
 	/**
-	 * Gets the current position for the character
+	 * Sets the maximum health points of this character.
 	 * 
-	 * @return current position.
+	 * @param maxHP
+	 *            the new amount of maximum health points.
 	 */
-	public Position getPosition() {
-		return position;
+	protected void setMaxHP(int maxHP) {
+		this.maxHP = maxHP;
 	}
 
-	/**
-	 * Gets the current direction for the character
-	 * 
-	 * @return the current direction.
-	 */
-	public Direction getDirection() {
-		return direction;
-	}
-
-	/**
-	 * Sets the character velocity.
-	 * 
-	 * @param velocity the velocity to be set.
-	 */
-	protected void setVelocity(int velocity){
-		this.velocity = velocity;
-	}
-	/**
-	 * Gets the character velocity.
-	 * 
-	 * @return character velocity
-	 */
-	public int getVelocity() {
-		return velocity;
-	}
-
-	/**
-	 * Sets the maximum health points of this character. 
-	 * @param maxHP the new amount of maximum health points.
-	 */
-	protected void setMaxHP(int maxHP){
-		this.maxHP = maxHP; 
-	}
 	/**
 	 * Gets the maximum health points the character can have.
 	 * 
@@ -110,21 +65,21 @@ public abstract class Character implements Serializable {
 	public int getMaxHP() {
 		return maxHP;
 	}
-	
+
 	/**
-	 * Sets the maximum health points of this character. 
-	 * If a value greater than this character's maxHP is passed,
-	 * the current HP is set to maxHP.
-	 *   
-	 * @param maxHP the new amount of maximum health points.
+	 * Sets the maximum health points of this character. If a value greater than
+	 * this character's maxHP is passed, the current HP is set to maxHP.
+	 * 
+	 * @param maxHP
+	 *            the new amount of maximum health points.
 	 */
-	protected void setCurrent(int currentHP){
-		if(currentHP > maxHP)
+	protected void setCurrent(int currentHP) {
+		if (currentHP > maxHP)
 			this.currentHP = maxHP;
 		else
-			this.currentHP = currentHP; 
+			this.currentHP = currentHP;
 	}
-	
+
 	/**
 	 * Gets character current health points (HP)
 	 * 
@@ -133,13 +88,15 @@ public abstract class Character implements Serializable {
 	public int getCurrentHP() {
 		return currentHP;
 	}
-	
+
 	/**
-	 * Sets the character's attack. 
-	 * @param attack the new attack value to be set.
+	 * Sets the character's attack.
+	 * 
+	 * @param attack
+	 *            the new attack value to be set.
 	 */
-	protected void setAttack(int attack){
-		this.attack = attack; 
+	protected void setAttack(int attack) {
+		this.attack = attack;
 	}
 
 	/**
@@ -179,7 +136,7 @@ public abstract class Character implements Serializable {
 	 * @param grid
 	 *            the character grid.
 	 */
-	public void tryToMove(Direction direction, CharacterGrid grid) {
+	public void tryToMove(Direction direction, Grid grid) {
 		Position destination = null;
 
 		if (state == State.MOVING || direction == null)
@@ -250,18 +207,19 @@ public abstract class Character implements Serializable {
 			default:
 				break;
 			}
-			position.incPos(xIncrement, yIncrement);
+			getPosition().incPos(xIncrement, yIncrement);
 		}
 	}
 
 	/**
-	 * Attacks a character. If there's no character to be attacked, <code>null</code> is received.
+	 * Attacks a character. If there's no character to be attacked,
+	 * <code>null</code> is received.
 	 * 
 	 * @param character
 	 *            Character to be attacked (or null).
 	 * @return true if could attack it, false otherwise
 	 */
-	public boolean attack(Character character) {
+	public boolean attack(Entity entity) {
 		long now = System.currentTimeMillis();
 		if (now - lastAttackTime <= ATTACK_COOLDOWN && state != State.IDLE)
 			return false;
@@ -269,6 +227,13 @@ public abstract class Character implements Serializable {
 		state = State.ATTACKING;
 		lastAttackTime = System.currentTimeMillis();
 
+		// If what's in the position to be attacked is not a character,
+		// do nothing.
+		if (!(entity instanceof Character))
+			return false;
+		
+		Character character = (Character) entity;
+		
 		// We check this after setting the state, to allow the character to
 		// "attack" empty spaces.
 		if (character == null || character == this || !closeEnough(character))

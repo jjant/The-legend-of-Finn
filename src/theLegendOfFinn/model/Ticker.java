@@ -5,10 +5,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import theLegendOfFinn.controller.communicators.Notifier;
-import theLegendOfFinn.model.character.Character;
-import theLegendOfFinn.model.character.EnemyCharacter;
-import theLegendOfFinn.model.character.PlayerCharacter;
 import theLegendOfFinn.model.Round;
+import theLegendOfFinn.model.entity.character.EnemyCharacter;
+import theLegendOfFinn.model.entity.character.PlayerCharacter;
+import theLegendOfFinn.model.entity.Entity;
 
 public class Ticker implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -92,10 +92,10 @@ public class Ticker implements Serializable {
 					enemy.move();
 				} else {
 					if (enemy.getPosition().getY() % Map.CELL_SIZE != 0
-							&& enemy.getDirection() == Character.Direction.DOWN)
+							&& enemy.getDirection() == Entity.Direction.DOWN)
 						enemy.getPosition().incY(Map.CELL_SIZE);
 					else if (enemy.getPosition().getX() % Map.CELL_SIZE != 0
-							&& enemy.getDirection() == Character.Direction.RIGHT)
+							&& enemy.getDirection() == Entity.Direction.RIGHT)
 						enemy.getPosition().incX(Map.CELL_SIZE);
 					map.getGrid().freePosition(enemy.getPosition());
 					enemyIter.remove();

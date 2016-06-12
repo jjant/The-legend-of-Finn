@@ -6,7 +6,7 @@ import theLegendOfFinn.controller.Manager;
 import theLegendOfFinn.controller.RenderManager.Stage;
 import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.Ticker;
-import theLegendOfFinn.model.character.Character;
+import theLegendOfFinn.model.entity.character.Character;
 
 public class StageMapManager extends StageManager {
 

@@ -2,7 +2,7 @@ package theLegendOfFinn.model;
 
 import java.io.Serializable;
 
-import theLegendOfFinn.model.character.Character.Direction;
+import theLegendOfFinn.model.entity.Entity.Direction;
 
 public class Position implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -39,6 +39,7 @@ public class Manager {
 	public void initialize() throws TickerMissingException{
 		if(ticker == null)
 			throw new TickerMissingException("Ticker has not been set.");
+		ticker.setNotifier(notifier);
 		modelManager = new ModelManager(this);
 		modelManager.initialize();
 		masterRenderer.initialize();
@@ -89,8 +90,6 @@ public class Manager {
 	 */
 	public void loadTicker(Ticker ticker) {
 		this.ticker = Ticker.loadTicker(ticker);
-		this.ticker.setNotifier(notifier);
-
 	}
 
 	public Notifier getNotifier() {

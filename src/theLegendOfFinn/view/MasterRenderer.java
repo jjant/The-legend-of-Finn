@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 
 import theLegendOfFinn.controller.RenderManager;
 import theLegendOfFinn.controller.communicators.Delegate;
-import theLegendOfFinn.model.character.EnemyCharacter;
+import theLegendOfFinn.model.entity.character.EnemyCharacter;
 import theLegendOfFinn.view.character.CharacterRenderer;
 import theLegendOfFinn.view.menu.GameOverRenderer;
 import theLegendOfFinn.view.menu.MapSelectionRenderer;

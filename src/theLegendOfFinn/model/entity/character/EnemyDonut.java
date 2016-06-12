@@ -1,4 +1,4 @@
-package theLegendOfFinn.model.character;
+package theLegendOfFinn.model.entity.character;
 
 import theLegendOfFinn.model.Position;
 

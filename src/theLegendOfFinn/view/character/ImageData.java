@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import theLegendOfFinn.model.Position;
-import theLegendOfFinn.model.character.Character;
-import theLegendOfFinn.model.character.PlayerCharacter;
-import theLegendOfFinn.model.character.Character.Direction;
-import theLegendOfFinn.model.character.Character.State;
+import theLegendOfFinn.model.entity.character.Character;
+import theLegendOfFinn.model.entity.character.PlayerCharacter;
+import theLegendOfFinn.model.entity.Entity.Direction;
+import theLegendOfFinn.model.entity.character.Character.State;
 
 /**
  * Class holding the information of a sprite to be rendered.

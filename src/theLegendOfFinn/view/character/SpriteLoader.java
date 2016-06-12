@@ -6,13 +6,13 @@ import java.util.Map;
 
 import javax.swing.ImageIcon;
 
-import theLegendOfFinn.model.character.Character;
-import theLegendOfFinn.model.character.Character.Direction;
-import theLegendOfFinn.model.character.Character.State;
-import theLegendOfFinn.model.character.EnemyDog;
-import theLegendOfFinn.model.character.EnemyDonut;
-import theLegendOfFinn.model.character.EnemyPenguin;
-import theLegendOfFinn.model.character.PlayerCharacter;
+import theLegendOfFinn.model.entity.character.Character;
+import theLegendOfFinn.model.entity.character.EnemyDog;
+import theLegendOfFinn.model.entity.character.EnemyDonut;
+import theLegendOfFinn.model.entity.character.EnemyPenguin;
+import theLegendOfFinn.model.entity.character.PlayerCharacter;
+import theLegendOfFinn.model.entity.Entity.Direction;
+import theLegendOfFinn.model.entity.character.Character.State;
 
 public class SpriteLoader {
 	private Map<Class<?>, Map<State, Map<Direction, Image>>> classMap;

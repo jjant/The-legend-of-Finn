@@ -6,8 +6,8 @@ import theLegendOfFinn.controller.Manager;
 import theLegendOfFinn.controller.RenderManager.Stage;
 import theLegendOfFinn.model.Map;
 import theLegendOfFinn.model.Ticker.Arena;
-import theLegendOfFinn.model.character.EnemyCharacter;
-import theLegendOfFinn.model.character.PlayerCharacter;;
+import theLegendOfFinn.model.entity.character.EnemyCharacter;
+import theLegendOfFinn.model.entity.character.PlayerCharacter;;
 
 /** Provides an interface for the view to communicate changes to the controller.
  * 

@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import theLegendOfFinn.model.character.PlayerCharacter;
+import theLegendOfFinn.model.entity.character.PlayerCharacter;
 
 /**
  * Renders the GUI.
