@@ -4,6 +4,8 @@ import java.awt.event.KeyEvent;
 
 import theLegendOfFinn.controller.Manager;
 import theLegendOfFinn.controller.RenderManager.Stage;
+import theLegendOfFinn.model.Round;
+import theLegendOfFinn.model.Ticker;
 import theLegendOfFinn.view.menu.ModeRenderer;
 
 public class StageModeManager extends StageManager{
@@ -29,9 +31,10 @@ public class StageModeManager extends StageManager{
 		case KeyEvent.VK_ENTER:
 		case KeyEvent.VK_A:
 			if (menuMode.getOption().equals(ModeRenderer.CAMPAIGN))
-				stage = Stage.MAPSELECTION;
+				manager.loadTicker(new Ticker(manager.getNotifier(), Round.RoundTypes.NORMAL));
 			else if (menuMode.getOption().equals(ModeRenderer.SURVIVAL))
-				stage = Stage.MAPSELECTION;
+				manager.loadTicker(new Ticker(manager.getNotifier(), Round.RoundTypes.SURVIVAL));
+			stage = Stage.MAPSELECTION;
 			break;
 		default:
 			break;

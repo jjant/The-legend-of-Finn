@@ -18,7 +18,7 @@ public class Ticker implements Serializable {
 	}
 	
 	private int roundNumber;
-	private Round.RoundTypes roundType;
+	private Round.RoundTypes gameMode;
 	private Map map;
 	private Round round;
 	private Boolean canModify = false;
@@ -26,15 +26,15 @@ public class Ticker implements Serializable {
 	//probando
 	private Arena arena;
 
-	public Ticker(Notifier notifier) {
+	public Ticker(Notifier notifier, Round.RoundTypes gameMode) {
 		this.notifier = notifier;
-		this.renew();
+		this.renew(gameMode);
 	}
 
-	public void renew() {
-		roundType = Round.RoundTypes.NORMAL;
+	public void renew(Round.RoundTypes gameMode) {
+		this.gameMode = gameMode;
 		roundNumber = 0;
-		round = new Round(roundType, roundNumber);
+		round = new Round(gameMode, roundNumber);
 		this.map = new Map(new PlayerCharacter(0), round.getEnemies());
 	}
 
@@ -64,7 +64,7 @@ public class Ticker implements Serializable {
 	public void loadMap(Map map) {
 		this.map = map;
 	}
-
+	
 	public Map getMap() {
 		return map;
 	}
@@ -122,18 +122,18 @@ public class Ticker implements Serializable {
 		*/
 		roundNumber ++;
 		//probando
-		if(roundNumber == 2 && roundType == Round.RoundTypes.NORMAL
-				|| roundNumber == 8 && roundType == Round.RoundTypes.SURVIVAL)
+		if(roundNumber == 2 && gameMode == Round.RoundTypes.NORMAL
+				|| roundNumber == 8 && gameMode == Round.RoundTypes.SURVIVAL)
 			getPlayer().levelUp();
 		//
-		if (roundType == Round.RoundTypes.NORMAL) {
+		if (gameMode == Round.RoundTypes.NORMAL) {
 			if (roundNumber == 9)
-				roundType = Round.RoundTypes.BOSS;
+				gameMode = Round.RoundTypes.BOSS;
 		}
-		else if (roundType == Round.RoundTypes.BOSS) {
+		else if (gameMode == Round.RoundTypes.BOSS) {
 			// should display YOU WIN or something like that and return to main menu.
 		}
-		round = new Round(roundType, roundNumber);
+		round = new Round(gameMode, roundNumber);
 		// round = Round.round2();
 		updateMap();
 	}

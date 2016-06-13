@@ -37,7 +37,7 @@ public class StageMapSelectionManager extends StageManager{
 			break;
 		case KeyEvent.VK_ENTER:
 		case KeyEvent.VK_A:
-			manager.loadTicker(new Ticker(manager.getNotifier()));
+			//manager.loadTicker(new Ticker(manager.getNotifier()));
 			Ticker ticker = manager.getTicker();
 			if (menuMapSelection.getOption().equals(MapSelectionRenderer.GRASS))
 				ticker.setArena(Arena.GRASS);
