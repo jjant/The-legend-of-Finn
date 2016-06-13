@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import theLegendOfFinn.model.entity.character.EnemyCharacter;
+import theLegendOfFinn.model.entity.character.EnemyPenguin;
 import theLegendOfFinn.model.entity.character.EnemyDog;
 import theLegendOfFinn.model.entity.character.EnemyDonut;
-import theLegendOfFinn.model.entity.character.EnemyPenguin;
+import theLegendOfFinn.model.entity.character.EnemyKing;
+
 
 /**
  * Represents and stores the round in the game.
@@ -57,7 +59,7 @@ public class Round implements Serializable {
 	private void survivalRound(int roundNumber) {
 		int index = 0;
 		while (roundNumber >= 0) {
-			int flipEnemy = ThreadLocalRandom.current().nextInt(0, 3);
+			int flipEnemy = ThreadLocalRandom.current().nextInt(0, 4);
 			switch (flipEnemy) {
 			case 0:
 				this.enemies.add(new EnemyPenguin(new Position(positions[index % 4])));
@@ -67,6 +69,9 @@ public class Round implements Serializable {
 				break;
 			case 2:
 				this.enemies.add(new EnemyDonut(new Position(positions[index % 4])));
+				break;
+			case 3:
+				this.enemies.add(new EnemyKing(new Position(positions[index % 4])));
 				break;
 			}
 			index ++;
@@ -87,6 +92,11 @@ public class Round implements Serializable {
 	private int addTwoDonuts(int index) {
 		this.enemies.add(new EnemyDonut(new Position(positions[index % 4])));
 		this.enemies.add(new EnemyDonut(new Position(positions[(index + 1) % 4])));
+		return index + 2;
+	}
+	private int addTwoKings(int index) {
+		this.enemies.add(new EnemyKing(new Position(positions[index % 4])));
+		this.enemies.add(new EnemyKing(new Position(positions[(index + 1) % 4])));
 		return index + 2;
 	}
 	private void normalRound(int roundNumber) {
@@ -115,6 +125,18 @@ public class Round implements Serializable {
 		case 5:
 			index = addTwoDonuts(index);
 			index = addTwoDonuts(index);
+			break;
+		case 6:
+			index = addTwoKings(index);
+			index = addTwoDogs(index);
+			break;
+		case 7:
+			index = addTwoKings(index);
+			index = addTwoDonuts(index);
+			break;
+		case 8:
+			index = addTwoKings(index);
+			index = addTwoKings(index);
 			break;
 		default:
 			break;
