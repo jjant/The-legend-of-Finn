@@ -5,11 +5,11 @@ import theLegendOfFinn.model.Map;
 import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.entity.Entity.Direction;
 
-public class Projectile extends MovingEntity {
+public class BossProjectile extends MovingEntity {
 	private static final long serialVersionUID = 1L;
 
 	private static final int PROJECTILE_VELOCITY = 1;
-	public Projectile(Position position, Direction direction) {
+	public BossProjectile(Position position, Direction direction) {
 		super(position, direction, PROJECTILE_VELOCITY);
 
 	}

@@ -8,7 +8,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.LookAndFeel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import theLegendOfFinn.controller.RenderManager;
 import theLegendOfFinn.controller.communicators.Delegate;
@@ -24,10 +29,11 @@ import theLegendOfFinn.view.menu.StartingMenuRenderer;
 public class MasterRenderer extends Canvas implements KeyListener {
 	private static final long serialVersionUID = 1L;
 	
+	private static final String saveFileMissingMessage = "savefile.finn not found.";
 	public static final int WIDTH = 640;
 	public static final int HEIGHT = WIDTH * 3 / 4;
 	public static final String TITLE = "The legend of Finn";
-
+	
 	private Delegate delegate;
 
 	private JFrame frame;
@@ -45,7 +51,7 @@ public class MasterRenderer extends Canvas implements KeyListener {
 
 	public MasterRenderer(Delegate delegate) {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
-
+		
 		this.delegate = delegate;
 		
 		characterRenderer = new CharacterRenderer();
@@ -55,6 +61,7 @@ public class MasterRenderer extends Canvas implements KeyListener {
 		mapSelectionRenderer = new MapSelectionRenderer();
 		modeRenderer = new ModeRenderer();
 		
+
 		frame = new JFrame();
 		addKeyListener(this);
 		frame.setTitle(TITLE);
@@ -132,7 +139,10 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	public void setModeRenderer(ModeRenderer modeRenderer) {
 		this.modeRenderer = modeRenderer;
 	}
-
+	
+	public void displayFileMissing(){
+		JOptionPane.showMessageDialog(frame, saveFileMissingMessage);
+	}
 	/**
 	 * Returns the current MenuRenderer
 	 * 

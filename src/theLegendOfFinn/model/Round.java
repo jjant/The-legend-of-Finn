@@ -36,6 +36,44 @@ public class Round implements Serializable {
 	}
 	*/
 	
+	public Round(RoundTypes roundType, int roundNumber) {
+		this.enemies = new ArrayList<>();
+		switch (roundType) {
+		case NORMAL:
+			this.normalRound(roundNumber);
+			break;
+		case BOSS:
+			//this.enemies.add(new EnemyBoss(new Position(Map.TOP_LEFT_CORNER)));
+			break;
+		case SURVIVAL:
+			this.survivalRound(roundNumber);
+			break;
+		default:
+			// should start survival i guess.
+			break;
+		}
+	}
+	
+	private void survivalRound(int roundNumber) {
+		int index = 0;
+		while (roundNumber >= 0) {
+			int flipEnemy = ThreadLocalRandom.current().nextInt(0, 3);
+			switch (flipEnemy) {
+			case 0:
+				this.enemies.add(new EnemyPenguin(new Position(positions[index % 4])));
+				break;
+			case 1:
+				this.enemies.add(new EnemyDog(new Position(positions[index % 4])));
+				break;
+			case 2:
+				this.enemies.add(new EnemyDonut(new Position(positions[index % 4])));
+				break;
+			}
+			index ++;
+			roundNumber --;
+		}
+	}
+	
 	private int addTwoWarriors(int index) {
 		this.enemies.add(new EnemyPenguin(new Position(positions[index % 4])));
 		this.enemies.add(new EnemyPenguin(new Position(positions[(index + 1) % 4])));
@@ -83,44 +121,9 @@ public class Round implements Serializable {
 		}
 	}
 	
-	private void survivalRound(int roundNumber) {
-		int index = 0;
-		while (roundNumber >= 0) {
-			int flipEnemy = ThreadLocalRandom.current().nextInt(0, 3);
-			switch (flipEnemy) {
-			case 0:
-				this.enemies.add(new EnemyPenguin(new Position(positions[index % 4])));
-				break;
-			case 1:
-				this.enemies.add(new EnemyDog(new Position(positions[index % 4])));
-				break;
-			case 2:
-				this.enemies.add(new EnemyDonut(new Position(positions[index % 4])));
-				break;
-			}
-			index ++;
-			roundNumber --;
-		}
-	}
+
 	
-	public Round(RoundTypes roundType, int roundNumber) {
-		this.enemies = new ArrayList<>();
-		switch (roundType) {
-		case NORMAL:
-			this.normalRound(roundNumber);
-			break;
-		case BOSS:
-			//this.enemies.add(new EnemyBoss(new Position(Map.TOP_LEFT_CORNER)));
-			break;
-		case SURVIVAL:
-			this.survivalRound(roundNumber);
-			break;
-		default:
-			// should start survival i guess.
-			break;
-		}
-	}
-	
+
 	/**
 	 * Returns true if there are enemies left in the round.
 	 * 

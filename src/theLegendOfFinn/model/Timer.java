@@ -1,6 +1,10 @@
 package theLegendOfFinn.model;
 
-public class Timer {
+import java.io.Serializable;
+
+public class Timer implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	public static final long ATTACK_COOLDOWN = 500;			//in ms 
 	public static final long MOVE_COOLDOWN_BASE = 15; 		//in ms
 	

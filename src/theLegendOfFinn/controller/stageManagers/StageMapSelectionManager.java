@@ -33,7 +33,7 @@ public class StageMapSelectionManager extends StageManager{
 			menuMapSelection.previousOption();
 			break;
 		case KeyEvent.VK_ESCAPE:
-			stage = Stage.MENU;
+			stage = Stage.MODE;
 			break;
 		case KeyEvent.VK_ENTER:
 		case KeyEvent.VK_A:

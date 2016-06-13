@@ -6,7 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import theLegendOfFinn.model.Position;
-import theLegendOfFinn.model.entity.Projectile;
+import theLegendOfFinn.model.entity.BossProjectile;
 
 public class Boss extends EnemyCharacter {
 	private static final long serialVersionUID = 1L;
@@ -44,9 +44,9 @@ public class Boss extends EnemyCharacter {
 
 	//cambiar dsp
 	public void attack() {
-		Map<Direction, Projectile> projectiles = new HashMap<>();
+		Map<Direction, BossProjectile> projectiles = new HashMap<>();
 		for (Direction direction : Direction.values()){
-			projectiles.put(direction, new Projectile(getProjectilePosition(direction), direction));
+			projectiles.put(direction, new BossProjectile(getProjectilePosition(direction), direction));
 			projectiles.get(direction).move();
 			}
 	}

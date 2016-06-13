@@ -19,16 +19,19 @@ public class Manager {
 	private RenderManager renderManager;
 	private EventManager eventManager;
 	private ModelManager modelManager;
-
+	
 	private Notifier notifier;
 
 	private Ticker ticker;
-
+	
+	
 	public Manager() {
 		notifier = new Notifier(this);
+		FileManager.createFileManager(this);
 		masterRenderer = new MasterRenderer(new Delegate(this));
 		renderManager = new RenderManager(this);
 		eventManager = new EventManager(this);
+		
 		renderManager.initialize();
 	}
 
@@ -51,13 +54,13 @@ public class Manager {
 	 */
 	public void updateStage(Stage stage) {
 		renderManager.setStage(stage);
-		if (!(stage.equals(Stage.MENU) || stage.equals(Stage.MAPSELECTION)))
+		if (!(stage.equals(Stage.MENU) || stage.equals(Stage.MAPSELECTION)|| stage.equals(Stage.MODE)))
 			toggleMovement();
 	}
 
 	public void toggleMovement() {
 		Stage stage = getStage(); 
-		if (stage.equals(Stage.MAP) || stage.equals(Stage.MAPSELECTION))
+		if (stage.equals(Stage.MAP))
 			ticker.changeModifier(true);
 		else
 			ticker.changeModifier(false);
@@ -96,8 +99,13 @@ public class Manager {
 		return notifier;
 	}
 
+	public void loadFileMissing(){
+		masterRenderer.displayFileMissing();
+	}
+	
 	public static void main(String[] args) {
 		new Manager();
 	}
+	
 
 }

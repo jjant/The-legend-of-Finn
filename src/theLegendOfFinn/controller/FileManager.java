@@ -10,13 +10,23 @@ import java.io.ObjectOutputStream;
 import theLegendOfFinn.model.Ticker;
 
 public class FileManager {
-	private FileManager(){};
-	private static FileManager instance;
+
+	private Manager manager;
 	
-	public static FileManager getFileManager(){
-		return (instance != null) ? instance : (instance = new FileManager());
+	private FileManager() {
+	};
+
+	private static FileManager instance;
+
+	
+	public static void createFileManager(Manager manager){
+		getFileManager().manager = manager;
 	}
 	
+	public static FileManager getFileManager() {
+		return (instance != null) ? instance : (instance = new FileManager());
+	}
+
 	public void saveGame(Ticker ticker) {
 		try {
 			ObjectOutputStream fileStream = new ObjectOutputStream(new FileOutputStream("savegame.finn"));
@@ -27,19 +37,19 @@ public class FileManager {
 			e.printStackTrace();
 		}
 	}
-	
+
 	// Me genero banda de catchs automaticamente para salvar errores.
 	public Ticker loadGame() throws ClassNotFoundException {
 		try {
 			ObjectInputStream fileStream = new ObjectInputStream(new FileInputStream("savegame.finn"));
-			Ticker ticker = (Ticker)fileStream.readObject();
+			Ticker ticker = (Ticker) fileStream.readObject();
 			fileStream.close();
 			return ticker;
+		} catch (ClassNotFoundException e) {
+			// Never happens;
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			manager.loadFileMissing();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

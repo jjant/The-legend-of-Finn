@@ -34,8 +34,10 @@ public class StageMenuManager extends StageManager {
 					manager.loadTicker(fileManager.loadGame());
 					manager.initialize();
 					stage = Stage.MAP;
-				} catch (ClassNotFoundException | TickerMissingException e) {
+				} catch (ClassNotFoundException e) {
 					// Tirar algo porq no encontro el archivo.
+				} catch (TickerMissingException e) {
+					
 				}
 			else if (menu.getOption().equals(StartingMenuRenderer.NEW))
 				stage = Stage.MODE;

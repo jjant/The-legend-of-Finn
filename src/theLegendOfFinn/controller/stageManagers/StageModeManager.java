@@ -23,6 +23,9 @@ public class StageModeManager extends StageManager{
 		case KeyEvent.VK_RIGHT:
 			menuMode.previousOption();
 			break;
+		case KeyEvent.VK_ESCAPE:
+			stage = Stage.MENU;
+			break;
 		case KeyEvent.VK_ENTER:
 		case KeyEvent.VK_A:
 			if (menuMode.getOption().equals(ModeRenderer.CAMPAIGN))
