@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import theLegendOfFinn.model.entity.character.Character;
 import theLegendOfFinn.model.entity.character.EnemyDog;
 import theLegendOfFinn.model.entity.character.EnemyDonut;
+import theLegendOfFinn.model.entity.character.EnemyKing;
 import theLegendOfFinn.model.entity.character.EnemyPenguin;
 import theLegendOfFinn.model.entity.character.PlayerCharacter;
 import theLegendOfFinn.model.entity.Entity.Direction;
@@ -26,6 +27,7 @@ public class SpriteLoader {
 		Map<Integer, Map<Direction, Image>> dogMap = loadDogSprites();
 		Map<Integer, Map<Direction, Image>> penguinMap = loadPenguinSprites();
 		Map<Integer, Map<Direction, Image>> donutMap = loadDonutSprites();
+		Map<Integer, Map<Direction, Image>> kingMap = loadKingSprites();
 		
 
 		classMap = new HashMap<>();
@@ -33,6 +35,7 @@ public class SpriteLoader {
 		classMap.put(EnemyDog.class, dogMap);
 		classMap.put(EnemyPenguin.class, penguinMap);
 		classMap.put(EnemyDonut.class, donutMap);
+		classMap.put(EnemyKing.class, kingMap);
 	}
 
 	public Map<Direction, Image> getSprites(Character character) {
@@ -67,6 +70,10 @@ public class SpriteLoader {
 	
 	private Map<Integer, Map<Direction, Image>> loadDonutSprites() {
 		return loadSprites(enemySpritesPath, "Donut");
+	}
+	
+	private Map<Integer, Map<Direction, Image>> loadKingSprites() {
+		return loadSprites(enemySpritesPath, "King");
 	}
 	
 	//revisar. medio villero q este aca, pero bue.
