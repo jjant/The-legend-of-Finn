@@ -4,9 +4,14 @@ import java.io.Serializable;
 
 import theLegendOfFinn.model.entity.Entity.Direction;
 
+/**
+ * Stores the coordinates of a point of the map.
+ */
 public class Position implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	// Coordinates with the (0,0) at the top left corner.
+	// Positives in down/right directions.
 	private int x;
 	private int y;
 
@@ -15,38 +20,45 @@ public class Position implements Serializable {
 		this.y = y;
 	}
 
-	public Position(Position other) {
-		this.x = other.getX();
-		this.y = other.getY();
+	public Position(Position otherPosition) {
+		this.x = otherPosition.getX();
+		this.y = otherPosition.getY();
 	}
-
+	
+	/**
+	 * Sets a position compatible with the grid using a direction as guide. 
+	 * 
+	 * @param direction
+	 * 				used to set the new coordinates.
+	 * @return the changed position if it's a valid position, null otherwise.
+	 */
 	public Position toGridIndexes(Direction direction) {
-		Position pos = null;
+		Position newPos = null;
 		if (direction == null)
 			return null;
 
 		switch (direction) {
 		case LEFT:
-			pos = new Position(this.getX() / Map.CELL_SIZE - 1, this.getY() / Map.CELL_SIZE);
+			newPos = new Position(this.getX() / Map.CELL_SIZE - 1, this.getY() / Map.CELL_SIZE);
 			break;
 		case UP:
-			pos = new Position(this.getX() / Map.CELL_SIZE, this.getY() / Map.CELL_SIZE - 1);
+			newPos = new Position(this.getX() / Map.CELL_SIZE, this.getY() / Map.CELL_SIZE - 1);
 			break;
 		case RIGHT:
-			pos = new Position(this.getX() / Map.CELL_SIZE + 1, this.getY() / Map.CELL_SIZE);
+			newPos = new Position(this.getX() / Map.CELL_SIZE + 1, this.getY() / Map.CELL_SIZE);
 			break;
 		case DOWN:
-			pos = new Position(this.getX() / Map.CELL_SIZE, this.getY() / Map.CELL_SIZE + 1);
+			newPos = new Position(this.getX() / Map.CELL_SIZE, this.getY() / Map.CELL_SIZE + 1);
 			break;
 		default:
 			break;
 		}
 
-		if (pos.getX() < 0 || pos.getX() >= Map.WIDTH || pos.getY() < 0 || pos.getY() >= Map.HEIGHT) {
+		if (newPos.getX() < 0 || newPos.getX() >= Map.WIDTH || newPos.getY() < 0 || newPos.getY() >= Map.HEIGHT) {
 			return null;
 		}
 
-		return pos;
+		return newPos;
 	}
 
 	public int getX() {
@@ -70,41 +82,65 @@ public class Position implements Serializable {
 		this.y = y;
 	}
 
+	/**
+	 * Increments the x coordinate by a number.
+	 * 
+	 * @param increment
+	 */
 	public void incX(int increment) {
 		x += increment;
 	}
 
+	/**
+	 * Increments the y coordinate by a number.
+	 * @param increment
+	 */
 	public void incY(int increment) {
 		y += increment;
 	}
 
+	/**
+	 * Increments both coordinates at the same time, not necessarily by the same number.
+	 * 
+	 * @param incrementX
+	 * @param incrementY
+	 */
 	public void incPos(int incrementX, int incrementY) {
 		x += incrementX;
 		y += incrementY;
 	}
 
 	/**
-	 * Returns the difference between the x coordinates of two positions,
-	 * in absolute value.
-	 * @return The distance between this position's x and other's.
+	 * Gets the distance between the current's and an other's 'x' coordinate.
+	 * 
+	 * @param other
+	 * 			the position to compare.
+	 * @return The distance between this position's 'x' and other's.
 	 */
 	public int distanceX(Position other) {
-		int distanceX = (other.getX() - this.getX());
-		if (distanceX < 0)
-			distanceX *= -1;
-		return distanceX;
+		return Math.abs(this.getX() - other.getX());
 	}
 
-	// se podrian hacer en 1 solo metodo.
+	/**
+	 * Gets the distance between the current's and another's 'y' coordinate.
+	 * 
+	 * @param other
+	 * 			the position to compare.
+	 * @return The distance between this position's 'y' and other's.
+	 */
 	public int distanceY(Position other) {
-		int distanceY = (other.getY() - this.getY());
-		if (distanceY < 0)
-			distanceY *= -1;
-		return distanceY;
+		return Math.abs(this.getY() - other.getY());
 	}
 	
 	
 
+	/**
+	 * Checks if another position is one grid's position far from the current.
+	 * 
+	 * @param position
+	 * 				the position to be checked.
+	 * @return true if the condition is true, false otherwise.
+	 */
 	public boolean isNearby(Position position) {
 		if (Math.abs(getX() - position.getX()) + Math.abs(getY() - position.getY()) <= Map.CELL_SIZE)
 			return true;

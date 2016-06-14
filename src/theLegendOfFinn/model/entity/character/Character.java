@@ -16,10 +16,6 @@ public abstract class Character extends ActingEntity implements Serializable {
 	private int maxHP;
 	private int currentHP;
 
-	/*
-	 * private long lastAttackTime; private final long ATTACK_COOLDOWN = 500; //
-	 * in ms
-	 */
 
 	public Character(Position position, Direction direction, int maxHP, int attack, int velocity) {
 		super(position, direction, velocity, attack);

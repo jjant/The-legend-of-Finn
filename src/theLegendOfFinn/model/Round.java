@@ -22,22 +22,16 @@ import theLegendOfFinn.model.entity.character.EnemyKing;
 public class Round implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	public static final int BOSS_ROUND_NUMBER = 9;
+	
+	// Different types of rounds, or game modes.
 	public static enum RoundType {
 		NORMAL, BOSS, SURVIVAL;
 	}
 	
 	private List<EnemyCharacter> enemies;
+	// Array with the four corners of the map.
 	private final Position[] positions = {Map.TOP_LEFT_CORNER, Map.TOP_RIGHT_CORNER, Map.BOTTOM_LEFT_CORNER, Map.BOTTOM_RIGHT_CORNER};
-	//private static final int NORMAL_ROUND_ENEMIES = 4;
-	
-	/*
-	public Round(List<EnemyCharacter> enemies) {
-		this.enemies = new ArrayList<>();
-		for (EnemyCharacter enemy : enemies) {
-			this.enemies.add(enemy);
-		}
-	}
-	*/
 	
 	public Round(RoundType roundType, int roundNumber) {
 		this.enemies = new ArrayList<>();
@@ -46,7 +40,7 @@ public class Round implements Serializable {
 			normalRound(roundNumber);
 			break;
 		case BOSS:
-			normalRound(9);
+			normalRound(BOSS_ROUND_NUMBER);
 			break;
 		case SURVIVAL:
 			survivalRound(roundNumber);
@@ -54,6 +48,12 @@ public class Round implements Serializable {
 		}
 	}
 	
+	/**
+	 * Sets the enemies of each round randomly in the corners of the map.
+	 * 
+	 * @param roundNumber
+	 * 					determines the number of enemies to be added.
+	 */
 	private void survivalRound(int roundNumber) {
 		int index = 0;
 		while (roundNumber >= 0) {
@@ -102,6 +102,13 @@ public class Round implements Serializable {
 		enemies.add(new Boss());
 	}
 	
+	/**
+	 * Loads four enemies in each normal round increasing the difficulty
+	 * until the boss round is reached.
+	 * 
+	 * @param roundNumber
+	 * 					determines the difficulty of the round.
+	 */
 	private void normalRound(int roundNumber) {
 		int index = 0;
 		switch (roundNumber) {
@@ -147,9 +154,6 @@ public class Round implements Serializable {
 		}
 	}
 	
-
-	
-
 	/**
 	 * Returns true if there are enemies left in the round.
 	 * 
@@ -165,6 +169,7 @@ public class Round implements Serializable {
 	 * 
 	 * @return Array of enemies
 	 */
+	/*
 	public List<EnemyCharacter> getEnemiesBatch() {
 		if (enemies.size() == 0)
 			return null;
@@ -179,39 +184,15 @@ public class Round implements Serializable {
 
 		return enemiesBatch;
 	}
-
-	// re villero, pero bueno, para probar
-	public List<EnemyCharacter> getEnemies(){
+	*/
+	
+	/**
+	 * Gets the list of enemies of the current Round.
+	 * 
+	 * @return list of enemies.
+	 */
+	public List<EnemyCharacter> getRoundEnemies(){
 		return enemies;
 	}
 	
-	/*
-	public static Round round1(){
-		List<EnemyCharacter> enemies = new ArrayList<>();
-		enemies.add(new EnemyDog(new Position(0, 0)));
-		enemies.add(new EnemyWarrior(new Position(32+320, 0)));
-		Round round1 = new Round(enemies);
-		return round1;
-	}
-	*/
-	
-	/*
-	public static Round round2(){
-		List<EnemyCharacter> enemies = new ArrayList<>();
-		for(int i = 0; i < 6; i++)
-			enemies.add(new EnemyWarrior(new Position(32* i, 32 * i)));
-		Round round2 = new Round(enemies);
-	
-		return round2;
-	}
-	*/
-	
-	/*
-	//for debugging
-	public static Round emptyRound(){
-		List<EnemyCharacter> enemies = new ArrayList<>();
-		Round emptyRound = new Round(enemies);
-		return emptyRound;
-	}
-	*/
 }

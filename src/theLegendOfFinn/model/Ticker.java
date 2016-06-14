@@ -38,7 +38,7 @@ public class Ticker implements Serializable {
 		this.roundType = gameMode;
 		roundNumber = 0;
 		round = new Round(gameMode, roundNumber);
-		this.map = new Map(new PlayerCharacter(0), round.getEnemies());
+		this.map = new Map(new PlayerCharacter(0), round.getRoundEnemies());
 	}
 
 	public void tick() {

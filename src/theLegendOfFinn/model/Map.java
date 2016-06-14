@@ -9,14 +9,20 @@ import theLegendOfFinn.model.entity.character.EnemyCharacter;
 import theLegendOfFinn.model.entity.character.PlayerCharacter;
 import theLegendOfFinn.model.exceptions.PositionOccupiedException;
 
+/**
+ * Contains the characters of the game and the grid of entities.
+ */
 public class Map implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	// width and height of a single position of the grid.
 	public static final int CELL_SIZE = 32;
 
+	// width and height of the map measured in grid positions.
 	public static final int WIDTH = 640 / CELL_SIZE;
 	public static final int HEIGHT = ((WIDTH * 3) / 4);
 	
+	// useful positions in the map.
 	public static final Position TOP_LEFT_CORNER = new Position(0, 0);
 	public static final Position BOTTOM_LEFT_CORNER = new Position(0, (HEIGHT - 1) * CELL_SIZE);
 	public static final Position TOP_RIGHT_CORNER = new Position((WIDTH - 1) * CELL_SIZE, 0);
@@ -27,18 +33,6 @@ public class Map implements Serializable {
 	
 	private Grid grid;
 
-	/*
-	public Map(){
-		player = new PlayerCharacter(1);
-		grid = new CharacterGrid();
-		try {
-			grid.add(player);
-			//add(player);
-		} catch (PositionOccupiedException e) {
-			e.printStackTrace();
-		}
-	}
-	*/
 	public Map(PlayerCharacter player) {
 		this(player, new ArrayList<EnemyCharacter>());
 	}
@@ -53,24 +47,6 @@ public class Map implements Serializable {
 		}
 		this.enemyList = enemyList;
 	}
-	
-	// Lo hice villerisimo...
-	/*
-	public void add(Character character) throws PositionOccupiedException {
-		if (grid[character.getPosition().getX()/CELL_SIZE][character.getPosition().getY()/CELL_SIZE] != null) {
-			throw new PositionOccupiedException(
-					"La posicion [" + character.getPosition().getX() + "]" + "[" + character.getPosition().getY() + "]" + " esta ocupada, imposible a�adir " + character + ".");
-		}
-		grid[character.getPosition().getX()/CELL_SIZE][character.getPosition().getY()/CELL_SIZE] = character;
-	}
-	*/
-	
-	// cambiar luego;
-	/*
-	public void remove(Position pos) {
-		grid[pos.getX()/CELL_SIZE][pos.getY()/CELL_SIZE] = null;
-	}
-	*/
 
 	public PlayerCharacter getPlayer() {
 		return player;
@@ -80,19 +56,29 @@ public class Map implements Serializable {
 		return enemyList;
 	}
 	
-	
 	public Boss getBoss(){
 		if(enemyList.get(0) instanceof Boss)
 			return (Boss)enemyList.get(0);
 		return null;
 	}
-	
+
+	/**
+	 * Gets the matrix of entities called grid.
+	 * 
+	 * @return the grid.
+	 */
 	public Grid getGrid() {
 		return grid;
 	}
 	
+	/**
+	 * Loads the enemies of a round to the enemyList of the map.
+	 * 
+	 * @param round
+	 * 				a round with an array of enemies.
+	 */
 	public void setRound(Round round){
-		enemyList = round.getEnemies();
+		enemyList = round.getRoundEnemies();
 	}
 	
 
