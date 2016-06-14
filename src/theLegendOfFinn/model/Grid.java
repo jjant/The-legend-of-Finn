@@ -7,6 +7,10 @@ import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.entity.Entity;
 import theLegendOfFinn.model.exceptions.PositionOccupiedException;
 
+/**
+ * Provides a matrix of Entities to take record of the position
+ * that every one of them occupies in the map.
+ */
 public class Grid implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -18,6 +22,12 @@ public class Grid implements Serializable {
 		enemiesAlive = 0;
 	}
 
+	/**
+	 * Adds a new Entity to the grid
+	 * 
+	 * @param entity
+	 * @throws PositionOccupiedException if the intended position is occupied
+	 */
 	public void add(Entity entity) throws PositionOccupiedException {
 		if (matrix[entity.getPosition().getX() / Map.CELL_SIZE][entity.getPosition().getY() / Map.CELL_SIZE] != null) {
 			throw new PositionOccupiedException("La posicion [" + entity.getPosition().getX() + "]" + "["
@@ -27,28 +37,64 @@ public class Grid implements Serializable {
 		enemiesAlive += 1;
 	}
 
-	public boolean isFreePosition(Position pos) {
-		if (matrix[pos.getX() / Map.CELL_SIZE][pos.getY() / Map.CELL_SIZE] != null)
+	/**
+	 * Checks if a particular position is free in the grid.
+	 * 
+	 * @param position
+	 * 			the position intended to be checked.
+	 * @return true if the position is free, false otherwise.
+	 */
+	public boolean isFreePosition(Position position) {
+		if (matrix[position.getX() / Map.CELL_SIZE][position.getY() / Map.CELL_SIZE] != null)
 			return false;
 		return true;
 	}
 
-	public void freePosition(Position pos) {
-		matrix[pos.getX() / Map.CELL_SIZE][pos.getY() / Map.CELL_SIZE] = null;
+	/**
+	 * Liberates a position in the grid setting it to null.
+	 * 
+	 * @param position
+	 * 				the position intended to free.
+	 */
+	public void freePosition(Position position) {
+		matrix[position.getX() / Map.CELL_SIZE][position.getY() / Map.CELL_SIZE] = null;
 	}
 
-	public void occupyPosition(Entity entity, Position pos) {
-		matrix[pos.getX() / Map.CELL_SIZE][pos.getY() / Map.CELL_SIZE] = entity;
+	/**
+	 * Occupies a position of the grid with an Entity.
+	 * 
+	 * @param entity
+	 * 				the Entity that will occupy the position.
+	 * @param pos
+	 * 			the position to be occupied.
+	 */
+	public void occupyPosition(Entity entity, Position position) {
+		matrix[position.getX() / Map.CELL_SIZE][position.getY() / Map.CELL_SIZE] = entity;
 	}
 
+	/**
+	 * Gets the enemies alive.
+	 * 
+	 * @return the number of enemies alive in the grid.
+	 */
 	public int getEnemiesAlive() {
 		return enemiesAlive;
 	}
 
+	/**
+	 * Gets the matrix of entities.
+	 * 
+	 * @return the matrix.
+	 */
 	public Entity[][] getCharMatrix() {
 		return matrix;
 	}
 
+	/**
+	 * Checks if there are enemies left in the grid.
+	 * 
+	 * @return true if there are, false otherwise.
+	 */
 	public boolean areEnemiesLeft() {
 		if (enemiesAlive > 0)
 			return true;
@@ -63,10 +109,16 @@ public class Grid implements Serializable {
 		return Map.WIDTH;
 	}
 	
+	/**
+	 * Gets an Entity in a particular position of the grid.
+	 * 
+	 * @param position
+	 * @return the Entity in the position.
+	 */
 	public Entity getEntity(Position position){
 		int x = position.getX()/Map.CELL_SIZE;
 		int y = position.getY()/Map.CELL_SIZE;
-		return matrix[x][y];
+			return matrix[x][y];	
 	}
-
+	
 }
