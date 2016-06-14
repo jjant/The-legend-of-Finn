@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import theLegendOfFinn.model.entity.character.Boss;
 import theLegendOfFinn.model.entity.character.EnemyCharacter;
 import theLegendOfFinn.model.entity.character.EnemyPenguin;
 import theLegendOfFinn.model.entity.character.EnemyDog;
@@ -21,7 +22,7 @@ import theLegendOfFinn.model.entity.character.EnemyKing;
 public class Round implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	public static enum RoundTypes {
+	public static enum RoundType {
 		NORMAL, BOSS, SURVIVAL;
 	}
 	
@@ -38,20 +39,17 @@ public class Round implements Serializable {
 	}
 	*/
 	
-	public Round(RoundTypes roundType, int roundNumber) {
+	public Round(RoundType roundType, int roundNumber) {
 		this.enemies = new ArrayList<>();
 		switch (roundType) {
 		case NORMAL:
-			this.normalRound(roundNumber);
+			normalRound(roundNumber);
 			break;
 		case BOSS:
-			//this.enemies.add(new EnemyBoss(new Position(Map.TOP_LEFT_CORNER)));
+			normalRound(9);
 			break;
 		case SURVIVAL:
-			this.survivalRound(roundNumber);
-			break;
-		default:
-			// should start survival i guess.
+			survivalRound(roundNumber);
 			break;
 		}
 	}
@@ -99,6 +97,11 @@ public class Round implements Serializable {
 		this.enemies.add(new EnemyKing(new Position(positions[(index + 1) % 4])));
 		return index + 2;
 	}
+	
+	private void addBoss(){
+		enemies.add(new Boss());
+	}
+	
 	private void normalRound(int roundNumber) {
 		int index = 0;
 		switch (roundNumber) {
@@ -138,7 +141,8 @@ public class Round implements Serializable {
 			index = addTwoKings(index);
 			index = addTwoKings(index);
 			break;
-		default:
+		case 9:
+			addBoss();
 			break;
 		}
 	}

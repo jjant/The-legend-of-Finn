@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import theLegendOfFinn.model.entity.character.Boss;
 import theLegendOfFinn.model.entity.character.EnemyCharacter;
 import theLegendOfFinn.model.entity.character.PlayerCharacter;
 import theLegendOfFinn.model.exceptions.PositionOccupiedException;
@@ -79,6 +80,13 @@ public class Map implements Serializable {
 		return enemyList;
 	}
 	
+	
+	public Boss getBoss(){
+		if(enemyList.get(0) instanceof Boss)
+			return (Boss)enemyList.get(0);
+		return null;
+	}
+	
 	public Grid getGrid() {
 		return grid;
 	}
@@ -86,5 +94,7 @@ public class Map implements Serializable {
 	public void setRound(Round round){
 		enemyList = round.getEnemies();
 	}
+	
+
 	
 }

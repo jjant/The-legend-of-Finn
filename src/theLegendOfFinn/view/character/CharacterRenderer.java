@@ -1,7 +1,9 @@
 package theLegendOfFinn.view.character;
 
 import java.awt.Graphics;
+import java.util.List;
 
+import theLegendOfFinn.model.entity.BossProjectile;
 import theLegendOfFinn.model.entity.character.Character;
 import theLegendOfFinn.view.Renderer;
 
@@ -21,6 +23,10 @@ public class CharacterRenderer implements Renderer {
 
 	public void draw(Character character) {
 		imageData.add(character);
+	}
+
+	public void draw(List<BossProjectile> projectiles) {
+		imageData.add(projectiles);
 	}
 
 	public void dispose() {

@@ -31,9 +31,9 @@ public class StageModeManager extends StageManager{
 		case KeyEvent.VK_ENTER:
 		case KeyEvent.VK_A:
 			if (menuMode.getOption().equals(ModeRenderer.CAMPAIGN))
-				manager.loadTicker(new Ticker(manager.getNotifier(), Round.RoundTypes.NORMAL));
+				manager.loadTicker(new Ticker(manager.getNotifier(), Round.RoundType.NORMAL));
 			else if (menuMode.getOption().equals(ModeRenderer.SURVIVAL))
-				manager.loadTicker(new Ticker(manager.getNotifier(), Round.RoundTypes.SURVIVAL));
+				manager.loadTicker(new Ticker(manager.getNotifier(), Round.RoundType.SURVIVAL));
 			stage = Stage.MAPSELECTION;
 			break;
 		default:

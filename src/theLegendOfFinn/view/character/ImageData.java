@@ -1,14 +1,16 @@
 package theLegendOfFinn.view.character;
 
-import java.awt.*;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import theLegendOfFinn.model.Position;
+import theLegendOfFinn.model.entity.BossProjectile;
+import theLegendOfFinn.model.entity.Entity.Direction;
+import theLegendOfFinn.model.entity.character.Boss;
 import theLegendOfFinn.model.entity.character.Character;
 import theLegendOfFinn.model.entity.character.PlayerCharacter;
-import theLegendOfFinn.model.entity.Entity.Direction;
 
 /**
  * Class holding the information of a sprite to be rendered.
@@ -62,15 +64,31 @@ public class ImageData {
 		Map<Direction, Image> sprites = spriteLoader.getSprites(character);
 		images.add(sprites.get(character.getDirection()));
 		positions.add(character.getPosition());
-		
-		//CAMBIAR DSP
-		if(character.getClass() == PlayerCharacter.class &&character.getState() == Character.ATTACKING){
-			heights.add(55);
-			widths.add(64);
+
+		// CAMBIAR DSP
+		if (character.getClass() == PlayerCharacter.class && character.getState() == Character.ATTACKING) {
+			heights.add(48);
+			widths.add(48);
 		}
-		else{
-		heights.add(32);
-		widths.add(32);}
+
+		else if (character.getClass().equals(Boss.class)) {
+			heights.add(64);
+			widths.add(64);
+		} else {
+			heights.add(32);
+			widths.add(32);
+		}
+	}
+
+	public void add(List<BossProjectile> projectiles) {
+		Image sprite = spriteLoader.getSprites(projectiles);
+		for (BossProjectile projectile : projectiles) {
+			images.add(sprite);
+			positions.add(projectile.getPosition());
+			heights.add(32);
+			widths.add(32);
+		}
+
 	}
 
 	public void dispose() {

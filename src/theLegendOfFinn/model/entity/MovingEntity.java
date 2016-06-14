@@ -7,18 +7,18 @@ import theLegendOfFinn.model.Timer;
 
 public class MovingEntity extends Entity {
 	private static final long serialVersionUID = 1L;
-	
+
 	public static final int IDLE = 0;
 	public static final int MOVING = 1;
-	
+
 	protected int state = IDLE;
-	
+
 	// Movement fields
 	/*
-	public final long MOVE_COOLDOWN = 15; // in ms
-	protected long lastMoveTime;
-	*/
-	
+	 * public final long MOVE_COOLDOWN = 15; // in ms protected long
+	 * lastMoveTime;
+	 */
+
 	private Timer timer;
 	protected int moveRemaining;
 	private int velocity;
@@ -26,11 +26,10 @@ public class MovingEntity extends Entity {
 	public MovingEntity(Position position, Direction direction, int velocity) {
 		super(position, direction);
 		this.velocity = velocity;
-		//lastMoveTime = 0;
+		// lastMoveTime = 0;
 		this.timer = new Timer(velocity);
 	}
-	
-	
+
 	/**
 	 * Tries to move the character to the specified direction. If movement is
 	 * impossible, it does nothing.
@@ -69,11 +68,10 @@ public class MovingEntity extends Entity {
 		state = MOVING;
 		moveRemaining = Map.CELL_SIZE;
 		timer.updateLastMoveTime(System.currentTimeMillis());
-		//lastMoveTime = System.currentTimeMillis();
+		// lastMoveTime = System.currentTimeMillis();
 		grid.occupyPosition(this, destination);
 		grid.freePosition(this.getPosition());
 	}
-	
 
 	/**
 	 * Moves the character step by step.
@@ -84,17 +82,17 @@ public class MovingEntity extends Entity {
 			updateStatus();
 			return;
 		}
-		
+
 		long nowTime = System.currentTimeMillis();
-		if (this.getTimer().moveTimePassed(nowTime)) {
-			this.getTimer().updateLastMoveTime(nowTime);
-		
-		/*	
-		long nowMoveTime = System.currentTimeMillis();
-		if (nowMoveTime - lastMoveTime >= MOVE_COOLDOWN / getVelocity()) {
-			lastMoveTime = nowMoveTime;
-		*/
-		
+		if (getTimer().moveTimePassed(nowTime)) {
+			getTimer().updateLastMoveTime(nowTime);
+
+			/*
+			 * long nowMoveTime = System.currentTimeMillis(); if (nowMoveTime -
+			 * lastMoveTime >= MOVE_COOLDOWN / getVelocity()) { lastMoveTime =
+			 * nowMoveTime;
+			 */
+
 			moveRemaining--;
 
 			switch (direction) {
@@ -128,11 +126,12 @@ public class MovingEntity extends Entity {
 		if (state == MOVING && moveRemaining <= 0)
 			state = IDLE;
 	}
-	
+
 	/**
 	 * Sets the character velocity.
 	 * 
-	 * @param velocity the velocity to be set.
+	 * @param velocity
+	 *            the velocity to be set.
 	 */
 	protected void setVelocity(int velocity) {
 		this.velocity = velocity;
@@ -146,7 +145,7 @@ public class MovingEntity extends Entity {
 	public int getVelocity() {
 		return velocity;
 	}
-	
+
 	/**
 	 * Gets character current state
 	 * 
@@ -155,7 +154,7 @@ public class MovingEntity extends Entity {
 	public int getState() {
 		return state;
 	}
-	
+
 	/**
 	 * Gets Entity timer
 	 * 
@@ -164,5 +163,5 @@ public class MovingEntity extends Entity {
 	public Timer getTimer() {
 		return timer;
 	}
-	
+
 }
