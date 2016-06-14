@@ -65,6 +65,9 @@ public class Ticker implements Serializable {
 			BossProjectile projectile = iter.next();
 			projectile.tryToMove(projectile.getDirection(), map.getGrid());
 			projectile.move();
+			if(projectile.attack(getPlayer()))
+				iter.remove();
+				
 			if(!projectile.getPosition().withinBoundaries()){
 				iter.remove();
 			}

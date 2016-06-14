@@ -4,12 +4,19 @@ import theLegendOfFinn.model.Grid;
 import theLegendOfFinn.model.Map;
 import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.Timer;
+import theLegendOfFinn.model.entity.character.Character;
 
-public class MovingEntity extends Entity {
+public class ActingEntity extends Entity {
 	private static final long serialVersionUID = 1L;
 
-	public static final int IDLE = 0;
 	public static final int MOVING = 1;
+
+	// Attacking state.
+	public static final int ATTACKING = 2;
+
+	// Attack fields
+	private final int RANGE = 1;
+	private int attack;
 
 	protected int state = IDLE;
 
@@ -23,11 +30,12 @@ public class MovingEntity extends Entity {
 	protected int moveRemaining;
 	private int velocity;
 
-	public MovingEntity(Position position, Direction direction, int velocity) {
+	public ActingEntity(Position position, Direction direction, int velocity, int attack) {
 		super(position, direction);
 		this.velocity = velocity;
 		// lastMoveTime = 0;
 		this.timer = new Timer(velocity);
+		this.attack = attack;
 	}
 
 	/**
@@ -73,6 +81,8 @@ public class MovingEntity extends Entity {
 		grid.freePosition(this.getPosition());
 	}
 
+	
+	//deberia ser privado y no relizar validaciones...
 	/**
 	 * Moves the character step by step.
 	 */
@@ -162,6 +172,64 @@ public class MovingEntity extends Entity {
 	 */
 	public Timer getTimer() {
 		return timer;
+	}
+
+	/**
+	 * Sets the character's attack.
+	 * 
+	 * @param attack
+	 *            the new attack value to be set.
+	 */
+	protected void setAttack(int attack) {
+		this.attack = attack;
+	}
+
+	/**
+	 * Gets character attack points (How much damage it does).
+	 * 
+	 * @return attack points
+	 */
+	public int getAttack() {
+		return attack;
+	}
+
+	/**
+	 * Attacks a character. If there's no character to be attacked,
+	 * <code>null</code> is received.
+	 * 
+	 * @param character
+	 *            Character to be attacked (or null).
+	 * @return true if could attack it, false otherwise
+	 */
+	public boolean attack(Entity entity) {
+		// long now = System.currentTimeMillis();
+		long nowTime = System.currentTimeMillis();
+		if (this.getTimer().attackTimePassed(nowTime) && state != IDLE)
+			return false;
+
+		/*
+		 * if (now - lastAttackTime <= ATTACK_COOLDOWN && state != IDLE) return
+		 * false;
+		 */
+
+		state = ATTACKING;
+
+		this.getTimer().updateLastAttackTime(nowTime);
+		// lastAttackTime = System.currentTimeMillis();
+
+		// If what's in the position to be attacked is not a character,
+		// do nothing.
+		if (!(entity instanceof Character))
+			return false;
+
+		Character character = (Character) entity;
+
+		// We check this after setting the state, to allow the character to
+		// "attack" empty spaces;
+		if (character == null || character == this || !closeEnough(character, RANGE))
+			return false;
+		character.receiveAttack(this);
+		return true;
 	}
 
 }

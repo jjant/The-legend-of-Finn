@@ -6,8 +6,6 @@ import theLegendOfFinn.controller.FileManager;
 import theLegendOfFinn.controller.Manager;
 import theLegendOfFinn.controller.RenderManager.Stage;
 import theLegendOfFinn.controller.exceptions.TickerMissingException;
-import theLegendOfFinn.model.Round;
-import theLegendOfFinn.model.Round.RoundType;
 import theLegendOfFinn.view.menu.MenuRenderer;
 import theLegendOfFinn.view.menu.StartingMenuRenderer;
 

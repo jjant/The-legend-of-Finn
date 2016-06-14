@@ -83,6 +83,11 @@ public class Position implements Serializable {
 		y += incrementY;
 	}
 
+	/**
+	 * Returns the difference between the x coordinates of two positions,
+	 * in absolute value.
+	 * @return The distance between this position's x and other's.
+	 */
 	public int distanceX(Position other) {
 		int distanceX = (other.getX() - this.getX());
 		if (distanceX < 0)
@@ -90,12 +95,15 @@ public class Position implements Serializable {
 		return distanceX;
 	}
 
+	// se podrian hacer en 1 solo metodo.
 	public int distanceY(Position other) {
 		int distanceY = (other.getY() - this.getY());
 		if (distanceY < 0)
 			distanceY *= -1;
 		return distanceY;
 	}
+	
+	
 
 	public boolean isNearby(Position position) {
 		if (Math.abs(getX() - position.getX()) + Math.abs(getY() - position.getY()) <= Map.CELL_SIZE)

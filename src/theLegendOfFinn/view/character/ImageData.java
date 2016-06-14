@@ -72,8 +72,8 @@ public class ImageData {
 		}
 
 		else if (character.getClass().equals(Boss.class)) {
-			heights.add(64);
-			widths.add(64);
+			heights.add(32);
+			widths.add(32);
 		} else {
 			heights.add(32);
 			widths.add(32);

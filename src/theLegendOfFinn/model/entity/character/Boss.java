@@ -14,19 +14,17 @@ import theLegendOfFinn.model.entity.BossProjectile;
 public class Boss extends EnemyCharacter {
 	private static final long serialVersionUID = 1L;
 
-	// Teleporting state.
-	public static final int TELEPORTING = 3;
 
-	private static final int PROJECTILES_SPAWNED = 4;
 	// probando
-	private static final int RESTING_TIME = 1000;
+	//private static final int RESTING_TIME = 1000;
+	
 	// cambiar dsp
-	private static final Position BOSS_POSITION = new Position(32 * 5, 32 * 5);
+	private static final Position BOSS_POSITION = new Position(Map.CELL_SIZE * 5, Map.CELL_SIZE * 5);
 	private static final int BOSS_VELOCITY = 3;
 	private static final int BOSS_MAX_HP = 10;
 	private static final int BOSS_ATTACK = 5;
 	private static final int BOSS_HP_BOUNTY = 0;
-	private static final long TELEPORT_DELAY = 500;
+	private static final long TELEPORT_DELAY = 1500;
 
 	private List<BossProjectile> projectiles;
 	private int lastAction = Boss.MOVING;
@@ -38,8 +36,7 @@ public class Boss extends EnemyCharacter {
 		projectiles = new ArrayList<>();
 	}
 
-	// probando
-
+	// revisar el uso del timer.
 	public void act(Grid grid) {
 		long now = System.currentTimeMillis();
 		if (getTimer().attackTimePassed(now)) {
@@ -74,7 +71,7 @@ public class Boss extends EnemyCharacter {
 	// cambiar dsp
 	public void attack() {
 		for (Direction direction : Direction.values()) {
-			Position projPosition = getProjectilePosition(direction);
+			Position projPosition = getProjectileSpawnPosition(direction);
 			if (projPosition.withinBoundaries())
 				projectiles.add(new BossProjectile(projPosition, direction));
 		}
@@ -108,7 +105,7 @@ public class Boss extends EnemyCharacter {
 		getPosition().setY(newPosition.getY());
 	}
 
-	private Position getProjectilePosition(Direction direction) {
+	private Position getProjectileSpawnPosition(Direction direction) {
 		int bossX = getPosition().getX();
 		int bossY = getPosition().getY();
 		int x = 0, y = 0;
