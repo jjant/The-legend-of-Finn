@@ -24,11 +24,6 @@ public abstract class Character extends MovingEntity implements Serializable {
 	// Attack fields
 	private int attack;
 
-	/*
-	 * private long lastAttackTime; private final long ATTACK_COOLDOWN = 500; //
-	 * in ms
-	 */
-
 	public Character(Position position, Direction direction, int maxHP, int attack, int velocity) {
 		super(position, direction, velocity);
 		this.maxHP = maxHP;
@@ -125,20 +120,12 @@ public abstract class Character extends MovingEntity implements Serializable {
 	 * @return true if could attack it, false otherwise
 	 */
 	public boolean attack(Entity entity) {
-		// long now = System.currentTimeMillis();
 		long nowTime = System.currentTimeMillis();
 		if (this.getTimer().attackTimePassed(nowTime) && state != IDLE)
 			return false;
 
-		/*
-		 * if (now - lastAttackTime <= ATTACK_COOLDOWN && state != IDLE) return
-		 * false;
-		 */
-
 		state = ATTACKING;
-
 		this.getTimer().updateLastAttackTime(nowTime);
-		// lastAttackTime = System.currentTimeMillis();
 
 		// If what's in the position to be attacked is not a character,
 		// do nothing.
@@ -191,18 +178,16 @@ public abstract class Character extends MovingEntity implements Serializable {
 	 * @return true if is close enough, false otherwise.
 	 */
 	public boolean closeEnough(Character character) {
-		// WE SHOULD CHANGE IT TO MAKE THE REVERSE VALIDATIONS.
-		// WE SHOULD SAY WHEN ITS TRUE, NOT WHEN IS FALSE.
 		int distanceX = getPosition().distanceX(character.getPosition());
 		int distanceY = getPosition().distanceY(character.getPosition());
 
-		if (distanceX == 0 && distanceY >= Map.CELL_SIZE * 3 / 2
-				|| distanceX == Map.CELL_SIZE && distanceY >= Map.CELL_SIZE / 2
-				|| distanceX >= Map.CELL_SIZE * 3 / 2 && distanceY == 0
-				|| distanceX >= Map.CELL_SIZE / 2 && distanceY == Map.CELL_SIZE
-				|| distanceX >= Map.CELL_SIZE && distanceY >= Map.CELL_SIZE)
-			return false;
+		if (distanceX == 0 && distanceY < Map.CELL_SIZE * 3 / 2
+				|| distanceX == Map.CELL_SIZE && distanceY < Map.CELL_SIZE / 2
+				|| distanceX < Map.CELL_SIZE * 3 / 2 && distanceY == 0
+				|| distanceX < Map.CELL_SIZE / 2 && distanceY == Map.CELL_SIZE
+				|| distanceX < Map.CELL_SIZE && distanceY < Map.CELL_SIZE)
+			return true;
 
-		return true;
+		return false;
 	}
 }
