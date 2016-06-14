@@ -78,7 +78,7 @@ public class Map implements Serializable {
 	 * 				a round with an array of enemies.
 	 */
 	public void setRound(Round round){
-		enemyList = round.getEnemies();
+		enemyList = round.getRoundEnemies();
 	}
 	
 
