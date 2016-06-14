@@ -34,7 +34,7 @@ public class Entity implements Serializable {
 
 	public static final int IDLE = 0;
 
-	private Position position;
+	protected Position position;
 	protected Direction direction;
 
 	public Entity(Position position, Direction direction) {
@@ -50,6 +50,8 @@ public class Entity implements Serializable {
 	public Position getPosition() {
 		return position;
 	}
+	
+
 
 	/**
 	 * Gets the current direction for this entity.

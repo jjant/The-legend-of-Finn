@@ -13,16 +13,16 @@ import theLegendOfFinn.model.utils.Position;
 
 /**
  * Final enemy in the game.
+ * 
  * @author LCDPCJL
  *
  */
 public class Boss extends EnemyCharacter {
 	private static final long serialVersionUID = 1L;
 
-
 	// probando
-	//private static final int RESTING_TIME = 1000;
-	
+	// private static final int RESTING_TIME = 1000;
+
 	// cambiar dsp
 	private static final Position BOSS_POSITION = new Position(Map.CELL_SIZE * 5, Map.CELL_SIZE * 5);
 	private static final int BOSS_VELOCITY = 3;
@@ -33,19 +33,23 @@ public class Boss extends EnemyCharacter {
 
 	private List<BossProjectile> projectiles;
 	private int lastAction = Boss.MOVING;
+	private Random moveRandomizer;
 
 	private Position nextPosition;
 
 	public Boss() {
 		super(BOSS_POSITION, BOSS_VELOCITY, BOSS_MAX_HP, BOSS_ATTACK, BOSS_HP_BOUNTY);
 		projectiles = new ArrayList<>();
+		moveRandomizer = new Random();
 	}
 
 	// revisar el uso del timer.
 	public void act(Grid grid) {
 		long now = System.currentTimeMillis();
 		if (getTimer().attackTimePassed(now)) {
+			
 			getTimer().updateLastAttackTime(now);
+			
 			if (lastAction == Boss.MOVING) {
 				tryToAttack();
 				lastAction = Boss.ATTACKING;
@@ -86,13 +90,14 @@ public class Boss extends EnemyCharacter {
 		if (state == IDLE) {
 			state = MOVING;
 
-			Random r = new Random();
-
 			do {
-				int x = r.nextInt(grid.getWidth()) * Map.CELL_SIZE;
-				int y = r.nextInt(grid.getHeight()) * Map.CELL_SIZE;
+				int x = moveRandomizer.nextInt(grid.getWidth()) * Map.CELL_SIZE;
+				int y = moveRandomizer.nextInt(grid.getHeight()) * Map.CELL_SIZE;
 				nextPosition = new Position(x, y);
 			} while (!grid.isFreePosition(nextPosition));
+
+			grid.freePosition(getPosition());
+
 
 			Timer teleportTimer = new Timer();
 			TimerTask task = new TimerTask() {
@@ -105,11 +110,20 @@ public class Boss extends EnemyCharacter {
 		}
 	}
 
-	private void move(Position newPosition) {
-		getPosition().setX(newPosition.getX());
-		getPosition().setY(newPosition.getY());
+	/**
+	 * Teleports the boss to position.
+	 * @param position the position to which the boss will teleport.
+	 */
+	private void move(Position position) {
+		getPosition().setX(position.getX());
+		getPosition().setY(position.getY());
 	}
-
+	/**
+	 * Given a direction, it returns the position where a projectile should be spawned.
+	 * This position is one square away from the boss.
+	 * @param direction
+	 * @return the specified position.
+	 */
 	private Position getProjectileSpawnPosition(Direction direction) {
 		int bossX = getPosition().getX();
 		int bossY = getPosition().getY();
@@ -137,6 +151,10 @@ public class Boss extends EnemyCharacter {
 		return new Position(x, y);
 	}
 
+	/**
+	 * Returns the list of projectiles currently active.
+	 * @return the list of projectiles.
+	 */
 	public List<BossProjectile> getProjectiles() {
 		return projectiles;
 	}

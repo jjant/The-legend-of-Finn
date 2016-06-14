@@ -7,7 +7,7 @@ import theLegendOfFinn.model.utils.Position;
 
 /**
  * Parent class for every character in the game.
- * Characters can receive damage (thus, they have HP).
+ * Characters can receive damage from entities, for this they have HP.
  *
  */
 public abstract class Character extends ActingEntity implements Serializable {

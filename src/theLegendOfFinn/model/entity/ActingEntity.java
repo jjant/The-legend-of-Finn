@@ -5,7 +5,10 @@ import theLegendOfFinn.model.gameData.Grid;
 import theLegendOfFinn.model.gameData.Map;
 import theLegendOfFinn.model.utils.Position;
 import theLegendOfFinn.model.utils.Timer;
-
+/**
+ * An entity that can move and attack.
+ *
+ */
 public class ActingEntity extends Entity {
 	private static final long serialVersionUID = 1L;
 
@@ -156,6 +159,16 @@ public class ActingEntity extends Entity {
 		return velocity;
 	}
 
+	/**
+	 * Sets the position of this entity.
+	 * Should be used carefully. If movement is required, use move() or tryToMove().
+	 * @param position the new position to be set.
+	 */
+	protected void setPosition(Position position){
+		this.position = position;
+	}
+	
+	
 	/**
 	 * Gets character current state
 	 * 
