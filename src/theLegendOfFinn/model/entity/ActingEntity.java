@@ -1,10 +1,10 @@
 package theLegendOfFinn.model.entity;
 
-import theLegendOfFinn.model.Grid;
-import theLegendOfFinn.model.Map;
-import theLegendOfFinn.model.Position;
-import theLegendOfFinn.model.Timer;
 import theLegendOfFinn.model.entity.character.Character;
+import theLegendOfFinn.model.gameData.Grid;
+import theLegendOfFinn.model.gameData.Map;
+import theLegendOfFinn.model.utils.Position;
+import theLegendOfFinn.model.utils.Timer;
 
 public class ActingEntity extends Entity {
 	private static final long serialVersionUID = 1L;

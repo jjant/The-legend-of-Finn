@@ -4,9 +4,9 @@ import java.awt.event.KeyEvent;
 
 import theLegendOfFinn.controller.Manager;
 import theLegendOfFinn.controller.RenderManager.Stage;
-import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.Ticker;
 import theLegendOfFinn.model.entity.character.Character;
+import theLegendOfFinn.model.utils.Position;
 
 public class StageMapManager extends StageManager {
 

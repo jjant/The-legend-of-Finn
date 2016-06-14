@@ -4,8 +4,8 @@ import java.awt.event.KeyEvent;
 
 import theLegendOfFinn.controller.Manager;
 import theLegendOfFinn.controller.RenderManager.Stage;
-import theLegendOfFinn.model.Round;
 import theLegendOfFinn.model.Ticker;
+import theLegendOfFinn.model.gameData.Round;
 import theLegendOfFinn.view.menu.ModeRenderer;
 
 public class StageModeManager extends StageManager{

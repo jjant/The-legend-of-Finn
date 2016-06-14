@@ -1,7 +1,9 @@
-package theLegendOfFinn.model.entity;
+package theLegendOfFinn.model.entity.character.enemy.boss;
 
-import theLegendOfFinn.model.Position;
+import theLegendOfFinn.model.entity.ActingEntity;
+import theLegendOfFinn.model.entity.Entity;
 import theLegendOfFinn.model.entity.character.PlayerCharacter;
+import theLegendOfFinn.model.utils.Position;
 
 public class BossProjectile extends ActingEntity {
 	private static final long serialVersionUID = 1L;

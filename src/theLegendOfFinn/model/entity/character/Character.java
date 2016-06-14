@@ -2,11 +2,12 @@ package theLegendOfFinn.model.entity.character;
 
 import java.io.Serializable;
 
-import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.entity.ActingEntity;
+import theLegendOfFinn.model.utils.Position;
 
 /**
  * Parent class for every character in the game.
+ * Characters can receive damage (thus, they have HP).
  *
  */
 public abstract class Character extends ActingEntity implements Serializable {

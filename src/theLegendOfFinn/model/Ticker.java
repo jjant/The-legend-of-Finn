@@ -5,14 +5,17 @@ import java.util.Iterator;
 import java.util.List;
 
 import theLegendOfFinn.controller.communicators.Notifier;
-import theLegendOfFinn.model.Round;
-import theLegendOfFinn.model.Round.RoundType;
-import theLegendOfFinn.model.entity.character.Boss;
-import theLegendOfFinn.model.entity.character.EnemyCharacter;
 import theLegendOfFinn.model.entity.character.PlayerCharacter;
-import theLegendOfFinn.model.entity.BossProjectile;
+import theLegendOfFinn.model.entity.character.enemy.EnemyCharacter;
+import theLegendOfFinn.model.entity.character.enemy.boss.Boss;
+import theLegendOfFinn.model.entity.character.enemy.boss.BossProjectile;
+import theLegendOfFinn.model.gameData.Map;
+import theLegendOfFinn.model.gameData.Round;
+import theLegendOfFinn.model.gameData.Round.RoundType;
 import theLegendOfFinn.model.entity.Entity;
-
+/**
+ * Class responsible for updating the model.
+ */
 public class Ticker implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -34,13 +37,20 @@ public class Ticker implements Serializable {
 		this.renew(gameMode);
 	}
 
+	/**
+	 * Renews the ticker, setting it up for a new game.
+	 * @param gameMode Either normal or survival. 
+	 */
 	public void renew(Round.RoundType gameMode) {
 		this.roundType = gameMode;
 		roundNumber = 0;
 		round = new Round(gameMode, roundNumber);
-		this.map = new Map(new PlayerCharacter(0), round.getRoundEnemies());
+		this.map = new Map(new PlayerCharacter(), round.getRoundEnemies());
 	}
 
+	/**
+	 * Updates the game model.
+	 */
 	public void tick() {
 		if (canModify) {
 			PlayerCharacter player = map.getPlayer();
@@ -56,6 +66,9 @@ public class Ticker implements Serializable {
 		}
 	}
 
+	/**
+	 * Updates the boss stage.
+	 */
 	public void tickBoss() {
 		Boss boss = getBoss();
 		boss.act(map.getGrid());
@@ -78,10 +91,18 @@ public class Ticker implements Serializable {
 		return ticker;
 	}
 
+	/**
+	 * Returns the list of enemies from the current map.
+	 * @return list of enemies.
+	 */
 	public List<EnemyCharacter> getEnemies() {
 		return map.getEnemies();
 	}
 
+	/**
+	 * Gets the player character.
+	 * @return the player character.
+	 */
 	public PlayerCharacter getPlayer() {
 		return map.getPlayer();
 	}

@@ -1,4 +1,4 @@
-package theLegendOfFinn.model;
+package theLegendOfFinn.model.utils;
 
 import java.io.Serializable;
 

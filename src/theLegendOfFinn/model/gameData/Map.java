@@ -1,13 +1,14 @@
-package theLegendOfFinn.model;
+package theLegendOfFinn.model.gameData;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import theLegendOfFinn.model.entity.character.Boss;
-import theLegendOfFinn.model.entity.character.EnemyCharacter;
 import theLegendOfFinn.model.entity.character.PlayerCharacter;
+import theLegendOfFinn.model.entity.character.enemy.EnemyCharacter;
+import theLegendOfFinn.model.entity.character.enemy.boss.Boss;
 import theLegendOfFinn.model.exceptions.PositionOccupiedException;
+import theLegendOfFinn.model.utils.Position;
 
 /**
  * Contains the characters of the game and the grid of entities.

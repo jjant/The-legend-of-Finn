@@ -1,8 +1,9 @@
 package theLegendOfFinn.model.entity.character;
 
-import theLegendOfFinn.model.Map;
-import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.entity.Entity;
+import theLegendOfFinn.model.entity.character.enemy.EnemyCharacter;
+import theLegendOfFinn.model.gameData.Map;
+import theLegendOfFinn.model.utils.Position;
 import theLegendOfFinn.view.Renderer;
 
 /**
@@ -18,13 +19,12 @@ public class PlayerCharacter extends Character {
 	public static final int[] PLAYER_ATTACK = { 1, 2 };
 	public static final int[] PLAYER_VELOCITY = { 5, 5 };
 
-	private int level;
+	private int level = 0;
 	
-	public PlayerCharacter(int level) {
+	public PlayerCharacter() {
 		super(new Position(Map.WIDTH * Renderer.CELL_SIZE / 2 - Renderer.CELL_SIZE,
-				Map.HEIGHT * Renderer.CELL_SIZE / 2 - Renderer.CELL_SIZE / 2), Direction.DOWN, PLAYER_MAX_HP[level],
-				PLAYER_ATTACK[level], PLAYER_VELOCITY[level]);
-		this.level = level; 
+				Map.HEIGHT * Renderer.CELL_SIZE / 2 - Renderer.CELL_SIZE / 2), Direction.DOWN, PLAYER_MAX_HP[0],
+				PLAYER_ATTACK[0], PLAYER_VELOCITY[0]);
 
 	}
 

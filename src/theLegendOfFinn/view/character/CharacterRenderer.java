@@ -3,8 +3,8 @@ package theLegendOfFinn.view.character;
 import java.awt.Graphics;
 import java.util.List;
 
-import theLegendOfFinn.model.entity.BossProjectile;
 import theLegendOfFinn.model.entity.character.Character;
+import theLegendOfFinn.model.entity.character.enemy.boss.BossProjectile;
 import theLegendOfFinn.view.Renderer;
 
 public class CharacterRenderer implements Renderer {

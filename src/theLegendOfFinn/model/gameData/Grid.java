@@ -1,11 +1,10 @@
-package theLegendOfFinn.model;
+package theLegendOfFinn.model.gameData;
 
 import java.io.Serializable;
 
-import theLegendOfFinn.model.Map;
-import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.entity.Entity;
 import theLegendOfFinn.model.exceptions.PositionOccupiedException;
+import theLegendOfFinn.model.utils.Position;
 
 /**
  * Provides a matrix of Entities to take record of the position

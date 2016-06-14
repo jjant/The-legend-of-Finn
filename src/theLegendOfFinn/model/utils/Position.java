@@ -1,8 +1,9 @@
-package theLegendOfFinn.model;
+package theLegendOfFinn.model.utils;
 
 import java.io.Serializable;
 
 import theLegendOfFinn.model.entity.Entity.Direction;
+import theLegendOfFinn.model.gameData.Map;
 
 /**
  * Stores the coordinates of a point of the map.

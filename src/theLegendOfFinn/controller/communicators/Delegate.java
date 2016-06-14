@@ -4,10 +4,10 @@ import java.util.List;
 
 import theLegendOfFinn.controller.Manager;
 import theLegendOfFinn.controller.RenderManager.Stage;
-import theLegendOfFinn.model.Map;
 import theLegendOfFinn.model.Ticker.Arena;
-import theLegendOfFinn.model.entity.character.EnemyCharacter;
-import theLegendOfFinn.model.entity.character.PlayerCharacter;;
+import theLegendOfFinn.model.entity.character.PlayerCharacter;
+import theLegendOfFinn.model.entity.character.enemy.EnemyCharacter;
+import theLegendOfFinn.model.gameData.Map;;
 
 /** Provides an interface for the view to communicate changes to the controller.
  * 

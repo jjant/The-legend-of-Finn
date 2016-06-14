@@ -5,8 +5,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-import theLegendOfFinn.model.Map;
 import theLegendOfFinn.model.Ticker.Arena;
+import theLegendOfFinn.model.gameData.Map;
 
 import javax.imageio.ImageIO;
 

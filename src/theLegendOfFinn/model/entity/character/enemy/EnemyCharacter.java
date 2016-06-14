@@ -1,7 +1,10 @@
-package theLegendOfFinn.model.entity.character;
+package theLegendOfFinn.model.entity.character.enemy;
 
-import theLegendOfFinn.model.Position;
-import theLegendOfFinn.model.Grid;
+import theLegendOfFinn.model.entity.character.Character;
+import theLegendOfFinn.model.entity.character.PlayerCharacter;
+import theLegendOfFinn.model.gameData.Grid;
+import theLegendOfFinn.model.utils.Position;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 /**

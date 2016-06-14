@@ -5,17 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import theLegendOfFinn.model.Position;
-import theLegendOfFinn.model.entity.BossProjectile;
 import theLegendOfFinn.model.entity.Entity.Direction;
-import theLegendOfFinn.model.entity.character.Boss;
 import theLegendOfFinn.model.entity.character.Character;
 import theLegendOfFinn.model.entity.character.PlayerCharacter;
+import theLegendOfFinn.model.entity.character.enemy.boss.Boss;
+import theLegendOfFinn.model.entity.character.enemy.boss.BossProjectile;
+import theLegendOfFinn.model.utils.Position;
 
 /**
  * Class holding the information of a sprite to be rendered.
  * 
- * @author LCDPCJL
  *
  */
 public class ImageData {

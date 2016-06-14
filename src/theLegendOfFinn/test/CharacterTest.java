@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import theLegendOfFinn.model.Map;
-import theLegendOfFinn.model.Position;
 import theLegendOfFinn.model.entity.Entity.Direction;
 import theLegendOfFinn.view.Renderer;
-import theLegendOfFinn.model.entity.character.EnemyCharacter;
-import theLegendOfFinn.model.entity.character.EnemyDog;
 import theLegendOfFinn.model.entity.character.PlayerCharacter;
+import theLegendOfFinn.model.entity.character.enemy.EnemyCharacter;
+import theLegendOfFinn.model.entity.character.enemy.EnemyDog;
 import theLegendOfFinn.model.entity.character.Character;
 import theLegendOfFinn.model.exceptions.PositionOccupiedException;
+import theLegendOfFinn.model.gameData.Map;
+import theLegendOfFinn.model.utils.Position;
 
 public class CharacterTest {
 	private PlayerCharacter player;
@@ -23,7 +23,7 @@ public class CharacterTest {
 
 	@Before
 	public void createCharacters() {
-		player = new PlayerCharacter(1);
+		player = new PlayerCharacter();
 		enemy = new EnemyDog(new Position(Map.WIDTH * Renderer.CELL_SIZE / 2,
 				Map.HEIGHT * Renderer.CELL_SIZE / 2 - Renderer.CELL_SIZE / 2), Direction.LEFT);
 	}

@@ -6,8 +6,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import theLegendOfFinn.model.Map;
-import theLegendOfFinn.model.Position;
+import theLegendOfFinn.model.gameData.Map;
+import theLegendOfFinn.model.utils.Position;
 
 public class Entity implements Serializable {
 	private static final long serialVersionUID = 1L;

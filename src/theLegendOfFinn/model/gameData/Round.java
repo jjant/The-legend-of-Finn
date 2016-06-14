@@ -1,16 +1,17 @@
-package theLegendOfFinn.model;
+package theLegendOfFinn.model.gameData;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-import theLegendOfFinn.model.entity.character.Boss;
-import theLegendOfFinn.model.entity.character.EnemyCharacter;
-import theLegendOfFinn.model.entity.character.EnemyPenguin;
-import theLegendOfFinn.model.entity.character.EnemyDog;
-import theLegendOfFinn.model.entity.character.EnemyDonut;
-import theLegendOfFinn.model.entity.character.EnemyKing;
+import theLegendOfFinn.model.entity.character.enemy.EnemyCharacter;
+import theLegendOfFinn.model.entity.character.enemy.EnemyDog;
+import theLegendOfFinn.model.entity.character.enemy.EnemyDonut;
+import theLegendOfFinn.model.entity.character.enemy.EnemyKing;
+import theLegendOfFinn.model.entity.character.enemy.EnemyPenguin;
+import theLegendOfFinn.model.entity.character.enemy.boss.Boss;
+import theLegendOfFinn.model.utils.Position;
 
 
 /**

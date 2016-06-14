@@ -1,4 +1,4 @@
-package theLegendOfFinn.model.entity.character;
+package theLegendOfFinn.model.entity.character.enemy.boss;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,11 +6,16 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import theLegendOfFinn.model.Grid;
-import theLegendOfFinn.model.Map;
-import theLegendOfFinn.model.Position;
-import theLegendOfFinn.model.entity.BossProjectile;
+import theLegendOfFinn.model.entity.character.enemy.EnemyCharacter;
+import theLegendOfFinn.model.gameData.Grid;
+import theLegendOfFinn.model.gameData.Map;
+import theLegendOfFinn.model.utils.Position;
 
+/**
+ * Final enemy in the game.
+ * @author LCDPCJL
+ *
+ */
 public class Boss extends EnemyCharacter {
 	private static final long serialVersionUID = 1L;
 

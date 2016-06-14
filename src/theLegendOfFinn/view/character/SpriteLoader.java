@@ -7,14 +7,14 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
-import theLegendOfFinn.model.entity.character.Boss;
 import theLegendOfFinn.model.entity.character.Character;
-import theLegendOfFinn.model.entity.character.EnemyDog;
-import theLegendOfFinn.model.entity.character.EnemyDonut;
-import theLegendOfFinn.model.entity.character.EnemyKing;
-import theLegendOfFinn.model.entity.character.EnemyPenguin;
 import theLegendOfFinn.model.entity.character.PlayerCharacter;
-import theLegendOfFinn.model.entity.BossProjectile;
+import theLegendOfFinn.model.entity.character.enemy.EnemyDog;
+import theLegendOfFinn.model.entity.character.enemy.EnemyDonut;
+import theLegendOfFinn.model.entity.character.enemy.EnemyKing;
+import theLegendOfFinn.model.entity.character.enemy.EnemyPenguin;
+import theLegendOfFinn.model.entity.character.enemy.boss.Boss;
+import theLegendOfFinn.model.entity.character.enemy.boss.BossProjectile;
 import theLegendOfFinn.model.entity.Entity.Direction;
 
 public class SpriteLoader {

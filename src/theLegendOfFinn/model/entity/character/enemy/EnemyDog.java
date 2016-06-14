@@ -1,6 +1,6 @@
-package theLegendOfFinn.model.entity.character;
+package theLegendOfFinn.model.entity.character.enemy;
 
-import theLegendOfFinn.model.Position;
+import theLegendOfFinn.model.utils.Position;
 
 public class EnemyDog extends EnemyCharacter {
 	private static final long serialVersionUID = 1L;
