@@ -86,7 +86,7 @@ public class Entity implements Serializable {
 		int distanceY = getPosition().distanceY(entity.getPosition());
 		int distance = Math.abs(distanceX) + Math.abs(distanceY);
 
-		if (distance <= (2 * delta + 1) * Map.CELL_SIZE * 3.0 / 4.0)
+		if (distance <= (2 * delta + 1) * Map.CELL_SIZE * 3.0 / 5.0)
 			closeEnough = true;
 		
 		return closeEnough;
