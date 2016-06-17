@@ -47,7 +47,7 @@ public class ActingEntity extends Entity {
 	public void tryToMove(Direction direction, Grid grid) {
 		Position destination = null;
 
-		if (state == MOVING || direction == null)
+		if (state != IDLE || direction == null)
 			return;
 
 		this.direction = direction;

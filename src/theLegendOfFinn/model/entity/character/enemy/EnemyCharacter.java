@@ -80,10 +80,11 @@ public abstract class EnemyCharacter extends Character {
 	 * 
 	 * @param player
 	 */
-	public void attackNearbyPlayer(PlayerCharacter player) {
+	public boolean attack(PlayerCharacter player) {
 		if (getPosition().isNearby(player.getPosition()) && getState() == IDLE) {
-			attack(player);
+			return super.attack(player);
 		}
+		return false;
 	}
 
 	public int getHPBounty() {

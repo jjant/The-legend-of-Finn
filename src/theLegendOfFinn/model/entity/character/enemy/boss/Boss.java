@@ -29,7 +29,7 @@ public class Boss extends EnemyCharacter {
 	private static final int BOSS_MAX_HP = 10;
 	private static final int BOSS_ATTACK = 5;
 	private static final int BOSS_HP_BOUNTY = 0;
-	private static final long TELEPORT_DELAY = 1500;
+	private static final long TELEPORT_DELAY = 1250;
 
 	private List<BossProjectile> projectiles;
 	private int lastAction = Boss.MOVING;

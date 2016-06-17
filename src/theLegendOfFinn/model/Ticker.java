@@ -134,8 +134,8 @@ public class Ticker implements Serializable {
 				EnemyCharacter enemy = enemyIter.next();
 				if (enemy.isAlive()) {
 					enemy.updateStatus();
-					enemy.attackNearbyPlayer(map.getPlayer());
 					enemy.chasePlayer(map.getPlayer().getPosition(), map.getGrid());
+					enemy.attack(map.getPlayer());
 					enemy.move();
 				} else {
 					if (enemy.getPosition().getY() % Map.CELL_SIZE != 0

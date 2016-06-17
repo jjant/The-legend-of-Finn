@@ -23,7 +23,7 @@ public class MapRenderer implements Renderer {
 	
 	public MapRenderer(Map map, Arena arena) {
 		try {
-			backGroundImage = ImageIO.read(new File( backGroudImagePath + arena.toString() + "_map.png"));
+			backGroundImage = ImageIO.read(new File( backGroudImagePath + arena.toString() + "_Map.png"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
