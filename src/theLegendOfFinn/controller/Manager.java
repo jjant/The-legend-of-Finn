@@ -106,6 +106,11 @@ public class Manager {
 		updateStage(eventManager.handlePlayerDeath());
 	}
 
+	public void win() {
+		masterRenderer.displayWin();
+		updateStage(RenderManager.Stage.MENU);
+	}
+
 	public void keyChange(int key) {
 		updateStage(eventManager.handleEvent(key, getStage()));
 	}

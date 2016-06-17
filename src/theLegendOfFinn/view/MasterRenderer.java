@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -26,7 +27,9 @@ import theLegendOfFinn.view.menu.StartingMenuRenderer;
 public class MasterRenderer extends Canvas implements KeyListener {
 	private static final long serialVersionUID = 1L;
 
-	private static final String saveFileMissingMessage = "savefile.finn not found.";
+	private static final String SAVEFILE_ISSING_MESSAGE = "savefile.finn not found.";
+	private static final String WIN_MESSAGE = "Congratulations! You've won!";
+	
 	public static final int WIDTH = 640;
 	public static final int HEIGHT = WIDTH * 3 / 4;
 	public static final String TITLE = "The legend of Finn";
@@ -143,7 +146,7 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	}
 
 	public void displayFileMissing() {
-		JOptionPane.showMessageDialog(frame, saveFileMissingMessage);
+		JOptionPane.showMessageDialog(frame, SAVEFILE_ISSING_MESSAGE);
 	}
 
 	/**
@@ -184,4 +187,9 @@ public class MasterRenderer extends Canvas implements KeyListener {
 	public void setTitleSuffix(String suffix) {
 		frame.setTitle(MasterRenderer.TITLE + suffix);
 	}
+	
+	public void displayWin(){
+		JOptionPane.showMessageDialog(frame, WIN_MESSAGE);
+	}
+	
 }
