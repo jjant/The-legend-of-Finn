@@ -68,7 +68,7 @@ public class Map implements Serializable {
 	/**
 	 * Gets the matrix of entities called grid.
 	 * 
-	 * @return the grid.
+	 * @return grid The grid.
 	 */
 	public Grid getGrid() {
 		return grid;

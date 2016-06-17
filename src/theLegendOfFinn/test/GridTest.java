@@ -27,7 +27,7 @@ public class GridTest {
     public void shouldAddEntity() throws PositionOccupiedException {
         Entity entity = new Entity(new Position(0,0), Entity.Direction.DOWN);
         Position pos = new Position(0,0);
-        if(grid.isFreePosition(pos)) {
+        if(grid.isFree(pos)) {
             try {
                 grid.add(entity);
             } catch (PositionOccupiedException e) {
@@ -42,7 +42,7 @@ public class GridTest {
     public void shouldntAddEntity() throws PositionOccupiedException {
         Entity entity = new Entity(new Position(0,0), Entity.Direction.DOWN);
         Position pos = new Position(0,0);
-        if(grid.isFreePosition(pos)) {
+        if(grid.isFree(pos)) {
             try {
                 grid.add(entity);
             } catch (PositionOccupiedException e) {
@@ -60,12 +60,12 @@ public class GridTest {
     @Test
     public void shouldRemoveEntity() throws PositionOccupiedException {
         Position pos = new Position(0,0);
-        if(grid.isFreePosition(pos)) {
+        if(grid.isFree(pos)) {
             Entity entity = new Entity(new Position(0,0), Entity.Direction.DOWN);
             grid.add(entity);
         }
         grid.freePosition(pos);
-        assertTrue("freePosition succesfull", grid.isFreePosition(pos));
+        assertTrue("freePosition succesfull", grid.isFree(pos));
     }
 
 

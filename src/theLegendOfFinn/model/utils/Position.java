@@ -20,6 +20,10 @@ public class Position implements Serializable {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public Position() {
+		this.y = this.x = 0;
+	}
 
 	public Position(Position otherPosition) {
 		this.x = otherPosition.getX();

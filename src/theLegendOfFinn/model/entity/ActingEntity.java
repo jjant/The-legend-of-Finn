@@ -68,7 +68,7 @@ public class ActingEntity extends Entity {
 
 		// Check destination is within the borders of the map, and its a valid
 		// destination.
-		if (destination == null || !destination.withinBoundaries() || !grid.isFreePosition(destination))
+		if (destination == null || !destination.withinBoundaries() || !grid.isFree(destination))
 			return;
 		state = MOVING;
 		moveRemaining = Map.CELL_SIZE;
@@ -146,17 +146,7 @@ public class ActingEntity extends Entity {
 	 */
 	public int getVelocity() {
 		return velocity;
-	}
-
-	/**
-	 * Sets the position of this entity.
-	 * Should be used carefully. If movement is required, use move() or tryToMove().
-	 * @param position the new position to be set.
-	 */
-	protected void setPosition(Position position){
-		this.position = position;
-	}
-	
+	}	
 	
 	/**
 	 * Gets character current state

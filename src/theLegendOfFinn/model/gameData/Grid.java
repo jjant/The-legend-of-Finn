@@ -44,10 +44,8 @@ public class Grid implements Serializable {
 	 * 			the position intended to be checked.
 	 * @return true if the position is free, false otherwise.
 	 */
-	public boolean isFreePosition(Position position) {
-		if (matrix[position.getX() / Map.CELL_SIZE][position.getY() / Map.CELL_SIZE] != null)
-			return false;
-		return true;
+	public boolean isFree(Position position) {
+		return matrix[position.getX() / Map.CELL_SIZE][position.getY() / Map.CELL_SIZE] == null;
 	}
 
 	/**
@@ -120,5 +118,4 @@ public class Grid implements Serializable {
 		int y = position.getY()/Map.CELL_SIZE;
 			return matrix[x][y];	
 	}
-	
 }

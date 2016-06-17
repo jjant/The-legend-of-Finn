@@ -51,7 +51,14 @@ public class Entity implements Serializable {
 		return position;
 	}
 	
-
+	/**
+	 * Sets the position of this entity. Should be used carefully, some entitys behave differently
+	 * respecting its position.
+	 * @param position the new position to be set.
+	 */
+	public void setPosition(Position position) {
+		this.position = position;
+	}
 
 	/**
 	 * Gets the current direction for this entity.

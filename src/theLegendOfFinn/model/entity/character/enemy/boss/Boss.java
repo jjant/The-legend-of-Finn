@@ -92,7 +92,7 @@ public class Boss extends EnemyCharacter {
 				int x = moveRandomizer.nextInt(grid.getWidth()) * Map.CELL_SIZE;
 				int y = moveRandomizer.nextInt(grid.getHeight()) * Map.CELL_SIZE;
 				nextPosition = new Position(x, y);
-			} while (!grid.isFreePosition(nextPosition));
+			} while (!grid.isFree(nextPosition));
 
 			Timer teleportTimer = new Timer();
 			TimerTask task = new TimerTask() {
