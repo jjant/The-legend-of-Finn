@@ -1,6 +1,7 @@
 package theLegendOfFinn.controller.stageManagers;
 
 import java.awt.event.KeyEvent;
+import java.util.logging.Level;
 
 import theLegendOfFinn.controller.Manager;
 import theLegendOfFinn.controller.RenderManager.Stage;
@@ -37,7 +38,6 @@ public class StageMapSelectionManager extends StageManager{
 			break;
 		case KeyEvent.VK_ENTER:
 		case KeyEvent.VK_A:
-			//manager.loadTicker(new Ticker(manager.getNotifier()));
 			Ticker ticker = manager.getTicker();
 			if (menuMapSelection.getOption().equals(MapSelectionRenderer.GRASS))
 				ticker.setArena(Arena.GRASS);
@@ -50,6 +50,7 @@ public class StageMapSelectionManager extends StageManager{
 			try {
 				manager.initialize();
 			} catch (TickerMissingException e) {
+				Manager.LOGGER.log(Level.WARNING, "Ticker object missing", e);
 				e.printStackTrace();
 			}
 			stage = Stage.MAP;

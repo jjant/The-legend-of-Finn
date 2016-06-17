@@ -1,11 +1,14 @@
 package theLegendOfFinn.controller;
 
 import java.io.FileInputStream;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import theLegendOfFinn.model.Ticker;
 
@@ -46,11 +49,12 @@ public class FileManager {
 			fileStream.close();
 			return ticker;
 		} catch (ClassNotFoundException e) {
-			// Never happens;
+			// This exception will never happen.
+			Manager.LOGGER.log(Level.FINE, "Ticker class file is missing", e);
 		} catch (FileNotFoundException e) {
 			manager.loadFileMissing();
 		} catch (IOException e) {
-			e.printStackTrace();
+			Manager.LOGGER.log(Level.FINER, "Closing the savefile threw an exception.", e);
 		}
 		return null;
 	}

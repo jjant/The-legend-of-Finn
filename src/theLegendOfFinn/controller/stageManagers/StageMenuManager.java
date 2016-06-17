@@ -1,6 +1,7 @@
 package theLegendOfFinn.controller.stageManagers;
 
 import java.awt.event.KeyEvent;
+import java.util.logging.Level;
 
 import theLegendOfFinn.controller.FileManager;
 import theLegendOfFinn.controller.Manager;
@@ -35,9 +36,10 @@ public class StageMenuManager extends StageManager {
 					manager.initialize();
 					stage = Stage.MAP;
 				} catch (ClassNotFoundException e) {
-					// Tirar algo porq no encontro el archivo.
+					//Will never happen
+					Manager.LOGGER.log(Level.FINE, "Ticker class file missing", e);
 				} catch (TickerMissingException e) {
-					
+					Manager.LOGGER.log(Level.WARNING, "Ticker object missing", e);
 				}
 			else if (menu.getOption().equals(StartingMenuRenderer.NEW))
 				stage = Stage.MODE;

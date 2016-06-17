@@ -7,7 +7,6 @@ import theLegendOfFinn.model.Ticker;
 
 /**
  * Manages the model's updates.
- * @author LCDPCJL
  *
  */
 public class ModelManager implements Runnable {

@@ -52,14 +52,6 @@ public class RenderManager implements Runnable {
 		}
 	}
 
-	// WARNING!
-	// SECOND PASSED CHANGED TO STATIC
-	// LASTSECOND CHANGED TO STATIC
-	// 1000ms CHANGED to 15ms
-	// ONLY FOR DEBUGGING GOALS
-	// SOMETHING LIKE THIS SHOULD BE IMPLEMENTED
-	// TAKING INTO ACCOUNT CHARACTER'S VELOCITY
-	// porq tan emocionado el comment
 	public static boolean secondPassed() {
 		long now = System.currentTimeMillis();
 		if ((now - lastSecond) >= 15) {
