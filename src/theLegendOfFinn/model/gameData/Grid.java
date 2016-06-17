@@ -9,7 +9,6 @@ import theLegendOfFinn.model.utils.Position;
 /**
  * Provides a matrix of Entities to take record of the position
  * that every one of them occupies in the map.
- * 
  */
 public class Grid implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -40,8 +39,7 @@ public class Grid implements Serializable {
 	/**
 	 * Checks if a particular position is free in the grid.
 	 * 
-	 * @param position
-	 * 			the position intended to be checked.
+	 * @param position the position intended to be checked.
 	 * @return true if the position is free, false otherwise.
 	 */
 	public boolean isFree(Position position) {
@@ -51,8 +49,7 @@ public class Grid implements Serializable {
 	/**
 	 * Liberates a position in the grid setting it to null.
 	 * 
-	 * @param position
-	 * 				the position intended to free.
+	 * @param position the position intended to free.
 	 */
 	public void freePosition(Position position) {
 		matrix[position.getX() / Map.CELL_SIZE][position.getY() / Map.CELL_SIZE] = null;
@@ -61,10 +58,8 @@ public class Grid implements Serializable {
 	/**
 	 * Occupies a position of the grid with an Entity.
 	 * 
-	 * @param entity
-	 * 				the Entity that will occupy the position.
-	 * @param pos
-	 * 			the position to be occupied.
+	 * @param entity the Entity that will occupy the position.
+	 * @param pos the position to be occupied.
 	 */
 	public void occupyPosition(Entity entity, Position position) {
 		matrix[position.getX() / Map.CELL_SIZE][position.getY() / Map.CELL_SIZE] = entity;

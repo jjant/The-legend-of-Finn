@@ -8,12 +8,18 @@ import theLegendOfFinn.model.Ticker;
 import theLegendOfFinn.model.gameData.Round;
 import theLegendOfFinn.view.menu.ModeRenderer;
 
+/**
+ * Manages the stage mode selector view
+ */
 public class StageModeManager extends StageManager{
 
 	public StageModeManager(Manager manager) {
 		super(manager);
 	}
 	
+	/**
+	 * Handles a given key during the current stage.
+	 */
 	public Stage handleStage(int key) {
 		Stage stage = Stage.MODE;
 		ModeRenderer menuMode = masterRenderer.getModeRenderer();

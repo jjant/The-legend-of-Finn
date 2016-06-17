@@ -7,12 +7,18 @@ import theLegendOfFinn.controller.Manager;
 import theLegendOfFinn.controller.RenderManager.Stage;
 import theLegendOfFinn.view.menu.PauseRenderer;
 
+/**
+ * Manages the pause stage
+ */
 public class StagePauseManager extends StageManager {
 
 	public StagePauseManager(Manager manager) {
 		super(manager);
 	}
 
+	/**
+	 * Handles a given key during the current stage
+	 */
 	public Stage handleStage(int key) {
 		Stage stage = Stage.PAUSE;
 		PauseRenderer menuPause = masterRenderer.getPauseRenderer();

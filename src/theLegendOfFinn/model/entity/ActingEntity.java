@@ -12,16 +12,14 @@ import theLegendOfFinn.model.utils.Timer;
 public class ActingEntity extends Entity {
 	private static final long serialVersionUID = 1L;
 
+	// State fields
 	public static final int MOVING = 1;
-
-	// Attacking state.
 	public static final int ATTACKING = 2;
-
+	protected int state = IDLE;
+	
 	// Attack fields
 	private final int RANGE = 1;
 	private int attack;
-
-	protected int state = IDLE;
 	
 	// Movement fields
 	private Timer timer;
@@ -39,10 +37,8 @@ public class ActingEntity extends Entity {
 	 * Tries to move the character to the specified direction. If movement is
 	 * impossible, it does nothing.
 	 * 
-	 * @param direction
-	 *            the direction towards the movement is desired.
-	 * @param grid
-	 *            the character grid.
+	 * @param direction the direction towards the movement is desired.
+	 * @param grid the character grid.
 	 */
 	public void tryToMove(Direction direction, Grid grid) {
 		Position destination = null;
@@ -73,15 +69,12 @@ public class ActingEntity extends Entity {
 		state = MOVING;
 		moveRemaining = Map.CELL_SIZE;
 		timer.updateLastMoveTime(System.currentTimeMillis());
-		// lastMoveTime = System.currentTimeMillis();
 		grid.occupyPosition(this, destination);
 		grid.freePosition(this.getPosition());
 	}
 
-	// No deberia realizar validaciones.
 	/**
 	 * Moves the character step by step.
-	 * 
 	 */
 	public void move() {
 		int yIncrement = 0, xIncrement = 0;
@@ -122,7 +115,6 @@ public class ActingEntity extends Entity {
 
 	/**
 	 * Updates status to corresponding one.
-	 * 
 	 */
 	public void updateStatus() {
 		if (state == MOVING && moveRemaining <= 0)
@@ -132,8 +124,7 @@ public class ActingEntity extends Entity {
 	/**
 	 * Sets the character velocity.
 	 * 
-	 * @param velocity
-	 *            the velocity to be set.
+	 * @param velocity the velocity to be set.
 	 */
 	protected void setVelocity(int velocity) {
 		this.velocity = velocity;
@@ -189,14 +180,14 @@ public class ActingEntity extends Entity {
 	 * Attacks a character. If there's no character to be attacked,
 	 * <code>null</code> is received.
 	 * 
-	 * @param character
-	 *            Character to be attacked (or null).
+	 * @param character Character to be attacked (or null).
 	 * @return true if could attack it, false otherwise
 	 */
 	public boolean attack(Entity entity) {
 		long nowTime = System.currentTimeMillis();
 		if (this.getTimer().attackTimePassed(nowTime) && state != IDLE)
 			return false;
+		
 		state = ATTACKING;
 		this.getTimer().updateLastAttackTime(nowTime);
 		
@@ -211,6 +202,7 @@ public class ActingEntity extends Entity {
 		// "attack" empty spaces;
 		if (character == null || character == this || !closeEnough(character, RANGE))
 			return false;
+		
 		character.receiveAttack(this);
 		return true;
 	}

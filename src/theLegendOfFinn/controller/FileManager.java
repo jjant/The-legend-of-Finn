@@ -11,36 +11,52 @@ import java.util.logging.Level;
 
 import theLegendOfFinn.model.Ticker;
 
+/**
+ * Manages file saving capabilities. File manager is a singleton.
+ */
 public class FileManager {
 
 	private Manager manager;
 	
-	private FileManager() {
-	};
+	// Overwrites constuctor
+	private FileManager() {};
 
 	private static FileManager instance;
-
 	
+	/**
+	 * Creates a manager from a given one.
+	 * @param manager
+	 */
 	public static void createFileManager(Manager manager){
 		getFileManager().manager = manager;
 	}
 	
+	/**
+	 * Gets the file manager or builds one.
+	 * @return the file manager.
+	 */
 	public static FileManager getFileManager() {
 		return (instance != null) ? instance : (instance = new FileManager());
 	}
 
+	/**
+	 * Saves the game from a given ticker.
+	 * @param ticker ticker to save.
+	 */
 	public void saveGame(Ticker ticker) {
 		try {
 			ObjectOutputStream fileStream = new ObjectOutputStream(new FileOutputStream("savegame.finn"));
 			fileStream.writeObject(ticker);
 			fileStream.close();
-			System.out.println("SAVED!");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	// Me genero banda de catchs automaticamente para salvar errores.
+	/**
+	 * Loads a game from a file.
+	 * @return the generated ticker.
+	 */
 	public Ticker loadGame() throws ClassNotFoundException {
 		try {
 			ObjectInputStream fileStream = new ObjectInputStream(new FileInputStream("savegame.finn"));

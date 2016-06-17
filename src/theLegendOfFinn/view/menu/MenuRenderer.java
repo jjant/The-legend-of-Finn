@@ -16,9 +16,7 @@ import theLegendOfFinn.view.MasterRenderer;
 import theLegendOfFinn.view.Renderer;
 
 /**
- * Parent of all the menu renderers in the game.
- * 
- * Poner algo mas...
+ * Parent of all the menu renderers in the game. Manages the menu renderization.
  */
 public abstract class MenuRenderer implements Renderer {
 
@@ -38,8 +36,7 @@ public abstract class MenuRenderer implements Renderer {
 	/**
 	 * Draws the menu to the given graphics buffer.
 	 * 
-	 * @param g
-	 *            The graphics onto which the menu is going to be drawn.
+	 * @param g The graphics onto which the menu is going to be drawn.
 	 */
 	public void render(Graphics g) {
 		g.drawImage(backGroundImage, 0, 0, MasterRenderer.WIDTH, MasterRenderer.HEIGHT, null);
@@ -65,8 +62,7 @@ public abstract class MenuRenderer implements Renderer {
 	 * Sets the currently selected option to the one <code>i</code> places
 	 * after.
 	 * 
-	 * @param i
-	 *            the number of places to be skipped.
+	 * @param i the number of places to be skipped.
 	 */
 	public void selectOption(int i) {
 		int nextIndex = (options.indexOf(option) + i) % options.size();
@@ -87,8 +83,7 @@ public abstract class MenuRenderer implements Renderer {
 	/**
 	 * Adds an option object to the menu.
 	 * 
-	 * @param option
-	 *            The option to be added.
+	 * @param option The option to be added.
 	 */
 	public void addOption(MenuOption option) {
 		options.add(option);

@@ -8,12 +8,18 @@ import theLegendOfFinn.model.Ticker;
 import theLegendOfFinn.model.entity.character.Character;
 import theLegendOfFinn.model.utils.Position;
 
+/**
+ * Manages the map selector view
+ */
 public class StageMapManager extends StageManager {
 
 	public StageMapManager(Manager manager) {
 		super(manager);
 	}
 
+	/**
+	 * Handles a given key during the current stage
+	 */
 	@Override
 	public Stage handleStage(int key) {
 		Stage stage = Stage.MAP;

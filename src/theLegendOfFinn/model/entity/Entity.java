@@ -9,6 +9,9 @@ import java.util.Random;
 import theLegendOfFinn.model.gameData.Map;
 import theLegendOfFinn.model.utils.Position;
 
+/**
+ * Represent an object which occupies space and faces toward a given direction.
+ */
 public class Entity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -73,8 +76,7 @@ public class Entity implements Serializable {
 	 * Checks if calling character is close enough to another character given a
 	 * delta measured in Map.CELL_SIZEs (using the taxicab norm).
 	 * 
-	 * @param entity
-	 *            The entity whose closeness we want to check.
+	 * @param entity The entity whose closeness we want to check.
 	 * @return true if the passed entity is close enough to this one, false otherwise.
 	 */
 	public boolean closeEnough(Entity entity, int delta) {

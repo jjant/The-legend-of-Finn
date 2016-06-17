@@ -33,13 +33,12 @@ public class Position implements Serializable {
 	/**
 	 * Sets a position compatible with the grid using a direction as guide. 
 	 * 
-	 * @param direction
-	 * 				used to set the new coordinates.
+	 * @param direction used to set the new coordinates.
 	 * @return the changed position if it's a valid position, null otherwise.
 	 */
 	public Position toGridIndexes(Direction direction) {
 		Position newPos = null;
-		if (direction == null)
+		if (direction == null) 
 			return null;
 
 		switch (direction) {
@@ -59,30 +58,51 @@ public class Position implements Serializable {
 			break;
 		}
 
-		if (newPos.getX() < 0 || newPos.getX() >= Map.WIDTH || newPos.getY() < 0 || newPos.getY() >= Map.HEIGHT) {
+		if (newPos.getX() < 0 || newPos.getX() >= Map.WIDTH || 
+			newPos.getY() < 0 || newPos.getY() >= Map.HEIGHT)
 			return null;
-		}
 
 		return newPos;
 	}
 
+	/**
+	 * Gets the x coordinate
+	 * @return the x coordinate
+	 */
 	public int getX() {
 		return x;
 	}
-
+	
+	/**
+	 * Gets the y coordinate
+	 * @return the y coordinate
+	 */
 	public int getY() {
 		return y;
 	}
 
+	/**
+	 * Sets the coordinates to a given position
+	 * @param x the x coordinate
+	 * @param y the y coordinate
+	 */
 	public void setPosition(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 
+	/**
+	 * Sets the x coordinate
+	 * @param x the x coordinate to set
+	 */
 	public void setX(int x) {
 		this.x = x;
 	}
 
+	/**
+	 * Sets the y coordinate
+	 * @param y the y coordinate to set
+	 */
 	public void setY(int y) {
 		this.y = y;
 	}
@@ -90,7 +110,7 @@ public class Position implements Serializable {
 	/**
 	 * Increments the x coordinate by a number.
 	 * 
-	 * @param increment
+	 * @param increment to add the x coordinate
 	 */
 	public void incX(int increment) {
 		x += increment;
@@ -98,7 +118,7 @@ public class Position implements Serializable {
 
 	/**
 	 * Increments the y coordinate by a number.
-	 * @param increment
+	 * @param increment to add the y coordinate.
 	 */
 	public void incY(int increment) {
 		y += increment;
@@ -107,8 +127,8 @@ public class Position implements Serializable {
 	/**
 	 * Increments both coordinates at the same time, not necessarily by the same number.
 	 * 
-	 * @param incrementX
-	 * @param incrementY
+	 * @param incrementX x increment
+	 * @param incrementY y increment
 	 */
 	public void incPos(int incrementX, int incrementY) {
 		x += incrementX;
@@ -118,8 +138,7 @@ public class Position implements Serializable {
 	/**
 	 * Gets the distance between the current's and an other's 'x' coordinate.
 	 * 
-	 * @param other
-	 * 			the position to compare.
+	 * @param other the position to compare.
 	 * @return The distance between this position's 'x' and other's.
 	 */
 	public int distanceX(Position other) {
@@ -129,8 +148,7 @@ public class Position implements Serializable {
 	/**
 	 * Gets the distance between the current's and another's 'y' coordinate.
 	 * 
-	 * @param other
-	 * 			the position to compare.
+	 * @param other the position to compare.
 	 * @return The distance between this position's 'y' and other's.
 	 */
 	public int distanceY(Position other) {
@@ -142,14 +160,11 @@ public class Position implements Serializable {
 	/**
 	 * Checks if another position is one grid's position far from the current.
 	 * 
-	 * @param position
-	 * 				the position to be checked.
+	 * @param position the position to be checked.
 	 * @return true if the condition is true, false otherwise.
 	 */
 	public boolean isNearby(Position position) {
-		if (Math.abs(getX() - position.getX()) + Math.abs(getY() - position.getY()) <= Map.CELL_SIZE)
-			return true;
-		return false;
+		return (Math.abs(getX() - position.getX()) + Math.abs(getY() - position.getY()) <= Map.CELL_SIZE);
 	}
 	
 	/**
@@ -160,6 +175,11 @@ public class Position implements Serializable {
 		return !(getX() < 0 || getX() >= Map.WIDTH * Map.CELL_SIZE || getY() < 0 || getY() >= Map.HEIGHT * Map.CELL_SIZE);
 	}
 
+	/**
+	 * Compare two different position
+	 * @param position position to compare
+	 * @return true if both position are equal, false otherwise.
+	 */
 	public boolean equals(Position position) {
 		if (position == this)
 			return true;
@@ -167,7 +187,10 @@ public class Position implements Serializable {
 			return false;
 		return x == position.getX() && y == position.getY();
 	}
-
+	
+	/**
+	 * Sets the String representation for a Position
+	 */
 	public String toString() {
 		return "(" + this.getX() + ", " + this.getY() + ")";
 	}

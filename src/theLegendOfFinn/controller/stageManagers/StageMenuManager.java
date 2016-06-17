@@ -10,12 +10,18 @@ import theLegendOfFinn.controller.exceptions.TickerMissingException;
 import theLegendOfFinn.view.menu.MenuRenderer;
 import theLegendOfFinn.view.menu.StartingMenuRenderer;
 
+/**
+ * Manages the stage menu selector view
+ */
 public class StageMenuManager extends StageManager {
 
 	public StageMenuManager(Manager manager) {
 		super(manager);
 	}
 
+	/**
+	 * Handles a given key during the current stage
+	 */
 	@Override
 	public Stage handleStage(int key) {
 		FileManager fileManager = FileManager.getFileManager();

@@ -13,16 +13,13 @@ import theLegendOfFinn.model.gameData.Map;
 
 import javax.imageio.ImageIO;
 
+/**
+ * Manages the map renderization
+ */
 public class MapRenderer implements Renderer {
 	private static final String backGroudImagePath = "./Assets/maps/";
 
 	private BufferedImage backGroundImage;
-	/*
-	 * private Map map;
-	 * 
-	 * REVISAR se crea una instancia de map y no se utiliza. RTA: Se va a usar
-	 * para los obstaculos.
-	 */
 
 	public MapRenderer(Map map, Arena arena) {
 		try {
@@ -33,6 +30,9 @@ public class MapRenderer implements Renderer {
 
 	}
 
+	/**
+	 * Render a given map graphic.
+	 */
 	public void render(Graphics g) {
 
 		g.drawImage(backGroundImage, 0, 0, MasterRenderer.WIDTH, MasterRenderer.HEIGHT, null);

@@ -6,12 +6,18 @@ import theLegendOfFinn.controller.Manager;
 import theLegendOfFinn.controller.RenderManager.Stage;
 import theLegendOfFinn.view.menu.GameOverRenderer;
 
+/**
+ * Manages the game over view
+ */
 public class StageGameOverManager extends StageManager{
 
 	public StageGameOverManager(Manager manager) {
 		super(manager);
 	}
 
+	/**
+	 * Handles a given key for the current stage
+	 */
 	public Stage handleStage(int key) {
 		Stage stage = Stage.GAMEOVER;
 		GameOverRenderer menuGameOver = masterRenderer.getGameOverRenderer();

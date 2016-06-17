@@ -15,15 +15,16 @@ import theLegendOfFinn.model.entity.character.PlayerCharacter;
  * Renders the GUI.
  * 
  * @author Julian Antonielli
- *
  */
 public class GUIRenderer implements Renderer {
 
+	// Renderizable GUI elements
 	private PlayerCharacter player;
 	private BufferedImage emptyHeart;
 	private BufferedImage halfHeart;
 	private BufferedImage fullHeart;
 
+	// Heart values
 	private int hearts;
 	private int fullHearts;
 	private int halfHearts;
@@ -42,6 +43,9 @@ public class GUIRenderer implements Renderer {
 		}
 	}
 
+	/**
+	 * Renders a given GUI graphic.
+	 */
 	public void render(Graphics g) {
 		int x = 32;
 		hearts = player.getMaxHP() / 2;
