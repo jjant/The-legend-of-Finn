@@ -9,6 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Parent class of all the enemies.
+ * 
  */
 public abstract class EnemyCharacter extends Character {
 	private static final long serialVersionUID = 1L;

@@ -77,7 +77,6 @@ public class Round implements Serializable {
 			roundNumber --;
 		}
 	}
-	
 	private int addTwoWarriors(int index) {
 		this.enemies.add(new EnemyPenguin(new Position(positions[index % 4])));
 		this.enemies.add(new EnemyPenguin(new Position(positions[(index + 1) % 4])));

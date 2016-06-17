@@ -43,7 +43,7 @@ public class Ticker implements Serializable {
 	 */
 	public void renew(Round.RoundType gameMode) {
 		this.roundType = gameMode;
-		roundNumber = 0;
+		roundNumber = 8;
 		round = new Round(gameMode, roundNumber);
 		this.map = new Map(new PlayerCharacter(), round.getRoundEnemies());
 	}
@@ -59,8 +59,9 @@ public class Ticker implements Serializable {
 			if (roundType.equals(Round.RoundType.BOSS)) {
 				tickBoss();
 			}
-			else
+			else {
 				behaviourEnemies(map.getEnemies());
+			}
 			if (!player.isAlive())
 				notifier.NotifyDeath();
 		}
@@ -76,7 +77,7 @@ public class Ticker implements Serializable {
 		Iterator<BossProjectile> iter = projectiles.iterator();
 		while(iter.hasNext()){
 			BossProjectile projectile = iter.next();
-			projectile.tryToMove(projectile.getDirection(), map.getGrid());
+			//projectile.tryToMove(projectile.getDirection(), map.getGrid());
 			projectile.move();
 			if(projectile.attack(getPlayer()))
 				iter.remove();

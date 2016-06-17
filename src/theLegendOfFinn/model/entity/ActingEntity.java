@@ -22,13 +22,8 @@ public class ActingEntity extends Entity {
 	private int attack;
 
 	protected int state = IDLE;
-
+	
 	// Movement fields
-	/*
-	 * public final long MOVE_COOLDOWN = 15; // in ms protected long
-	 * lastMoveTime;
-	 */
-
 	private Timer timer;
 	protected int moveRemaining;
 	private int velocity;
@@ -36,7 +31,6 @@ public class ActingEntity extends Entity {
 	public ActingEntity(Position position, Direction direction, int velocity, int attack) {
 		super(position, direction);
 		this.velocity = velocity;
-		// lastMoveTime = 0;
 		this.timer = new Timer(velocity);
 		this.attack = attack;
 	}
@@ -84,10 +78,10 @@ public class ActingEntity extends Entity {
 		grid.freePosition(this.getPosition());
 	}
 
-	
-	//deberia ser privado y no relizar validaciones...
+	// No deberia realizar validaciones.
 	/**
 	 * Moves the character step by step.
+	 * 
 	 */
 	public void move() {
 		int yIncrement = 0, xIncrement = 0;
@@ -99,12 +93,6 @@ public class ActingEntity extends Entity {
 		long nowTime = System.currentTimeMillis();
 		if (getTimer().moveTimePassed(nowTime)) {
 			getTimer().updateLastMoveTime(nowTime);
-
-			/*
-			 * long nowMoveTime = System.currentTimeMillis(); if (nowMoveTime -
-			 * lastMoveTime >= MOVE_COOLDOWN / getVelocity()) { lastMoveTime =
-			 * nowMoveTime;
-			 */
 
 			moveRemaining--;
 
@@ -134,6 +122,7 @@ public class ActingEntity extends Entity {
 
 	/**
 	 * Updates status to corresponding one.
+	 * 
 	 */
 	public void updateStatus() {
 		if (state == MOVING && moveRemaining <= 0)
@@ -215,21 +204,12 @@ public class ActingEntity extends Entity {
 	 * @return true if could attack it, false otherwise
 	 */
 	public boolean attack(Entity entity) {
-		// long now = System.currentTimeMillis();
 		long nowTime = System.currentTimeMillis();
 		if (this.getTimer().attackTimePassed(nowTime) && state != IDLE)
 			return false;
-
-		/*
-		 * if (now - lastAttackTime <= ATTACK_COOLDOWN && state != IDLE) return
-		 * false;
-		 */
-
 		state = ATTACKING;
-
 		this.getTimer().updateLastAttackTime(nowTime);
-		// lastAttackTime = System.currentTimeMillis();
-
+		
 		// If what's in the position to be attacked is not a character,
 		// do nothing.
 		if (!(entity instanceof Character))

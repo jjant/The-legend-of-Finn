@@ -43,41 +43,33 @@ public class Boss extends EnemyCharacter {
 		moveRandomizer = new Random();
 	}
 
-	// revisar el uso del timer.
+	/**
+	 * Checks which is the action to perform next and calls
+	 * the corresponding method.
+	 * 
+	 * @param grid
+	 * 				matrix of entities.
+	 */
 	public void act(Grid grid) {
 		long now = System.currentTimeMillis();
 		if (getTimer().attackTimePassed(now)) {
-			
 			getTimer().updateLastAttackTime(now);
-			
-			if (lastAction == Boss.MOVING) {
-				tryToAttack();
+			if (lastAction == Boss.MOVING && state == IDLE) {
+					attack();
 				lastAction = Boss.ATTACKING;
 			} else if (lastAction == Boss.BOSS_ATTACK) {
-				tryToIdle();
 				lastAction = Boss.IDLE;
 			} else {
-				tryToMove(Direction.randomDirection(), grid);
+				tryToMove(grid);
 				lastAction = Boss.MOVING;
 			}
 		}
 	}
-
+	
 	/**
-	 * If it's possible, it attacks.
+	 * Throws a projectile in every direction checking boundaries.
+	 * 
 	 */
-	public void tryToAttack() {
-		if (state == IDLE) {
-			attack();
-		}
-	}
-
-	// do nothing..?
-	public void tryToIdle() {
-
-	}
-
-	// cambiar dsp
 	public void attack() {
 		for (Direction direction : Direction.values()) {
 			Position projPosition = getProjectileSpawnPosition(direction);
@@ -86,7 +78,13 @@ public class Boss extends EnemyCharacter {
 		}
 	}
 
-	public void tryToMove(Direction direction, Grid grid) {
+	/**
+	 * Replaces the tryToMove method in ActingEntity. Sets a random position
+	 * and moves.
+	 * 
+	 * @param grid
+	 */
+	public void tryToMove(Grid grid) {
 		if (state == IDLE) {
 			state = MOVING;
 
@@ -96,13 +94,10 @@ public class Boss extends EnemyCharacter {
 				nextPosition = new Position(x, y);
 			} while (!grid.isFreePosition(nextPosition));
 
-			grid.freePosition(getPosition());
-
-
 			Timer teleportTimer = new Timer();
 			TimerTask task = new TimerTask() {
 				public void run() {
-					move(nextPosition);
+					move(nextPosition, grid);
 					state = IDLE;
 				}
 			};
@@ -114,9 +109,11 @@ public class Boss extends EnemyCharacter {
 	 * Teleports the boss to position.
 	 * @param position the position to which the boss will teleport.
 	 */
-	private void move(Position position) {
+	private void move(Position position, Grid grid) {
+		grid.freePosition(getPosition());
 		getPosition().setX(position.getX());
 		getPosition().setY(position.getY());
+		grid.occupyPosition(this, position);
 	}
 	/**
 	 * Given a direction, it returns the position where a projectile should be spawned.
@@ -132,7 +129,7 @@ public class Boss extends EnemyCharacter {
 		switch (direction) {
 		case UP:
 			x = bossX;
-			y = bossY + 1;
+			y = bossY - 1;
 			break;
 		case RIGHT:
 			x = bossX + 1;
@@ -140,7 +137,7 @@ public class Boss extends EnemyCharacter {
 			break;
 		case DOWN:
 			x = bossX;
-			y = bossY - 1;
+			y = bossY + 1;
 			break;
 		case LEFT:
 			x = bossX - 1;

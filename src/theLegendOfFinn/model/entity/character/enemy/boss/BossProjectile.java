@@ -31,6 +31,11 @@ public class BossProjectile extends ActingEntity {
 		return true;
 	}
 
+	/**
+	 * Replaces the move method in ActingEntity.
+	 * Increments the corresponding coordinate.
+	 * 
+	 */
 	public void move() {
 		int yIncrement = 0, xIncrement = 0;
 

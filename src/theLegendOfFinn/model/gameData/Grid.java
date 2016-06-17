@@ -9,6 +9,7 @@ import theLegendOfFinn.model.utils.Position;
 /**
  * Provides a matrix of Entities to take record of the position
  * that every one of them occupies in the map.
+ * 
  */
 public class Grid implements Serializable {
 	private static final long serialVersionUID = 1L;
