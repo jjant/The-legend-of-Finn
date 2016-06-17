@@ -24,7 +24,7 @@ public class Grid implements Serializable {
 	/**
 	 * Adds a new Entity to the grid
 	 * 
-	 * @param entity
+	 * @param entity entity to add
 	 * @throws PositionOccupiedException if the intended position is occupied
 	 */
 	public void add(Entity entity) throws PositionOccupiedException {
@@ -59,7 +59,7 @@ public class Grid implements Serializable {
 	 * Occupies a position of the grid with an Entity.
 	 * 
 	 * @param entity the Entity that will occupy the position.
-	 * @param pos the position to be occupied.
+	 * @param position the position to be occupied.
 	 */
 	public void occupyPosition(Entity entity, Position position) {
 		matrix[position.getX() / Map.CELL_SIZE][position.getY() / Map.CELL_SIZE] = entity;
@@ -103,7 +103,7 @@ public class Grid implements Serializable {
 	/**
 	 * Gets an Entity in a particular position of the grid.
 	 * 
-	 * @param position
+	 * @param position position to look up
 	 * @return the Entity in the position.
 	 */
 	public Entity getEntity(Position position){

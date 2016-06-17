@@ -25,7 +25,7 @@ public class FileManager {
 	
 	/**
 	 * Creates a manager from a given one.
-	 * @param manager
+	 * @param manager to create from
 	 */
 	public static void createFileManager(Manager manager){
 		getFileManager().manager = manager;
@@ -56,6 +56,7 @@ public class FileManager {
 	/**
 	 * Loads a game from a file.
 	 * @return the generated ticker.
+	 * @throws ClassNotFoundException if class is not found. This should not happen.
 	 */
 	public Ticker loadGame() throws ClassNotFoundException {
 		try {

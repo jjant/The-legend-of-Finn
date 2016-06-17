@@ -43,7 +43,7 @@ public class ImageData {
 	
 	/**
 	 * Gets the image for a given index
-	 * @param index
+	 * @param index index given
 	 * @return the image
 	 */
 	public Image getImage(int index) {
@@ -52,7 +52,7 @@ public class ImageData {
 	
 	/**
 	 * Gets the position for a given index
-	 * @param index
+	 * @param index index given
 	 * @return the position
 	 */
 	public Position getPosition(int index) {
@@ -61,7 +61,7 @@ public class ImageData {
 
 	/**
 	 * Gets the height for a given index
-	 * @param index
+	 * @param index index given
 	 * @return the height
 	 */
 	public int getHeight(int index) {
@@ -70,7 +70,7 @@ public class ImageData {
 
 	/**
 	 * Gets the width for a given index
-	 * @param index
+	 * @param index index given
 	 * @return the width
 	 */
 	public int getWidth(int index) {
@@ -79,7 +79,7 @@ public class ImageData {
 
 	/**
 	 * Gets the amount of images
-	 * @return
+	 * @return amount of images
 	 */
 	public int size() {
 		return images.size();
@@ -109,7 +109,7 @@ public class ImageData {
 
 	/**
 	 * Adds a list of projectiles into the map
-	 * @param projectiles
+	 * @param projectiles list of projectiles
 	 */
 	public void add(List<BossProjectile> projectiles) {
 		Image sprite = spriteLoader.getSprites(projectiles);

@@ -43,8 +43,8 @@ public class Ticker implements Serializable {
 	/**
 	 * Renews the ticker, setting it up for a new game.
 	 * 
-	 * @param gameMode
-	 *            Either normal or survival.
+	 * @param gameMode Either normal or survival.
+	 *  
 	 */
 	public void renew(Round.RoundType gameMode) {
 		this.roundType = gameMode;

@@ -48,7 +48,7 @@ public class EventManager {
 	 * Handles an event
 	 * @param key key to handle
 	 * @param stage current stage
-	 * @return
+	 * @return new stage
 	 */
 	public Stage handleEvent(int key, Stage stage) {
 		Stage newStage = stageManagerSelector.get(stage).handleStage(key);
@@ -56,8 +56,8 @@ public class EventManager {
 	}
 
 	/**
-	 * Game over stage
-	 * @return
+	 * Gets game over stage
+	 * @return game over stage
 	 */
 	public Stage handlePlayerDeath() {
 		return Stage.GAMEOVER;

@@ -180,7 +180,7 @@ public class ActingEntity extends Entity {
 	 * Attacks a character. If there's no character to be attacked,
 	 * <code>null</code> is received.
 	 * 
-	 * @param character Character to be attacked (or null).
+	 * @param entity Entity to be attacked (or null).
 	 * @return true if could attack it, false otherwise
 	 */
 	public boolean attack(Entity entity) {

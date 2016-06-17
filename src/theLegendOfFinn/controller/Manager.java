@@ -69,6 +69,7 @@ public class Manager {
 	 * Initializes the game. Must be called when a new game is requested or a
 	 * game is to be loaded. Calling this method before having a ticker set is
 	 * unsafe and will throw an exception.
+	 * @throws TickerMissingException if ticker was not loaded correctly.
 	 */
 	public void initialize() throws TickerMissingException {
 		if (ticker == null)
@@ -176,6 +177,7 @@ public class Manager {
 
 	/**
 	 * Start the game flow
+	 * @param args default params
 	 */
 	public static void main(String[] args) {
 		new Manager();

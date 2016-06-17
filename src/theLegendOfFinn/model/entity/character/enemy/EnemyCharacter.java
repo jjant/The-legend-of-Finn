@@ -29,8 +29,8 @@ public abstract class EnemyCharacter extends Character {
 	/**
 	 * Sets the direction towards the player's position and tries to move forward.
 	 * 
-	 * @param playerPosition
-	 * @param grid
+	 * @param playerPosition player's position
+	 * @param grid game's entities grid
 	 */
 	public void chasePlayer(Position playerPosition, Grid grid) {
 		if (playerPosition == null || grid == null) return;
@@ -57,6 +57,7 @@ public abstract class EnemyCharacter extends Character {
 	 * Checks if the player is next to the enemy and if so, attacks him.
 	 * 
 	 * @param player playable character
+	 * @return true if could attack. false otherwise.
 	 */
 	public boolean attack(PlayerCharacter player) {
 		if (player != null && getPosition().isNearby(player.getPosition()) && getState() == IDLE) {

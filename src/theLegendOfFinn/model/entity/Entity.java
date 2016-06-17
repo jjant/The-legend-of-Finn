@@ -77,6 +77,7 @@ public class Entity implements Serializable {
 	 * delta measured in Map.CELL_SIZEs (using the taxicab norm).
 	 * 
 	 * @param entity The entity whose closeness we want to check.
+	 * @param delta distance default
 	 * @return true if the passed entity is close enough to this one, false otherwise.
 	 */
 	public boolean closeEnough(Entity entity, int delta) {

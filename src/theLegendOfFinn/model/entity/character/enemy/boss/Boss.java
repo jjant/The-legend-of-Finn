@@ -23,7 +23,7 @@ public class Boss extends EnemyCharacter {
 	// Boss default attributes
 	private static final Position BOSS_POSITION = new Position(Map.CELL_SIZE * 5, Map.CELL_SIZE * 5);
 	private static final int BOSS_VELOCITY = 3;
-	private static final int BOSS_MAX_HP = 10;
+	private static final int BOSS_MAX_HP = 15;
 	private static final int BOSS_ATTACK = 5;
 	private static final int BOSS_HP_BOUNTY = 0;
 	private static final long TELEPORT_DELAY = 1250;
@@ -74,7 +74,7 @@ public class Boss extends EnemyCharacter {
 	 * Replaces the tryToMove method in ActingEntity. Sets a random position
 	 * and moves.
 	 * 
-	 * @param grid
+	 * @param grid grid to act.
 	 */
 	public void tryToMove(Grid grid) {
 		if (state == IDLE) {
