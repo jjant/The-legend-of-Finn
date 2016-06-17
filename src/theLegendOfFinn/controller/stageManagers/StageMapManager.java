@@ -44,8 +44,6 @@ public class StageMapManager extends StageManager {
 			break;
 		case KeyEvent.VK_A:
 			Position posToAttack = player.getPosition().toGridIndexes(player.getDirection());
-			System.out.println(posToAttack);
-			System.out.println(player.getDirection());
 			if (posToAttack != null) {
 				int x = posToAttack.getX();
 				int y = posToAttack.getY();
