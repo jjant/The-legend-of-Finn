@@ -48,7 +48,7 @@ public class Ticker implements Serializable {
 	 */
 	public void renew(Round.RoundType gameMode) {
 		this.roundType = gameMode;
-		roundNumber = 8;
+		roundNumber = 0;
 		round = new Round(gameMode, roundNumber);
 		this.map = new Map(new PlayerCharacter(), round.getRoundEnemies());
 	}
