@@ -3,7 +3,9 @@ package theLegendOfFinn.model.gameData;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
+import theLegendOfFinn.controller.Manager;
 import theLegendOfFinn.model.entity.character.PlayerCharacter;
 import theLegendOfFinn.model.entity.character.enemy.EnemyCharacter;
 import theLegendOfFinn.model.entity.character.enemy.boss.Boss;
@@ -44,7 +46,7 @@ public class Map implements Serializable {
 		try {
 			grid.add(player);
 		} catch (PositionOccupiedException e) {
-			e.printStackTrace();
+			Manager.LOGGER.log(Level.FINE, "Tried to override occupied position", e);
 		}
 		this.enemyList = enemyList;
 	}

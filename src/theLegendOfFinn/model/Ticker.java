@@ -29,7 +29,6 @@ public class Ticker implements Serializable {
 	private Round round;
 	private Boolean canModify = false;
 	private transient Notifier notifier;
-	// probando
 	private Arena arena;
 
 	public Ticker(Notifier notifier, Round.RoundType gameMode) {
@@ -77,7 +76,6 @@ public class Ticker implements Serializable {
 		Iterator<BossProjectile> iter = projectiles.iterator();
 		while(iter.hasNext()){
 			BossProjectile projectile = iter.next();
-			//projectile.tryToMove(projectile.getDirection(), map.getGrid());
 			projectile.move();
 			if(projectile.attack(getPlayer()))
 				iter.remove();

@@ -4,9 +4,11 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
 
 import javax.imageio.ImageIO;
 
+import theLegendOfFinn.controller.Manager;
 import theLegendOfFinn.model.entity.character.PlayerCharacter;
 
 /**
@@ -36,7 +38,7 @@ public class GUIRenderer implements Renderer {
 			halfHeart = ImageIO.read(new File("./Assets/gui/halfHeart.png"));
 			fullHeart = ImageIO.read(new File("./Assets/gui/fullHeart.png"));
 		} catch (IOException e) {
-			e.printStackTrace();
+			Manager.LOGGER.log(Level.FINE, "GUI image missing.", e);
 		}
 	}
 
