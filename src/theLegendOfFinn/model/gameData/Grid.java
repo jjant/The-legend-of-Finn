@@ -94,9 +94,7 @@ public class Grid implements Serializable {
 	 * @return true if there are, false otherwise.
 	 */
 	public boolean areEnemiesLeft() {
-		if (enemiesAlive > 0)
-			return true;
-		return false;
+		return enemiesAlive > 0;
 	}
 
 	public int getHeight() {

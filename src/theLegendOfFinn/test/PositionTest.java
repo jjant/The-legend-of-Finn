@@ -39,13 +39,11 @@ public class PositionTest {
     public void shouldBeNearby() {
         Position pos2 = new Position(Map.CELL_SIZE,0);
         assertTrue(pos.isNearby(pos2));
-
     }
 
     @Test
     public void shouldntBeNearby() {
         Position pos2 = new Position(Map.CELL_SIZE+1,0);
         assertFalse(pos.isNearby(pos2));
-
     }
 }

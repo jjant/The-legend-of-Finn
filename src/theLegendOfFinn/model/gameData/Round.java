@@ -24,6 +24,9 @@ public class Round implements Serializable {
 		NORMAL, BOSS, SURVIVAL;
 	}
 	
+	public Round(RoundType roundType) {
+		this(roundType, 0);
+	}
 	
 	public Round(RoundType roundType, int roundNumber) {
 		this.enemies = new ArrayList<>();

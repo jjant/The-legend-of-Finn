@@ -33,6 +33,7 @@ public class CharacterTest {
 		for (int i = 0; i < 5; i++) {
 			enemy.attack(player);
 			Thread.sleep(510);
+			enemy.updateStatus();
 		}
 		assertFalse("Player died when killed by the enemy.", player.isAlive());
 	}
@@ -42,6 +43,7 @@ public class CharacterTest {
 		for (int i = 0; i < 5; i++) {
 			player.attack(enemy);
 			Thread.sleep(510);
+			player.updateStatus();
 		}
 		assertFalse("Enemy died when killed by the Player.", enemy.isAlive());
 	}
@@ -72,6 +74,7 @@ public class CharacterTest {
 		for (int i = 0; i < 2; i++) {
 			enemy.attack(player);
 			Thread.sleep(510);
+			enemy.updateStatus();
 		}
 
 		int playerHP = player.getCurrentHP();
@@ -80,6 +83,7 @@ public class CharacterTest {
 		for (int i = 0; i < 5; i++) {
 			player.attack(enemy);
 			Thread.sleep(510);
+			player.updateStatus();
 		}
 		boolean recoveredCorrectLife = player.getCurrentHP() == playerHP + enemy.getHPBounty()
 				|| player.getCurrentHP() == player.getMaxHP();
