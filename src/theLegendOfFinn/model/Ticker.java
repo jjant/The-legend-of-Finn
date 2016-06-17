@@ -13,6 +13,7 @@ import theLegendOfFinn.model.gameData.Map;
 import theLegendOfFinn.model.gameData.Round;
 import theLegendOfFinn.model.gameData.Round.RoundType;
 import theLegendOfFinn.model.entity.Entity;
+
 /**
  * Class responsible for updating the model.
  */
@@ -38,7 +39,9 @@ public class Ticker implements Serializable {
 
 	/**
 	 * Renews the ticker, setting it up for a new game.
-	 * @param gameMode Either normal or survival. 
+	 * 
+	 * @param gameMode
+	 *            Either normal or survival.
 	 */
 	public void renew(Round.RoundType gameMode) {
 		this.roundType = gameMode;
@@ -57,8 +60,7 @@ public class Ticker implements Serializable {
 			player.updateStatus();
 			if (roundType.equals(Round.RoundType.BOSS)) {
 				tickBoss();
-			}
-			else {
+			} else {
 				behaviourEnemies(map.getEnemies());
 			}
 			if (!player.isAlive())
@@ -71,19 +73,24 @@ public class Ticker implements Serializable {
 	 */
 	public void tickBoss() {
 		Boss boss = getBoss();
-		boss.act(map.getGrid());
-		List<BossProjectile> projectiles = boss.getProjectiles();
-		Iterator<BossProjectile> iter = projectiles.iterator();
-		while(iter.hasNext()){
-			BossProjectile projectile = iter.next();
-			projectile.move();
-			if(projectile.attack(getPlayer()))
-				iter.remove();
-				
-			if(!projectile.getPosition().withinBoundaries()){
-				iter.remove();
+		if (boss.isAlive()) {
+			boss.act(map.getGrid());
+			List<BossProjectile> projectiles = boss.getProjectiles();
+			Iterator<BossProjectile> iter = projectiles.iterator();
+			while (iter.hasNext()) {
+				BossProjectile projectile = iter.next();
+				projectile.move();
+				if (projectile.attack(getPlayer()))
+					iter.remove();
+
+				if (!projectile.getPosition().withinBoundaries()) {
+					iter.remove();
+				}
 			}
 		}
+		else
+			notifier.notifyWin();
+		
 	}
 
 	public static Ticker loadTicker(Ticker ticker) {
@@ -92,6 +99,7 @@ public class Ticker implements Serializable {
 
 	/**
 	 * Returns the list of enemies from the current map.
+	 * 
 	 * @return list of enemies.
 	 */
 	public List<EnemyCharacter> getEnemies() {
@@ -100,6 +108,7 @@ public class Ticker implements Serializable {
 
 	/**
 	 * Gets the player character.
+	 * 
 	 * @return the player character.
 	 */
 	public PlayerCharacter getPlayer() {

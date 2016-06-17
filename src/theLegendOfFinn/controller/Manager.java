@@ -102,13 +102,19 @@ public class Manager {
 		return ticker;
 	}
 
+	/**
+	 * Updates the stage according to the player death.
+	 */
 	public void gameOver() {
 		updateStage(eventManager.handlePlayerDeath());
 	}
 
+	/**
+	 * Displays win message and quits.
+	 */
 	public void win() {
 		masterRenderer.displayWin();
-		updateStage(RenderManager.Stage.MENU);
+		System.exit(0);
 	}
 
 	public void keyChange(int key) {
