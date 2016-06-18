@@ -1,5 +1,8 @@
 package theLegendOfFinn.model.exceptions;
 
+/**
+ * Exception launched when trying to overwrite a position in the entitites grid.
+ */
 public class PositionOccupiedException extends Exception {
 	private static final long serialVersionUID = 1L;
 

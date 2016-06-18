@@ -19,17 +19,19 @@ import theLegendOfFinn.model.entity.Entity.Direction;
 
 public class SpriteLoader {
 	private Map<Class<?>, Map<Integer, Map<Direction, Image>>> classMap;
-
+	
+	// Enemy names to index assets
 	private enum EnemyName {
 		Dog, Penguin, Donut, King;
 	}
-
+	
+	// Directories to look for assets
 	private final static String playerSpritesPath = "./Assets/characters/player/";
 	private final static String enemySpritesPath = "./Assets/characters/enemies/";
 	private final static String BossSpritesPath = "./Assets/characters/boss/";
 	private final static String BossProjectilePath = "./Assets/characters/boss/Boss_STAR.gif";
-
-	// cambiar dsp
+	
+	// Possible states for renderizable sprites
 	private final static int[] characterStates = new int[] { Character.ATTACKING, Character.IDLE, Character.MOVING };
 
 	public SpriteLoader() {
@@ -48,15 +50,31 @@ public class SpriteLoader {
 		classMap.put(EnemyKing.class, kingMap);
 		classMap.put(Boss.class, bossMap);
 	}
-
+	
+	/**
+	 * Returns a map which maps a direction to an image
+	 * @param character character from which load the image
+	 * @return a map
+	 */
 	public Map<Direction, Image> getSprites(Character character) {
 		return classMap.get(character.getClass()).get(character.getState());
 	}
-
+	
+	/**
+	 * Return an image from a list of projectiles
+	 * @param projectiles list of projectiles
+	 * @return the image
+	 */
 	public Image getSprites(List<BossProjectile> projectiles) {
 		return new ImageIcon(BossProjectilePath).getImage();
 	}
 
+	/**
+	 * Returns a map which maps states to the map of directions->images
+	 * @param spritesPath path for a given sprite
+	 * @param characterName name for characters
+	 * @return a map
+	 */
 	private Map<Integer, Map<Direction, Image>> loadSprites(String spritesPath, String characterName) {
 		Map<Integer, Map<Direction, Image>> characterMap = new HashMap<>();
 		for (int state : characterStates) {
@@ -71,14 +89,27 @@ public class SpriteLoader {
 		return characterMap;
 	}
 
+	/**
+	 * Loads sprites for the player into the map
+	 * @return the map
+	 */
 	private Map<Integer, Map<Direction, Image>> loadPlayerSprites() {
 		return loadSprites(playerSpritesPath, "Finn");
 	}
 
+	/**
+	 * Loads the sprite for a given enemy into the map
+	 * @param enemyName name of the enemy
+	 * @return the map
+	 */
 	private Map<Integer, Map<Direction, Image>> loadEnemySprites(EnemyName enemyName) {
 		return loadSprites(enemySpritesPath, enemyName.toString());
 	}
 
+	/**
+	 * Loads the sprites for the boss into the map.
+	 * @return the map.
+	 */
 	private Map<Integer, Map<Direction, Image>> loadBossSprites() {
 		Map<Integer, Map<Direction, Image>> characterMap = new HashMap<>();
 		for (int state : characterStates) {
@@ -92,7 +123,11 @@ public class SpriteLoader {
 		return characterMap;
 	}
 
-	// revisar. medio villero q este aca, pero bue.
+	/**
+	 * Casts a state into a string.
+	 * @param state State to cast
+	 * @return the string
+	 */
 	private String stateToString(int state) {
 		String stateString = null;
 		switch (state) {
@@ -105,7 +140,6 @@ public class SpriteLoader {
 		case Character.MOVING:
 			stateString = "MOVING";
 			break;
-		// revisar dsp
 		default:
 			break;
 		}

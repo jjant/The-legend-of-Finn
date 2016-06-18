@@ -7,7 +7,6 @@ import theLegendOfFinn.model.Ticker;
 
 /**
  * Manages the model's updates.
- *
  */
 public class ModelManager implements Runnable {
 	private Ticker ticker;
@@ -17,6 +16,9 @@ public class ModelManager implements Runnable {
 		ticker = manager.getTicker();
 	}
 
+	/**
+	 * Initialized the model thread
+	 */
 	public void initialize(){
 		thread = new Thread(this, "Model manager thread");
 		thread.start();

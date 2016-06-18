@@ -9,34 +9,12 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Parent class of all the enemies.
- * 
  */
 public abstract class EnemyCharacter extends Character {
 	private static final long serialVersionUID = 1L;
 
-	// Enemies' attributes.
-	public static final int WARRIOR_MAX_HP = 1;
-	public static final int WARRIOR_ATTACK = 1;
-	public static final int WARRIOR_VELOCITY = 1;
-	public static final int WARRIOR_HP_BOUNTY = 1;
-	
-	public static final int DOG_MAX_HP = 2;
-	public static final int DOG_ATTACK = 2;
-	public static final int DOG_VELOCITY = 1;
-	public static final int DOG_HP_BOUNTY = 1;
-	
-	public static final int DONUT_MAX_HP = 3;
-	public static final int DONUT_ATTACK = 2;
-	public static final int DONUT_VELOCITY = 1;
-	public static final int DONUT_HP_BOUNTY = 2;
-	
-	public static final int KING_MAX_HP = 3;
-	public static final int KING_ATTACK = 2;
-	public static final int KING_VELOCITY = 2;
-	public static final int KING_HP_BOUNTY = 2;
-
 	// Amount of hp the enemy restores to the player when killed.
-	private int hpBounty = 1;
+	private int hpBounty;
 
 	public EnemyCharacter(Position pos, Direction direction, int velocity, int maxHP, int attack, int hpBounty) {
 		super(pos, direction, velocity, maxHP, attack);
@@ -51,8 +29,8 @@ public abstract class EnemyCharacter extends Character {
 	/**
 	 * Sets the direction towards the player's position and tries to move forward.
 	 * 
-	 * @param playerPosition
-	 * @param grid
+	 * @param playerPosition player's position
+	 * @param grid game's entities grid
 	 */
 	public void chasePlayer(Position playerPosition, Grid grid) {
 		if (playerPosition == null || grid == null) return;
@@ -78,7 +56,8 @@ public abstract class EnemyCharacter extends Character {
 	/**
 	 * Checks if the player is next to the enemy and if so, attacks him.
 	 * 
-	 * @param player
+	 * @param player playable character
+	 * @return true if could attack. false otherwise.
 	 */
 	public boolean attack(PlayerCharacter player) {
 		if (player != null && getPosition().isNearby(player.getPosition()) && getState() == IDLE) {
@@ -87,6 +66,10 @@ public abstract class EnemyCharacter extends Character {
 		return false;
 	}
 
+	/**
+	 * Gets amount of hp the enemy restores to the player when killed.
+	 * @return the total amount.
+	 */
 	public int getHPBounty() {
 		return hpBounty;
 	}

@@ -23,22 +23,30 @@ import theLegendOfFinn.view.menu.ModeRenderer;
 import theLegendOfFinn.view.menu.PauseRenderer;
 import theLegendOfFinn.view.menu.StartingMenuRenderer;
 
+/**
+ * Manages every renderer in the game. Controls the renderization flow.
+ */
 public class MasterRenderer extends Canvas implements KeyListener {
 	private static final long serialVersionUID = 1L;
 
+	// Default messages
 	private static final String SAVEFILE_ISSING_MESSAGE = "savefile.finn not found.";
 	private static final String WIN_MESSAGE = "Congratulations! You've won!";
 	
+	// Default renderization attributes
 	public static final int WIDTH = 640;
 	public static final int HEIGHT = WIDTH * 3 / 4;
 	public static final String TITLE = "The legend of Finn";
 
+	// Controller communicator
 	private Delegate delegate;
 
+	// Graphic view attributes
 	private JFrame frame;
 	private BufferStrategy bs;
 	private Graphics g;
 
+	// Renderers to manage
 	private CharacterRenderer characterRenderer;
 	private MapRenderer mapRenderer;
 	private MenuRenderer startingMenuRenderer;
@@ -73,11 +81,18 @@ public class MasterRenderer extends Canvas implements KeyListener {
 		requestFocus();
 	}
 
+	/**
+	 * Initialized the renderization with the GUI and the map.
+	 */
 	public void initialize() {
 		mapRenderer = new MapRenderer(delegate.getMap(), delegate.getArena());
 		guiRenderer = new GUIRenderer(delegate.getPlayer());
 	}
 
+	/**
+	 * Renders a given stage with every needed asset.
+	 * @param stage stage to render.
+	 */
 	public void render(RenderManager.Stage stage) {
 		bs = getBufferStrategy();
 		if (bs == null) {
@@ -124,26 +139,49 @@ public class MasterRenderer extends Canvas implements KeyListener {
 		g.dispose();
 	}
 
+	/**
+	 * Sets the map renderer
+	 * @param mapRenderer map renderer to set
+	 */
 	public void setMapRenderer(MapRenderer mapRenderer) {
 		this.mapRenderer = mapRenderer;
 	}
 
+	/**
+	 * Sets the menu renderer
+	 * @param menuRenderer menu render to set
+	 */
 	public void setMenuRenderer(MenuRenderer menuRenderer) {
 		this.startingMenuRenderer = menuRenderer;
 	}
 
+	/**
+	 * Sets the pause renderer
+	 * @param pauseRenderer Pause renderer to set
+	 */
 	public void setPauseRenderer(PauseRenderer pauseRenderer) {
 		this.pauseRenderer = pauseRenderer;
 	}
 
+	/**
+	 * Sets the map selection renderer
+	 * @param mapSelectionRenderer map selection renderer to set
+	 */
 	public void setMapSelectionRenderer(MapSelectionRenderer mapSelectionRenderer) {
 		this.mapSelectionRenderer = mapSelectionRenderer;
 	}
 
+	/**
+	 * Sets the mode renderer
+	 * @param modeRenderer mode renderer to set
+	 */
 	public void setModeRenderer(ModeRenderer modeRenderer) {
 		this.modeRenderer = modeRenderer;
 	}
 
+	/**
+	 * Displays a file missing message to show when a file did't loaded.
+	 */
 	public void displayFileMissing() {
 		JOptionPane.showMessageDialog(frame, SAVEFILE_ISSING_MESSAGE);
 	}
@@ -157,32 +195,53 @@ public class MasterRenderer extends Canvas implements KeyListener {
 		return startingMenuRenderer;
 	}
 
+	/**
+	 * Gets the pause renderer
+	 * @return pause renderer
+	 */
 	public PauseRenderer getPauseRenderer() {
 		return pauseRenderer;
 	}
 
+	/**
+	 * Gets the game over renderer
+	 * @return game over renderer
+	 */
 	public GameOverRenderer getGameOverRenderer() {
 		return gameOverRenderer;
 	}
 
+	/**
+	 * Gets the map selection renderer
+	 * @return map selection renderer
+	 */
 	public MapSelectionRenderer getMapSelectionRenderer() {
 		return mapSelectionRenderer;
 	}
 
+	/**
+	 * Gets the mode renderer
+	 * @return mode renderer
+	 */
 	public ModeRenderer getModeRenderer() {
 		return modeRenderer;
 	}
 
+	/**
+	 * Communicate the key pressed to the controller
+	 */
 	public void keyPressed(KeyEvent e) {
 		delegate.passKeyPressed(e.getKeyCode());
 	}
+	
+	// Overwrite key events
+	public void keyReleased(KeyEvent e) {}
+	public void keyTyped(KeyEvent e) {}
 
-	public void keyReleased(KeyEvent e) {
-	}
-
-	public void keyTyped(KeyEvent e) {
-	}
-
+	/**
+	 * Sets window title's suffix
+	 * @param suffix suffix to append
+	 */
 	public void setTitleSuffix(String suffix) {
 		frame.setTitle(MasterRenderer.TITLE + suffix);
 	}

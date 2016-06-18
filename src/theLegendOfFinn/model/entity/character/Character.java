@@ -36,8 +36,7 @@ public abstract class Character extends ActingEntity implements Serializable {
 	/**
 	 * Sets the maximum health points of this character.
 	 * 
-	 * @param maxHP
-	 *            the new amount of maximum health points.
+	 * @param maxHP the new amount of maximum health points.
 	 */
 	protected void setMaxHP(int maxHP) {
 		this.maxHP = maxHP;
@@ -56,8 +55,7 @@ public abstract class Character extends ActingEntity implements Serializable {
 	 * Sets the maximum health points of this character. If a value greater than
 	 * this character's maxHP is passed, the current HP is set to maxHP.
 	 * 
-	 * @param maxHP
-	 *            the new amount of maximum health points.
+	 * @param maxHP the new amount of maximum health points.
 	 */
 	protected void setCurrent(int currentHP) {
 		if (currentHP > maxHP)
@@ -78,8 +76,7 @@ public abstract class Character extends ActingEntity implements Serializable {
 	/**
 	 * Set health points (HP) to a new value
 	 * 
-	 * @param newHP
-	 *            new value to set the health points.
+	 * @param newHP new value to set the health points.
 	 */
 	protected void setCurrentHP(int newHP) {
 		this.currentHP = newHP;
@@ -88,8 +85,7 @@ public abstract class Character extends ActingEntity implements Serializable {
 	/**
 	 * Takes an amount of damage from a given character
 	 * 
-	 * @param actingEntity
-	 *            Character who attacks.
+	 * @param actingEntity Character who attacks.
 	 */
 	public void receiveAttack(ActingEntity actingEntity) {
 		setCurrentHP(getCurrentHP() - actingEntity.getAttack());
@@ -99,16 +95,10 @@ public abstract class Character extends ActingEntity implements Serializable {
 	 * Updates status to corresponding one.
 	 */
 	public void updateStatus() {
-		// long now = System.currentTimeMillis();
 		long nowTime = System.currentTimeMillis();
 
-		if (state == ATTACKING && this.getTimer().attackTimePassed(nowTime))
-			state = IDLE;
-		/*
-		 * if (state == ATTACKING && now - lastAttackTime >= ATTACK_COOLDOWN)
-		 * state = IDLE;
-		 */
-		else if ((state == MOVING) && moveRemaining <= 0)
+		if (state == ATTACKING && this.getTimer().attackTimePassed(nowTime) ||
+			state == MOVING && moveRemaining <= 0)
 			state = IDLE;
 	}
 

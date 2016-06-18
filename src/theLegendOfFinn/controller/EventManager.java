@@ -12,9 +12,14 @@ import theLegendOfFinn.controller.stageManagers.StageModeManager;
 import theLegendOfFinn.controller.stageManagers.StageMapSelectionManager;
 import theLegendOfFinn.controller.stageManagers.StagePauseManager;
 
+/**
+ * Manages every event occurred during the game.
+ *
+ */
 public class EventManager {
 	private Map<Stage, StageManager> stageManagerSelector;
 
+	// Stage managers
 	private StageManager menuManager;
 	private StageManager gameOverManager;
 	private StageManager mapManager;
@@ -39,11 +44,21 @@ public class EventManager {
 		stageManagerSelector.put(Stage.MODE, modeManager);
 	}
 
+	/**
+	 * Handles an event
+	 * @param key key to handle
+	 * @param stage current stage
+	 * @return new stage
+	 */
 	public Stage handleEvent(int key, Stage stage) {
 		Stage newStage = stageManagerSelector.get(stage).handleStage(key);
 		return newStage;
 	}
 
+	/**
+	 * Gets game over stage
+	 * @return game over stage
+	 */
 	public Stage handlePlayerDeath() {
 		return Stage.GAMEOVER;
 	}

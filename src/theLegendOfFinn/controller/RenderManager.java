@@ -2,7 +2,11 @@ package theLegendOfFinn.controller;
 
 import theLegendOfFinn.view.MasterRenderer;
 
+/**
+ * Manages the game's view renderization.
+ */
 public class RenderManager implements Runnable {
+	// Possible game stages
 	public enum Stage {
 		MENU, MAP, PAUSE, GAMEOVER, MAPSELECTION, MODE;
 	}
@@ -13,10 +17,10 @@ public class RenderManager implements Runnable {
 	
 	private Stage stage;
 
+	// Default values for renderization
 	private final double fps = 60.0;
 	private final double ns = 100000000.0 / fps;
 	private long lastTime;
-	private static long lastSecond;
 	private double delta;
 	
 
@@ -24,12 +28,11 @@ public class RenderManager implements Runnable {
 		this.masterRenderer = manager.getMasterRenderer();
 	}
 
-	/**Initializes the rendering of the game.
-	 * 
+	/**
+	 * Initializes the rendering of the game.
 	 */
 	public void initialize() {
 		lastTime = System.nanoTime();
-		lastSecond = System.currentTimeMillis();
 		delta = 0;
 		
 		stage = Stage.MENU;
@@ -37,8 +40,8 @@ public class RenderManager implements Runnable {
 		thread.start();
 	}
 	
-	/**Loop that renders the game.
-	 * 
+	/**
+	 * Loop that renders the game.
 	 */
 	public void run() {
 		while (true) {
@@ -51,26 +54,17 @@ public class RenderManager implements Runnable {
 			}			
 		}
 	}
-
-	public static boolean secondPassed() {
-		long now = System.currentTimeMillis();
-		if ((now - lastSecond) >= 15) {
-			lastSecond = now;
-			return true;
-		}
-		return false;
-	}
 	
-	/** Returns the current stage of the game.
-	 * 
+	/** 
+	 * Returns the current stage of the game.
 	 * @return the current stage.
 	 */
 	public Stage getStage(){
 		return stage;
 	}
 	
-	/** Sets the current stage of the game.
-	 * 
+	/** 
+	 * Sets the current stage of the game.
 	 * @param stage the stage to be set.
 	 */
 	public void setStage(Stage stage){

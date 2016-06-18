@@ -52,6 +52,3 @@ local.properties
 
 # Savegame
 *.finn
-
-# Javadocs documentation
-.doc/

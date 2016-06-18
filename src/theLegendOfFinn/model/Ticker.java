@@ -19,15 +19,18 @@ import theLegendOfFinn.model.entity.Entity;
  */
 public class Ticker implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
+	// Different arenas to play on.
 	public enum Arena {
 		GRASS, ICE, LAVA, MOUNTAIN;
 	}
 
+	// Round fields. Represent the enemies on the map on a given point.
 	private int roundNumber;
 	private Round.RoundType roundType;
-	private Map map;
 	private Round round;
+	
+	private Map map;
 	private Boolean canModify = false;
 	private transient Notifier notifier;
 	private Arena arena;
@@ -40,12 +43,12 @@ public class Ticker implements Serializable {
 	/**
 	 * Renews the ticker, setting it up for a new game.
 	 * 
-	 * @param gameMode
-	 *            Either normal or survival.
+	 * @param gameMode Either normal or survival.
+	 *  
 	 */
 	public void renew(Round.RoundType gameMode) {
 		this.roundType = gameMode;
-		roundNumber = 8;
+		roundNumber = 0;
 		round = new Round(gameMode, roundNumber);
 		this.map = new Map(new PlayerCharacter(), round.getRoundEnemies());
 	}
@@ -58,11 +61,10 @@ public class Ticker implements Serializable {
 			PlayerCharacter player = map.getPlayer();
 			player.move();
 			player.updateStatus();
-			if (roundType.equals(Round.RoundType.BOSS)) {
+			if (roundType.equals(Round.RoundType.BOSS))
 				tickBoss();
-			} else {
+			else
 				behaviourEnemies(map.getEnemies());
-			}
 			if (!player.isAlive())
 				notifier.NotifyDeath();
 		}
@@ -92,11 +94,7 @@ public class Ticker implements Serializable {
 			notifier.notifyWin();
 		
 	}
-
-	public static Ticker loadTicker(Ticker ticker) {
-		return ticker;
-	}
-
+	
 	/**
 	 * Returns the list of enemies from the current map.
 	 * 
@@ -114,16 +112,27 @@ public class Ticker implements Serializable {
 	public PlayerCharacter getPlayer() {
 		return map.getPlayer();
 	}
-
+	
+	/**
+	 * Loads a new map into the game
+	 * @param map map to load.
+	 */
 	public void loadMap(Map map) {
 		this.map = map;
 	}
 
+	/**
+	 * Gets the current game's map.
+	 * @return the map.
+	 */
 	public Map getMap() {
 		return map;
 	}
 
-	// Maybe rename to: toggleMovement
+	/**
+	 * Sets the game's stop condition
+	 * @param b the truth value
+	 */
 	public void changeModifier(Boolean b) {
 		canModify = b;
 	}
@@ -131,8 +140,7 @@ public class Ticker implements Serializable {
 	/**
 	 * Sets the enemies' behavior: They'll seek to chase and attack the player.
 	 * 
-	 * @param enemies
-	 *            List of enemies who's behavior is to be set.
+	 * @param enemies List of enemies who's behavior is to be set.
 	 */
 	private void behaviourEnemies(List<EnemyCharacter> enemies) {
 		if (canModify) {
@@ -146,64 +154,91 @@ public class Ticker implements Serializable {
 					enemy.move();
 				} else {
 					if (enemy.getPosition().getY() % Map.CELL_SIZE != 0
-							&& enemy.getDirection() == Entity.Direction.DOWN)
+						&& enemy.getDirection() == Entity.Direction.DOWN)
 						enemy.getPosition().incY(Map.CELL_SIZE);
 					else if (enemy.getPosition().getX() % Map.CELL_SIZE != 0
-							&& enemy.getDirection() == Entity.Direction.RIGHT)
+						&& enemy.getDirection() == Entity.Direction.RIGHT)
 						enemy.getPosition().incX(Map.CELL_SIZE);
+					
 					map.getGrid().freePosition(enemy.getPosition());
 					enemyIter.remove();
 				}
 			}
 		}
 	}
-
+	
+	/**
+	 * Says when a round is finished (Every enemy is dead).
+	 * @return true if there are not enemies left. false otherwise.
+	 */
 	public boolean roundFinished() {
 		return !round.enemiesLeft();
 	}
-	//
 
+	/**
+	 * Sets a round
+	 * @param round round to set.
+	 */
 	public void setRound(Round round) {
 		this.round = round;
 	}
 
+	/**
+	 * Manages rounds by brining the next one taking into account
+	 * the enemies, rounds, and game modes.
+	 */
 	public void nextRound() {
 		roundNumber++;
 		if (roundNumber == 2 && roundType == Round.RoundType.NORMAL
-				|| roundNumber == 8 && roundType == Round.RoundType.SURVIVAL)
+			|| roundNumber == 8 && roundType == Round.RoundType.SURVIVAL)
 			getPlayer().levelUp();
 
 		if (roundType == Round.RoundType.NORMAL) {
-			if (roundNumber == 9) {
+			if (roundNumber == 9)
 				roundType = Round.RoundType.BOSS;
-
-			}
 		} else if (roundType == Round.RoundType.BOSS) {
 			// should display YOU WIN or something like that and return to main
 			// menu.
 		}
 		round = new Round(roundType, roundNumber);
-		// round = Round.round2();
 		updateMap();
 	}
 
+	/**
+	 * Updates map's round
+	 */
 	public void updateMap() {
 		map.setRound(round);
 	}
 
-	// shoud only be called when game is looadded, change this mehtod's aname
+	/**
+	 * Changes the game notifier
+	 * @param notifier notifier to update.
+	 */
 	public void setNotifier(Notifier notifier) {
 		this.notifier = notifier;
 	}
 
+	/**
+	 * Gets the current arena
+	 * @return arena
+	 */
 	public Arena getArena() {
 		return arena;
 	}
 
+	/**
+	 * Sets arena to a given one.
+	 * @param arena to load.
+	 */
 	public void setArena(Arena arena) {
 		this.arena = arena;
 	}
 
+	/**
+	 * Gets the boss if there is one in the map. Null otherwise.
+	 * @return the boss.
+	 */
 	private Boss getBoss() {
 		if (!roundType.equals(RoundType.BOSS))
 			return null;

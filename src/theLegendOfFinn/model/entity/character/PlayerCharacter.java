@@ -15,10 +15,11 @@ import theLegendOfFinn.view.Renderer;
 public class PlayerCharacter extends Character {
 	private static final long serialVersionUID = 1L;
 
-	public static final int[] PLAYER_MAX_HP = { 6, 10 };
-	public static final int[] PLAYER_ATTACK = { 1, 2 };
-	public static final int[] PLAYER_VELOCITY = { 5, 5 };
-
+	private static final int[] PLAYER_MAX_HP = { 6, 10 };
+	private static final int[] PLAYER_ATTACK = { 1, 2 };
+	private static final int[] PLAYER_VELOCITY = { 5, 5 };
+	
+	// Level of attributes
 	private int level = 0;
 	
 	public PlayerCharacter() {

@@ -10,7 +10,6 @@ import theLegendOfFinn.model.entity.character.PlayerCharacter;
 import theLegendOfFinn.model.entity.character.enemy.EnemyCharacter;
 import theLegendOfFinn.model.entity.character.enemy.boss.Boss;
 import theLegendOfFinn.model.exceptions.PositionOccupiedException;
-import theLegendOfFinn.model.utils.Position;
 
 /**
  * Contains the characters of the game and the grid of entities.
@@ -24,16 +23,12 @@ public class Map implements Serializable {
 	// width and height of the map measured in grid positions.
 	public static final int WIDTH = 640 / CELL_SIZE;
 	public static final int HEIGHT = ((WIDTH * 3) / 4);
-	
-	// useful positions in the map.
-	public static final Position TOP_LEFT_CORNER = new Position(0, 0);
-	public static final Position BOTTOM_LEFT_CORNER = new Position(0, (HEIGHT - 1) * CELL_SIZE);
-	public static final Position TOP_RIGHT_CORNER = new Position((WIDTH - 1) * CELL_SIZE, 0);
-	public static final Position BOTTOM_RIGHT_CORNER = new Position((WIDTH - 1) * CELL_SIZE, (HEIGHT - 1) * CELL_SIZE);
 
+	// entities interacting in the grid
 	private PlayerCharacter player;
 	private List<EnemyCharacter> enemyList;
 	
+	// entities containing grid
 	private Grid grid;
 
 	public Map(PlayerCharacter player) {
@@ -51,14 +46,26 @@ public class Map implements Serializable {
 		this.enemyList = enemyList;
 	}
 
+	/**
+	 * Gets the playable character
+	 * @return the playable character
+	 */
 	public PlayerCharacter getPlayer() {
 		return player;
 	}
 	
+	/**
+	 * Get the list of enemies in the current map.
+	 * @return the enemies' list.
+	 */
 	public List<EnemyCharacter> getEnemies() {
 		return enemyList;
 	}
 	
+	/**
+	 * Gets the boss in the map if there is one, null otherwise
+	 * @return the boss
+	 */
 	public Boss getBoss(){
 		if(enemyList.get(0) instanceof Boss)
 			return (Boss)enemyList.get(0);
@@ -77,8 +84,7 @@ public class Map implements Serializable {
 	/**
 	 * Loads the enemies of a round to the enemyList of the map.
 	 * 
-	 * @param round
-	 * 				a round with an array of enemies.
+	 * @param round a round with an array of enemies.
 	 */
 	public void setRound(Round round){
 		enemyList = round.getRoundEnemies();

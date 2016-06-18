@@ -20,35 +20,28 @@ import theLegendOfFinn.model.utils.Position;
 public class Boss extends EnemyCharacter {
 	private static final long serialVersionUID = 1L;
 
-	// probando
-	// private static final int RESTING_TIME = 1000;
-
-	// cambiar dsp
+	// Boss default attributes
 	private static final Position BOSS_POSITION = new Position(Map.CELL_SIZE * 5, Map.CELL_SIZE * 5);
 	private static final int BOSS_VELOCITY = 3;
-	private static final int BOSS_MAX_HP = 10;
+	private static final int BOSS_MAX_HP = 15;
 	private static final int BOSS_ATTACK = 5;
 	private static final int BOSS_HP_BOUNTY = 0;
 	private static final long TELEPORT_DELAY = 1250;
 
-	private List<BossProjectile> projectiles;
+	private final List<BossProjectile> projectiles = new ArrayList<>();
 	private int lastAction = Boss.MOVING;
-	private Random moveRandomizer;
-
+	private final Random moveRandomizer = new Random();
 	private Position nextPosition;
 
 	public Boss() {
 		super(BOSS_POSITION, BOSS_VELOCITY, BOSS_MAX_HP, BOSS_ATTACK, BOSS_HP_BOUNTY);
-		projectiles = new ArrayList<>();
-		moveRandomizer = new Random();
 	}
 
 	/**
 	 * Checks which is the action to perform next and calls
 	 * the corresponding method.
 	 * 
-	 * @param grid
-	 * 				matrix of entities.
+	 * @param grid matrix of entities.
 	 */
 	public void act(Grid grid) {
 		long now = System.currentTimeMillis();
@@ -68,7 +61,6 @@ public class Boss extends EnemyCharacter {
 	
 	/**
 	 * Throws a projectile in every direction checking boundaries.
-	 * 
 	 */
 	public void attack() {
 		for (Direction direction : Direction.values()) {
@@ -82,7 +74,7 @@ public class Boss extends EnemyCharacter {
 	 * Replaces the tryToMove method in ActingEntity. Sets a random position
 	 * and moves.
 	 * 
-	 * @param grid
+	 * @param grid grid to act.
 	 */
 	public void tryToMove(Grid grid) {
 		if (state == IDLE) {

@@ -10,12 +10,18 @@ import theLegendOfFinn.model.Ticker;
 import theLegendOfFinn.model.Ticker.Arena;
 import theLegendOfFinn.view.menu.MapSelectionRenderer;
 
+/**
+ * Manages the map selection stage view.
+ */
 public class StageMapSelectionManager extends StageManager{
 
 	public StageMapSelectionManager(Manager manager) {
 		super(manager);
 	}
 
+	/**
+	 * Handles a given key during the current stage
+	 */
 	public Stage handleStage(int key) {
 		Stage stage = Stage.MAPSELECTION;
 		MapSelectionRenderer menuMapSelection = masterRenderer.getMapSelectionRenderer();

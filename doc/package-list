@@ -1,0 +1,16 @@
+theLegendOfFinn.controller
+theLegendOfFinn.controller.communicators
+theLegendOfFinn.controller.exceptions
+theLegendOfFinn.controller.stageManagers
+theLegendOfFinn.model
+theLegendOfFinn.model.entity
+theLegendOfFinn.model.entity.character
+theLegendOfFinn.model.entity.character.enemy
+theLegendOfFinn.model.entity.character.enemy.boss
+theLegendOfFinn.model.exceptions
+theLegendOfFinn.model.gameData
+theLegendOfFinn.model.utils
+theLegendOfFinn.test
+theLegendOfFinn.view
+theLegendOfFinn.view.character
+theLegendOfFinn.view.menu

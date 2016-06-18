@@ -18,13 +18,13 @@ import java.util.logging.SimpleFormatter;
  * class or one of the sub-managers.
  * 
  * @author LCDPCJL
- *
  */
 public class Manager {
 	public static final Logger LOGGER = initializeLogger();
 
 	private MasterRenderer masterRenderer;
 
+	// Managers to control
 	private RenderManager renderManager;
 	private EventManager eventManager;
 	private ModelManager modelManager;
@@ -33,6 +33,10 @@ public class Manager {
 
 	private Ticker ticker;
 
+	/**
+	 * Initialized error's file logger.
+	 * @return logger.
+	 */
 	private static Logger initializeLogger() {
 		Logger logger = Logger.getAnonymousLogger();
 		String logPath = "./Log/log";
@@ -65,6 +69,7 @@ public class Manager {
 	 * Initializes the game. Must be called when a new game is requested or a
 	 * game is to be loaded. Calling this method before having a ticker set is
 	 * unsafe and will throw an exception.
+	 * @throws TickerMissingException if ticker was not loaded correctly.
 	 */
 	public void initialize() throws TickerMissingException {
 		if (ticker == null)
@@ -76,9 +81,9 @@ public class Manager {
 	}
 
 	/**
-	 * Updates the game's stage, if the stage
+	 * Updates the game's stage.
 	 * 
-	 * @param stage
+	 * @param stage stage to update to
 	 */
 	public void updateStage(Stage stage) {
 		renderManager.setStage(stage);
@@ -86,6 +91,9 @@ public class Manager {
 			toggleMovement();
 	}
 
+	/**
+	 * Change status of the game when showing a game-stopping stage
+	 */
 	public void toggleMovement() {
 		Stage stage = getStage();
 		if (stage.equals(Stage.MAP))
@@ -94,16 +102,25 @@ public class Manager {
 			ticker.changeModifier(false);
 	}
 
+	/**
+	 * Gets stage from the renderManager
+	 * @return stage
+	 */
 	public Stage getStage() {
 		return renderManager.getStage();
 	}
 
+	/**
+	 * Gets the ticker
+	 * @return ticker
+	 */
 	public Ticker getTicker() {
 		return ticker;
 	}
 
 	/**
 	 * Updates the stage according to the player death.
+	 * Ends the game
 	 */
 	public void gameOver() {
 		updateStage(eventManager.handlePlayerDeath());
@@ -117,10 +134,18 @@ public class Manager {
 		System.exit(0);
 	}
 
+	/**
+	 * Handles the keys
+	 * @param key key to handle
+	 */
 	public void keyChange(int key) {
 		updateStage(eventManager.handleEvent(key, getStage()));
 	}
 
+	/**
+	 * Gets the master renderer
+	 * @return master renderer
+	 */
 	public MasterRenderer getMasterRenderer() {
 		return masterRenderer;
 	}
@@ -129,21 +154,31 @@ public class Manager {
 	 * Sets the current ticker to the one specified. This method should be
 	 * called if and only if the game is to be loaded.
 	 * 
-	 * @param ticker
-	 *            The loaded ticker.
+	 * @param ticker The loaded ticker.
 	 */
 	public void loadTicker(Ticker ticker) {
-		this.ticker = Ticker.loadTicker(ticker);
+		this.ticker = ticker;
 	}
 
+	/**
+	 * Gets notifier
+	 * @return notifier
+	 */
 	public Notifier getNotifier() {
 		return notifier;
 	}
 
+	/**
+	 * Shows file missing error
+	 */
 	public void loadFileMissing() {
 		masterRenderer.displayFileMissing();
 	}
 
+	/**
+	 * Start the game flow
+	 * @param args default params
+	 */
 	public static void main(String[] args) {
 		new Manager();
 	}
