@@ -7,12 +7,12 @@ Short arena-style game, featuring Adventure Time characters. Written completely 
 Open in eclipse and run. Main function is in manager class.
 
 ### Instructions 
-* Flecha arriba 		- Mover arriba.
-* Flecha abajo 		- Mover abajo.
-* Flecha izquierda 	- Mover izquierda.
-* Flecha derecha 		- Mover derecha.
-* Letra A 		- Aceptar/Atacar.
-* ESCAPE			- Menú/Volver atras (en menú).
+* Up arrow 		    - Move up.
+* Down arrow 		  - Move down.
+* Left arrow 	    - Move left.
+* Right arrow 		- Move right.
+* A key 		      - Accept/Attack.
+* ESCAPE key			- Menu/Back (in menu).
 
 ### Screenshots
 
